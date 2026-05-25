@@ -1,0 +1,151 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --font-display: "Cormorant Garamond", "Playfair Display", serif;
+  --font-body: "Inter", system-ui, sans-serif;
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+  --color-saffron: var(--saffron);
+  --color-gold: var(--gold);
+  --color-deep-purple: var(--deep-purple);
+}
+
+:root {
+  --background: oklch(0.985 0.005 80);
+  --foreground: oklch(0.18 0.04 300);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.18 0.04 300);
+  --primary: oklch(0.35 0.13 305);
+  --primary-foreground: oklch(0.99 0 0);
+  --accent: oklch(0.7 0.18 45);
+  --accent-foreground: oklch(0.99 0 0);
+  --muted: oklch(0.95 0.01 60);
+  --muted-foreground: oklch(0.45 0.03 300);
+  --border: oklch(0.9 0.02 300);
+  --saffron: oklch(0.72 0.19 55);
+  --gold: oklch(0.78 0.14 80);
+  --deep-purple: oklch(0.25 0.12 305);
+
+  --gradient-hero: linear-gradient(
+    135deg,
+    oklch(0.3 0.15 305) 0%,
+    oklch(0.4 0.13 320) 40%,
+    oklch(0.75 0.18 50) 100%
+  );
+  --gradient-nav: linear-gradient(
+    90deg,
+    oklch(0.35 0.15 305 / 0.9),
+    oklch(0.45 0.13 320 / 0.85),
+    oklch(0.75 0.18 55 / 0.85)
+  );
+  --gradient-cta: linear-gradient(135deg, oklch(0.7 0.2 35), oklch(0.65 0.22 25));
+  --gradient-soft: radial-gradient(
+    ellipse at top,
+    oklch(0.96 0.03 320 / 0.8),
+    oklch(0.98 0.01 60 / 0.3) 60%,
+    transparent
+  );
+  --shadow-glow: 0 20px 60px -20px oklch(0.4 0.15 305 / 0.4);
+  --shadow-soft: 0 10px 40px -10px oklch(0.4 0.1 305 / 0.2);
+  --radius: 1rem;
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+  body {
+    background: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+  }
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    letter-spacing: -0.01em;
+  }
+}
+
+@layer utilities {
+  .text-gradient-hero {
+    background: linear-gradient(135deg, oklch(0.3 0.15 305), oklch(0.7 0.18 45));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .bg-gradient-nav {
+    background: var(--gradient-nav);
+  }
+  .bg-gradient-cta {
+    background: var(--gradient-cta);
+  }
+  .bg-gradient-soft {
+    background: var(--gradient-soft);
+  }
+  .shadow-glow {
+    box-shadow: var(--shadow-glow);
+  }
+  .shadow-soft {
+    box-shadow: var(--shadow-soft);
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
+@keyframes float-down {
+  0% {
+    transform: translateY(-10vh) rotate(0deg) translateX(0);
+    opacity: 0;
+  }
+  15% {
+    opacity: 0.4;
+  }
+  85% {
+    opacity: 0.4;
+  }
+  100% {
+    transform: translateY(110vh) rotate(360deg) translateX(20px);
+    opacity: 0;
+  }
+}
+.flower-petal {
+  position: absolute;
+  pointer-events: none;
+  animation: float-down linear infinite;
+  will-change: transform;
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.fade-up {
+  animation: fade-up 0.8s ease-out both;
+}
