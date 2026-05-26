@@ -1,9 +1,22 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 
 export function HeroVideo() {
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.defaultMuted = true;
+      videoRef.current.muted = true;
+      videoRef.current.play().catch((err) => {
+        console.warn("Hero video autoplay failed to start:", err);
+      });
+    }
+  }, []);
+
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none select-none z-0">
       <video
+        ref={videoRef}
         autoPlay
         muted
         loop
@@ -16,3 +29,4 @@ export function HeroVideo() {
     </div>
   );
 }
+

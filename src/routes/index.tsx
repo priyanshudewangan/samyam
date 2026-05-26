@@ -1,7 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Nav } from "@/components/Nav";
 import { FlowerField } from "@/components/FlowerField";
-import { HeroVideo } from "@/components/HeroVideo";
 import React from "react";
 import { Footer } from "@/components/Footer";
 import { detailedYatras } from "@/constants/yatras";
@@ -15,6 +14,7 @@ import vrindavanImg from "@/assets/vrindavan.jpg";
 import himachalImg from "@/assets/himachal.jpg";
 import yatra1Img from "@/assets/Yatra-1.jpg";
 import studentsImg from "@/assets/students.png";
+import heroBg from "@/assets/hero-bg.jpg";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -98,7 +98,15 @@ function Index() {
 
       {/* HERO */}
       <section data-nav-theme="accent" className="relative min-h-screen flex items-center justify-center px-4 pt-32 pb-20 overflow-hidden bg-gradient-soft">
-        <HeroVideo />
+        {/* Background Image with Overlay */}
+        <div className="absolute inset-0 z-0 select-none pointer-events-none">
+          <img
+            src={heroBg}
+            alt="Sacred Rituals Background"
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-black/40 bg-gradient-to-b from-black/25 via-transparent to-black/35" />
+        </div>
         <FlowerField count={22} />
         <div className="relative z-10 max-w-5xl text-center fade-up">
           <p className="font-display italic text-white/90 text-lg md:text-xl mb-4 drop-shadow-md">
