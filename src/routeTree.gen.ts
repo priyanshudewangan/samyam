@@ -12,13 +12,17 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as YatrasRouteImport } from './routes/yatras'
 import { Route as TeerthasRouteImport } from './routes/teerthas'
 import { Route as MethodologyRouteImport } from './routes/methodology'
+import { Route as KnowledgePortalRouteImport } from './routes/knowledge-portal'
 import { Route as InstitutionsRouteImport } from './routes/institutions'
 import { Route as EnquireRouteImport } from './routes/enquire'
 import { Route as DifferenceRouteImport } from './routes/difference'
+import { Route as CustomYatraRouteImport } from './routes/custom-yatra'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as YatrasIndexRouteImport } from './routes/yatras.index'
+import { Route as TeerthasIndexRouteImport } from './routes/teerthas.index'
 import { Route as YatrasExploreRouteImport } from './routes/yatras.explore'
+import { Route as TeerthasExploreRouteImport } from './routes/teerthas.explore'
 
 const YatrasRoute = YatrasRouteImport.update({
   id: '/yatras',
@@ -33,6 +37,11 @@ const TeerthasRoute = TeerthasRouteImport.update({
 const MethodologyRoute = MethodologyRouteImport.update({
   id: '/methodology',
   path: '/methodology',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const KnowledgePortalRoute = KnowledgePortalRouteImport.update({
+  id: '/knowledge-portal',
+  path: '/knowledge-portal',
   getParentRoute: () => rootRouteImport,
 } as any)
 const InstitutionsRoute = InstitutionsRouteImport.update({
@@ -50,6 +59,11 @@ const DifferenceRoute = DifferenceRouteImport.update({
   path: '/difference',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CustomYatraRoute = CustomYatraRouteImport.update({
+  id: '/custom-yatra',
+  path: '/custom-yatra',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AboutRoute = AboutRouteImport.update({
   id: '/about',
   path: '/about',
@@ -65,46 +79,67 @@ const YatrasIndexRoute = YatrasIndexRouteImport.update({
   path: '/',
   getParentRoute: () => YatrasRoute,
 } as any)
+const TeerthasIndexRoute = TeerthasIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => TeerthasRoute,
+} as any)
 const YatrasExploreRoute = YatrasExploreRouteImport.update({
   id: '/explore',
   path: '/explore',
   getParentRoute: () => YatrasRoute,
 } as any)
+const TeerthasExploreRoute = TeerthasExploreRouteImport.update({
+  id: '/explore',
+  path: '/explore',
+  getParentRoute: () => TeerthasRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/custom-yatra': typeof CustomYatraRoute
   '/difference': typeof DifferenceRoute
   '/enquire': typeof EnquireRoute
   '/institutions': typeof InstitutionsRoute
+  '/knowledge-portal': typeof KnowledgePortalRoute
   '/methodology': typeof MethodologyRoute
-  '/teerthas': typeof TeerthasRoute
+  '/teerthas': typeof TeerthasRouteWithChildren
   '/yatras': typeof YatrasRouteWithChildren
+  '/teerthas/explore': typeof TeerthasExploreRoute
   '/yatras/explore': typeof YatrasExploreRoute
+  '/teerthas/': typeof TeerthasIndexRoute
   '/yatras/': typeof YatrasIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/custom-yatra': typeof CustomYatraRoute
   '/difference': typeof DifferenceRoute
   '/enquire': typeof EnquireRoute
   '/institutions': typeof InstitutionsRoute
+  '/knowledge-portal': typeof KnowledgePortalRoute
   '/methodology': typeof MethodologyRoute
-  '/teerthas': typeof TeerthasRoute
+  '/teerthas/explore': typeof TeerthasExploreRoute
   '/yatras/explore': typeof YatrasExploreRoute
+  '/teerthas': typeof TeerthasIndexRoute
   '/yatras': typeof YatrasIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/custom-yatra': typeof CustomYatraRoute
   '/difference': typeof DifferenceRoute
   '/enquire': typeof EnquireRoute
   '/institutions': typeof InstitutionsRoute
+  '/knowledge-portal': typeof KnowledgePortalRoute
   '/methodology': typeof MethodologyRoute
-  '/teerthas': typeof TeerthasRoute
+  '/teerthas': typeof TeerthasRouteWithChildren
   '/yatras': typeof YatrasRouteWithChildren
+  '/teerthas/explore': typeof TeerthasExploreRoute
   '/yatras/explore': typeof YatrasExploreRoute
+  '/teerthas/': typeof TeerthasIndexRoute
   '/yatras/': typeof YatrasIndexRoute
 }
 export interface FileRouteTypes {
@@ -112,47 +147,60 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/about'
+    | '/custom-yatra'
     | '/difference'
     | '/enquire'
     | '/institutions'
+    | '/knowledge-portal'
     | '/methodology'
     | '/teerthas'
     | '/yatras'
+    | '/teerthas/explore'
     | '/yatras/explore'
+    | '/teerthas/'
     | '/yatras/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/about'
+    | '/custom-yatra'
     | '/difference'
     | '/enquire'
     | '/institutions'
+    | '/knowledge-portal'
     | '/methodology'
-    | '/teerthas'
+    | '/teerthas/explore'
     | '/yatras/explore'
+    | '/teerthas'
     | '/yatras'
   id:
     | '__root__'
     | '/'
     | '/about'
+    | '/custom-yatra'
     | '/difference'
     | '/enquire'
     | '/institutions'
+    | '/knowledge-portal'
     | '/methodology'
     | '/teerthas'
     | '/yatras'
+    | '/teerthas/explore'
     | '/yatras/explore'
+    | '/teerthas/'
     | '/yatras/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
+  CustomYatraRoute: typeof CustomYatraRoute
   DifferenceRoute: typeof DifferenceRoute
   EnquireRoute: typeof EnquireRoute
   InstitutionsRoute: typeof InstitutionsRoute
+  KnowledgePortalRoute: typeof KnowledgePortalRoute
   MethodologyRoute: typeof MethodologyRoute
-  TeerthasRoute: typeof TeerthasRoute
+  TeerthasRoute: typeof TeerthasRouteWithChildren
   YatrasRoute: typeof YatrasRouteWithChildren
 }
 
@@ -179,6 +227,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MethodologyRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/knowledge-portal': {
+      id: '/knowledge-portal'
+      path: '/knowledge-portal'
+      fullPath: '/knowledge-portal'
+      preLoaderRoute: typeof KnowledgePortalRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/institutions': {
       id: '/institutions'
       path: '/institutions'
@@ -198,6 +253,13 @@ declare module '@tanstack/react-router' {
       path: '/difference'
       fullPath: '/difference'
       preLoaderRoute: typeof DifferenceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/custom-yatra': {
+      id: '/custom-yatra'
+      path: '/custom-yatra'
+      fullPath: '/custom-yatra'
+      preLoaderRoute: typeof CustomYatraRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/about': {
@@ -221,6 +283,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof YatrasIndexRouteImport
       parentRoute: typeof YatrasRoute
     }
+    '/teerthas/': {
+      id: '/teerthas/'
+      path: '/'
+      fullPath: '/teerthas/'
+      preLoaderRoute: typeof TeerthasIndexRouteImport
+      parentRoute: typeof TeerthasRoute
+    }
     '/yatras/explore': {
       id: '/yatras/explore'
       path: '/explore'
@@ -228,8 +297,29 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof YatrasExploreRouteImport
       parentRoute: typeof YatrasRoute
     }
+    '/teerthas/explore': {
+      id: '/teerthas/explore'
+      path: '/explore'
+      fullPath: '/teerthas/explore'
+      preLoaderRoute: typeof TeerthasExploreRouteImport
+      parentRoute: typeof TeerthasRoute
+    }
   }
 }
+
+interface TeerthasRouteChildren {
+  TeerthasExploreRoute: typeof TeerthasExploreRoute
+  TeerthasIndexRoute: typeof TeerthasIndexRoute
+}
+
+const TeerthasRouteChildren: TeerthasRouteChildren = {
+  TeerthasExploreRoute: TeerthasExploreRoute,
+  TeerthasIndexRoute: TeerthasIndexRoute,
+}
+
+const TeerthasRouteWithChildren = TeerthasRoute._addFileChildren(
+  TeerthasRouteChildren,
+)
 
 interface YatrasRouteChildren {
   YatrasExploreRoute: typeof YatrasExploreRoute
@@ -247,11 +337,13 @@ const YatrasRouteWithChildren =
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
+  CustomYatraRoute: CustomYatraRoute,
   DifferenceRoute: DifferenceRoute,
   EnquireRoute: EnquireRoute,
   InstitutionsRoute: InstitutionsRoute,
+  KnowledgePortalRoute: KnowledgePortalRoute,
   MethodologyRoute: MethodologyRoute,
-  TeerthasRoute: TeerthasRoute,
+  TeerthasRoute: TeerthasRouteWithChildren,
   YatrasRoute: YatrasRouteWithChildren,
 }
 export const routeTree = rootRouteImport

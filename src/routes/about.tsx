@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Nav } from "@/components/Nav";
 import { FlowerField } from "@/components/FlowerField";
-import spiritualJoy from "@/assets/spiritual_joy.jpg";
+import spiritualJoy from "@/assets/spiritual_joy_new.jpg";
 import aarti from "@/assets/aarti.jpg";
 import founder from "@/assets/founder.jpg";
 import bgAbout from "@/assets/bg-about.png";
@@ -183,15 +183,15 @@ function AboutPage() {
           </h2>
           <div className="max-w-3xl mx-auto space-y-6 text-sm md:text-base text-white/90 leading-relaxed mb-16">
             <p>
-              We are committed to reviving the true essence of teerth yatra, ensuring that every
+              We are committed to <span className="text-white font-semibold">reviving the true essence of teerth yatra</span>, ensuring that every
               seeker embarks on a spiritually enriching journey. Our exquisitely curated programs
-              are designed to align with the sacred teachings of ancient scriptures, offering not
+              are designed to align with the <span className="text-white font-semibold">sacred teachings of ancient scriptures</span>, offering not
               just a visit to holy sites but a profound inner transformation.
             </p>
             <p>
-              With scholar-led guidance, immersive rituals, and curated comforts, we create journeys
-              that honour tradition while welcoming modern seekers into a space of reverence,
-              reflection, and renewal.
+              With <span className="text-white font-semibold">scholar-led guidance</span>, immersive rituals, and curated comforts, we create journeys
+              that honour tradition while welcoming modern seekers into a space of <span className="text-white font-semibold">reverence,
+              reflection, and renewal</span>.
             </p>
           </div>
 
@@ -217,9 +217,9 @@ function AboutPage() {
             ].map((f) => (
               <div
                 key={f.label}
-                className="bg-white/10 backdrop-blur-md border border-white/20 p-6 rounded-2xl hover:bg-white/20 transition duration-300"
+                className="bg-white/10 backdrop-blur-md border border-white/20 p-6 rounded-2xl hover:bg-white/20 hover:scale-[1.02] transition-all duration-300 group"
               >
-                <p className="text-[10px] uppercase tracking-wider text-white/70 mb-2 font-medium">
+                <p className="text-[10px] uppercase tracking-wider text-white/70 mb-2 font-medium group-hover:text-white transition-colors">
                   {f.label}
                 </p>
                 <p className="text-sm md:text-base font-semibold text-white leading-snug">
@@ -230,7 +230,7 @@ function AboutPage() {
           </div>
 
           {/* Prepare - Immerse - Absorb - Integrate horizontal block */}
-          <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl grid grid-cols-2 md:grid-cols-4 gap-6 p-8 text-center mb-16">
+          <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl grid grid-cols-2 md:grid-cols-4 gap-6 p-8 text-center mb-16 shadow-lg shadow-black/5">
             {[
               {
                 t: "Prepare",
@@ -251,10 +251,10 @@ function AboutPage() {
             ].map((step, idx, arr) => (
               <div
                 key={step.t}
-                className={`relative flex flex-col items-center justify-center px-4 ${idx < arr.length - 1 ? "md:border-r md:border-white/20" : ""
+                className={`relative flex flex-col items-center justify-center px-4 group hover:scale-105 transition-transform duration-300 ${idx < arr.length - 1 ? "md:border-r md:border-white/20" : ""
                   }`}
               >
-                <p className="text-xs uppercase tracking-[0.2em] text-[#ffebe3] font-bold mb-2">
+                <p className="text-xs uppercase tracking-[0.2em] text-[#ff8243] font-bold mb-2 group-hover:text-white transition-colors">
                   {step.t}
                 </p>
                 <p className="text-xs text-white/90 leading-relaxed max-w-[200px]">{step.d}</p>
@@ -267,36 +267,36 @@ function AboutPage() {
             {[
               {
                 num: "1",
-                t: "1. Authentic Spiritual Experience",
-                d: "We guide seekers in undertaking teerth yatras in their truest spirit, fostering a deep connection with divine energies.",
+                t: "Authentic Spiritual Experience",
+                d: "We guide seekers in undertaking teerth yatras in their <span class='text-[#ff8243] font-medium'>truest spirit</span>, fostering a deep connection with divine energies.",
               },
               {
                 num: "2",
-                t: "2. Maximizing Spiritual Benefits",
-                d: "Our yatras are structured to help travellers receive the complete phal (spiritual incentives) as described in sacred phala shruthis.",
+                t: "Maximizing Spiritual Benefits",
+                d: "Our yatras are structured to help travellers receive the <span class='text-[#ff8243] font-medium'>complete phal</span> (spiritual incentives) as described in sacred phala shruthis.",
               },
               {
                 num: "3",
-                t: "3. Divine Immersion",
-                d: "Seekers absorb the divine vibrations of these destinations through sacred rituals, guided yoga and meditations, and time with revered saints.",
+                t: "Divine Immersion",
+                d: "Seekers absorb the <span class='text-[#ff8243] font-medium'>divine vibrations</span> of these destinations through sacred rituals, guided yoga and meditations, and time with revered saints.",
               },
               {
                 num: "4",
-                t: "4. Heart-Centred Awakening",
-                d: "Our journeys focus on opening the anahata chakra, deepening one's bhakti (devotion), and leading towards true jnana (wisdom) and vairagya (mindful indulgence).",
+                t: "Heart-Centred Awakening",
+                d: "Our journeys focus on <span class='text-[#ff8243] font-medium'>opening the anahata chakra</span>, deepening one's bhakti (devotion), and leading towards true jnana (wisdom) and vairagya.",
               },
             ].map((card) => (
               <div
                 key={card.num}
-                className="bg-white/10 backdrop-blur-md border border-white/20 p-8 rounded-3xl flex flex-col gap-3 relative hover:bg-white/15 transition duration-300"
+                className="bg-white/10 backdrop-blur-md border border-white/20 p-8 rounded-3xl flex flex-col gap-3 relative hover:bg-white/15 hover:scale-[1.01] transition-all duration-300 group shadow-lg shadow-black/5"
               >
-                <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center text-xs font-bold text-white shadow-soft">
+                <div className="flex items-center gap-4">
+                  <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center text-sm font-bold text-white shadow-soft group-hover:bg-white/30 transition-colors">
                     {card.num}
                   </div>
-                  <h3 className="font-semibold text-lg md:text-xl text-white">{card.t}</h3>
+                  <h3 className="font-semibold text-lg md:text-xl text-white group-hover:text-[#ff8243] transition-colors">{card.t}</h3>
                 </div>
-                <p className="text-sm text-white/80 leading-relaxed pl-11">{card.d}</p>
+                <p className="text-sm text-white/80 leading-relaxed pl-14" dangerouslySetInnerHTML={{ __html: card.d }} />
               </div>
             ))}
           </div>

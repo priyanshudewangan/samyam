@@ -15,13 +15,14 @@ export function FlowerField({ count = 18 }: { count?: number }) {
             alt=""
             aria-hidden
             className="flower-petal"
+            decoding="async"
             style={{
               left: `${left}%`,
               width: size,
               height: size,
               animationDuration: `${dur}s`,
               animationDelay: `-${delay}s`,
-              opacity: 0.55,
+              opacity: 0.45,
             }}
           />
         );

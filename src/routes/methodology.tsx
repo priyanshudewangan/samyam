@@ -3,7 +3,10 @@ import { useState } from "react";
 import { Nav } from "@/components/Nav";
 import { FlowerField } from "@/components/FlowerField";
 import { Footer } from "@/components/Footer";
-import aarti from "@/assets/aarti.jpg";
+import meth1 from "@/assets/methodology-1.jpeg";
+import meth2 from "@/assets/methodology-2.jpeg";
+import meth3 from "@/assets/methodology-3.jpg";
+import meth4 from "@/assets/methodology-4.jpg";
 
 export const Route = createFileRoute("/methodology")({
   component: MethodologyPage,
@@ -138,11 +141,12 @@ function MethodologyPage() {
         {/* Background Image & Overlay */}
         <div className="absolute inset-0 z-0">
           <img
-            src={aarti}
-            alt="Ganga Aarti Ceremony"
+            src={meth1}
+            alt="Samyam Methodology Hero"
             className="w-full h-full object-cover object-center"
+            decoding="async"
           />
-          <div className="absolute inset-0 bg-black/65 backdrop-blur-[1px]"></div>
+          <div className="absolute inset-0 bg-black/65 backdrop-blur-[0.5px]"></div>
         </div>
 
         {/* Content */}

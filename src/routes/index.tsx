@@ -2,12 +2,19 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Nav } from "@/components/Nav";
 import { FlowerField } from "@/components/FlowerField";
 import { HeroVideo } from "@/components/HeroVideo";
-import React, { useState } from "react";
+import React from "react";
 import { Footer } from "@/components/Footer";
 import { detailedYatras } from "@/constants/yatras";
 
 // Asset imports
-import spiritualJoy from "@/assets/spiritual_joy.jpg";
+import spiritualJoy from "@/assets/spiritual_joy_new.jpg";
+import founderImg from "@/assets/founder.jpg";
+import aartiImg from "@/assets/aarti.jpg";
+import kashiImg from "@/assets/kashi.jpg";
+import vrindavanImg from "@/assets/vrindavan.jpg";
+import himachalImg from "@/assets/himachal.jpg";
+import yatra1Img from "@/assets/Yatra-1.jpg";
+import studentsImg from "@/assets/students.png";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -64,31 +71,27 @@ const waysList = [
   },
 ];
 
-const testimonials = [
-  {
-    q: "I returned from Kashi not just with memories, but with a deeper sense of clarity and devotion. The ritual details, scholar guidance, and local warmth made this unlike any travel I've done.",
-    a: "Rajesh K., Bangalore",
-    y: "Kashi Sojourn",
-  },
-  {
-    q: "Bringing my parents and children to Vrindavan was a soul-stirring experience. Samyam took care of all the premium comforts, allowing us to completely absorb the divine leelas without any worry.",
-    a: "Priya M., Mumbai",
-    y: "Vrindavan Mathura",
-  },
-  {
-    q: "The Shakti Peethas yatra was deeply empowering. Practicing morning sadhanas amidst the Himalayas under spiritual guidance was a transcendental milestone for me.",
-    a: "Ananya S., Delhi",
-    y: "Himachal Retreat",
-  },
-];
+import galleryData from "@/data/gallery.json";
+
+const localImages: Record<string, string> = {
+  aartiImg,
+  kashiImg,
+  vrindavanImg,
+  spiritualJoy,
+  himachalImg,
+  yatra1Img,
+  studentsImg,
+  founderImg,
+};
+
+const resolveImage = (imgSrc: string) => {
+  if (imgSrc in localImages) {
+    return localImages[imgSrc];
+  }
+  return imgSrc;
+};
 
 function Index() {
-  const [activeIdx, setActiveIdx] = useState(0);
-
-  const nextSlide = () => setActiveIdx((prev) => (prev + 1) % testimonials.length);
-  const prevSlide = () =>
-    setActiveIdx((prev) => (prev - 1 + testimonials.length) % testimonials.length);
-
   return (
     <div className="relative min-h-screen overflow-x-hidden bg-background flex flex-col justify-between">
       <Nav />
@@ -113,13 +116,13 @@ function Index() {
           </p>
           <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
             <a
-              href="/enquire"
+              href="/custom-yatra"
               className="px-8 py-4 rounded-full bg-gradient-cta text-accent-foreground font-medium shadow-glow hover:scale-105 transition"
             >
               Plan My Journey
             </a>
             <a
-              href="/yatras"
+              href="/teerthas"
               className="px-8 py-4 rounded-full border-2 border-white text-white font-medium hover:bg-white hover:text-primary transition"
             >
               Explore Teerthas
@@ -137,14 +140,35 @@ function Index() {
             Why Choose SAMYAM
           </p>
           <h2 className="text-4xl md:text-5xl text-center text-primary max-w-3xl mx-auto mb-16">
-            We don't just take you to sacred places—we guide you through a transformation.
+            We don't just take you to sacred places—we guide you through a <span className="text-accent italic">transformation.</span>
           </h2>
+
+          {/* THE SAMYAM WAY - PROCESS */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8 mb-20 max-w-5xl mx-auto">
+            {[
+              { t: "Prepare", d: "Swadhyay & Sankalp", c: "text-[#ff8243]" },
+              { t: "Immerse", d: "Rituals & Seva", c: "text-[#ff8243]" },
+              { t: "Absorb", d: "Satsang & Dhyan", c: "text-[#ff8243]" },
+              { t: "Integrate", d: "Daily Life Anchors", c: "text-[#ff8243]" },
+            ].map((step, idx) => (
+              <div key={step.t} className="relative group p-6 rounded-2xl bg-card border border-border shadow-soft hover:shadow-glow transition-all duration-300 text-center">
+                <div className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground mb-1">Step 0{idx + 1}</div>
+                <h4 className={`text-lg md:text-xl font-display font-semibold ${step.c} mb-1 group-hover:scale-110 transition-transform`}>{step.t}</h4>
+                <p className="text-xs text-muted-foreground">{step.d}</p>
+                {idx < 3 && (
+                  <div className="hidden md:block absolute top-1/2 -right-4 -translate-y-1/2 text-border text-xl">→</div>
+                )}
+              </div>
+            ))}
+          </div>
+
           <div className="grid lg:grid-cols-12 gap-8 items-stretch">
             {/* Image Column */}
             <div className="lg:col-span-6 relative overflow-hidden rounded-3xl shadow-soft border border-border group min-h-[350px]">
               <img
-                src={spiritualJoy}
+                src="https://samyam.co/images/why%20choose%20samyam.jpg"
                 alt="Devotion and spiritual celebration with Samyam seekers"
+                decoding="async"
                 className="w-full h-full object-cover group-hover:scale-105 transition duration-700"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/45 via-transparent to-transparent pointer-events-none" />
@@ -201,6 +225,7 @@ function Index() {
                     src={y.img}
                     alt={y.name}
                     loading="lazy"
+                    decoding="async"
                     width={1024}
                     height={768}
                     className="w-full h-full object-cover group-hover:scale-105 transition duration-700"
@@ -270,7 +295,7 @@ function Index() {
             {waysList.map((c) => (
               <a
                 key={c.t}
-                href="/enquire"
+                href="/custom-yatra"
                 className="p-8 rounded-3xl bg-card shadow-soft border border-border hover:shadow-glow hover:border-accent/40 transition block"
               >
                 <div className="text-4xl">{c.i}</div>
@@ -282,61 +307,94 @@ function Index() {
         </div>
       </section>
 
-      {/* TESTIMONIALS (TRANSFORMATIONS & STORIES) */}
+      {/* GLIMPSES OF GRACE — VISUAL GALLERY */}
       <section data-nav-theme="light" className="relative py-24 px-4">
-        <div className="max-w-4xl mx-auto text-center">
-          <p className="text-sm tracking-[0.3em] uppercase text-accent mb-3">
-            Transformations & Stories
-          </p>
-          <h2 className="text-4xl md:text-5xl text-primary font-display font-semibold">
-            Hear from seekers who felt seen, guided, and held
-          </h2>
-          <p className="text-muted-foreground mt-4">
-            Swipe to read how different yatras shifted hearts across Bharat.
-          </p>
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-16 space-y-4">
+            <p className="text-sm tracking-[0.3em] uppercase text-accent font-bold">Glimpses of Grace</p>
+            <h2 className="text-4xl md:text-6xl font-display font-semibold text-primary">
+              Visual stories from our sacred journeys
+            </h2>
+          </div>
 
-          <div className="relative max-w-3xl mx-auto mt-12 bg-card p-10 md:p-12 rounded-3xl border border-border shadow-soft text-center overflow-hidden">
-            <div className="text-5xl text-accent mb-6">ॐ</div>
-            <div className="min-h-[160px] flex items-center justify-center">
-              <p className="font-display italic text-xl md:text-2xl text-primary leading-relaxed">
-                "{testimonials[activeIdx].q}"
-              </p>
-            </div>
-            <div className="mt-8 border-t border-border pt-6 flex flex-col items-center">
-              <p className="font-semibold text-primary">{testimonials[activeIdx].a}</p>
-              <p className="text-xs uppercase tracking-widest text-accent mt-1">
-                {testimonials[activeIdx].y}
-              </p>
-            </div>
-
-            {/* Navigation Arrows */}
-            <div className="mt-8 flex justify-center gap-4">
-              <button
-                onClick={prevSlide}
-                className="p-3 rounded-full border border-border bg-background hover:bg-muted text-primary transition cursor-pointer"
-                aria-label="Previous story"
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 auto-rows-[200px] md:auto-rows-[250px]">
+            {galleryData.map((item, idx) => (
+              <div
+                key={idx}
+                className={`relative group rounded-3xl overflow-hidden shadow-soft hover:shadow-glow transition-all duration-500 ${item.span}`}
               >
-                ←
-              </button>
-              <button
-                onClick={nextSlide}
-                className="p-3 rounded-full border border-border bg-background hover:bg-muted text-primary transition cursor-pointer"
-                aria-label="Next story"
-              >
-                →
-              </button>
-            </div>
-
-            {/* Dot Indicators */}
-            <div className="mt-4 flex justify-center gap-2">
-              {testimonials.map((_, i) => (
-                <button
-                  key={i}
-                  onClick={() => setActiveIdx(i)}
-                  className={`w-2.5 h-2.5 rounded-full transition ${i === activeIdx ? "bg-accent scale-125" : "bg-muted-foreground/35"}`}
-                  aria-label={`Go to slide ${i + 1}`}
+                <img
+                  src={resolveImage(item.img)}
+                  alt={item.title}
+                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                 />
-              ))}
+                {/* Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-6">
+                  <h4 className="text-white font-display text-xl md:text-2xl font-medium translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+                    {item.title}
+                  </h4>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* TRAVEL BEYOND. DISCOVER WITHIN. — BRAND PHILOSOPHY */}
+      <section data-nav-theme="light" className="relative py-28 px-4 overflow-hidden bg-muted/20">
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[800px] rounded-full bg-gradient-to-b from-accent/5 to-transparent blur-3xl pointer-events-none" />
+        <FlowerField count={8} />
+        
+        <div className="max-w-6xl mx-auto relative z-10">
+          <div className="text-center mb-16 space-y-4">
+            <p className="text-sm tracking-[0.4em] uppercase text-accent font-bold">The SAMYAM Vision</p>
+            <h2 className="text-5xl md:text-7xl font-display font-semibold text-primary leading-tight">
+              Travel Beyond.<br />
+              <span className="italic text-accent drop-shadow-sm">Discover Within.</span>
+            </h2>
+          </div>
+
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
+            {/* Philosophy Text */}
+            <div className="space-y-8 text-lg md:text-xl text-muted-foreground font-body leading-relaxed">
+              <p className="text-primary font-medium">
+                At SAMYAM, we redefine spiritual journeys across Bharat, where luxury meets divinity, and travel becomes transformation. We believe spirituality is not a privilege, but a birthright.
+              </p>
+              <p>
+                Our journeys are sacred experiences—weaving together culture, heritage, and Sanatan wisdom with comfort and care. We help you not just see the sacred, but to feel it, live it, and carry it within.
+              </p>
+              <p>
+                With SAMYAM, every yatra becomes a sacred passage—one that transforms the seeker from within, paving the way for divine spiritual awakening and eternal bliss.
+              </p>
+            </div>
+
+            {/* Founder Quote Card */}
+            <div className="relative group">
+              <div className="absolute -inset-4 bg-gradient-cta opacity-5 blur-2xl group-hover:opacity-10 transition duration-700 rounded-[3rem]" />
+              <div className="relative p-10 md:p-14 rounded-[3rem] bg-white border border-[#f5e3e6] shadow-soft hover:shadow-glow transition-all duration-500 text-center space-y-8 overflow-hidden">
+                {/* Decorative Elements */}
+                <div className="absolute top-0 right-0 w-32 h-32 bg-accent/5 rounded-full -mr-16 -mt-16 blur-2xl" />
+                <div className="absolute bottom-0 left-0 w-32 h-32 bg-primary/5 rounded-full -ml-16 -mb-16 blur-2xl" />
+                
+                <div className="relative z-10">
+                  <div className="w-24 h-24 mx-auto rounded-full overflow-hidden border-4 border-accent/20 mb-6 shadow-md">
+                    <img 
+                      src={founderImg} 
+                      alt="Nileema Shenoy" 
+                      className="w-full h-full object-cover grayscale-[20%] group-hover:grayscale-0 transition-all duration-700"
+                    />
+                  </div>
+                  <div className="text-4xl text-accent/30 mb-6 font-serif">“</div>
+                  <blockquote className="text-2xl md:text-3xl font-display font-medium text-primary italic leading-snug">
+                    Let's not just visit the sacred. Let's transform the way we experience the soul.
+                  </blockquote>
+                  <div className="mt-8 space-y-1">
+                    <div className="w-12 h-px bg-accent/30 mx-auto mb-4" />
+                    <cite className="not-italic block font-display text-xl text-primary font-semibold">Nileema Shenoy</cite>
+                    <span className="text-xs uppercase tracking-[0.2em] text-accent font-bold">Founder</span>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>

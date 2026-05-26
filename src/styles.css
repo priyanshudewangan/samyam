@@ -47,9 +47,9 @@
   );
   --gradient-nav: linear-gradient(
     90deg,
-    oklch(0.35 0.15 305 / 0.9),
-    oklch(0.45 0.13 320 / 0.85),
-    oklch(0.75 0.18 55 / 0.85)
+    oklch(0.35 0.15 305 / 0.95),
+    oklch(0.45 0.13 320 / 0.9),
+    oklch(0.75 0.18 55 / 0.9)
   );
   --gradient-cta: linear-gradient(135deg, oklch(0.7 0.2 35), oklch(0.65 0.22 25));
   --gradient-soft: radial-gradient(
@@ -63,40 +63,30 @@
   --radius: 1rem;
 
   /* Navbar Themes */
-  --nav-bg: linear-gradient(
-    90deg,
-    oklch(0.35 0.15 305 / 0.9),
-    oklch(0.45 0.13 320 / 0.85),
-    oklch(0.75 0.18 55 / 0.85)
-  );
-  --nav-text: oklch(0.99 0 0 / 0.9);
-  --nav-button-bg: oklch(1 0 0 / 0.15);
+  --nav-bg: oklch(0.35 0.13 305 / 0.95);
+  --nav-text: oklch(0.99 0 0);
+  --nav-button-bg: oklch(1 0 0 / 0.1);
   --nav-button-text: oklch(1 0 0);
 }
 
 [data-nav-theme="light"] {
-  --nav-bg: rgba(255, 255, 255, 0.8);
+  --nav-bg: rgba(255, 255, 255, 0.95);
   --nav-text: oklch(0.25 0.12 305);
-  --nav-button-bg: oklch(0.35 0.15 305 / 0.1);
+  --nav-button-bg: oklch(0.35 0.15 305 / 0.05);
   --nav-button-text: oklch(0.35 0.15 305);
 }
 
 [data-nav-theme="dark"] {
-  --nav-bg: oklch(0.25 0.12 305 / 0.85);
-  --nav-text: oklch(0.99 0 0 / 0.9);
-  --nav-button-bg: oklch(1 0 0 / 0.15);
+  --nav-bg: oklch(0.2 0.08 305 / 0.98);
+  --nav-text: oklch(0.99 0 0);
+  --nav-button-bg: oklch(1 0 0 / 0.1);
   --nav-button-text: oklch(1 0 0);
 }
 
 [data-nav-theme="accent"] {
-  --nav-bg: linear-gradient(
-    90deg,
-    oklch(0.45 0.2 340 / 0.9),
-    oklch(0.55 0.18 360 / 0.85),
-    oklch(0.85 0.15 60 / 0.85)
-  );
+  --nav-bg: oklch(0.45 0.2 340 / 0.95);
   --nav-text: white;
-  --nav-button-bg: rgba(255, 255, 255, 0.2);
+  --nav-button-bg: rgba(255, 255, 255, 0.15);
   --nav-button-text: white;
 }
 
@@ -185,4 +175,76 @@
 }
 .fade-up {
   animation: fade-up 0.8s ease-out both;
+}
+
+/* Teerthas page animations */
+@keyframes ken-burns {
+  0% { transform: scale(1); }
+  100% { transform: scale(1.08); }
+}
+.animate-ken-burns {
+  animation: ken-burns 20s ease-in-out infinite alternate;
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+.animate-shimmer {
+  background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.08) 50%, transparent 100%);
+  background-size: 200% 100%;
+  animation: shimmer 3s ease-in-out infinite;
+}
+
+@keyframes gentle-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+.animate-gentle-float {
+  animation: gentle-float 6s ease-in-out infinite;
+}
+
+@keyframes glow-pulse {
+  0%, 100% { box-shadow: 0 0 20px rgba(92, 36, 94, 0.3), inset 0 0 20px rgba(255,255,255,0.05); }
+  50% { box-shadow: 0 0 40px rgba(92, 36, 94, 0.5), inset 0 0 30px rgba(255,255,255,0.08); }
+}
+.animate-glow-pulse {
+  animation: glow-pulse 4s ease-in-out infinite;
+}
+
+@keyframes slide-in-up {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.stagger-fade-in > * {
+  opacity: 0;
+  animation: slide-in-up 0.6s ease-out forwards;
+}
+.stagger-fade-in > *:nth-child(1) { animation-delay: 0.1s; }
+.stagger-fade-in > *:nth-child(2) { animation-delay: 0.2s; }
+.stagger-fade-in > *:nth-child(3) { animation-delay: 0.3s; }
+.stagger-fade-in > *:nth-child(4) { animation-delay: 0.4s; }
+.stagger-fade-in > *:nth-child(5) { animation-delay: 0.5s; }
+.stagger-fade-in > *:nth-child(6) { animation-delay: 0.6s; }
+.stagger-fade-in > *:nth-child(7) { animation-delay: 0.7s; }
+.stagger-fade-in > *:nth-child(8) { animation-delay: 0.8s; }
+.stagger-fade-in > *:nth-child(9) { animation-delay: 0.9s; }
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+@keyframes hero-text-reveal {
+  from { opacity: 0; transform: translateY(30px) scale(0.96); filter: blur(8px); }
+  to { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+}
+.animate-hero-reveal {
+  animation: hero-text-reveal 1.2s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.animate-hero-reveal-delay {
+  animation: hero-text-reveal 1s cubic-bezier(0.16, 1, 0.3, 1) 0.3s both;
 }

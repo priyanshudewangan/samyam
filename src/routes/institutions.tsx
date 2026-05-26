@@ -2,6 +2,15 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { Nav } from "@/components/Nav";
 import { FlowerField } from "@/components/FlowerField";
 import { Footer } from "@/components/Footer";
+import { Mail, Phone } from "lucide-react";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+  DialogDescription,
+} from "@/components/ui/dialog";
 import studentsImg from "@/assets/students.png";
 
 export const Route = createFileRoute("/institutions")({
@@ -111,7 +120,7 @@ function InstitutionsPage() {
       <Nav />
 
       {/* HERO SECTION */}
-      <section className="relative min-h-[75vh] md:min-h-[85vh] flex items-center justify-center overflow-hidden">
+      <section data-nav-theme="dark" className="relative min-h-[75vh] md:min-h-[85vh] flex items-center justify-center overflow-hidden">
         {/* Background Image & Overlay */}
         <div className="absolute inset-0 z-0">
           <img
@@ -139,7 +148,7 @@ function InstitutionsPage() {
       </section>
 
       {/* OUR INTENT SECTION */}
-      <section className="relative py-20 px-6 bg-white overflow-hidden">
+      <section data-nav-theme="light" className="relative py-20 px-6 bg-white overflow-hidden">
         <FlowerField count={8} />
         <div className="max-w-5xl mx-auto relative z-10">
           <div className="p-8 md:p-14 text-center rounded-[2.5rem] bg-gradient-to-br from-[#fff8f5] to-[#fbf5fa] border border-[#f5e3e6] shadow-glow space-y-6">
@@ -158,7 +167,7 @@ function InstitutionsPage() {
       </section>
 
       {/* WHY SCHOOLS CHOOSE SAMYAM */}
-      <section className="relative py-20 px-6 bg-[#4e2055] text-white overflow-hidden">
+      <section data-nav-theme="dark" className="relative py-20 px-6 bg-[#4e2055] text-white overflow-hidden">
         <FlowerField count={8} />
         <div className="max-w-6xl mx-auto relative z-10 space-y-12">
           {/* Header */}
@@ -198,7 +207,7 @@ function InstitutionsPage() {
       </section>
 
       {/* THREE STREAM FRAMEWORK */}
-      <section className="relative py-20 px-6 bg-white overflow-hidden">
+      <section data-nav-theme="light" className="relative py-20 px-6 bg-white overflow-hidden">
         <FlowerField count={8} />
         <div className="max-w-6xl mx-auto relative z-10 space-y-12">
           {/* Header */}
@@ -236,7 +245,7 @@ function InstitutionsPage() {
       </section>
 
       {/* EXPERIENCE ARC SECTION */}
-      <section className="relative py-20 px-6 bg-[#4e2055] text-white overflow-hidden">
+      <section data-nav-theme="dark" className="relative py-20 px-6 bg-[#4e2055] text-white overflow-hidden">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-accent/5 blur-[120px] pointer-events-none" />
         <div className="max-w-6xl mx-auto relative z-10 space-y-12">
           {/* Header */}
@@ -272,7 +281,7 @@ function InstitutionsPage() {
       </section>
 
       {/* IMMERSION LABS */}
-      <section className="relative py-20 px-6 bg-white overflow-hidden">
+      <section data-nav-theme="light" className="relative py-20 px-6 bg-white overflow-hidden">
         <FlowerField count={8} />
         <div className="max-w-6xl mx-auto relative z-10 space-y-12">
           {/* Header */}
@@ -305,7 +314,7 @@ function InstitutionsPage() {
       </section>
 
       {/* FINAL CTA SECTION */}
-      <section className="relative py-20 px-6 bg-gradient-to-br from-[#fff8f5] to-[#fbf5fa] border-t border-[#f5e3e6] overflow-hidden">
+      <section data-nav-theme="light" className="relative py-20 px-6 bg-gradient-to-br from-[#fff8f5] to-[#fbf5fa] border-t border-[#f5e3e6] overflow-hidden">
         <div className="max-w-5xl mx-auto text-center space-y-8 relative z-10">
           <h2 className="text-3xl md:text-5xl font-display font-semibold text-primary leading-tight max-w-3xl mx-auto">
             Let’s co-create your school’s next transformative journey
@@ -316,18 +325,88 @@ function InstitutionsPage() {
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
+            <Dialog>
+              <DialogTrigger asChild>
+                <button
+                  className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-gradient-cta text-accent-foreground font-semibold rounded-full text-base shadow-soft hover:scale-[1.02] transition cursor-pointer border-none"
+                >
+                  <span>Speak with our Schools Team</span>
+                  <span>→</span>
+                </button>
+              </DialogTrigger>
+              <DialogContent className="sm:max-w-md bg-background/95 backdrop-blur-2xl border-accent/20 rounded-[2.5rem] overflow-hidden p-0 shadow-glow">
+                <div className="relative">
+                  {/* Decorative Top Accent */}
+                  <div className="h-2 w-full bg-gradient-cta" />
+
+                  <div className="p-8 space-y-8">
+                    <DialogHeader>
+                      <DialogTitle className="text-3xl md:text-4xl font-display font-semibold text-primary text-center">
+                        Contact our Schools Team
+                      </DialogTitle>
+                      <DialogDescription className="text-center text-muted-foreground pt-2">
+                        We're here to help you design the perfect journey for your students.
+                      </DialogDescription>
+                    </DialogHeader>
+
+                    <div className="grid gap-4">
+                      {/* Email */}
+                      <a
+                        href="mailto:samyamspirituals@gmail.com"
+                        className="flex items-center gap-4 p-5 rounded-2xl bg-white/50 border border-border/50 hover:bg-white hover:border-accent/20 transition-all group"
+                      >
+                        <div className="w-12 h-12 rounded-xl bg-primary/5 flex items-center justify-center text-primary group-hover:text-accent transition-colors">
+                          <Mail className="w-6 h-6" />
+                        </div>
+                        <div className="text-left">
+                          <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-accent/70">Email Us</p>
+                          <p className="text-primary font-medium">samyamspirituals@gmail.com</p>
+                        </div>
+                      </a>
+
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        {/* Phone */}
+                        <a
+                          href="tel:+919035225375"
+                          className="flex items-center gap-4 p-5 rounded-2xl bg-white/50 border border-border/50 hover:bg-white hover:border-accent/20 transition-all group"
+                        >
+                          <div className="w-12 h-12 rounded-xl bg-primary/5 flex items-center justify-center text-primary group-hover:text-accent transition-colors">
+                            <Phone className="w-6 h-6" />
+                          </div>
+                          <div className="text-left">
+                            <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-accent/70">Call Now</p>
+                            <p className="text-primary font-medium text-sm">+91-9035225375</p>
+                          </div>
+                        </a>
+
+                        {/* WhatsApp */}
+                        <a
+                          href="https://wa.me/919035225375"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-center gap-4 p-5 rounded-2xl bg-[#f5fff7] border border-green-500/20 hover:bg-green-500 hover:text-white transition-all group shadow-sm"
+                        >
+                          <div className="w-12 h-12 rounded-xl bg-green-500/10 flex items-center justify-center text-green-600 group-hover:text-white transition-colors">
+                            <svg viewBox="0 0 24 24" className="w-6 h-6 fill-current" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L0 24l6.335-1.662c1.72.937 3.659 1.432 5.631 1.432h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z" />
+                            </svg>
+                          </div>
+                          <div className="text-left">
+                            <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-accent/70">WhatsApp</p>
+                            <p className="font-medium text-sm">Message</p>
+                          </div>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </DialogContent>
+            </Dialog>
             <Link
-              to="/enquire"
-              className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-gradient-cta text-accent-foreground font-semibold rounded-full text-base shadow-soft hover:scale-[1.02] transition cursor-pointer"
-            >
-              <span>Speak with our Schools Team</span>
-              <span>→</span>
-            </Link>
-            <Link
-              to="/enquire"
+              to="/knowledge-portal"
               className="inline-flex items-center justify-center px-8 py-4 border border-accent text-accent font-semibold rounded-full text-base hover:bg-[#fff0ed] transition cursor-pointer"
             >
-              Request Presentation Deck
+              Review Content
             </Link>
           </div>
         </div>

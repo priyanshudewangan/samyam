@@ -92,12 +92,12 @@ export function Footer() {
             </h4>
             <ul className="space-y-0.5 text-[9.5px] text-white/80">
               <li>
-                <a href="#" className="hover:text-white transition">
+                <Link to="/knowledge-portal" className="hover:text-white transition">
                   Knowledge Portal
-                </a>
+                </Link>
               </li>
               <li>
-                <Link to="/enquire" className="hover:text-white transition">
+                <Link to="/custom-yatra" className="hover:text-white transition">
                   Customize your yatra
                 </Link>
               </li>
