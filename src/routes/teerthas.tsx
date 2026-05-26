@@ -112,7 +112,7 @@ function TeerthasPage() {
       <Nav />
 
       {/* HERO SECTION */}
-      <section className="relative min-h-[60vh] flex items-center justify-center overflow-hidden">
+      <section data-nav-theme="dark" className="relative min-h-[60vh] flex items-center justify-center overflow-hidden">
         {/* Background Image & Overlay */}
         <div className="absolute inset-0 z-0">
           <img
@@ -146,7 +146,7 @@ function TeerthasPage() {
       </section>
 
       {/* FILTERS SECTION */}
-      <section className="px-6 pb-12 max-w-6xl mx-auto relative z-10">
+      <section data-nav-theme="dark" className="px-6 pb-12 max-w-6xl mx-auto relative z-10">
         <div className="flex flex-col md:flex-row gap-10 md:items-center">
           {/* Regions */}
           <div className="space-y-4 flex-1">
@@ -240,7 +240,7 @@ function TeerthasPage() {
       </section>
 
       {/* EXPLORE OTHER TEERTHAS SECTION */}
-      <section className="relative py-24 px-6 bg-white border-y border-[#f5e3e6]/50 overflow-hidden">
+      <section data-nav-theme="light" className="relative py-24 px-6 bg-white border-y border-[#f5e3e6]/50 overflow-hidden">
         <div className="absolute top-0 left-0 w-full h-full pointer-events-none opacity-40">
            <FlowerField count={4} />
         </div>
@@ -275,7 +275,7 @@ function TeerthasPage() {
       </section>
 
       {/* FINAL CTA */}
-      <section className="relative py-24 px-6 text-center overflow-hidden">
+      <section data-nav-theme="dark" className="relative py-24 px-6 text-center overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-black/20 to-black/40" />
         <div className="max-w-4xl mx-auto relative z-10 space-y-8">
           <h2 className="text-4xl md:text-6xl font-display font-semibold text-white leading-tight">

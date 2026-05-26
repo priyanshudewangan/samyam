@@ -4,11 +4,9 @@ import { FlowerField } from "@/components/FlowerField";
 import { HeroVideo } from "@/components/HeroVideo";
 import React, { useState } from "react";
 import { Footer } from "@/components/Footer";
+import { detailedYatras } from "@/constants/yatras";
 
 // Asset imports
-import kashi from "@/assets/kashi.jpg";
-import vrindavan from "@/assets/vrindavan.jpg";
-import himachal from "@/assets/himachal.jpg";
 import spiritualJoy from "@/assets/spiritual_joy.jpg";
 
 export const Route = createFileRoute("/")({
@@ -24,36 +22,6 @@ export const Route = createFileRoute("/")({
     ],
   }),
 });
-
-const yatrasList = [
-  {
-    img: kashi,
-    name: "Kashi Sojourn",
-    date: "23-26 January 2025",
-    dur: "4 Days • 3 Nights • All Inclusive",
-    desc: "Soak in the divine vibrations of the ancient teerthas of Bharat and transcend consciousness. A journey towards inner transformation while exploring the ancient heritage of Bharat.",
-    occ3: "Triple Occupancy · On Request",
-    occ2: "Double Occupancy · On Request",
-  },
-  {
-    img: vrindavan,
-    name: "Vrindavan Mathura",
-    date: "March 12-15",
-    dur: "4 Days • 3 Nights",
-    desc: "Experience the divine leelas of Lord Krishna in the sacred land of Vrindavan and Mathura. A journey through the spiritual heart of Braj.",
-    occ3: "Triple Occupancy · On Request",
-    occ2: "Double Occupancy · On Request",
-  },
-  {
-    img: himachal,
-    name: "Shakti Peethas of Himachal",
-    date: "May 2026",
-    dur: "5-7 Days",
-    desc: "Journey to the sacred abodes of the Divine Mother in the pristine Himalayas. Experience the power of Shakti in the most beautiful mountain settings.",
-    occ3: "Triple Occupancy · On Request",
-    occ2: "Double Occupancy · On Request",
-  },
-];
 
 const differencesList = [
   {
@@ -126,7 +94,7 @@ function Index() {
       <Nav />
 
       {/* HERO */}
-      <section className="relative min-h-screen flex items-center justify-center px-4 pt-32 pb-20 overflow-hidden bg-gradient-soft">
+      <section data-nav-theme="accent" className="relative min-h-screen flex items-center justify-center px-4 pt-32 pb-20 overflow-hidden bg-gradient-soft">
         <HeroVideo />
         <FlowerField count={22} />
         <div className="relative z-10 max-w-5xl text-center fade-up">
@@ -162,7 +130,7 @@ function Index() {
       </section>
 
       {/* WHY */}
-      <section id="about" className="relative py-24 px-4">
+      <section id="about" data-nav-theme="light" className="relative py-24 px-4">
         <FlowerField count={8} />
         <div className="relative max-w-6xl mx-auto">
           <p className="text-sm tracking-[0.3em] uppercase text-accent text-center mb-3">
@@ -210,7 +178,7 @@ function Index() {
       </section>
 
       {/* YATRAS */}
-      <section id="yatras" className="relative py-24 px-4 bg-muted/40">
+      <section id="yatras" data-nav-theme="light" className="relative py-24 px-4 bg-muted/40">
         <div className="max-w-6xl mx-auto">
           <p className="text-sm tracking-[0.3em] uppercase text-accent text-center mb-3">
             Samyam's sacred offerings
@@ -223,7 +191,7 @@ function Index() {
             kshetras- Experience them with our unique one of its kind Yatra and Retreat programs
           </p>
           <div className="grid md:grid-cols-3 gap-8 mt-14">
-            {yatrasList.map((y) => (
+            {detailedYatras.map((y) => (
               <article
                 key={y.name}
                 className="group rounded-3xl overflow-hidden bg-card shadow-soft border border-border hover:shadow-glow transition flex flex-col h-full"
@@ -242,17 +210,17 @@ function Index() {
                   <div>
                     <p className="text-xs tracking-widest uppercase text-accent">{y.date}</p>
                     <h3 className="text-2xl text-primary mt-2">{y.name}</h3>
-                    <p className="text-xs text-muted-foreground mt-1">{y.dur}</p>
+                    <p className="text-xs text-muted-foreground mt-1">{y.duration}</p>
                     <p className="text-sm text-muted-foreground mt-4 leading-relaxed">{y.desc}</p>
                   </div>
                   <div className="mt-6 pt-5 border-t border-border">
                     <div className="space-y-1 text-xs text-muted-foreground">
-                      <p>✨ {y.occ3}</p>
-                      <p>✨ {y.occ2}</p>
+                      <p>✨ {y.triplePrice}</p>
+                      <p>✨ {y.doublePrice}</p>
                     </div>
                     <div className="mt-4 flex items-center justify-between">
                       <a
-                        href="/enquire"
+                        href="/yatras"
                         className="text-sm font-medium text-accent hover:underline flex items-center gap-1"
                       >
                         Explore <span className="group-hover:translate-x-1 transition">→</span>
@@ -267,7 +235,7 @@ function Index() {
       </section>
 
       {/* DIFFERENCE */}
-      <section id="difference" className="relative py-24 px-4">
+      <section id="difference" data-nav-theme="light" className="relative py-24 px-4">
         <FlowerField count={6} />
         <div className="relative max-w-6xl mx-auto">
           <p className="text-sm tracking-[0.3em] uppercase text-accent text-center mb-3">
@@ -292,7 +260,7 @@ function Index() {
       </section>
 
       {/* JOURNEY YOUR WAY */}
-      <section className="relative py-24 px-4 bg-muted/40">
+      <section data-nav-theme="light" className="relative py-24 px-4 bg-muted/40">
         <div className="max-w-6xl mx-auto text-center">
           <h2 className="text-4xl md:text-5xl text-primary">Your Journey, Your Way</h2>
           <p className="text-muted-foreground mt-4">
@@ -315,7 +283,7 @@ function Index() {
       </section>
 
       {/* TESTIMONIALS (TRANSFORMATIONS & STORIES) */}
-      <section className="relative py-24 px-4">
+      <section data-nav-theme="light" className="relative py-24 px-4">
         <div className="max-w-4xl mx-auto text-center">
           <p className="text-sm tracking-[0.3em] uppercase text-accent mb-3">
             Transformations & Stories

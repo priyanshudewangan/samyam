@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as YatrasRouteImport } from './routes/yatras'
 import { Route as TeerthasRouteImport } from './routes/teerthas'
 import { Route as MethodologyRouteImport } from './routes/methodology'
+import { Route as InstitutionsRouteImport } from './routes/institutions'
 import { Route as EnquireRouteImport } from './routes/enquire'
 import { Route as DifferenceRouteImport } from './routes/difference'
 import { Route as AboutRouteImport } from './routes/about'
@@ -32,6 +33,11 @@ const TeerthasRoute = TeerthasRouteImport.update({
 const MethodologyRoute = MethodologyRouteImport.update({
   id: '/methodology',
   path: '/methodology',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const InstitutionsRoute = InstitutionsRouteImport.update({
+  id: '/institutions',
+  path: '/institutions',
   getParentRoute: () => rootRouteImport,
 } as any)
 const EnquireRoute = EnquireRouteImport.update({
@@ -70,6 +76,7 @@ export interface FileRoutesByFullPath {
   '/about': typeof AboutRoute
   '/difference': typeof DifferenceRoute
   '/enquire': typeof EnquireRoute
+  '/institutions': typeof InstitutionsRoute
   '/methodology': typeof MethodologyRoute
   '/teerthas': typeof TeerthasRoute
   '/yatras': typeof YatrasRouteWithChildren
@@ -81,6 +88,7 @@ export interface FileRoutesByTo {
   '/about': typeof AboutRoute
   '/difference': typeof DifferenceRoute
   '/enquire': typeof EnquireRoute
+  '/institutions': typeof InstitutionsRoute
   '/methodology': typeof MethodologyRoute
   '/teerthas': typeof TeerthasRoute
   '/yatras/explore': typeof YatrasExploreRoute
@@ -92,6 +100,7 @@ export interface FileRoutesById {
   '/about': typeof AboutRoute
   '/difference': typeof DifferenceRoute
   '/enquire': typeof EnquireRoute
+  '/institutions': typeof InstitutionsRoute
   '/methodology': typeof MethodologyRoute
   '/teerthas': typeof TeerthasRoute
   '/yatras': typeof YatrasRouteWithChildren
@@ -105,6 +114,7 @@ export interface FileRouteTypes {
     | '/about'
     | '/difference'
     | '/enquire'
+    | '/institutions'
     | '/methodology'
     | '/teerthas'
     | '/yatras'
@@ -116,6 +126,7 @@ export interface FileRouteTypes {
     | '/about'
     | '/difference'
     | '/enquire'
+    | '/institutions'
     | '/methodology'
     | '/teerthas'
     | '/yatras/explore'
@@ -126,6 +137,7 @@ export interface FileRouteTypes {
     | '/about'
     | '/difference'
     | '/enquire'
+    | '/institutions'
     | '/methodology'
     | '/teerthas'
     | '/yatras'
@@ -138,6 +150,7 @@ export interface RootRouteChildren {
   AboutRoute: typeof AboutRoute
   DifferenceRoute: typeof DifferenceRoute
   EnquireRoute: typeof EnquireRoute
+  InstitutionsRoute: typeof InstitutionsRoute
   MethodologyRoute: typeof MethodologyRoute
   TeerthasRoute: typeof TeerthasRoute
   YatrasRoute: typeof YatrasRouteWithChildren
@@ -164,6 +177,13 @@ declare module '@tanstack/react-router' {
       path: '/methodology'
       fullPath: '/methodology'
       preLoaderRoute: typeof MethodologyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/institutions': {
+      id: '/institutions'
+      path: '/institutions'
+      fullPath: '/institutions'
+      preLoaderRoute: typeof InstitutionsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/enquire': {
@@ -229,6 +249,7 @@ const rootRouteChildren: RootRouteChildren = {
   AboutRoute: AboutRoute,
   DifferenceRoute: DifferenceRoute,
   EnquireRoute: EnquireRoute,
+  InstitutionsRoute: InstitutionsRoute,
   MethodologyRoute: MethodologyRoute,
   TeerthasRoute: TeerthasRoute,
   YatrasRoute: YatrasRouteWithChildren,

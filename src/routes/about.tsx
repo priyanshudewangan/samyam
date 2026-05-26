@@ -29,7 +29,7 @@ function AboutPage() {
       <Nav />
 
       {/* PHILOSOPHY & PURPOSE HERO */}
-      <section className="relative pt-36 pb-24 px-4 text-center overflow-hidden min-h-[60vh] md:min-h-[70vh] flex items-center justify-center">
+      <section data-nav-theme="dark" className="relative pt-36 pb-24 px-4 text-center overflow-hidden min-h-[60vh] md:min-h-[70vh] flex items-center justify-center">
         <img
           src={bgAbout}
           alt="Samyam Background"
@@ -59,7 +59,7 @@ function AboutPage() {
       </section>
 
       {/* INTRO GRID */}
-      <section className="py-16 px-4 max-w-6xl mx-auto">
+      <section data-nav-theme="light" className="py-16 px-4 max-w-6xl mx-auto">
         <div className="grid lg:grid-cols-12 gap-8 items-stretch">
           {/* Left Column - Content Card */}
           <div className="lg:col-span-7 bg-card border border-border rounded-3xl p-8 md:p-12 shadow-soft flex flex-col justify-between">
@@ -172,7 +172,7 @@ function AboutPage() {
       </section>
 
       {/* SACRED DESIGN HOUSE */}
-      <section className="relative py-24 px-4 overflow-hidden bg-gradient-to-br from-[#9b83a8] via-[#e2aa95] to-[#f4b69d] text-white">
+      <section data-nav-theme="accent" className="relative py-24 px-4 overflow-hidden bg-gradient-to-br from-[#9b83a8] via-[#e2aa95] to-[#f4b69d] text-white">
         {/* Subtle decorative flower images or overlays if needed */}
         <FlowerField count={8} />
 
@@ -310,7 +310,7 @@ function AboutPage() {
       </section>
 
       {/* TRAVEL BEYOND SECTION */}
-      <section className="py-16 px-4 max-w-6xl mx-auto">
+      <section data-nav-theme="light" className="py-16 px-4 max-w-6xl mx-auto">
         <div className="bg-[#fcf3f6] border border-accent/15 rounded-[2rem] p-8 md:p-12 shadow-soft">
           <div className="grid lg:grid-cols-12 gap-8 items-center">
             {/* Left bio content */}
@@ -389,7 +389,7 @@ function AboutPage() {
       </section>
 
       {/* VISION & MISSION & GOALS (DARK MODE) */}
-      <section className="py-20 px-4 bg-[#4e2d5c] text-white">
+      <section data-nav-theme="dark" className="py-20 px-4 bg-[#4e2d5c] text-white">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-4xl md:text-5xl font-display font-semibold text-center mb-16">
             Vision | Mission | Goals
@@ -460,7 +460,7 @@ function AboutPage() {
       </section>
 
       {/* OUR DIVINE EMBLEM */}
-      <section className="py-24 px-4 bg-background">
+      <section data-nav-theme="light" className="py-24 px-4 bg-background">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-display font-semibold text-primary">
@@ -526,7 +526,7 @@ function AboutPage() {
       </section>
 
       {/* OUR VALUES */}
-      <section className="py-20 px-4 bg-[#4e2d5c] text-white border-t border-white/10">
+      <section data-nav-theme="dark" className="py-20 px-4 bg-[#4e2d5c] text-white border-t border-white/10">
         <div className="max-w-6xl mx-auto text-center">
           <h2 className="text-4xl md:text-5xl font-display font-semibold mb-14">Our Values</h2>
 
@@ -569,7 +569,7 @@ function AboutPage() {
       </section>
 
       {/* OUR JOURNEY */}
-      <section className="py-20 px-4 bg-[#4e2d5c] text-white border-t border-white/10">
+      <section data-nav-theme="dark" className="py-20 px-4 bg-[#4e2d5c] text-white border-t border-white/10">
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-4xl md:text-5xl font-display font-semibold mb-3">Our Journey</h2>
           <p className="text-sm text-white/70 uppercase tracking-widest mb-16">
@@ -613,7 +613,7 @@ function AboutPage() {
       </section>
 
       {/* MEET THE FOUNDER */}
-      <section className="py-20 px-4 max-w-5xl mx-auto border-t border-border">
+      <section data-nav-theme="light" className="py-20 px-4 max-w-5xl mx-auto border-t border-border">
         <div className="grid md:grid-cols-12 gap-12 items-center">
           {/* Founder Image Column */}
           <div className="md:col-span-5 relative overflow-hidden rounded-3xl shadow-soft border border-border group aspect-[3/4] max-w-sm mx-auto w-full">

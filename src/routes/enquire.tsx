@@ -33,6 +33,7 @@ function EnquirePage() {
       {/* CTA */}
       <section
         id="plan"
+        data-nav-theme="accent"
         className="relative py-32 px-4 bg-gradient-nav overflow-hidden min-h-screen flex items-center justify-center"
       >
         <FlowerField count={14} />

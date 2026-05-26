@@ -134,7 +134,7 @@ function MethodologyPage() {
       <Nav />
 
       {/* HERO SECTION */}
-      <section className="relative min-h-[70vh] flex items-center justify-center overflow-hidden">
+      <section data-nav-theme="dark" className="relative min-h-[70vh] flex items-center justify-center overflow-hidden">
         {/* Background Image & Overlay */}
         <div className="absolute inset-0 z-0">
           <img
@@ -161,7 +161,7 @@ function MethodologyPage() {
       </section>
 
       {/* INTRO & THE PATH TO FIRM DEVOTION */}
-      <section className="relative py-20 px-6 bg-white overflow-hidden">
+      <section data-nav-theme="light" className="relative py-20 px-6 bg-white overflow-hidden">
         <FlowerField count={10} />
         <div className="max-w-4xl mx-auto text-center space-y-16 relative z-10">
           {/* Paragraph quote */}
@@ -200,7 +200,7 @@ function MethodologyPage() {
       </section>
 
       {/* SIX INTEGRATED PILLARS */}
-      <section className="relative py-20 px-6 bg-[#4e2055] text-white overflow-hidden">
+      <section data-nav-theme="dark" className="relative py-20 px-6 bg-[#4e2055] text-white overflow-hidden">
         {/* Subtle background glow */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-accent/10 blur-[120px] pointer-events-none" />
         <FlowerField count={8} />
@@ -243,7 +243,7 @@ function MethodologyPage() {
       </section>
 
       {/* SPIRITUAL RESOURCES LIBRARY */}
-      <section className="relative py-20 px-6 bg-[#faf6f8] text-primary overflow-hidden">
+      <section data-nav-theme="light" className="relative py-20 px-6 bg-[#faf6f8] text-primary overflow-hidden">
         <FlowerField count={8} />
         <div className="max-w-6xl mx-auto relative z-10">
           {/* Header */}
@@ -366,7 +366,7 @@ function MethodologyPage() {
       </section>
 
       {/* HOW THEY WORK TOGETHER & THE RESULT */}
-      <section className="relative py-20 px-6 bg-gradient-to-b from-[#34133b] to-[#1a0520] text-white overflow-hidden border-t border-white/10">
+      <section data-nav-theme="dark" className="relative py-20 px-6 bg-gradient-to-b from-[#34133b] to-[#1a0520] text-white overflow-hidden border-t border-white/10">
         <FlowerField count={6} />
         <div className="max-w-5xl mx-auto relative z-10 space-y-16">
           {/* Header */}

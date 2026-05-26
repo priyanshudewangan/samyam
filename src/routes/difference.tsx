@@ -23,7 +23,7 @@ function DifferencePage() {
       <Nav />
 
       {/* DIFFERENCE */}
-      <section id="difference" className="relative py-32 px-4">
+      <section id="difference" data-nav-theme="light" className="relative py-32 px-4">
         <FlowerField count={6} />
         <div className="relative max-w-6xl mx-auto">
           <p className="text-sm tracking-[0.3em] uppercase text-accent text-center mb-3">
