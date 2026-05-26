@@ -1,8 +1,15 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Nav } from "@/components/Nav";
 import { FlowerField } from "@/components/FlowerField";
-import aarti from "@/assets/aarti.jpg";
-import { yatras, pillars, differences } from "@/constants/landing-page";
+import { HeroVideo } from "@/components/HeroVideo";
+import React, { useState } from "react";
+import { Footer } from "@/components/Footer";
+
+// Asset imports
+import kashi from "@/assets/kashi.jpg";
+import vrindavan from "@/assets/vrindavan.jpg";
+import himachal from "@/assets/himachal.jpg";
+import spiritualJoy from "@/assets/spiritual_joy.jpg";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -18,43 +25,139 @@ export const Route = createFileRoute("/")({
   }),
 });
 
+const yatrasList = [
+  {
+    img: kashi,
+    name: "Kashi Sojourn",
+    date: "23-26 January 2025",
+    dur: "4 Days • 3 Nights • All Inclusive",
+    desc: "Soak in the divine vibrations of the ancient teerthas of Bharat and transcend consciousness. A journey towards inner transformation while exploring the ancient heritage of Bharat.",
+    occ3: "Triple Occupancy · On Request",
+    occ2: "Double Occupancy · On Request",
+  },
+  {
+    img: vrindavan,
+    name: "Vrindavan Mathura",
+    date: "March 12-15",
+    dur: "4 Days • 3 Nights",
+    desc: "Experience the divine leelas of Lord Krishna in the sacred land of Vrindavan and Mathura. A journey through the spiritual heart of Braj.",
+    occ3: "Triple Occupancy · On Request",
+    occ2: "Double Occupancy · On Request",
+  },
+  {
+    img: himachal,
+    name: "Shakti Peethas of Himachal",
+    date: "May 2026",
+    dur: "5-7 Days",
+    desc: "Journey to the sacred abodes of the Divine Mother in the pristine Himalayas. Experience the power of Shakti in the most beautiful mountain settings.",
+    occ3: "Triple Occupancy · On Request",
+    occ2: "Double Occupancy · On Request",
+  },
+];
+
+const differencesList = [
+  {
+    icon: "🕉️",
+    t: "Authentic Experiences",
+    d: "All the journeys are crafted, the sites are covered based on the instructions given in the scriptures of Bharat, deeply rooted in Sanatan.",
+  },
+  {
+    icon: "👥",
+    t: "Expert Guidance",
+    d: "The travels are guided by learned scholars and not tour guides.",
+  },
+  {
+    icon: "🌿",
+    t: "Eco-Conscious Travel",
+    d: "Respecting both the sacred sites and Mother Earth in our journeys.",
+  },
+  {
+    icon: "🎯",
+    t: "Personalized Journeys",
+    d: "Each yatra is crafted to match your spiritual intent and readiness.",
+  },
+];
+
+const waysList = [
+  {
+    i: "🧘",
+    t: "Individual Yatra",
+    d: "A personal journey of transformation, crafted for your unique spiritual path.",
+  },
+  {
+    i: "👨‍👩‍👧‍👦",
+    t: "Family Yatra",
+    d: "Create sacred memories together with a journey designed for families.",
+  },
+  {
+    i: "🏢",
+    t: "Corporate Immersion",
+    d: "Team retreats that combine spiritual awakening with team building.",
+  },
+];
+
+const testimonials = [
+  {
+    q: "I returned from Kashi not just with memories, but with a deeper sense of clarity and devotion. The ritual details, scholar guidance, and local warmth made this unlike any travel I've done.",
+    a: "Rajesh K., Bangalore",
+    y: "Kashi Sojourn",
+  },
+  {
+    q: "Bringing my parents and children to Vrindavan was a soul-stirring experience. Samyam took care of all the premium comforts, allowing us to completely absorb the divine leelas without any worry.",
+    a: "Priya M., Mumbai",
+    y: "Vrindavan Mathura",
+  },
+  {
+    q: "The Shakti Peethas yatra was deeply empowering. Practicing morning sadhanas amidst the Himalayas under spiritual guidance was a transcendental milestone for me.",
+    a: "Ananya S., Delhi",
+    y: "Himachal Retreat",
+  },
+];
+
 function Index() {
+  const [activeIdx, setActiveIdx] = useState(0);
+
+  const nextSlide = () => setActiveIdx((prev) => (prev + 1) % testimonials.length);
+  const prevSlide = () =>
+    setActiveIdx((prev) => (prev - 1 + testimonials.length) % testimonials.length);
+
   return (
-    <div className="relative min-h-screen overflow-x-hidden bg-background">
+    <div className="relative min-h-screen overflow-x-hidden bg-background flex flex-col justify-between">
       <Nav />
 
       {/* HERO */}
-      <section className="relative min-h-screen flex items-center justify-center px-4 pt-32 pb-20 bg-gradient-soft">
+      <section className="relative min-h-screen flex items-center justify-center px-4 pt-32 pb-20 overflow-hidden bg-gradient-soft">
+        <HeroVideo />
         <FlowerField count={22} />
         <div className="relative z-10 max-w-5xl text-center fade-up">
-          <p className="font-display italic text-primary/70 text-lg md:text-xl mb-4">
+          <p className="font-display italic text-white/90 text-lg md:text-xl mb-4 drop-shadow-md">
             ॥ श्री गुरुभ्यो नमः ॥
           </p>
-          <h1 className="font-display font-semibold text-5xl md:text-7xl lg:text-8xl leading-[1.05] text-gradient-hero drop-shadow-sm">
+          <h1 className="font-display font-semibold text-5xl md:text-7xl lg:text-8xl leading-[1.05] text-white drop-shadow-lg">
             Awaken to the
             <br />
             Mysticism of Bharat
           </h1>
-          <p className="mt-8 text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
+          <p className="mt-8 text-lg md:text-xl text-white/95 max-w-2xl mx-auto drop-shadow-md">
             Premium spiritual journeys guided by Sanatan Dharma.
             <br />
             <span className="italic">Travel Beyond. Discover Within.</span>
           </p>
           <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
             <a
-              href="#plan"
+              href="/enquire"
               className="px-8 py-4 rounded-full bg-gradient-cta text-accent-foreground font-medium shadow-glow hover:scale-105 transition"
             >
               Plan My Journey
             </a>
             <a
-              href="#yatras"
-              className="px-8 py-4 rounded-full border-2 border-accent text-accent font-medium hover:bg-accent hover:text-accent-foreground transition"
+              href="/yatras"
+              className="px-8 py-4 rounded-full border-2 border-white text-white font-medium hover:bg-white hover:text-primary transition"
             >
               Explore Teerthas
             </a>
           </div>
-          <p className="mt-16 text-xs tracking-[0.4em] uppercase text-muted-foreground">Scroll</p>
+          <p className="mt-16 text-xs tracking-[0.4em] uppercase text-white/80">Scroll</p>
         </div>
       </section>
 
@@ -63,26 +166,44 @@ function Index() {
         <FlowerField count={8} />
         <div className="relative max-w-6xl mx-auto">
           <p className="text-sm tracking-[0.3em] uppercase text-accent text-center mb-3">
-            Why Choose Samyam
+            Why Choose SAMYAM
           </p>
-          <h2 className="text-4xl md:text-5xl text-center text-primary max-w-3xl mx-auto">
-            We don't just take you to sacred places — we guide you through a transformation.
+          <h2 className="text-4xl md:text-5xl text-center text-primary max-w-3xl mx-auto mb-16">
+            We don't just take you to sacred places—we guide you through a transformation.
           </h2>
-          <div className="grid md:grid-cols-2 gap-8 mt-16">
-            <div className="p-10 rounded-3xl bg-card shadow-soft border border-border">
-              <h3 className="text-2xl text-primary mb-3">Sacred. Respectful. Responsible.</h3>
-              <p className="text-muted-foreground leading-relaxed">
-                Every journey is designed with deep reverence for sacred sites, respect for local
-                traditions, and responsibility toward preserving these holy places for future
-                generations.
-              </p>
+          <div className="grid lg:grid-cols-12 gap-8 items-stretch">
+            {/* Image Column */}
+            <div className="lg:col-span-6 relative overflow-hidden rounded-3xl shadow-soft border border-border group min-h-[350px]">
+              <img
+                src={spiritualJoy}
+                alt="Devotion and spiritual celebration with Samyam seekers"
+                className="w-full h-full object-cover group-hover:scale-105 transition duration-700"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/45 via-transparent to-transparent pointer-events-none" />
+              <div className="absolute bottom-6 left-6 right-6 text-white z-10">
+                <p className="font-display italic text-lg opacity-90">
+                  "Devotion is not an emotion, it is a state of being."
+                </p>
+              </div>
             </div>
-            <div className="p-10 rounded-3xl bg-card shadow-soft border border-border">
-              <h3 className="text-2xl text-primary mb-3">Intelligent Sacred Geography</h3>
-              <p className="text-muted-foreground leading-relaxed">
-                The sacred geography of Bharat is intelligent and alive. Each kshetra awakens
-                something precise in you — we understand this and craft journeys accordingly.
-              </p>
+
+            {/* Content Column */}
+            <div className="lg:col-span-6 flex flex-col gap-6 justify-between">
+              <div className="p-10 rounded-3xl bg-card shadow-soft border border-border flex-1 flex flex-col justify-center">
+                <h3 className="text-2xl text-primary mb-3">Sacred. Respectful. Responsible.</h3>
+                <p className="text-muted-foreground leading-relaxed">
+                  Every journey with SAMYAM is designed with deep reverence for the sacred sites,
+                  respect for local traditions, and responsibility toward preserving these holy
+                  places for future generations.
+                </p>
+              </div>
+              <div className="p-10 rounded-3xl bg-card shadow-soft border border-border flex-1 flex flex-col justify-center">
+                <h3 className="text-2xl text-primary mb-3">Intelligent Sacred Geography</h3>
+                <p className="text-muted-foreground leading-relaxed">
+                  The sacred geography of Bharat is intelligent and alive. Each kshetra awakens
+                  something precise in you—we understand this and craft journeys accordingly.
+                </p>
+              </div>
             </div>
           </div>
         </div>
@@ -92,18 +213,20 @@ function Index() {
       <section id="yatras" className="relative py-24 px-4 bg-muted/40">
         <div className="max-w-6xl mx-auto">
           <p className="text-sm tracking-[0.3em] uppercase text-accent text-center mb-3">
-            Sacred Offerings
+            Samyam's sacred offerings
           </p>
-          <h2 className="text-4xl md:text-5xl text-center text-primary">Samyam's Curated Yatras</h2>
+          <h2 className="text-4xl md:text-5xl text-center text-primary font-display font-semibold">
+            Curated Yatras & Retreats
+          </h2>
           <p className="text-center text-muted-foreground mt-4 max-w-2xl mx-auto">
-            Don't just visit the kshetras — experience them through our unique Yatra & Retreat
-            programs, infused with divine spiritual practice.
+            Specially curated yatras infused with divine spiritual retreats; Don't just visit the
+            kshetras- Experience them with our unique one of its kind Yatra and Retreat programs
           </p>
           <div className="grid md:grid-cols-3 gap-8 mt-14">
-            {yatras.map((y) => (
+            {yatrasList.map((y) => (
               <article
                 key={y.name}
-                className="group rounded-3xl overflow-hidden bg-card shadow-soft border border-border hover:shadow-glow transition"
+                className="group rounded-3xl overflow-hidden bg-card shadow-soft border border-border hover:shadow-glow transition flex flex-col h-full"
               >
                 <div className="aspect-[4/3] overflow-hidden">
                   <img
@@ -115,16 +238,26 @@ function Index() {
                     className="w-full h-full object-cover group-hover:scale-105 transition duration-700"
                   />
                 </div>
-                <div className="p-6">
-                  <p className="text-xs tracking-widest uppercase text-accent">{y.date}</p>
-                  <h3 className="text-2xl text-primary mt-2">{y.name}</h3>
-                  <p className="text-xs text-muted-foreground mt-1">{y.dur}</p>
-                  <p className="text-sm text-muted-foreground mt-4 leading-relaxed">{y.desc}</p>
-                  <div className="mt-5 pt-5 border-t border-border flex items-center justify-between">
-                    <span className="text-xs text-muted-foreground">On Request</span>
-                    <a href="#" className="text-sm font-medium text-accent hover:underline">
-                      Explore →
-                    </a>
+                <div className="p-6 flex flex-col flex-1 justify-between">
+                  <div>
+                    <p className="text-xs tracking-widest uppercase text-accent">{y.date}</p>
+                    <h3 className="text-2xl text-primary mt-2">{y.name}</h3>
+                    <p className="text-xs text-muted-foreground mt-1">{y.dur}</p>
+                    <p className="text-sm text-muted-foreground mt-4 leading-relaxed">{y.desc}</p>
+                  </div>
+                  <div className="mt-6 pt-5 border-t border-border">
+                    <div className="space-y-1 text-xs text-muted-foreground">
+                      <p>✨ {y.occ3}</p>
+                      <p>✨ {y.occ2}</p>
+                    </div>
+                    <div className="mt-4 flex items-center justify-between">
+                      <a
+                        href="/enquire"
+                        className="text-sm font-medium text-accent hover:underline flex items-center gap-1"
+                      >
+                        Explore <span className="group-hover:translate-x-1 transition">→</span>
+                      </a>
+                    </div>
                   </div>
                 </div>
               </article>
@@ -138,13 +271,13 @@ function Index() {
         <FlowerField count={6} />
         <div className="relative max-w-6xl mx-auto">
           <p className="text-sm tracking-[0.3em] uppercase text-accent text-center mb-3">
-            The Samyam Difference
+            The SAMYAM Difference
           </p>
           <h2 className="text-4xl md:text-5xl text-center text-primary">
             What sets us apart in spiritual travel
           </h2>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-14">
-            {differences.map((d) => (
+            {differencesList.map((d) => (
               <div
                 key={d.t}
                 className="p-8 rounded-3xl bg-card shadow-soft border border-border text-center hover:-translate-y-1 transition"
@@ -163,29 +296,13 @@ function Index() {
         <div className="max-w-6xl mx-auto text-center">
           <h2 className="text-4xl md:text-5xl text-primary">Your Journey, Your Way</h2>
           <p className="text-muted-foreground mt-4">
-            Choose the experience that resonates with your spiritual intent.
+            Choose the experience that resonates with your spiritual intent
           </p>
           <div className="grid md:grid-cols-3 gap-6 mt-14 text-left">
-            {[
-              {
-                i: "🧘",
-                t: "Individual Yatra",
-                d: "A personal journey of transformation, crafted for your unique spiritual path.",
-              },
-              {
-                i: "👨‍👩‍👧‍👦",
-                t: "Family Yatra",
-                d: "Create sacred memories together with a journey designed for families.",
-              },
-              {
-                i: "🏢",
-                t: "Corporate Immersion",
-                d: "Team retreats that combine spiritual awakening with team building.",
-              },
-            ].map((c) => (
+            {waysList.map((c) => (
               <a
                 key={c.t}
-                href="#"
+                href="/enquire"
                 className="p-8 rounded-3xl bg-card shadow-soft border border-border hover:shadow-glow hover:border-accent/40 transition block"
               >
                 <div className="text-4xl">{c.i}</div>
@@ -197,139 +314,67 @@ function Index() {
         </div>
       </section>
 
-      {/* QUOTE / SANATAN */}
-      <section className="relative py-28 px-4 overflow-hidden">
-        <img
-          src={aarti}
-          alt=""
-          aria-hidden
-          loading="lazy"
-          className="absolute inset-0 w-full h-full object-cover opacity-40"
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-background via-background/70 to-background" />
-        <div className="relative max-w-4xl mx-auto text-center">
-          <div className="text-6xl text-accent mb-6">ॐ</div>
-          <p className="font-display italic text-3xl md:text-4xl text-primary leading-snug">
-            "Let the journey not be just movement of the body to a holy place, but the softening of
-            the heart into devotion."
+      {/* TESTIMONIALS (TRANSFORMATIONS & STORIES) */}
+      <section className="relative py-24 px-4">
+        <div className="max-w-4xl mx-auto text-center">
+          <p className="text-sm tracking-[0.3em] uppercase text-accent mb-3">
+            Transformations & Stories
           </p>
-          <div className="mt-12 grid md:grid-cols-2 gap-8 text-left">
-            <div className="p-8 rounded-3xl bg-card/80 backdrop-blur border border-border">
-              <h3 className="text-xl text-primary">Sacred Wisdom</h3>
-              <p className="text-sm text-muted-foreground mt-2">
-                Our journeys are guided by timeless wisdom from the Vedas, Upanishads, and Puranas.
-                Each destination is chosen for its specific spiritual significance.
-              </p>
-            </div>
-            <div className="p-8 rounded-3xl bg-card/80 backdrop-blur border border-border">
-              <h3 className="text-xl text-primary">Respectful Practice</h3>
-              <p className="text-sm text-muted-foreground mt-2">
-                We honor the traditions, rituals, and local customs of each sacred site. Our guides
-                help you participate authentically and respectfully.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
+          <h2 className="text-4xl md:text-5xl text-primary font-display font-semibold">
+            Hear from seekers who felt seen, guided, and held
+          </h2>
+          <p className="text-muted-foreground mt-4">
+            Swipe to read how different yatras shifted hearts across Bharat.
+          </p>
 
-      {/* METHODOLOGY */}
-      <section id="methodology" className="relative py-24 px-4">
-        <div className="max-w-6xl mx-auto">
-          <p className="text-sm tracking-[0.3em] uppercase text-accent text-center mb-3">
-            Dridh Bhakti
-          </p>
-          <h2 className="text-4xl md:text-5xl text-center text-primary">Our Methodology</h2>
-          <p className="text-center text-muted-foreground mt-4 max-w-2xl mx-auto">
-            Six integrated pillars working synergistically to open your Anahata Chakra and deepen
-            your devotion.
-          </p>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 mt-14">
-            {pillars.map((p) => (
-              <div
-                key={p.t}
-                className="p-8 rounded-3xl border border-border bg-card hover:bg-gradient-soft transition shadow-soft"
+          <div className="relative max-w-3xl mx-auto mt-12 bg-card p-10 md:p-12 rounded-3xl border border-border shadow-soft text-center overflow-hidden">
+            <div className="text-5xl text-accent mb-6">ॐ</div>
+            <div className="min-h-[160px] flex items-center justify-center">
+              <p className="font-display italic text-xl md:text-2xl text-primary leading-relaxed">
+                "{testimonials[activeIdx].q}"
+              </p>
+            </div>
+            <div className="mt-8 border-t border-border pt-6 flex flex-col items-center">
+              <p className="font-semibold text-primary">{testimonials[activeIdx].a}</p>
+              <p className="text-xs uppercase tracking-widest text-accent mt-1">
+                {testimonials[activeIdx].y}
+              </p>
+            </div>
+
+            {/* Navigation Arrows */}
+            <div className="mt-8 flex justify-center gap-4">
+              <button
+                onClick={prevSlide}
+                className="p-3 rounded-full border border-border bg-background hover:bg-muted text-primary transition cursor-pointer"
+                aria-label="Previous story"
               >
-                <div className="text-4xl">{p.icon}</div>
-                <h3 className="text-xl text-primary mt-4">{p.t}</h3>
-              </div>
-            ))}
-          </div>
-          <div className="text-center mt-10">
-            <a
-              href="#"
-              className="inline-block px-8 py-3 rounded-full border-2 border-primary text-primary font-medium hover:bg-primary hover:text-primary-foreground transition"
-            >
-              Explore Our Methodology →
-            </a>
+                ←
+              </button>
+              <button
+                onClick={nextSlide}
+                className="p-3 rounded-full border border-border bg-background hover:bg-muted text-primary transition cursor-pointer"
+                aria-label="Next story"
+              >
+                →
+              </button>
+            </div>
+
+            {/* Dot Indicators */}
+            <div className="mt-4 flex justify-center gap-2">
+              {testimonials.map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => setActiveIdx(i)}
+                  className={`w-2.5 h-2.5 rounded-full transition ${i === activeIdx ? "bg-accent scale-125" : "bg-muted-foreground/35"}`}
+                  aria-label={`Go to slide ${i + 1}`}
+                />
+              ))}
+            </div>
           </div>
         </div>
       </section>
 
-      {/* FOUNDER */}
-      <section className="relative py-24 px-4 bg-muted/40">
-        <FlowerField count={6} />
-        <div className="relative max-w-4xl mx-auto text-center">
-          <h2 className="text-4xl md:text-5xl text-primary">Travel Beyond. Discover Within.</h2>
-          <div className="mt-8 space-y-5 text-muted-foreground leading-relaxed">
-            <p>
-              At SAMYAM, we redefine spiritual journeys across Bharat, where luxury meets divinity,
-              and travel becomes transformation. We believe spirituality is not a privilege, but a
-              birthright.
-            </p>
-            <p>
-              Our journeys are sacred experiences — weaving culture, heritage, and Sanatan wisdom
-              with comfort and care. We help you not just see the sacred, but feel it, live it, and
-              carry it within.
-            </p>
-          </div>
-          <p className="font-display italic text-2xl text-primary mt-10">
-            "Let's not just visit the sacred. Let's transform the way we experience the soul."
-          </p>
-          <p className="mt-4 text-sm tracking-widest uppercase text-accent">
-            — Nileema Shenoy, Founder
-          </p>
-        </div>
-      </section>
-
-      {/* CTA */}
-      <section id="plan" className="relative py-28 px-4 bg-gradient-nav overflow-hidden">
-        <FlowerField count={14} />
-        <div className="relative max-w-3xl mx-auto text-center text-primary-foreground">
-          <h2 className="text-4xl md:text-6xl font-display">Begin Your Transformation</h2>
-          <p className="mt-6 text-lg opacity-90">
-            Your sacred journey awaits. Let us craft an experience that awakens your soul.
-          </p>
-          <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
-            <a
-              href="tel:+919035225375"
-              className="px-6 py-3 rounded-full bg-white/15 backdrop-blur border border-white/30 hover:bg-white/25 transition"
-            >
-              📞 Call Us Now
-            </a>
-            <a
-              href="#"
-              className="px-6 py-3 rounded-full bg-white/15 backdrop-blur border border-white/30 hover:bg-white/25 transition"
-            >
-              💬 WhatsApp
-            </a>
-            <a
-              href="#"
-              className="px-8 py-3 rounded-full bg-gradient-cta text-accent-foreground font-medium shadow-glow"
-            >
-              Plan My Journey
-            </a>
-          </div>
-          <p className="mt-12 text-sm opacity-80">
-            Join 500+ seekers who have transformed through SAMYAM
-          </p>
-        </div>
-      </section>
-
-      {/* FOOTER */}
-      <footer className="py-10 text-center text-sm text-muted-foreground bg-background">
-        <div className="text-2xl text-accent mb-2">ॐ</div>
-        <p>© {new Date().getFullYear()} SAMYAM — Sacred. Respectful. Responsible.</p>
-      </footer>
+      <Footer />
     </div>
   );
 }
