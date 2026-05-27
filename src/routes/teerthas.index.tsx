@@ -126,7 +126,7 @@ function TeerthasPage() {
   );
 
   return (
-    <div className="relative min-h-screen overflow-x-hidden bg-[#1a0a1e] text-white">
+    <div className="relative min-h-screen overflow-x-hidden bg-background text-foreground">
       <Nav />
 
       {/* HERO SECTION — Cinematic fullscreen */}
@@ -191,11 +191,11 @@ function TeerthasPage() {
       </section>
 
       {/* FILTERS SECTION — Glassmorphic strip */}
-      <section data-nav-theme="dark" className="sticky top-0 z-30 py-5 px-6 border-b border-white/5" style={{ background: 'rgba(26, 10, 30, 0.85)', backdropFilter: 'blur(20px)' }}>
+      <section data-nav-theme="light" className="sticky top-0 z-30 py-5 px-6 border-b border-border" style={{ background: 'rgba(255, 255, 255, 0.85)', backdropFilter: 'blur(20px)' }}>
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row gap-6 md:items-center">
           {/* Regions */}
           <div className="flex items-center gap-3 flex-1">
-            <span className="text-[10px] font-bold text-white/40 uppercase tracking-[0.15em] font-body shrink-0">Region</span>
+            <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-[0.15em] font-body shrink-0">Region</span>
             <div className="flex items-center gap-2 overflow-x-auto no-scrollbar pb-1">
               {["All", "North", "South", "West", "East"].map((region) => (
                 <button
@@ -203,7 +203,7 @@ function TeerthasPage() {
                   onClick={() => setActiveRegion(region)}
                   className={`shrink-0 px-5 py-2 rounded-xl text-[11px] font-semibold transition-all duration-300 cursor-pointer ${activeRegion === region
                     ? "bg-gradient-to-r from-amber-500 to-orange-500 text-white shadow-[0_4px_20px_rgba(245,158,11,0.3)]"
-                    : "bg-white/5 text-white/60 hover:bg-white/10 hover:text-white/90"
+                    : "bg-muted text-muted-foreground hover:bg-muted/80 hover:text-foreground"
                     }`}
                 >
                   {region}
@@ -212,11 +212,11 @@ function TeerthasPage() {
             </div>
           </div>
 
-          <div className="hidden md:block w-px h-6 bg-white/10"></div>
+          <div className="hidden md:block w-px h-6 bg-border"></div>
 
           {/* Significance */}
           <div className="flex items-center gap-3 flex-1">
-            <span className="text-[10px] font-bold text-white/40 uppercase tracking-[0.15em] font-body shrink-0">Type</span>
+            <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-[0.15em] font-body shrink-0">Type</span>
             <div className="flex items-center gap-2 overflow-x-auto no-scrollbar pb-1">
               {["All", "Moksha", "Char Dham", "Kumbh Mela", "Ramayana", "Krishna", "Shaktipeethas"].map(
                 (sig) => (
@@ -225,7 +225,7 @@ function TeerthasPage() {
                     onClick={() => setActiveSignificance(sig)}
                     className={`shrink-0 px-5 py-2 rounded-xl text-[11px] font-semibold transition-all duration-300 cursor-pointer ${activeSignificance === sig
                       ? "bg-gradient-to-r from-amber-500 to-orange-500 text-white shadow-[0_4px_20px_rgba(245,158,11,0.3)]"
-                      : "bg-white/5 text-white/60 hover:bg-white/10 hover:text-white/90"
+                      : "bg-muted text-muted-foreground hover:bg-muted/80 hover:text-foreground"
                       }`}
                   >
                     {sig}
@@ -238,13 +238,12 @@ function TeerthasPage() {
       </section>
 
       {/* TEERTHAS GRID — Premium cards */}
-      <section className="px-6 py-20 max-w-7xl mx-auto">
+      <section data-nav-theme="light" className="px-6 py-20 max-w-7xl mx-auto bg-background text-foreground">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 stagger-fade-in">
           {filteredTeerthas.map((teertha, idx) => (
             <div
               key={teertha.name + idx}
-              className="group relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_20px_60px_-15px_rgba(92,36,94,0.5)]"
-              style={{ background: 'rgba(255,255,255,0.03)' }}
+              className="group relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-500 hover:-translate-y-2 hover:shadow-soft border border-border bg-white"
             >
               {/* Image with parallax hover */}
               <div className="aspect-[4/3] overflow-hidden relative">
@@ -254,7 +253,7 @@ function TeerthasPage() {
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                 />
                 {/* Gradient overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-[#1a0a1e] via-[#1a0a1e]/30 to-transparent opacity-80 group-hover:opacity-90 transition-opacity duration-500" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent opacity-80 group-hover:opacity-90 transition-opacity duration-500" />
 
                 {/* Shimmer effect on hover */}
                 <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 animate-shimmer" />
@@ -285,18 +284,18 @@ function TeerthasPage() {
               </div>
 
               {/* Bottom action bar */}
-              <div className="px-6 py-4 flex items-center justify-between border-t border-white/5 bg-white/[0.02]">
+              <div className="px-6 py-4 flex items-center justify-between border-t border-border bg-muted/40">
                 <Link
                   to="/teerthas/explore"
                   search={{ teertha: teertha.slug }}
-                  className="inline-flex items-center gap-2 text-[11px] font-bold text-amber-400 hover:text-amber-300 transition-colors group/link uppercase tracking-wider"
+                  className="inline-flex items-center gap-2 text-[11px] font-bold text-amber-600 hover:text-amber-700 transition-colors group/link uppercase tracking-wider"
                 >
                   Explore Journey
                   <span className="group-hover/link:translate-x-1.5 transition-transform duration-300">→</span>
                 </Link>
                 <div className="flex items-center gap-1">
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400/60"></span>
-                  <span className="text-[10px] text-white/40 font-body">Available</span>
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                  <span className="text-[10px] text-muted-foreground font-body">Available</span>
                 </div>
               </div>
             </div>
@@ -305,11 +304,11 @@ function TeerthasPage() {
 
         {/* Results counter */}
         <div className="mt-16 flex items-center justify-center gap-4">
-          <span className="w-16 h-px bg-gradient-to-r from-transparent to-white/20"></span>
-          <span className="text-white/40 text-xs font-body tracking-wider">
+          <span className="w-16 h-px bg-border"></span>
+          <span className="text-muted-foreground text-xs font-body tracking-wider">
             {filteredTeerthas.length} of {teerthasData.length} sacred destinations
           </span>
-          <span className="w-16 h-px bg-gradient-to-l from-transparent to-white/20"></span>
+          <span className="w-16 h-px bg-border"></span>
         </div>
       </section>
 

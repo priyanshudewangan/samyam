@@ -133,53 +133,73 @@ function MethodologyPage() {
   };
 
   return (
-    <div className="relative min-h-screen overflow-x-hidden bg-background">
+    <div className="relative min-h-screen overflow-x-hidden bg-background text-foreground flex flex-col justify-between">
       <Nav />
 
-      {/* HERO SECTION */}
-      <section data-nav-theme="dark" className="relative min-h-[70vh] flex items-center justify-center overflow-hidden">
-        {/* Background Image & Overlay */}
+      {/* HERO SECTION — Cinematic fullscreen */}
+      <section data-nav-theme="dark" className="relative min-h-[75vh] flex items-end justify-center overflow-hidden">
+        {/* Ken Burns Background */}
         <div className="absolute inset-0 z-0">
           <img
             src={meth1}
             alt="Samyam Methodology Hero"
-            className="w-full h-full object-cover object-center"
+            className="w-full h-full object-cover object-center animate-ken-burns"
             decoding="async"
           />
-          <div className="absolute inset-0 bg-black/65 backdrop-blur-[0.5px]"></div>
+          {/* Multi-layer gradient for depth */}
+          <div className="absolute inset-0 bg-gradient-to-t from-[#1a0a1e] via-[#1a0a1e]/40 to-transparent"></div>
+          <div className="absolute inset-0 bg-gradient-to-r from-[#1a0a1e]/30 to-transparent"></div>
         </div>
 
-        {/* Content */}
-        <div className="relative z-10 max-w-4xl mx-auto px-6 text-center pt-20">
-          <div className="text-accent text-5xl md:text-6xl font-display mb-2 select-none animate-pulse">
-            ॐ
+        {/* Decorative floating particles */}
+        <div className="absolute inset-0 z-[1] pointer-events-none overflow-hidden">
+          <div className="absolute top-[20%] left-[10%] w-1.5 h-1.5 rounded-full bg-amber-400/40 animate-gentle-float" style={{ animationDelay: '0s' }}></div>
+          <div className="absolute top-[35%] right-[15%] w-1 h-1 rounded-full bg-amber-300/30 animate-gentle-float" style={{ animationDelay: '2s' }}></div>
+          <div className="absolute top-[50%] left-[60%] w-2 h-2 rounded-full bg-purple-300/20 animate-gentle-float" style={{ animationDelay: '4s' }}></div>
+          <div className="absolute top-[15%] right-[40%] w-1 h-1 rounded-full bg-white/20 animate-gentle-float" style={{ animationDelay: '1s' }}></div>
+        </div>
+
+        <div className="max-w-5xl mx-auto px-6 text-center relative z-10 pb-20 space-y-8">
+          {/* Decorative line */}
+          <div className="flex items-center justify-center gap-4 animate-hero-reveal-delay">
+            <span className="w-12 h-px bg-gradient-to-r from-transparent to-amber-400/60"></span>
+            <span className="text-amber-400/80 text-xs font-semibold uppercase tracking-[0.3em] font-body">Six Integrated Pillars</span>
+            <span className="w-12 h-px bg-gradient-to-l from-transparent to-amber-400/60"></span>
           </div>
-          <h1 className="text-5xl md:text-7xl font-display font-semibold text-white tracking-wide">
-            Dridh Bhakti
+
+          <h1 className="text-6xl md:text-8xl font-display font-semibold text-white tracking-tight leading-[0.9] animate-hero-reveal">
+            Dridh<br />
+            <span className="bg-gradient-to-r from-amber-200 via-amber-400 to-orange-400 bg-clip-text text-transparent">Bhakti</span>
           </h1>
-          <div className="w-28 h-[2px] bg-gradient-to-r from-accent via-[#ae3164] to-[#4e2055] mx-auto my-5 rounded-full" />
-          <p className="text-white/90 text-sm md:text-base tracking-[0.25em] font-medium uppercase font-body">
-            Our Methodology: Six Integrated Pillars
+
+          <p className="text-white/70 text-sm md:text-lg max-w-2xl mx-auto font-body leading-relaxed animate-hero-reveal-delay">
+            Our integrated methodology works synergistically to open your Anahata Chakra, deepening your devotion and leading you towards true transformation.
           </p>
+        </div>
+
+        {/* Bottom scroll indicator */}
+        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2 animate-gentle-float">
+          <span className="text-white/30 text-[10px] uppercase tracking-[0.2em] font-body">Scroll</span>
+          <div className="w-px h-8 bg-gradient-to-b from-white/30 to-transparent"></div>
         </div>
       </section>
 
       {/* INTRO & THE PATH TO FIRM DEVOTION */}
-      <section data-nav-theme="light" className="relative py-20 px-6 bg-white overflow-hidden">
+      <section data-nav-theme="light" className="relative py-20 px-6 bg-background text-foreground overflow-hidden">
         <FlowerField count={10} />
         <div className="max-w-4xl mx-auto text-center space-y-16 relative z-10">
           {/* Paragraph quote */}
-          <p className="text-base md:text-xl text-primary/95 font-body leading-relaxed max-w-3xl mx-auto italic font-light">
-            We don't just take you on journeys—we guide you through a complete spiritual transformation
+          <p className="text-base md:text-xl text-muted-foreground font-body leading-relaxed max-w-3xl mx-auto italic font-light">
+            We don't just take you on journeys — we guide you through a complete spiritual transformation
             by integrating pilgrimage, practice, and wisdom into one harmonious path.
           </p>
 
           {/* Heading and details */}
-          <div className="space-y-6 pt-4 border-t border-[#f5e3e6]/50">
-            <h2 className="text-3xl md:text-4xl font-display font-semibold text-primary">
+          <div className="space-y-6 pt-4 border-t border-border">
+            <h2 className="text-3xl md:text-4xl font-display font-semibold text-foreground">
               The Path to Firm Devotion
             </h2>
-            <p className="text-sm md:text-base text-muted-foreground leading-relaxed max-w-2xl mx-auto">
+            <p className="text-sm md:text-base text-muted-foreground leading-relaxed max-w-2xl mx-auto font-body">
               Dridh Bhakti (Firm Devotion) is the central outcome of our integrated approach. Each of the
               six pillars works synergistically to open your Anahata Chakra (heart chakra), deepening your
               bhakti (devotion), leading you towards true jnana (wisdom) and vairagya (mindful detachment).
@@ -187,15 +207,15 @@ function MethodologyPage() {
           </div>
 
           {/* Anahata Chakra Card */}
-          <div className="max-w-xl mx-auto p-8 md:p-10 rounded-3xl bg-gradient-to-br from-[#fff6f4] to-[#fbf2fa] border border-[#f5e3e6] shadow-soft hover:shadow-glow transition-all duration-500 group">
+          <div className="max-w-xl mx-auto p-8 md:p-10 rounded-3xl bg-white border border-black/[0.06] shadow-soft hover:shadow-glow hover:border-amber-600/30 transition-all duration-500 group">
             <div className="mb-6 transform group-hover:scale-105 transition-transform duration-500">
               <AnahataChakraSVG />
             </div>
-            <h3 className="font-display font-semibold text-xl md:text-2xl text-primary mb-4">
+            <h3 className="font-display font-semibold text-xl md:text-2xl text-foreground mb-4">
               Activating the Anahata Chakra
             </h3>
-            <p className="text-xs md:text-sm text-muted-foreground/90 leading-relaxed max-w-md mx-auto">
-              Our primary objective is to activate your heart chakra—the 12-petalled lotus of love and devotion.
+            <p className="text-xs md:text-sm text-muted-foreground leading-relaxed max-w-md mx-auto font-body">
+              Our primary objective is to activate your heart chakra — the 12-petalled lotus of love and devotion.
               Through our integrated methodology, we help you open the doorways of bhakti in your Anahata Chakra,
               transforming your journey from a physical visit to a profound inner awakening.
             </p>
@@ -204,17 +224,17 @@ function MethodologyPage() {
       </section>
 
       {/* SIX INTEGRATED PILLARS */}
-      <section data-nav-theme="dark" className="relative py-20 px-6 bg-[#4e2055] text-white overflow-hidden">
+      <section data-nav-theme="dark" className="relative py-20 px-6 bg-[#1c081e] text-white overflow-hidden border-t border-white/5">
         {/* Subtle background glow */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-accent/10 blur-[120px] pointer-events-none" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-amber-500/5 blur-[120px] pointer-events-none" />
         <FlowerField count={8} />
 
         <div className="max-w-6xl mx-auto relative z-10">
           <div className="text-center space-y-4 mb-16">
-            <h2 className="text-4xl md:text-5xl font-display font-semibold">
+            <h2 className="text-4xl md:text-5xl font-display font-semibold text-white">
               Six Integrated Pillars
             </h2>
-            <p className="text-white/80 text-xs md:text-sm tracking-wider uppercase">
+            <p className="text-white/60 text-xs md:text-sm tracking-wider uppercase font-body">
               Each pillar is essential. Together, all six create a complete spiritual transformation.
             </p>
           </div>
@@ -224,7 +244,7 @@ function MethodologyPage() {
             {detailedPillars.map((p, idx) => (
               <div
                 key={idx}
-                className="p-8 rounded-3xl bg-white/5 border border-white/10 hover:bg-white/10 hover:border-white/20 transition-all duration-300 group text-left flex flex-col justify-between"
+                className="p-8 rounded-3xl bg-white/5 border border-white/10 hover:bg-white/10 hover:border-amber-400/30 transition-all duration-300 group text-left flex flex-col justify-between"
               >
                 <div>
                   <div className="w-12 h-12 rounded-2xl bg-white/10 flex items-center justify-center text-2xl mb-6 group-hover:scale-110 group-hover:bg-white/15 transition-all duration-300">
@@ -235,7 +255,7 @@ function MethodologyPage() {
                   </h3>
                   <div className="space-y-4 text-xs md:text-sm text-white/80 leading-relaxed font-body">
                     <p>{p.desc1}</p>
-                    <p className="border-t border-white/10 pt-3 text-white/70 italic">
+                    <p className="border-t border-white/10 pt-3 text-white/60 italic">
                       {p.desc2}
                     </p>
                   </div>
@@ -247,21 +267,21 @@ function MethodologyPage() {
       </section>
 
       {/* SPIRITUAL RESOURCES LIBRARY */}
-      <section data-nav-theme="light" className="relative py-20 px-6 bg-[#faf6f8] text-primary overflow-hidden">
+      <section data-nav-theme="light" className="relative py-20 px-6 bg-background text-foreground overflow-hidden border-t border-border">
         <FlowerField count={8} />
         <div className="max-w-6xl mx-auto relative z-10">
           {/* Header */}
           <div className="text-center space-y-4 mb-12">
-            <h2 className="text-4xl md:text-5xl font-display font-semibold text-primary">
+            <h2 className="text-4xl md:text-5xl font-display font-semibold text-foreground">
               Spiritual Resources Library
             </h2>
-            <p className="text-muted-foreground text-sm max-w-lg mx-auto">
+            <p className="text-muted-foreground text-sm max-w-lg mx-auto font-body">
               Access timeless wisdom and continue your spiritual journey
             </p>
           </div>
 
           {/* Tabs Navigation */}
-          <div className="flex flex-wrap justify-center gap-2 mb-10 max-w-3xl mx-auto">
+          <div className="flex flex-wrap justify-center gap-2 mb-10 max-w-3xl mx-auto font-body">
             {[
               { id: "scriptures", label: "Scriptures (Swadhyay)", icon: "📖" },
               { id: "mantras", label: "Mantras & Stotras", icon: "📿" },
@@ -273,8 +293,8 @@ function MethodologyPage() {
                 onClick={() => setActiveTab(tab.id as any)}
                 className={`flex items-center gap-2 px-5 py-2.5 rounded-full text-xs md:text-sm font-medium transition cursor-pointer ${
                   activeTab === tab.id
-                    ? "bg-[#4e2055] text-white shadow-soft"
-                    : "bg-white border border-[#f5e3e6] text-muted-foreground hover:bg-[#fff6f4] hover:text-primary"
+                    ? "bg-gradient-cta text-white shadow-soft"
+                    : "bg-muted border border-border text-muted-foreground hover:bg-muted/80 hover:text-foreground"
                 }`}
               >
                 <span>{tab.icon}</span>
@@ -290,18 +310,18 @@ function MethodologyPage() {
                 {scripturesData.map((item, idx) => (
                   <div
                     key={idx}
-                    className="p-6 md:p-8 rounded-3xl bg-white border border-[#f5e3e6] shadow-soft hover:shadow-glow transition-all duration-300 text-left relative overflow-hidden group"
+                    className="p-6 md:p-8 rounded-3xl bg-white border border-black/[0.06] shadow-soft hover:shadow-glow hover:border-amber-600/30 transition-all duration-300 text-left relative overflow-hidden group"
                   >
-                    <div className="absolute top-0 right-0 bg-accent/10 text-accent text-[9px] font-bold tracking-wider px-3.5 py-1 rounded-bl-xl uppercase">
+                    <div className="absolute top-0 right-0 bg-amber-500/10 text-amber-600 text-[9px] font-bold tracking-wider px-3.5 py-1 rounded-bl-xl uppercase font-body">
                       {item.type}
                     </div>
-                    <div className="text-xl mb-3 text-accent group-hover:scale-110 transition-transform">
+                    <div className="text-xl mb-3 text-amber-600 group-hover:scale-110 transition-transform">
                       📖
                     </div>
-                    <h4 className="text-lg font-semibold text-primary mb-2 font-display">
+                    <h4 className="text-lg font-semibold text-foreground mb-2 font-display">
                       {item.title}
                     </h4>
-                    <p className="text-xs md:text-sm text-muted-foreground leading-relaxed">
+                    <p className="text-xs md:text-sm text-muted-foreground leading-relaxed font-body">
                       {item.desc}
                     </p>
                   </div>
@@ -310,12 +330,12 @@ function MethodologyPage() {
             )}
 
             {activeTab !== "scriptures" && (
-              <div className="max-w-2xl mx-auto p-10 rounded-3xl bg-white border border-[#f5e3e6] text-center shadow-soft">
-                <span className="text-4xl mb-4 block">✨</span>
-                <h4 className="text-xl font-display font-semibold text-primary mb-2">
+              <div className="max-w-2xl mx-auto p-10 rounded-3xl bg-white border border-black/[0.06] text-center shadow-soft">
+                <span className="text-4xl mb-4 block animate-pulse">✨</span>
+                <h4 className="text-xl font-display font-semibold text-foreground mb-2">
                   Preparing Authentic Materials
                 </h4>
-                <p className="text-sm text-muted-foreground leading-relaxed max-w-md mx-auto">
+                <p className="text-sm text-muted-foreground leading-relaxed max-w-md mx-auto font-body">
                   Our scholars are currently indexing ancient audio tracks, mantra chants, visual guides, and quizzes aligned with classical scriptures.
                 </p>
               </div>
@@ -323,10 +343,10 @@ function MethodologyPage() {
           </div>
 
           {/* Coming Soon & Call To Action */}
-          <div className="mt-16 max-w-3xl mx-auto p-8 md:p-12 rounded-3xl bg-gradient-to-br from-[#4e2055] to-[#34133b] text-white text-center relative overflow-hidden shadow-glow">
+          <div className="mt-16 max-w-3xl mx-auto p-8 md:p-12 rounded-3xl bg-gradient-to-br from-[#260e28] via-[#1a0a1e] to-[#2d0f30] border border-white/10 text-white text-center relative overflow-hidden shadow-glow">
             {/* Background elements */}
-            <div className="absolute -top-12 -left-12 w-40 h-40 bg-accent/20 rounded-full blur-2xl pointer-events-none" />
-            <div className="absolute -bottom-12 -right-12 w-40 h-40 bg-purple-500/20 rounded-full blur-2xl pointer-events-none" />
+            <div className="absolute -top-12 -left-12 w-40 h-40 bg-accent/10 rounded-full blur-2xl pointer-events-none" />
+            <div className="absolute -bottom-12 -right-12 w-40 h-40 bg-purple-500/10 rounded-full blur-2xl pointer-events-none" />
 
             <div className="relative z-10 space-y-6">
               <div className="w-12 h-12 bg-white/10 rounded-2xl flex items-center justify-center text-2xl mx-auto mb-2 animate-bounce">
@@ -342,22 +362,22 @@ function MethodologyPage() {
               {/* Sub Form */}
               <div className="max-w-md mx-auto pt-2">
                 {subscribed ? (
-                  <div className="p-4 rounded-full bg-white/10 border border-white/20 text-accent font-medium text-sm animate-pulse">
+                  <div className="p-4 rounded-full bg-white/10 border border-white/20 text-amber-400 font-medium text-sm animate-pulse font-body">
                     ✨ Thank you! We will notify you when the library opens.
                   </div>
                 ) : (
-                  <form onSubmit={handleSubscribe} className="flex flex-col sm:flex-row gap-2 bg-white/5 p-1.5 rounded-full border border-white/15">
+                  <form onSubmit={handleSubscribe} className="flex flex-col sm:flex-row gap-2 bg-black/40 p-1.5 rounded-full border border-white/10 focus-within:border-amber-400 transition-all duration-300">
                     <input
                       type="email"
                       required
                       placeholder="Enter your email address"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
-                      className="flex-1 bg-transparent px-4 py-2 text-xs md:text-sm text-white placeholder-white/60 focus:outline-none w-full"
+                      className="flex-1 bg-transparent px-4 py-2 text-xs md:text-sm text-white placeholder-white/40 focus:outline-none w-full font-body"
                     />
                     <button
                       type="submit"
-                      className="px-6 py-2.5 bg-gradient-cta text-accent-foreground font-semibold rounded-full text-xs md:text-sm shadow-soft hover:scale-[1.02] transition cursor-pointer whitespace-nowrap"
+                      className="px-6 py-2.5 bg-gradient-cta text-white font-semibold rounded-full text-xs md:text-sm shadow-soft hover:scale-[1.02] transition cursor-pointer whitespace-nowrap"
                     >
                       Get Notified
                     </button>
@@ -370,15 +390,15 @@ function MethodologyPage() {
       </section>
 
       {/* HOW THEY WORK TOGETHER & THE RESULT */}
-      <section data-nav-theme="dark" className="relative py-20 px-6 bg-gradient-to-b from-[#34133b] to-[#1a0520] text-white overflow-hidden border-t border-white/10">
+      <section data-nav-theme="light" className="relative py-20 px-6 bg-background text-foreground overflow-hidden border-t border-border">
         <FlowerField count={6} />
         <div className="max-w-5xl mx-auto relative z-10 space-y-16">
           {/* Header */}
           <div className="text-center space-y-4">
-            <h2 className="text-4xl md:text-5xl font-display font-semibold">
+            <h2 className="text-4xl md:text-5xl font-display font-semibold text-foreground">
               How They Work Together
             </h2>
-            <p className="text-white/70 text-xs md:text-sm tracking-wider uppercase">
+            <p className="text-muted-foreground text-xs md:text-sm tracking-wider uppercase font-body">
               A Complete Spiritual Loop
             </p>
           </div>
@@ -404,14 +424,14 @@ function MethodologyPage() {
             ].map((step, idx) => (
               <div
                 key={idx}
-                className="p-6 md:p-8 rounded-3xl bg-white/5 border border-white/10 text-left hover:bg-white/10 transition duration-300 flex flex-col justify-between"
+                className="p-6 md:p-8 rounded-3xl bg-white border border-black/[0.06] text-left hover:border-amber-600/30 hover:bg-muted transition duration-300 flex flex-col justify-between shadow-soft"
               >
                 <div>
-                  <div className="text-2xl mb-4 text-accent">{step.icon}</div>
-                  <h4 className="text-lg font-semibold font-display mb-3 text-white">
+                  <div className="text-2xl mb-4 text-amber-600">{step.icon}</div>
+                  <h4 className="text-lg font-semibold font-display mb-3 text-foreground">
                     {step.t}
                   </h4>
-                  <p className="text-xs md:text-sm text-white/70 leading-relaxed">
+                  <p className="text-xs md:text-sm text-muted-foreground leading-relaxed font-body">
                     {step.d}
                   </p>
                 </div>
@@ -420,12 +440,12 @@ function MethodologyPage() {
           </div>
 
           {/* The Result: 100% Phal Card */}
-          <div className="max-w-3xl mx-auto mt-12 p-8 md:p-12 rounded-3xl bg-gradient-to-br from-[#531e5b] to-[#34133b] border-2 border-accent/40 shadow-glow text-center relative overflow-hidden group">
+          <div className="max-w-3xl mx-auto mt-12 p-8 md:p-12 rounded-3xl bg-gradient-to-br from-[#2d0f30] via-[#1c081e] to-[#260e28] border border-amber-400/30 shadow-glow text-center relative overflow-hidden group">
             {/* Glowing effect */}
-            <div className="absolute inset-0 bg-gradient-to-tr from-accent/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
+            <div className="absolute inset-0 bg-gradient-to-tr from-amber-400/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
 
             <div className="relative z-10 space-y-4">
-              <div className="inline-block px-4 py-1 rounded-full bg-accent/20 border border-accent text-accent text-[10px] md:text-xs font-bold uppercase tracking-[0.2em] mb-2 select-none animate-pulse">
+              <div className="inline-block px-4 py-1 rounded-full bg-amber-400/10 border border-amber-400/30 text-amber-400 text-[10px] md:text-xs font-bold uppercase tracking-[0.2em] mb-2 select-none animate-pulse font-body">
                 🏆 The Result: 100% Phal (Complete Benefit)
               </div>
               <p className="text-base md:text-lg text-white/95 font-body leading-relaxed max-w-2xl mx-auto">

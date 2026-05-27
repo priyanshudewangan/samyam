@@ -94,9 +94,7 @@ function KnowledgePortalPage() {
 
   return (
     <div
-      className={`relative min-h-screen overflow-x-hidden transition-colors duration-500 flex flex-col justify-between ${
-        isKashi ? "bg-[#fdfafb] text-primary" : "bg-[#1c081e] text-white"
-      }`}
+      className="relative min-h-screen overflow-x-hidden transition-colors duration-500 bg-background text-foreground flex flex-col justify-between"
     >
       <Nav />
 
@@ -113,9 +111,7 @@ function KnowledgePortalPage() {
             className="w-full h-full object-cover object-center filter brightness-50"
           />
           <div
-            className={`absolute inset-0 bg-gradient-to-b from-[#1c081e]/40 via-[#1c081e]/60 transition-colors duration-500 ${
-              isKashi ? "to-[#fdfafb]" : "to-[#1c081e]"
-            }`}
+            className="absolute inset-0 bg-gradient-to-b from-[#1c081e]/40 via-[#1c081e]/60 to-[#1c081e] transition-colors duration-500"
           ></div>
         </div>
 
@@ -143,12 +139,8 @@ function KnowledgePortalPage() {
 
       {/* STICKY TAB SELECTOR */}
       <section
-        data-nav-theme={isKashi ? "light" : "dark"}
-        className={`sticky top-[76px] md:top-[80px] z-40 border-y transition-all duration-500 backdrop-blur-md ${
-          isKashi
-            ? "border-black/10 bg-[#fdfafb]/90 text-primary"
-            : "border-white/10 bg-[#1c081e]/85 text-white"
-        }`}
+        data-nav-theme="light"
+        className="sticky top-[76px] md:top-[80px] z-40 border-y transition-all duration-500 backdrop-blur-md border-border bg-background/85 text-foreground"
       >
         <div className="max-w-7xl mx-auto px-4 md:px-8">
           <div className="flex md:justify-center overflow-x-auto no-scrollbar py-2 md:py-0">
@@ -159,10 +151,8 @@ function KnowledgePortalPage() {
                   onClick={() => setActiveTab(cat.id)}
                   className={`px-5 py-3 md:py-5 font-display text-sm md:text-base font-semibold border-b-2 transition-all duration-300 text-left md:text-center shrink-0 cursor-pointer ${
                     activeTab === cat.id
-                      ? "border-saffron text-saffron bg-white/5 md:bg-transparent"
-                      : isKashi
-                        ? "border-transparent text-primary/60 hover:text-primary hover:bg-black/5 md:hover:bg-transparent"
-                        : "border-transparent text-white/60 hover:text-white hover:bg-white/5 md:hover:bg-transparent"
+                      ? "border-amber-600 text-amber-600 bg-muted/50 md:bg-transparent"
+                      : "border-transparent text-muted-foreground hover:text-foreground hover:bg-muted md:hover:bg-transparent"
                   }`}
                 >
                   {cat.title}
@@ -175,22 +165,18 @@ function KnowledgePortalPage() {
 
       {/* VIDEOS SECTION */}
       <main
-        data-nav-theme={isKashi ? "light" : "dark"}
-        className="flex-1 py-12 md:py-20 max-w-7xl mx-auto px-4 md:px-8 w-full relative z-10"
+        data-nav-theme="light"
+        className="flex-1 py-12 md:py-20 max-w-7xl mx-auto px-4 md:px-8 w-full relative z-10 text-foreground"
       >
         {/* Tab Intro Header */}
         <div className="text-center mb-10 md:mb-16 space-y-4 fade-up">
           <h2
-            className={`text-3xl md:text-5xl font-display font-semibold transition-colors duration-500 ${
-              isKashi ? "text-primary" : "text-white"
-            }`}
+            className="text-3xl md:text-5xl font-display font-semibold text-foreground"
           >
             {currentCategory.title}
           </h2>
           <p
-            className={`text-sm md:text-lg max-w-2xl mx-auto font-body transition-colors duration-500 ${
-              isKashi ? "text-muted-foreground" : "text-white/70"
-            }`}
+            className="text-sm md:text-lg max-w-2xl mx-auto font-body text-muted-foreground"
           >
             {currentCategory.desc}
           </p>
@@ -201,9 +187,7 @@ function KnowledgePortalPage() {
           {/* Featured Video Frame */}
           {featuredVideo ? (
             <div
-              className={`group rounded-3xl overflow-hidden shadow-glow flex flex-col fade-up border transition-all duration-500 ${
-                isKashi ? "bg-white border-[#f5e3e6]" : "bg-white/5 border-white/10"
-              }`}
+              className="group rounded-3xl overflow-hidden shadow-glow flex flex-col fade-up border bg-white border-black/[0.06] transition-all duration-300"
             >
               <div className="aspect-video bg-black/40 relative">
                 <iframe
@@ -216,13 +200,11 @@ function KnowledgePortalPage() {
                 ></iframe>
               </div>
               <div className="p-6 md:p-8 text-left space-y-2">
-                <span className="text-[10px] font-bold text-saffron uppercase tracking-widest">
+                <span className="text-[10px] font-bold text-amber-600 uppercase tracking-widest font-body">
                   Featured Capsule
                 </span>
                 <p
-                  className={`text-sm leading-relaxed font-body transition-colors duration-500 ${
-                    isKashi ? "text-muted-foreground" : "text-white/80"
-                  }`}
+                  className="text-sm leading-relaxed font-body text-muted-foreground transition-colors duration-500"
                 >
                   Use this video to prime your seekers and align your group's consciousness before
                   stepping onto the sacred kshetra.
@@ -230,7 +212,7 @@ function KnowledgePortalPage() {
               </div>
             </div>
           ) : (
-            <div className="rounded-3xl border border-dashed border-white/20 p-12 text-center text-white/50">
+            <div className="rounded-3xl border border-dashed border-border p-12 text-center text-muted-foreground">
               No videos available in this category.
             </div>
           )}
@@ -238,26 +220,18 @@ function KnowledgePortalPage() {
           {/* Sidebar Orientation Guidelines */}
           <div className="space-y-4 md:space-y-6 text-left w-full fade-up">
             <h3
-              className={`text-xs font-bold uppercase tracking-widest font-body transition-colors duration-500 ${
-                isKashi ? "text-primary/50" : "text-white/50"
-              }`}
+              className="text-xs font-bold uppercase tracking-widest font-body text-muted-foreground"
             >
               How to use these resources
             </h3>
             {sidebarGuidelines.map((guide, idx) => (
               <div
                 key={idx}
-                className={`p-6 rounded-2xl border transition-all duration-500 space-y-2 ${
-                  isKashi
-                    ? "bg-white border-[#f5e3e6] shadow-soft hover:border-accent/40"
-                    : "bg-white/5 border-white/10 hover:border-white/20"
-                }`}
+                className="p-6 rounded-2xl border transition-all duration-300 space-y-2 bg-white border-black/[0.06] shadow-soft hover:border-amber-600/30 hover:bg-muted"
               >
-                <h4 className="text-lg font-display font-semibold text-saffron">{guide.title}</h4>
+                <h4 className="text-lg font-display font-semibold text-amber-600">{guide.title}</h4>
                 <p
-                  className={`text-sm font-body leading-relaxed transition-colors duration-500 ${
-                    isKashi ? "text-muted-foreground" : "text-white/75"
-                  }`}
+                  className="text-sm font-body leading-relaxed text-muted-foreground"
                 >
                   {guide.desc}
                 </p>
@@ -270,11 +244,7 @@ function KnowledgePortalPage() {
         {otherVideos.length > 0 && (
           <div className="space-y-8 text-left">
             <h3
-              className={`text-xl md:text-3xl font-display font-semibold border-b pb-4 transition-colors duration-500 ${
-                isKashi
-                  ? "text-primary border-black/10"
-                  : "text-white/90 border-white/10"
-              }`}
+              className="text-xl md:text-3xl font-display font-semibold border-b pb-4 text-foreground border-border"
             >
               More Insights
             </h3>
@@ -282,11 +252,7 @@ function KnowledgePortalPage() {
               {otherVideos.map((video) => (
                 <div
                   key={video.id}
-                  className={`group rounded-2xl overflow-hidden shadow-soft hover:shadow-glow hover:-translate-y-1 transition-all duration-300 flex flex-col border ${
-                    isKashi
-                      ? "bg-white border-[#f5e3e6] hover:border-accent/40"
-                      : "bg-white/5 border-white/10 hover:border-white/20"
-                  }`}
+                  className="group rounded-2xl overflow-hidden shadow-soft hover:shadow-glow hover:-translate-y-1 transition-all duration-300 flex flex-col border bg-white border-black/[0.06] hover:border-amber-600/30 hover:bg-muted"
                 >
                   <div className="aspect-video relative bg-black/30">
                     <iframe
@@ -307,17 +273,17 @@ function KnowledgePortalPage() {
         {/* Footer capsule submission card */}
         <div className="mt-16 md:mt-24 p-8 rounded-3xl bg-gradient-cta text-center space-y-4 shadow-glow max-w-3xl mx-auto">
           <span className="text-3xl">ॐ</span>
-          <h3 className="text-2xl font-display font-semibold text-accent-foreground">
+          <h3 className="text-2xl font-display font-semibold text-white">
             Share Your Experience
           </h3>
-          <p className="text-accent-foreground/90 max-w-xl mx-auto text-sm leading-relaxed">
+          <p className="text-white/80 max-w-xl mx-auto text-sm leading-relaxed font-body">
             Have a profound spiritual testimony, chanting recording, or knowledge capsule you'd like
             us to feature in our library? Connect with our team.
           </p>
-          <div className="pt-2">
+          <div className="pt-2 font-body">
             <a
               href="mailto:samyamspirituals@gmail.com"
-              className="inline-block px-8 py-3 bg-white text-primary font-bold rounded-full shadow-soft hover:scale-105 transition-all text-sm tracking-wide"
+              className="inline-block px-8 py-3 bg-white text-[#1c081e] hover:bg-white/90 font-bold rounded-full shadow-soft hover:scale-105 transition-all text-sm tracking-wide"
             >
               samyamspirituals@gmail.com
             </a>

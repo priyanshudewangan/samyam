@@ -116,7 +116,7 @@ const immersionLabs = [
 
 function InstitutionsPage() {
   return (
-    <div className="relative min-h-screen overflow-x-hidden bg-background text-primary">
+    <div className="relative min-h-screen overflow-x-hidden bg-background text-foreground flex flex-col justify-between">
       <Nav />
 
       {/* HERO SECTION */}
@@ -126,21 +126,21 @@ function InstitutionsPage() {
           <img
             src={studentsImg}
             alt="Students Exploring Heritage"
-            className="w-full h-full object-cover object-center filter brightness-90"
+            className="w-full h-full object-cover object-center filter brightness-[0.4]"
           />
-          <div className="absolute inset-0 bg-black/70 via-black/55 to-black/85"></div>
+          <div className="absolute inset-0 bg-gradient-to-b from-[#1c081e]/30 via-[#1c081e]/60 to-[#1c081e]"></div>
         </div>
 
         {/* Content */}
         <div className="relative z-10 max-w-5xl mx-auto px-6 text-center pt-24 space-y-6">
-          <span className="inline-block text-xs uppercase tracking-[0.5em] text-[#f08c3a] font-bold select-none animate-pulse">
+          <span className="inline-block text-xs uppercase tracking-[0.5em] text-amber-400 font-bold select-none animate-pulse">
             SAMYAM FOR SCHOOLS
           </span>
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-display font-semibold text-white leading-tight">
             Sacred Learning Journeys <br />
-            <span className="text-[#f0b040] text-gradient-saffron">for Modern Classrooms</span>
+            <span className="text-amber-400">for Modern Classrooms</span>
           </h1>
-          <p className="text-white/95 text-base md:text-xl max-w-3xl mx-auto leading-relaxed font-body font-light">
+          <p className="text-white/95 text-base md:text-xl max-w-3xl mx-auto leading-relaxed font-body font-light font-body">
             More than study tours—immersions that blend civilizational wisdom with contemporary pedagogy,
             curated especially for students, faculty, and parent communities.
           </p>
@@ -148,17 +148,17 @@ function InstitutionsPage() {
       </section>
 
       {/* OUR INTENT SECTION */}
-      <section data-nav-theme="light" className="relative py-20 px-6 bg-white overflow-hidden">
+      <section data-nav-theme="light" className="relative py-20 px-6 bg-background overflow-hidden border-t border-border">
         <FlowerField count={8} />
         <div className="max-w-5xl mx-auto relative z-10">
-          <div className="p-8 md:p-14 text-center rounded-[2.5rem] bg-gradient-to-br from-[#fff8f5] to-[#fbf5fa] border border-[#f5e3e6] shadow-glow space-y-6">
-            <span className="text-xs uppercase tracking-[0.55em] text-accent font-bold">
+          <div className="p-8 md:p-14 text-center rounded-[2.5rem] bg-white border border-black/[0.06] shadow-glow space-y-6 text-foreground">
+            <span className="text-xs uppercase tracking-[0.55em] text-amber-600 font-bold">
               Our Intent
             </span>
-            <h2 className="text-2xl md:text-4xl font-display font-semibold text-primary max-w-3xl mx-auto leading-tight">
+            <h2 className="text-2xl md:text-4xl font-display font-semibold text-foreground max-w-3xl mx-auto leading-tight">
               Not “just” sightseeing. We help students experience living Sanatan culture with awe, sensitivity, and relevance.
             </h2>
-            <p className="text-sm md:text-base text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+            <p className="text-sm md:text-base text-muted-foreground max-w-3xl mx-auto leading-relaxed font-body">
               Every program is co-designed with school leadership—aligning with academic goals while initiating
               young minds into gratitude, seva, and inner leadership.
             </p>
@@ -167,18 +167,18 @@ function InstitutionsPage() {
       </section>
 
       {/* WHY SCHOOLS CHOOSE SAMYAM */}
-      <section data-nav-theme="dark" className="relative py-20 px-6 bg-[#4e2055] text-white overflow-hidden">
+      <section data-nav-theme="dark" className="relative py-20 px-6 bg-[#1c081e] text-white overflow-hidden border-t border-white/5">
         <FlowerField count={8} />
         <div className="max-w-6xl mx-auto relative z-10 space-y-12">
           {/* Header */}
           <div className="text-center space-y-3">
-            <span className="text-xs uppercase tracking-[0.5em] text-accent/90 font-semibold">
+            <span className="text-xs uppercase tracking-[0.5em] text-amber-400 font-semibold">
               Why Schools Choose SAMYAM
             </span>
             <h2 className="text-3xl md:text-4xl font-display font-semibold">
               Learning that transforms
             </h2>
-            <p className="text-white/80 text-xs md:text-sm max-w-2xl mx-auto leading-relaxed font-body">
+            <p className="text-white/60 text-xs md:text-sm max-w-2xl mx-auto leading-relaxed font-body">
               We combine scholar guidance, stellar logistics, and thoughtful facilitation so every student
               completes the journey with clarity and pride.
             </p>
@@ -189,15 +189,15 @@ function InstitutionsPage() {
             {whyChooseSchools.map((item, idx) => (
               <div
                 key={idx}
-                className="p-6 md:p-8 rounded-3xl bg-white/5 border border-white/10 hover:bg-white/10 hover:border-white/20 transition-all duration-300 group text-left"
+                className="p-6 md:p-8 rounded-3xl bg-white/[0.03] border border-white/10 hover:bg-white/[0.06] hover:border-amber-400/30 transition-all duration-300 group text-left"
               >
-                <div className="w-12 h-12 rounded-2xl bg-white/10 flex items-center justify-center text-3xl mb-4 group-hover:scale-110 transition-transform duration-300">
+                <div className="w-12 h-12 rounded-2xl bg-white/5 flex items-center justify-center text-3xl mb-4 group-hover:scale-110 transition-transform duration-300">
                   {item.icon}
                 </div>
                 <h3 className="text-lg md:text-xl font-semibold mb-2 text-white font-display">
                   {item.title}
                 </h3>
-                <p className="text-xs md:text-sm text-white/70 leading-relaxed font-body">
+                <p className="text-xs md:text-sm text-white/60 leading-relaxed font-body">
                   {item.desc}
                 </p>
               </div>
@@ -207,15 +207,15 @@ function InstitutionsPage() {
       </section>
 
       {/* THREE STREAM FRAMEWORK */}
-      <section data-nav-theme="light" className="relative py-20 px-6 bg-white overflow-hidden">
+      <section data-nav-theme="light" className="relative py-20 px-6 bg-background overflow-hidden border-t border-border">
         <FlowerField count={8} />
         <div className="max-w-6xl mx-auto relative z-10 space-y-12">
           {/* Header */}
           <div className="text-center space-y-3">
-            <span className="text-xs uppercase tracking-[0.5em] text-accent font-semibold">
+            <span className="text-xs uppercase tracking-[0.5em] text-amber-600 font-semibold">
               Three Stream Framework
             </span>
-            <h2 className="text-3xl md:text-4xl font-display font-semibold text-primary">
+            <h2 className="text-3xl md:text-4xl font-display font-semibold text-foreground">
               How we co-create each journey
             </h2>
           </div>
@@ -225,15 +225,15 @@ function InstitutionsPage() {
             {threeStreamFramework.map((stream, idx) => (
               <div
                 key={idx}
-                className="p-6 md:p-8 rounded-3xl bg-gradient-to-br from-[#fffbfb] to-[#fcf6f8] border border-[#f5e3e6] shadow-soft hover:shadow-glow transition-all duration-300"
+                className="p-6 md:p-8 rounded-3xl bg-white border border-black/[0.06] shadow-soft hover:shadow-glow hover:border-amber-600/30 transition-all duration-300"
               >
-                <h3 className="text-lg md:text-xl font-display font-semibold text-primary mb-4 border-b border-[#f5e3e6] pb-2">
+                <h3 className="text-lg md:text-xl font-display font-semibold text-foreground mb-4 border-b border-border pb-2">
                   {stream.title}
                 </h3>
-                <ul className="space-y-3 text-xs md:text-sm text-muted-foreground list-none">
+                <ul className="space-y-3 text-xs md:text-sm text-muted-foreground list-none font-body">
                   {stream.points.map((pt, pIdx) => (
                     <li key={pIdx} className="flex gap-2.5 items-center">
-                      <span className="text-accent">✺</span>
+                      <span className="text-amber-600 font-bold">✺</span>
                       <span>{pt}</span>
                     </li>
                   ))}
@@ -245,12 +245,12 @@ function InstitutionsPage() {
       </section>
 
       {/* EXPERIENCE ARC SECTION */}
-      <section data-nav-theme="dark" className="relative py-20 px-6 bg-[#4e2055] text-white overflow-hidden">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-accent/5 blur-[120px] pointer-events-none" />
+      <section data-nav-theme="dark" className="relative py-20 px-6 bg-[#1c081e] text-white overflow-hidden border-t border-white/5">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-amber-500/5 blur-[120px] pointer-events-none" />
         <div className="max-w-6xl mx-auto relative z-10 space-y-12">
           {/* Header */}
           <div className="text-center space-y-3">
-            <span className="text-xs uppercase tracking-[0.55em] text-accent font-semibold">
+            <span className="text-xs uppercase tracking-[0.55em] text-amber-400 font-semibold">
               Experience Arc
             </span>
             <h2 className="text-3xl md:text-4xl font-display font-semibold">
@@ -263,15 +263,15 @@ function InstitutionsPage() {
             {experienceArc.map((arc, idx) => (
               <div
                 key={idx}
-                className="p-6 md:p-8 rounded-3xl bg-white/5 border border-white/10 hover:bg-white/10 hover:border-white/20 transition-all duration-300"
+                className="p-6 md:p-8 rounded-3xl bg-white/[0.03] border border-white/10 hover:bg-white/[0.06] hover:border-amber-400/30 transition-all duration-300"
               >
-                <span className="text-[10px] uppercase tracking-wider text-accent font-bold block mb-2">
+                <span className="text-[10px] uppercase tracking-wider text-amber-400 font-bold block mb-2 font-body">
                   Phase {idx + 1}
                 </span>
                 <h3 className="text-xl font-display font-semibold mb-3 text-white">
                   {arc.phase}
                 </h3>
-                <p className="text-xs md:text-sm text-white/70 leading-relaxed font-body">
+                <p className="text-xs md:text-sm text-white/60 leading-relaxed font-body">
                   {arc.detail}
                 </p>
               </div>
@@ -281,15 +281,15 @@ function InstitutionsPage() {
       </section>
 
       {/* IMMERSION LABS */}
-      <section data-nav-theme="light" className="relative py-20 px-6 bg-white overflow-hidden">
+      <section data-nav-theme="light" className="relative py-20 px-6 bg-background overflow-hidden border-t border-border">
         <FlowerField count={8} />
         <div className="max-w-6xl mx-auto relative z-10 space-y-12">
           {/* Header */}
           <div className="text-left space-y-2">
-            <span className="text-xs uppercase tracking-[0.5em] text-accent font-semibold">
+            <span className="text-xs uppercase tracking-[0.5em] text-amber-600 font-semibold">
               Immersion Labs
             </span>
-            <h2 className="text-3xl md:text-4xl font-display font-semibold text-primary">
+            <h2 className="text-3xl md:text-4xl font-display font-semibold text-foreground">
               Where learning becomes visceral
             </h2>
           </div>
@@ -299,12 +299,12 @@ function InstitutionsPage() {
             {immersionLabs.map((lab, idx) => (
               <div
                 key={idx}
-                className="p-6 md:p-8 rounded-3xl bg-gradient-to-br from-[#fffbfb] to-[#fcf6f8] border border-[#f5e3e6] shadow-soft hover:shadow-glow transition-all duration-300"
+                className="p-6 md:p-8 rounded-3xl bg-white border border-black/[0.06] shadow-soft hover:shadow-glow hover:border-amber-600/30 transition-all duration-300"
               >
-                <h3 className="text-lg md:text-xl font-display font-semibold text-primary mb-3">
+                <h3 className="text-lg md:text-xl font-display font-semibold text-foreground mb-3">
                   {lab.title}
                 </h3>
-                <p className="text-xs md:text-sm text-muted-foreground leading-relaxed">
+                <p className="text-xs md:text-sm text-muted-foreground leading-relaxed font-body">
                   {lab.desc}
                 </p>
               </div>
@@ -314,12 +314,12 @@ function InstitutionsPage() {
       </section>
 
       {/* FINAL CTA SECTION */}
-      <section data-nav-theme="light" className="relative py-20 px-6 bg-gradient-to-br from-[#fff8f5] to-[#fbf5fa] border-t border-[#f5e3e6] overflow-hidden">
+      <section data-nav-theme="dark" className="relative py-20 px-6 bg-gradient-to-br from-[#260e28] via-[#1a0a1e] to-[#2d0f30] border-t border-white/5 overflow-hidden">
         <div className="max-w-5xl mx-auto text-center space-y-8 relative z-10">
-          <h2 className="text-3xl md:text-5xl font-display font-semibold text-primary leading-tight max-w-3xl mx-auto">
+          <h2 className="text-3xl md:text-5xl font-display font-semibold text-white leading-tight max-w-3xl mx-auto">
             Let’s co-create your school’s next transformative journey
           </h2>
-          <p className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+          <p className="text-base md:text-lg text-white/60 max-w-2xl mx-auto leading-relaxed font-body">
             Share your preferred destination, batch size, timeline, and learning objectives. Our academic strategists
             will design an immersive program deck within 3 working days.
           </p>
@@ -328,39 +328,39 @@ function InstitutionsPage() {
             <Dialog>
               <DialogTrigger asChild>
                 <button
-                  className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-gradient-cta text-accent-foreground font-semibold rounded-full text-base shadow-soft hover:scale-[1.02] transition cursor-pointer border-none"
+                  className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-gradient-cta text-white font-semibold rounded-full text-base shadow-soft hover:scale-[1.02] transition cursor-pointer border-none"
                 >
                   <span>Speak with our Schools Team</span>
                   <span>→</span>
                 </button>
               </DialogTrigger>
-              <DialogContent className="sm:max-w-md bg-background/95 backdrop-blur-2xl border-accent/20 rounded-[2.5rem] overflow-hidden p-0 shadow-glow">
+              <DialogContent className="sm:max-w-md bg-[#1a0a1e]/95 backdrop-blur-2xl border border-white/10 rounded-[2.5rem] overflow-hidden p-0 shadow-glow text-white">
                 <div className="relative">
                   {/* Decorative Top Accent */}
                   <div className="h-2 w-full bg-gradient-cta" />
 
                   <div className="p-8 space-y-8">
                     <DialogHeader>
-                      <DialogTitle className="text-3xl md:text-4xl font-display font-semibold text-primary text-center">
+                      <DialogTitle className="text-3xl md:text-4xl font-display font-semibold text-white text-center">
                         Contact our Schools Team
                       </DialogTitle>
-                      <DialogDescription className="text-center text-muted-foreground pt-2">
+                      <DialogDescription className="text-center text-white/60 pt-2 font-body">
                         We're here to help you design the perfect journey for your students.
                       </DialogDescription>
                     </DialogHeader>
 
-                    <div className="grid gap-4">
+                    <div className="grid gap-4 font-body">
                       {/* Email */}
                       <a
                         href="mailto:samyamspirituals@gmail.com"
-                        className="flex items-center gap-4 p-5 rounded-2xl bg-white/50 border border-border/50 hover:bg-white hover:border-accent/20 transition-all group"
+                        className="flex items-center gap-4 p-5 rounded-2xl bg-white/[0.03] border border-white/10 hover:bg-white/[0.08] hover:border-amber-400/40 transition-all group"
                       >
-                        <div className="w-12 h-12 rounded-xl bg-primary/5 flex items-center justify-center text-primary group-hover:text-accent transition-colors">
+                        <div className="w-12 h-12 rounded-xl bg-white/5 flex items-center justify-center text-amber-400 group-hover:text-amber-400 transition-colors">
                           <Mail className="w-6 h-6" />
                         </div>
                         <div className="text-left">
-                          <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-accent/70">Email Us</p>
-                          <p className="text-primary font-medium">samyamspirituals@gmail.com</p>
+                          <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-amber-400/80">Email Us</p>
+                          <p className="text-white font-medium">samyamspirituals@gmail.com</p>
                         </div>
                       </a>
 
@@ -368,14 +368,14 @@ function InstitutionsPage() {
                         {/* Phone */}
                         <a
                           href="tel:+919035225375"
-                          className="flex items-center gap-4 p-5 rounded-2xl bg-white/50 border border-border/50 hover:bg-white hover:border-accent/20 transition-all group"
+                          className="flex items-center gap-4 p-5 rounded-2xl bg-white/[0.03] border border-white/10 hover:bg-white/[0.08] hover:border-amber-400/40 transition-all group"
                         >
-                          <div className="w-12 h-12 rounded-xl bg-primary/5 flex items-center justify-center text-primary group-hover:text-accent transition-colors">
+                          <div className="w-12 h-12 rounded-xl bg-white/5 flex items-center justify-center text-amber-400 group-hover:text-amber-400 transition-colors">
                             <Phone className="w-6 h-6" />
                           </div>
                           <div className="text-left">
-                            <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-accent/70">Call Now</p>
-                            <p className="text-primary font-medium text-sm">+91-9035225375</p>
+                            <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-amber-400/80">Call Now</p>
+                            <p className="text-white font-medium text-sm">+91-9035225375</p>
                           </div>
                         </a>
 
@@ -384,16 +384,16 @@ function InstitutionsPage() {
                           href="https://wa.me/919035225375"
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="flex items-center gap-4 p-5 rounded-2xl bg-[#f5fff7] border border-green-500/20 hover:bg-green-500 hover:text-white transition-all group shadow-sm"
+                          className="flex items-center gap-4 p-5 rounded-2xl bg-green-950/20 border border-green-500/30 hover:bg-green-900/40 hover:border-green-500/60 transition-all group shadow-sm"
                         >
-                          <div className="w-12 h-12 rounded-xl bg-green-500/10 flex items-center justify-center text-green-600 group-hover:text-white transition-colors">
+                          <div className="w-12 h-12 rounded-xl bg-green-500/10 flex items-center justify-center text-green-400 group-hover:text-white transition-colors">
                             <svg viewBox="0 0 24 24" className="w-6 h-6 fill-current" xmlns="http://www.w3.org/2000/svg">
                               <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L0 24l6.335-1.662c1.72.937 3.659 1.432 5.631 1.432h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z" />
                             </svg>
                           </div>
                           <div className="text-left">
-                            <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-accent/70">WhatsApp</p>
-                            <p className="font-medium text-sm">Message</p>
+                            <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-green-400">WhatsApp</p>
+                            <p className="font-medium text-sm text-green-300">Message</p>
                           </div>
                         </a>
                       </div>
@@ -404,7 +404,7 @@ function InstitutionsPage() {
             </Dialog>
             <Link
               to="/knowledge-portal"
-              className="inline-flex items-center justify-center px-8 py-4 border border-accent text-accent font-semibold rounded-full text-base hover:bg-[#fff0ed] transition cursor-pointer"
+              className="inline-flex items-center justify-center px-8 py-4 border border-amber-400 text-amber-400 font-semibold rounded-full text-base hover:bg-amber-400/10 transition cursor-pointer"
             >
               Review Content
             </Link>

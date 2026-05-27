@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 
 const links = [
   { label: "Home", to: "/" },
-  { label: "Yatras", to: "/yatras" },
+  { label: "Yatra & retreats", to: "/yatras" },
   { label: "Teerthas", to: "/teerthas" },
   { label: "Institutions", to: "/institutions" },
   { label: "Methodology", to: "/methodology" },
@@ -54,7 +54,7 @@ export function Nav() {
         >
           <img src={logo} alt="Samyam Logo" className="w-full h-full object-contain" />
         </Link>
-        
+
         <nav className="flex-1 flex items-center justify-center gap-1 overflow-x-auto no-scrollbar">
           {links.map((l) => (
             <Link

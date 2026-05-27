@@ -1,4 +1,6 @@
 import React, { useEffect, useRef } from "react";
+import heroBg from "@/assets/hero-bg.jpg";
+import samyamHeroVideo from "@/assets/samyamhero.mov";
 
 export function HeroVideo() {
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -21,9 +23,12 @@ export function HeroVideo() {
         muted
         loop
         playsInline
+        preload="auto"
+        poster={heroBg}
         className="w-full h-full object-cover opacity-100 transition-opacity duration-1000"
       >
-        <source src="https://samyam.co/videos/first%20page.mp4" type="video/mp4" />
+        <source src={samyamHeroVideo} type="video/quicktime" />
+        <source src={samyamHeroVideo} type="video/mp4" />
         Your browser does not support the video tag.
       </video>
     </div>

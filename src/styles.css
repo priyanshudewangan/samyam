@@ -24,67 +24,67 @@
 }
 
 :root {
-  --background: oklch(0.985 0.005 80);
-  --foreground: oklch(0.18 0.04 300);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.18 0.04 300);
-  --primary: oklch(0.35 0.13 305);
-  --primary-foreground: oklch(0.99 0 0);
-  --accent: oklch(0.7 0.18 45);
-  --accent-foreground: oklch(0.99 0 0);
-  --muted: oklch(0.95 0.01 60);
-  --muted-foreground: oklch(0.45 0.03 300);
-  --border: oklch(0.9 0.02 300);
-  --saffron: oklch(0.72 0.19 55);
-  --gold: oklch(0.78 0.14 80);
-  --deep-purple: oklch(0.25 0.12 305);
+  --background: #FFFFFF;
+  --foreground: #3D0068;
+  --card: #FFFFFF;
+  --card-foreground: #3D0068;
+  --primary: #823883;
+  --primary-foreground: #FFFFFF;
+  --accent: #FF7722;
+  --accent-foreground: #FFFFFF;
+  --muted: #EFD9F7;
+  --muted-foreground: #823883;
+  --border: #EFD9F7;
+  --saffron: #FF7722;
+  --gold: #D7AC28;
+  --deep-purple: #3D0068;
 
   --gradient-hero: linear-gradient(
     135deg,
-    oklch(0.3 0.15 305) 0%,
-    oklch(0.4 0.13 320) 40%,
-    oklch(0.75 0.18 50) 100%
+    #3D0068 0%,
+    #823883 40%,
+    #FF7722 100%
   );
   --gradient-nav: linear-gradient(
     90deg,
-    oklch(0.35 0.15 305 / 0.95),
-    oklch(0.45 0.13 320 / 0.9),
-    oklch(0.75 0.18 55 / 0.9)
+    rgba(61, 0, 104, 0.95),
+    rgba(130, 56, 131, 0.9),
+    rgba(255, 119, 34, 0.9)
   );
-  --gradient-cta: linear-gradient(135deg, oklch(0.7 0.2 35), oklch(0.65 0.22 25));
+  --gradient-cta: linear-gradient(135deg, #FF7722, #FF883D);
   --gradient-soft: radial-gradient(
     ellipse at top,
-    oklch(0.96 0.03 320 / 0.8),
-    oklch(0.98 0.01 60 / 0.3) 60%,
+    rgba(239, 217, 247, 0.8),
+    rgba(255, 255, 255, 0.3) 60%,
     transparent
   );
-  --shadow-glow: 0 20px 60px -20px oklch(0.4 0.15 305 / 0.4);
-  --shadow-soft: 0 10px 40px -10px oklch(0.4 0.1 305 / 0.2);
+  --shadow-glow: 0 20px 60px -20px rgba(61, 0, 104, 0.4);
+  --shadow-soft: 0 10px 40px -10px rgba(61, 0, 104, 0.15);
   --radius: 1rem;
 
   /* Navbar Themes */
-  --nav-bg: oklch(0.35 0.13 305 / 0.95);
-  --nav-text: oklch(0.99 0 0);
-  --nav-button-bg: oklch(1 0 0 / 0.1);
-  --nav-button-text: oklch(1 0 0);
+  --nav-bg: rgba(61, 0, 104, 0.95);
+  --nav-text: #FFFFFF;
+  --nav-button-bg: rgba(255, 255, 255, 0.1);
+  --nav-button-text: #FFFFFF;
 }
 
 [data-nav-theme="light"] {
   --nav-bg: rgba(255, 255, 255, 0.95);
-  --nav-text: oklch(0.25 0.12 305);
-  --nav-button-bg: oklch(0.35 0.15 305 / 0.05);
-  --nav-button-text: oklch(0.35 0.15 305);
+  --nav-text: #823883;
+  --nav-button-bg: rgba(130, 56, 131, 0.05);
+  --nav-button-text: #823883;
 }
 
 [data-nav-theme="dark"] {
-  --nav-bg: oklch(0.2 0.08 305 / 0.98);
-  --nav-text: oklch(0.99 0 0);
-  --nav-button-bg: oklch(1 0 0 / 0.1);
-  --nav-button-text: oklch(1 0 0);
+  --nav-bg: rgba(61, 0, 104, 0.98);
+  --nav-text: #FFFFFF;
+  --nav-button-bg: rgba(255, 255, 255, 0.1);
+  --nav-button-text: #FFFFFF;
 }
 
 [data-nav-theme="accent"] {
-  --nav-bg: oklch(0.45 0.2 340 / 0.95);
+  --nav-bg: rgba(130, 56, 131, 0.95);
   --nav-text: white;
   --nav-button-bg: rgba(255, 255, 255, 0.15);
   --nav-button-text: white;
@@ -111,7 +111,7 @@
 
 @layer utilities {
   .text-gradient-hero {
-    background: linear-gradient(135deg, oklch(0.3 0.15 305), oklch(0.7 0.18 45));
+    background: linear-gradient(135deg, #823883, #FF7722);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;

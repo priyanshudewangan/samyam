@@ -152,7 +152,7 @@ function CustomYatraPage() {
   };
 
   return (
-    <div className="relative min-h-screen overflow-x-hidden bg-[#1c081e] text-white flex flex-col justify-between">
+    <div className="relative min-h-screen overflow-x-hidden bg-background text-foreground flex flex-col justify-between">
       <Nav />
 
       {/* HERO SECTION */}
@@ -192,18 +192,18 @@ function CustomYatraPage() {
       </section>
 
       {/* THE SAMYAM OFFERING (WEAVE) & SIDEBAR */}
-      <section data-nav-theme="light" className="py-20 bg-white text-[#2b102c] relative">
+      <section data-nav-theme="light" className="py-20 bg-background text-foreground relative">
         <FlowerField count={8} />
         <div className="max-w-7xl mx-auto px-6 md:px-8 grid lg:grid-cols-[1.3fr_0.7fr] gap-12 items-start relative z-10">
 
           {/* Grid of Weaving Points */}
           <div className="space-y-8 text-left">
             <div>
-              <p className="text-xs uppercase tracking-[0.35em] text-accent mb-2">What we weave in</p>
-              <h2 className="text-3xl md:text-5xl font-display font-semibold text-[#1c081e]">
+              <p className="text-xs uppercase tracking-[0.35em] text-amber-600 mb-2 font-semibold">What we weave in</p>
+              <h2 className="text-3xl md:text-5xl font-display font-semibold text-foreground">
                 Tailored Devotional Immersions
               </h2>
-              <p className="text-sm md:text-base text-muted-foreground mt-4 leading-relaxed max-w-xl">
+              <p className="text-sm md:text-base text-muted-foreground mt-4 leading-relaxed max-w-xl font-body">
                 Our custom programs weave ancient wisdom, cultural richness, and premium comfort—offering
                 seekers more than travel, a true awakening.
               </p>
@@ -213,13 +213,13 @@ function CustomYatraPage() {
               {_$.map((item, i) => (
                 <div
                   key={i}
-                  className="p-6 rounded-3xl border border-black/5 bg-[#faf6f8] hover:bg-white hover:shadow-soft hover:border-accent/30 transition-all duration-300 space-y-3 flex flex-col justify-start"
+                  className="p-6 rounded-3xl border border-black/[0.06] bg-white hover:border-amber-600/40 transition-all duration-300 space-y-3 flex flex-col justify-start shadow-soft"
                 >
                   <div className="text-3xl">{item.icon}</div>
-                  <h4 className="text-base uppercase tracking-[0.2em] font-semibold text-accent leading-tight">
+                  <h4 className="text-base uppercase tracking-[0.2em] font-semibold text-amber-600 leading-tight">
                     {item.title}
                   </h4>
-                  <p className="text-xs md:text-sm text-muted-foreground leading-relaxed">
+                  <p className="text-xs md:text-sm text-muted-foreground leading-relaxed font-body">
                     {item.desc}
                   </p>
                 </div>
@@ -228,26 +228,26 @@ function CustomYatraPage() {
           </div>
 
           {/* Sidebar Partner Card */}
-          <div className="p-8 rounded-[32px] border border-black/5 bg-gradient-to-br from-[#fffdfd] to-[#faf3f7] shadow-soft text-left space-y-6 lg:sticky lg:top-28">
-            <h3 className="text-2xl md:text-3xl font-display font-semibold text-[#1c081e]">
+          <div className="p-8 rounded-[32px] border border-black/[0.06] bg-white shadow-soft text-left space-y-6 lg:sticky lg:top-28 text-foreground">
+            <h3 className="text-2xl md:text-3xl font-display font-semibold text-foreground">
               Partner With SAMYAM
             </h3>
-            <p className="text-sm text-muted-foreground leading-relaxed">
-              Crafting retreats that go beyond travel—sacred experiences tailored for your vision,
+            <p className="text-sm text-muted-foreground leading-relaxed font-body">
+              Crafting retreats that go beyond travel — sacred experiences tailored for your vision,
               family, or corporate team.
             </p>
             <ul className="space-y-4">
               {T$.map((item, i) => (
                 <li key={i} className="flex items-start gap-3 text-xs md:text-sm text-muted-foreground">
-                  <span className="text-accent mt-0.5 shrink-0">✺</span>
-                  <span className="leading-relaxed">{item}</span>
+                  <span className="text-amber-600 mt-0.5 shrink-0">✺</span>
+                  <span className="leading-relaxed font-body">{item}</span>
                 </li>
               ))}
             </ul>
-            <div className="rounded-2xl border border-black/5 bg-white p-5 flex flex-col gap-2 text-xs md:text-sm shadow-sm">
-              <span className="font-semibold uppercase tracking-[0.25em] text-accent">Contact Support</span>
-              <a href="tel:+919035225375" className="hover:text-accent transition">+91-9035225375</a>
-              <a href="mailto:samyamspirituals@gmail.com" className="hover:text-accent transition">samyamspirituals@gmail.com</a>
+            <div className="rounded-2xl border border-border bg-muted p-5 flex flex-col gap-2 text-xs md:text-sm shadow-sm font-body">
+              <span className="font-semibold uppercase tracking-[0.25em] text-amber-600">Contact Support</span>
+              <a href="tel:+919035225375" className="hover:text-amber-600 text-foreground transition font-medium">+91-9035225375</a>
+              <a href="mailto:samyamspirituals@gmail.com" className="hover:text-amber-600 text-foreground transition font-medium">samyamspirituals@gmail.com</a>
             </div>
           </div>
 
@@ -255,11 +255,12 @@ function CustomYatraPage() {
       </section>
 
       {/* CO-CREATION PROCESS */}
-      <section data-nav-theme="light" className="py-20 bg-[#faf6f8] text-[#2b102c] border-y border-black/5">
+      <section data-nav-theme="light" className="py-20 bg-background text-foreground border-y border-border relative">
+        <FlowerField count={8} />
         <div className="max-w-6xl mx-auto px-6 text-center">
           <div className="space-y-4 mb-16">
-            <p className="text-xs uppercase tracking-[0.4em] text-accent">How we co-create</p>
-            <h2 className="text-3xl md:text-5xl font-display font-semibold text-[#1c081e]">
+            <p className="text-xs uppercase tracking-[0.4em] text-amber-600 font-semibold">How we co-create</p>
+            <h2 className="text-3xl md:text-5xl font-display font-semibold text-foreground leading-tight">
               Choose the place, pace, and purpose. We hold everything else.
             </h2>
           </div>
@@ -268,11 +269,11 @@ function CustomYatraPage() {
             {b$.map((p, i) => (
               <div
                 key={i}
-                className="p-6 rounded-3xl bg-white border border-black/5 shadow-soft hover:shadow-glow hover:-translate-y-1 transition-all duration-300 space-y-4"
+                className="p-6 rounded-3xl bg-white border border-black/[0.06] shadow-soft hover:shadow-glow hover:border-amber-600/30 hover:-translate-y-1 transition-all duration-300 space-y-4"
               >
                 <div className="text-4xl">{p.icon}</div>
-                <h3 className="text-lg font-display font-semibold text-[#1c081e]">{p.title}</h3>
-                <p className="text-xs md:text-sm text-muted-foreground leading-relaxed">
+                <h3 className="text-lg font-display font-semibold text-foreground">{p.title}</h3>
+                <p className="text-xs md:text-sm text-muted-foreground leading-relaxed font-body">
                   {p.desc}
                 </p>
               </div>
@@ -340,16 +341,16 @@ function CustomYatraPage() {
               {/* Form Body */}
               <form
                 onSubmit={handleSubmit}
-                className="p-8 rounded-3xl bg-white/5 border border-white/10 shadow-glow text-left space-y-6"
+                className="p-8 rounded-3xl bg-white/[0.03] border border-white/10 shadow-glow text-left space-y-6 backdrop-blur-md"
               >
                 {step === 1 && (
                   <div className="space-y-6 fade-up">
-                    <h3 className="text-xl md:text-2xl font-display font-semibold border-b border-white/10 pb-2">
+                    <h3 className="text-xl md:text-2xl font-display font-semibold border-b border-white/10 pb-2 text-white">
                       Tell Us About Yourself
                     </h3>
-                    <div className="space-y-4">
+                    <div className="space-y-4 font-body">
                       <div>
-                        <label className="block text-xs font-semibold text-white/60 mb-2 uppercase tracking-wider">
+                        <label className="block text-xs font-semibold text-amber-400/85 mb-2 uppercase tracking-wider">
                           Full Name *
                         </label>
                         <input
@@ -359,11 +360,11 @@ function CustomYatraPage() {
                           value={formData.name}
                           onChange={handleChange}
                           placeholder="Your name"
-                          className="w-full rounded-2xl bg-[#260e28] border border-white/20 px-4 py-3 placeholder-white/40 focus:outline-none focus:border-accent text-sm"
+                          className="w-full rounded-2xl bg-white/[0.04] border border-white/10 px-4 py-3 text-white placeholder-white/30 focus:outline-none focus:border-amber-400 focus:ring-1 focus:ring-amber-400/50 text-sm transition-all duration-300"
                         />
                       </div>
                       <div>
-                        <label className="block text-xs font-semibold text-white/60 mb-2 uppercase tracking-wider">
+                        <label className="block text-xs font-semibold text-amber-400/85 mb-2 uppercase tracking-wider">
                           Email *
                         </label>
                         <input
@@ -373,11 +374,11 @@ function CustomYatraPage() {
                           value={formData.email}
                           onChange={handleChange}
                           placeholder="your.email@example.com"
-                          className="w-full rounded-2xl bg-[#260e28] border border-white/20 px-4 py-3 placeholder-white/40 focus:outline-none focus:border-accent text-sm"
+                          className="w-full rounded-2xl bg-white/[0.04] border border-white/10 px-4 py-3 text-white placeholder-white/30 focus:outline-none focus:border-amber-400 focus:ring-1 focus:ring-amber-400/50 text-sm transition-all duration-300"
                         />
                       </div>
                       <div>
-                        <label className="block text-xs font-semibold text-white/60 mb-2 uppercase tracking-wider">
+                        <label className="block text-xs font-semibold text-amber-400/85 mb-2 uppercase tracking-wider">
                           Phone / WhatsApp *
                         </label>
                         <input
@@ -387,7 +388,7 @@ function CustomYatraPage() {
                           value={formData.phone}
                           onChange={handleChange}
                           placeholder="+91 98765 43210"
-                          className="w-full rounded-2xl bg-[#260e28] border border-white/20 px-4 py-3 placeholder-white/40 focus:outline-none focus:border-accent text-sm"
+                          className="w-full rounded-2xl bg-white/[0.04] border border-white/10 px-4 py-3 text-white placeholder-white/30 focus:outline-none focus:border-amber-400 focus:ring-1 focus:ring-amber-400/50 text-sm transition-all duration-300"
                         />
                       </div>
                     </div>
@@ -396,12 +397,12 @@ function CustomYatraPage() {
 
                 {step === 2 && (
                   <div className="space-y-6 fade-up">
-                    <h3 className="text-xl md:text-2xl font-display font-semibold border-b border-white/10 pb-2">
+                    <h3 className="text-xl md:text-2xl font-display font-semibold border-b border-white/10 pb-2 text-white">
                       Where & When?
                     </h3>
-                    <div className="space-y-4">
+                    <div className="space-y-4 font-body">
                       <div>
-                        <label className="block text-xs font-semibold text-white/60 mb-2 uppercase tracking-wider">
+                        <label className="block text-xs font-semibold text-amber-400/85 mb-2 uppercase tracking-wider">
                           Preferred Destination *
                         </label>
                         <select
@@ -409,7 +410,7 @@ function CustomYatraPage() {
                           name="destination"
                           value={formData.destination}
                           onChange={handleChange}
-                          className="w-full rounded-2xl bg-[#260e28] border border-white/20 px-4 py-3 focus:outline-none focus:border-accent text-sm"
+                          className="w-full rounded-2xl bg-white/[0.04] border border-white/10 px-4 py-3 text-white focus:outline-none focus:border-amber-400 focus:ring-1 focus:ring-amber-400/50 text-sm transition-all duration-300 [&>option]:bg-[#1c081e] [&>option]:text-white"
                         >
                           <option value="">Select a destination</option>
                           <option value="kashi">Kashi (Varanasi)</option>
@@ -421,7 +422,7 @@ function CustomYatraPage() {
                         </select>
                       </div>
                       <div>
-                        <label className="block text-xs font-semibold text-white/60 mb-2 uppercase tracking-wider">
+                        <label className="block text-xs font-semibold text-amber-400/85 mb-2 uppercase tracking-wider">
                           Number of Travelers *
                         </label>
                         <select
@@ -429,7 +430,7 @@ function CustomYatraPage() {
                           name="travelers"
                           value={formData.travelers}
                           onChange={handleChange}
-                          className="w-full rounded-2xl bg-[#260e28] border border-white/20 px-4 py-3 focus:outline-none focus:border-accent text-sm"
+                          className="w-full rounded-2xl bg-white/[0.04] border border-white/10 px-4 py-3 text-white focus:outline-none focus:border-amber-400 focus:ring-1 focus:ring-amber-400/50 text-sm transition-all duration-300 [&>option]:bg-[#1c081e] [&>option]:text-white"
                         >
                           <option value="">Select traveler count</option>
                           <option value="1">Just Me</option>
@@ -445,12 +446,12 @@ function CustomYatraPage() {
 
                 {step === 3 && (
                   <div className="space-y-6 fade-up">
-                    <h3 className="text-xl md:text-2xl font-display font-semibold border-b border-white/10 pb-2">
+                    <h3 className="text-xl md:text-2xl font-display font-semibold border-b border-white/10 pb-2 text-white">
                       Journey Preferences
                     </h3>
-                    <div className="space-y-4">
+                    <div className="space-y-4 font-body">
                       <div>
-                        <label className="block text-xs font-semibold text-white/60 mb-2 uppercase tracking-wider">
+                        <label className="block text-xs font-semibold text-amber-400/85 mb-2 uppercase tracking-wider">
                           Journey Type *
                         </label>
                         <select
@@ -458,7 +459,7 @@ function CustomYatraPage() {
                           name="journeyType"
                           value={formData.journeyType}
                           onChange={handleChange}
-                          className="w-full rounded-2xl bg-[#260e28] border border-white/20 px-4 py-3 focus:outline-none focus:border-accent text-sm"
+                          className="w-full rounded-2xl bg-white/[0.04] border border-white/10 px-4 py-3 text-white focus:outline-none focus:border-amber-400 focus:ring-1 focus:ring-amber-400/50 text-sm transition-all duration-300 [&>option]:bg-[#1c081e] [&>option]:text-white"
                         >
                           <option value="">Select journey type</option>
                           <option value="solo">Solo yatra</option>
@@ -468,14 +469,14 @@ function CustomYatraPage() {
                         </select>
                       </div>
                       <div>
-                        <label className="block text-xs font-semibold text-white/60 mb-2 uppercase tracking-wider">
+                        <label className="block text-xs font-semibold text-amber-400/85 mb-2 uppercase tracking-wider">
                           Budget Range (Optional)
                         </label>
                         <select
                           name="budget"
                           value={formData.budget}
                           onChange={handleChange}
-                          className="w-full rounded-2xl bg-[#260e28] border border-white/20 px-4 py-3 focus:outline-none focus:border-accent text-sm"
+                          className="w-full rounded-2xl bg-white/[0.04] border border-white/10 px-4 py-3 text-white focus:outline-none focus:border-amber-400 focus:ring-1 focus:ring-amber-400/50 text-sm transition-all duration-300 [&>option]:bg-[#1c081e] [&>option]:text-white"
                         >
                           <option value="">Prefer not to say</option>
                           <option value="essentials">Curated Essentials</option>
@@ -485,7 +486,7 @@ function CustomYatraPage() {
                         </select>
                       </div>
                       <div>
-                        <label className="block text-xs font-semibold text-white/60 mb-2 uppercase tracking-wider">
+                        <label className="block text-xs font-semibold text-amber-400/85 mb-2 uppercase tracking-wider">
                           Tell Us Your Spiritual Intent *
                         </label>
                         <textarea
@@ -495,7 +496,7 @@ function CustomYatraPage() {
                           value={formData.message}
                           onChange={handleChange}
                           placeholder="What draw is pulling you to this sacred pilgrimage? What seekings do you have?"
-                          className="w-full rounded-2xl bg-[#260e28] border border-white/20 px-4 py-3 focus:outline-none focus:border-accent text-sm resize-none"
+                          className="w-full rounded-2xl bg-white/[0.04] border border-white/10 px-4 py-3 text-white placeholder-white/30 focus:outline-none focus:border-amber-400 focus:ring-1 focus:ring-amber-400/50 text-sm resize-none transition-all duration-300 font-body"
                         ></textarea>
                       </div>
                     </div>
@@ -508,9 +509,10 @@ function CustomYatraPage() {
                     type="button"
                     onClick={prevStep}
                     disabled={step === 1}
-                    className={`px-6 py-2.5 rounded-full font-medium transition-all text-xs md:text-sm ${step === 1 ? "opacity-30 cursor-not-allowed" : "hover:opacity-80"
-                      }`}
-                    style={{ background: "rgba(255,255,255,0.1)", color: "white" }}
+                    className={`px-6 py-2.5 rounded-full font-medium transition-all text-xs md:text-sm font-body ${
+                      step === 1 ? "opacity-30 cursor-not-allowed" : "hover:bg-white/20 hover:scale-102"
+                    }`}
+                    style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)", color: "white" }}
                   >
                     ← Previous
                   </button>
@@ -518,14 +520,14 @@ function CustomYatraPage() {
                     <button
                       type="button"
                       onClick={nextStep}
-                      className="px-6 py-2.5 bg-gradient-cta text-accent-foreground font-semibold rounded-full text-xs md:text-sm hover:scale-[1.02] transition cursor-pointer"
+                      className="px-6 py-2.5 bg-gradient-cta text-white font-semibold rounded-full text-xs md:text-sm hover:scale-[1.05] shadow-md transition cursor-pointer"
                     >
                       Next →
                     </button>
                   ) : (
                     <button
                       type="submit"
-                      className="px-6 py-2.5 bg-gradient-cta text-accent-foreground font-semibold rounded-full text-xs md:text-sm hover:scale-[1.02] transition cursor-pointer"
+                      className="px-6 py-2.5 bg-gradient-cta text-white font-semibold rounded-full text-xs md:text-sm hover:scale-[1.05] shadow-md transition cursor-pointer"
                     >
                       Submit Intent
                     </button>
