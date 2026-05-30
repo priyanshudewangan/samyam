@@ -51,7 +51,7 @@
     rgba(130, 56, 131, 0.9),
     rgba(255, 119, 34, 0.9)
   );
-  --gradient-cta: linear-gradient(135deg, #FF7722, #FF883D);
+  --gradient-cta: linear-gradient(to right, #FF7722, #823883);
   --gradient-soft: radial-gradient(
     ellipse at top,
     rgba(239, 217, 247, 0.8),
@@ -137,6 +137,9 @@
   .no-scrollbar {
     -ms-overflow-style: none;
     scrollbar-width: none;
+  }
+  .ease-out-expo {
+    transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
   }
 }
 

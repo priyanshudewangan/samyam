@@ -17,12 +17,15 @@ import { Route as InstitutionsRouteImport } from './routes/institutions'
 import { Route as EnquireRouteImport } from './routes/enquire'
 import { Route as DifferenceRouteImport } from './routes/difference'
 import { Route as CustomYatraRouteImport } from './routes/custom-yatra'
+import { Route as AdminRouteImport } from './routes/admin'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as YatrasIndexRouteImport } from './routes/yatras.index'
 import { Route as TeerthasIndexRouteImport } from './routes/teerthas.index'
+import { Route as AdminIndexRouteImport } from './routes/admin.index'
 import { Route as YatrasExploreRouteImport } from './routes/yatras.explore'
 import { Route as TeerthasExploreRouteImport } from './routes/teerthas.explore'
+import { Route as AdminLoginRouteImport } from './routes/admin.login'
 
 const YatrasRoute = YatrasRouteImport.update({
   id: '/yatras',
@@ -64,6 +67,11 @@ const CustomYatraRoute = CustomYatraRouteImport.update({
   path: '/custom-yatra',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AboutRoute = AboutRouteImport.update({
   id: '/about',
   path: '/about',
@@ -84,6 +92,11 @@ const TeerthasIndexRoute = TeerthasIndexRouteImport.update({
   path: '/',
   getParentRoute: () => TeerthasRoute,
 } as any)
+const AdminIndexRoute = AdminIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AdminRoute,
+} as any)
 const YatrasExploreRoute = YatrasExploreRouteImport.update({
   id: '/explore',
   path: '/explore',
@@ -94,10 +107,16 @@ const TeerthasExploreRoute = TeerthasExploreRouteImport.update({
   path: '/explore',
   getParentRoute: () => TeerthasRoute,
 } as any)
+const AdminLoginRoute = AdminLoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => AdminRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/admin': typeof AdminRouteWithChildren
   '/custom-yatra': typeof CustomYatraRoute
   '/difference': typeof DifferenceRoute
   '/enquire': typeof EnquireRoute
@@ -106,8 +125,10 @@ export interface FileRoutesByFullPath {
   '/methodology': typeof MethodologyRoute
   '/teerthas': typeof TeerthasRouteWithChildren
   '/yatras': typeof YatrasRouteWithChildren
+  '/admin/login': typeof AdminLoginRoute
   '/teerthas/explore': typeof TeerthasExploreRoute
   '/yatras/explore': typeof YatrasExploreRoute
+  '/admin/': typeof AdminIndexRoute
   '/teerthas/': typeof TeerthasIndexRoute
   '/yatras/': typeof YatrasIndexRoute
 }
@@ -120,8 +141,10 @@ export interface FileRoutesByTo {
   '/institutions': typeof InstitutionsRoute
   '/knowledge-portal': typeof KnowledgePortalRoute
   '/methodology': typeof MethodologyRoute
+  '/admin/login': typeof AdminLoginRoute
   '/teerthas/explore': typeof TeerthasExploreRoute
   '/yatras/explore': typeof YatrasExploreRoute
+  '/admin': typeof AdminIndexRoute
   '/teerthas': typeof TeerthasIndexRoute
   '/yatras': typeof YatrasIndexRoute
 }
@@ -129,6 +152,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/admin': typeof AdminRouteWithChildren
   '/custom-yatra': typeof CustomYatraRoute
   '/difference': typeof DifferenceRoute
   '/enquire': typeof EnquireRoute
@@ -137,8 +161,10 @@ export interface FileRoutesById {
   '/methodology': typeof MethodologyRoute
   '/teerthas': typeof TeerthasRouteWithChildren
   '/yatras': typeof YatrasRouteWithChildren
+  '/admin/login': typeof AdminLoginRoute
   '/teerthas/explore': typeof TeerthasExploreRoute
   '/yatras/explore': typeof YatrasExploreRoute
+  '/admin/': typeof AdminIndexRoute
   '/teerthas/': typeof TeerthasIndexRoute
   '/yatras/': typeof YatrasIndexRoute
 }
@@ -147,6 +173,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/about'
+    | '/admin'
     | '/custom-yatra'
     | '/difference'
     | '/enquire'
@@ -155,8 +182,10 @@ export interface FileRouteTypes {
     | '/methodology'
     | '/teerthas'
     | '/yatras'
+    | '/admin/login'
     | '/teerthas/explore'
     | '/yatras/explore'
+    | '/admin/'
     | '/teerthas/'
     | '/yatras/'
   fileRoutesByTo: FileRoutesByTo
@@ -169,14 +198,17 @@ export interface FileRouteTypes {
     | '/institutions'
     | '/knowledge-portal'
     | '/methodology'
+    | '/admin/login'
     | '/teerthas/explore'
     | '/yatras/explore'
+    | '/admin'
     | '/teerthas'
     | '/yatras'
   id:
     | '__root__'
     | '/'
     | '/about'
+    | '/admin'
     | '/custom-yatra'
     | '/difference'
     | '/enquire'
@@ -185,8 +217,10 @@ export interface FileRouteTypes {
     | '/methodology'
     | '/teerthas'
     | '/yatras'
+    | '/admin/login'
     | '/teerthas/explore'
     | '/yatras/explore'
+    | '/admin/'
     | '/teerthas/'
     | '/yatras/'
   fileRoutesById: FileRoutesById
@@ -194,6 +228,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
+  AdminRoute: typeof AdminRouteWithChildren
   CustomYatraRoute: typeof CustomYatraRoute
   DifferenceRoute: typeof DifferenceRoute
   EnquireRoute: typeof EnquireRoute
@@ -262,6 +297,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CustomYatraRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/about': {
       id: '/about'
       path: '/about'
@@ -290,6 +332,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TeerthasIndexRouteImport
       parentRoute: typeof TeerthasRoute
     }
+    '/admin/': {
+      id: '/admin/'
+      path: '/'
+      fullPath: '/admin/'
+      preLoaderRoute: typeof AdminIndexRouteImport
+      parentRoute: typeof AdminRoute
+    }
     '/yatras/explore': {
       id: '/yatras/explore'
       path: '/explore'
@@ -304,8 +353,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TeerthasExploreRouteImport
       parentRoute: typeof TeerthasRoute
     }
+    '/admin/login': {
+      id: '/admin/login'
+      path: '/login'
+      fullPath: '/admin/login'
+      preLoaderRoute: typeof AdminLoginRouteImport
+      parentRoute: typeof AdminRoute
+    }
   }
 }
+
+interface AdminRouteChildren {
+  AdminLoginRoute: typeof AdminLoginRoute
+  AdminIndexRoute: typeof AdminIndexRoute
+}
+
+const AdminRouteChildren: AdminRouteChildren = {
+  AdminLoginRoute: AdminLoginRoute,
+  AdminIndexRoute: AdminIndexRoute,
+}
+
+const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
 
 interface TeerthasRouteChildren {
   TeerthasExploreRoute: typeof TeerthasExploreRoute
@@ -337,6 +405,7 @@ const YatrasRouteWithChildren =
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
+  AdminRoute: AdminRouteWithChildren,
   CustomYatraRoute: CustomYatraRoute,
   DifferenceRoute: DifferenceRoute,
   EnquireRoute: EnquireRoute,

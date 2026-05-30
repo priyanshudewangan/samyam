@@ -27,6 +27,7 @@ import {
   SIDEBAR_WIDTH_MOBILE,
   SIDEBAR_WIDTH_ICON,
   SIDEBAR_KEYBOARD_SHORTCUT,
+  SidebarContextProps,
 } from "./sidebar-context";
 
 const SidebarProvider = React.forwardRef<

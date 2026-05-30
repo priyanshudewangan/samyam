@@ -3,6 +3,8 @@ import { Nav } from "@/components/Nav";
 import { FlowerField } from "@/components/FlowerField";
 import { Footer } from "@/components/Footer";
 import React, { useState } from "react";
+import { ScrollReveal } from "@/components/ui/ScrollReveal";
+import { API_ENDPOINTS } from "@/lib/api-config";
 
 export const Route = createFileRoute("/custom-yatra")({
   component: CustomYatraPage,
@@ -105,6 +107,8 @@ const T$ = [
 function CustomYatraPage() {
   const [step, setStep] = useState(1);
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState("");
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -142,13 +146,46 @@ function CustomYatraPage() {
     if (step > 1) setStep(step - 1);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!formData.journeyType || !formData.message) {
       alert("Please specify journey type and share your spiritual intent.");
       return;
     }
-    setSubmitted(true);
+
+    setIsSubmitting(true);
+    setError("");
+
+    const payload = {
+      name: formData.name,
+      phoneNumber: formData.phone,
+      email: formData.email,
+      preferredYatra: `Custom Yatra - ${formData.destination}`,
+      travelers: formData.travelers,
+      journeyType: formData.journeyType,
+      budget: formData.budget || "Prefer not to say",
+      message: formData.message,
+    };
+
+    try {
+      const response = await fetch(API_ENDPOINTS.ENQUIRIES, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to submit custom yatra enquiry. Please try again.");
+      }
+
+      setSubmitted(true);
+    } catch (err: any) {
+      setError(err.message || "Something went wrong. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -171,23 +208,29 @@ function CustomYatraPage() {
 
         <FlowerField count={18} />
 
-        <div className="max-w-4xl mx-auto px-6 text-center relative z-10 space-y-6 pt-24 fade-up">
-          <p className="font-display italic text-accent text-lg md:text-xl tracking-wider">
-            ॥ संकल्प से सिद्धि ॥
-          </p>
-          <h1
-            className="text-5xl md:text-8xl font-display font-semibold text-white tracking-tight leading-none"
-            style={{
-              textShadow:
-                "0 6px 40px rgba(0,0,0,0.8), 0 0 60px rgba(174,49,100,0.3)",
-            }}
-          >
-            Customize Your Yatra
-          </h1>
-          <p className="text-white/80 text-sm md:text-lg max-w-2xl mx-auto font-body leading-relaxed">
-            Co-create a sacred pilgrimage tailored to your spiritual rhythm, preferred pace,
-            and divine intent. Move beyond sightseeing to a true inner awakening.
-          </p>
+        <div className="max-w-4xl mx-auto px-6 text-center relative z-10 space-y-6 pt-24">
+          <ScrollReveal variant="fade-up" delay={100}>
+            <p className="font-display italic text-accent text-lg md:text-xl tracking-wider">
+              ॥ संकल्प से सिद्धि ॥
+            </p>
+          </ScrollReveal>
+          <ScrollReveal variant="fade-up" delay={300}>
+            <h1
+              className="text-5xl md:text-8xl font-display font-semibold text-white tracking-tight leading-none"
+              style={{
+                textShadow:
+                  "0 6px 40px rgba(0,0,0,0.8), 0 0 60px rgba(174,49,100,0.3)",
+              }}
+            >
+              Customize Your Yatra
+            </h1>
+          </ScrollReveal>
+          <ScrollReveal variant="fade-up" delay={500}>
+            <p className="text-white/80 text-sm md:text-lg max-w-2xl mx-auto font-body leading-relaxed">
+              Co-create a sacred pilgrimage tailored to your spiritual rhythm, preferred pace,
+              and divine intent. Move beyond sightseeing to a true inner awakening.
+            </p>
+          </ScrollReveal>
         </div>
       </section>
 
@@ -198,58 +241,67 @@ function CustomYatraPage() {
 
           {/* Grid of Weaving Points */}
           <div className="space-y-8 text-left">
-            <div>
-              <p className="text-xs uppercase tracking-[0.35em] text-amber-600 mb-2 font-semibold">What we weave in</p>
-              <h2 className="text-3xl md:text-5xl font-display font-semibold text-foreground">
-                Tailored Devotional Immersions
-              </h2>
-              <p className="text-sm md:text-base text-muted-foreground mt-4 leading-relaxed max-w-xl font-body">
-                Our custom programs weave ancient wisdom, cultural richness, and premium comfort—offering
-                seekers more than travel, a true awakening.
-              </p>
-            </div>
+            <ScrollReveal variant="fade-left">
+              <div>
+                <p className="text-xs uppercase tracking-[0.35em] text-amber-600 mb-2 font-semibold">What we weave in</p>
+                <h2 className="text-3xl md:text-5xl font-display font-semibold text-foreground">
+                  Tailored Devotional Immersions
+                </h2>
+                <p className="text-sm md:text-base text-muted-foreground mt-4 leading-relaxed max-w-xl font-body">
+                  Our custom programs weave ancient wisdom, cultural richness, and premium comfort—offering
+                  seekers more than travel, a true awakening.
+                </p>
+              </div>
+            </ScrollReveal>
 
             <div className="grid sm:grid-cols-2 gap-6 pt-4">
               {_$.map((item, i) => (
-                <div
+                <ScrollReveal
                   key={i}
-                  className="p-6 rounded-3xl border border-black/[0.06] bg-white hover:border-amber-600/40 transition-all duration-300 space-y-3 flex flex-col justify-start shadow-soft"
+                  variant="fade-up"
+                  delay={i * 100}
                 >
-                  <div className="text-3xl">{item.icon}</div>
-                  <h4 className="text-base uppercase tracking-[0.2em] font-semibold text-amber-600 leading-tight">
-                    {item.title}
-                  </h4>
-                  <p className="text-xs md:text-sm text-muted-foreground leading-relaxed font-body">
-                    {item.desc}
-                  </p>
-                </div>
+                  <div
+                    className="p-6 rounded-3xl border border-black/[0.06] bg-white hover:border-amber-600/40 transition-all duration-300 space-y-3 flex flex-col justify-start shadow-soft h-full"
+                  >
+                    <div className="text-3xl">{item.icon}</div>
+                    <h4 className="text-base uppercase tracking-[0.2em] font-semibold text-amber-600 leading-tight">
+                      {item.title}
+                    </h4>
+                    <p className="text-xs md:text-sm text-muted-foreground leading-relaxed font-body">
+                      {item.desc}
+                    </p>
+                  </div>
+                </ScrollReveal>
               ))}
             </div>
           </div>
 
           {/* Sidebar Partner Card */}
-          <div className="p-8 rounded-[32px] border border-black/[0.06] bg-white shadow-soft text-left space-y-6 lg:sticky lg:top-28 text-foreground">
-            <h3 className="text-2xl md:text-3xl font-display font-semibold text-foreground">
-              Partner With SAMYAM
-            </h3>
-            <p className="text-sm text-muted-foreground leading-relaxed font-body">
-              Crafting retreats that go beyond travel — sacred experiences tailored for your vision,
-              family, or corporate team.
-            </p>
-            <ul className="space-y-4">
-              {T$.map((item, i) => (
-                <li key={i} className="flex items-start gap-3 text-xs md:text-sm text-muted-foreground">
-                  <span className="text-amber-600 mt-0.5 shrink-0">✺</span>
-                  <span className="leading-relaxed font-body">{item}</span>
-                </li>
-              ))}
-            </ul>
-            <div className="rounded-2xl border border-border bg-muted p-5 flex flex-col gap-2 text-xs md:text-sm shadow-sm font-body">
-              <span className="font-semibold uppercase tracking-[0.25em] text-amber-600">Contact Support</span>
-              <a href="tel:+919035225375" className="hover:text-amber-600 text-foreground transition font-medium">+91-9035225375</a>
-              <a href="mailto:samyamspirituals@gmail.com" className="hover:text-amber-600 text-foreground transition font-medium">samyamspirituals@gmail.com</a>
+          <ScrollReveal variant="fade-right" className="lg:sticky lg:top-28">
+            <div className="p-5 sm:p-8 rounded-[32px] border border-black/[0.06] bg-white shadow-soft text-left space-y-6 text-foreground w-full">
+              <h3 className="text-2xl md:text-3xl font-display font-semibold text-foreground">
+                Partner With SAMYAM
+              </h3>
+              <p className="text-sm text-muted-foreground leading-relaxed font-body">
+                Crafting retreats that go beyond travel — sacred experiences tailored for your vision,
+                family, or corporate team.
+              </p>
+              <ul className="space-y-4">
+                {T$.map((item, i) => (
+                  <li key={i} className="flex items-start gap-3 text-xs md:text-sm text-muted-foreground">
+                    <span className="text-amber-600 mt-0.5 shrink-0">✺</span>
+                    <span className="leading-relaxed font-body">{item}</span>
+                  </li>
+                ))}
+              </ul>
+              <div className="rounded-2xl border border-border bg-muted p-5 flex flex-col gap-2 text-xs md:text-sm shadow-sm font-body">
+                <span className="font-semibold uppercase tracking-[0.25em] text-amber-600">Contact Support</span>
+                <a href="tel:+919035225375" className="hover:text-amber-600 text-foreground transition font-medium">+91-9035225375</a>
+                <a href="mailto:samyamspirituals@gmail.com" className="hover:text-amber-600 text-foreground transition font-medium">samyamspirituals@gmail.com</a>
+              </div>
             </div>
-          </div>
+          </ScrollReveal>
 
         </div>
       </section>
@@ -258,25 +310,32 @@ function CustomYatraPage() {
       <section data-nav-theme="light" className="py-20 bg-background text-foreground border-y border-border relative">
         <FlowerField count={8} />
         <div className="max-w-6xl mx-auto px-6 text-center">
-          <div className="space-y-4 mb-16">
-            <p className="text-xs uppercase tracking-[0.4em] text-amber-600 font-semibold">How we co-create</p>
-            <h2 className="text-3xl md:text-5xl font-display font-semibold text-foreground leading-tight">
-              Choose the place, pace, and purpose. We hold everything else.
-            </h2>
-          </div>
+          <ScrollReveal variant="fade-up">
+            <div className="space-y-4 mb-16">
+              <p className="text-xs uppercase tracking-[0.4em] text-amber-600 font-semibold">How we co-create</p>
+              <h2 className="text-3xl md:text-5xl font-display font-semibold text-foreground leading-tight">
+                Choose the place, pace, and purpose. We hold everything else.
+              </h2>
+            </div>
+          </ScrollReveal>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 text-left">
             {b$.map((p, i) => (
-              <div
+              <ScrollReveal
                 key={i}
-                className="p-6 rounded-3xl bg-white border border-black/[0.06] shadow-soft hover:shadow-glow hover:border-amber-600/30 hover:-translate-y-1 transition-all duration-300 space-y-4"
+                variant="scale-up"
+                delay={i * 100}
               >
-                <div className="text-4xl">{p.icon}</div>
-                <h3 className="text-lg font-display font-semibold text-foreground">{p.title}</h3>
-                <p className="text-xs md:text-sm text-muted-foreground leading-relaxed font-body">
-                  {p.desc}
-                </p>
-              </div>
+                <div
+                  className="p-6 rounded-3xl bg-white border border-black/[0.06] shadow-soft hover:shadow-glow hover:border-amber-600/30 hover:-translate-y-1 transition-all duration-300 space-y-4 h-full"
+                >
+                  <div className="text-4xl">{p.icon}</div>
+                  <h3 className="text-lg font-display font-semibold text-foreground">{p.title}</h3>
+                  <p className="text-xs md:text-sm text-muted-foreground leading-relaxed font-body">
+                    {p.desc}
+                  </p>
+                </div>
+              </ScrollReveal>
             ))}
           </div>
         </div>
@@ -285,10 +344,9 @@ function CustomYatraPage() {
       {/* MULTI-STEP INTENTION FORM */}
       <section data-nav-theme="dark" className="py-20 bg-[#1c081e] text-white relative">
         <FlowerField count={10} />
-        <div className="max-w-3xl mx-auto px-6 relative z-10">
-
+        <ScrollReveal variant="fade-up" className="max-w-3xl mx-auto px-6 relative z-10">
           {submitted ? (
-            <div className="p-8 md:p-12 rounded-3xl bg-white/5 border border-white/10 shadow-glow text-center space-y-6 fade-up">
+            <div className="p-8 md:p-12 rounded-3xl bg-white/5 border border-white/10 shadow-glow text-center space-y-6">
               <div className="text-6xl md:text-8xl animate-pulse">✨</div>
               <h2 className="text-3xl md:text-5xl font-display font-semibold text-white">
                 Pranaam & Thank You
@@ -307,7 +365,7 @@ function CustomYatraPage() {
               </div>
             </div>
           ) : (
-            <div className="space-y-10 fade-up">
+            <div className="space-y-10">
 
               {/* Stepper Header */}
               <div className="flex items-center justify-between mb-8 max-w-md mx-auto">
@@ -341,10 +399,15 @@ function CustomYatraPage() {
               {/* Form Body */}
               <form
                 onSubmit={handleSubmit}
-                className="p-8 rounded-3xl bg-white/[0.03] border border-white/10 shadow-glow text-left space-y-6 backdrop-blur-md"
+                className="p-5 sm:p-8 rounded-3xl bg-white/[0.03] border border-white/10 shadow-glow text-left space-y-6 backdrop-blur-md"
               >
+                {error && (
+                  <div className="p-3 bg-red-500/10 border border-red-500/20 text-red-200 text-xs rounded-2xl text-center">
+                    {error}
+                  </div>
+                )}
                 {step === 1 && (
-                  <div className="space-y-6 fade-up">
+                  <div className="space-y-6">
                     <h3 className="text-xl md:text-2xl font-display font-semibold border-b border-white/10 pb-2 text-white">
                       Tell Us About Yourself
                     </h3>
@@ -396,7 +459,7 @@ function CustomYatraPage() {
                 )}
 
                 {step === 2 && (
-                  <div className="space-y-6 fade-up">
+                  <div className="space-y-6">
                     <h3 className="text-xl md:text-2xl font-display font-semibold border-b border-white/10 pb-2 text-white">
                       Where & When?
                     </h3>
@@ -445,7 +508,7 @@ function CustomYatraPage() {
                 )}
 
                 {step === 3 && (
-                  <div className="space-y-6 fade-up">
+                  <div className="space-y-6">
                     <h3 className="text-xl md:text-2xl font-display font-semibold border-b border-white/10 pb-2 text-white">
                       Journey Preferences
                     </h3>
@@ -527,17 +590,17 @@ function CustomYatraPage() {
                   ) : (
                     <button
                       type="submit"
-                      className="px-6 py-2.5 bg-gradient-cta text-white font-semibold rounded-full text-xs md:text-sm hover:scale-[1.05] shadow-md transition cursor-pointer"
+                      disabled={isSubmitting}
+                      className="px-6 py-2.5 bg-gradient-cta text-white font-semibold rounded-full text-xs md:text-sm hover:scale-[1.05] active:scale-[0.98] shadow-md transition cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
                     >
-                      Submit Intent
+                      {isSubmitting ? "Submitting..." : "Submit Intent"}
                     </button>
                   )}
                 </div>
               </form>
             </div>
           )}
-
-        </div>
+        </ScrollReveal>
       </section>
 
       {/* JOURNEY DESIGNER CONCIERGE */}

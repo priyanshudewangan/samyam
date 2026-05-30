@@ -3,6 +3,8 @@ import { Nav } from "@/components/Nav";
 import { FlowerField } from "@/components/FlowerField";
 import React, { useState } from "react";
 import { Footer } from "@/components/Footer";
+import { ScrollReveal } from "@/components/ui/ScrollReveal";
+import { API_ENDPOINTS } from "@/lib/api-config";
 
 export const Route = createFileRoute("/enquire")({
   component: EnquirePage,
@@ -20,10 +22,41 @@ export const Route = createFileRoute("/enquire")({
 
 function EnquirePage() {
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState("");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setSubmitted(true);
+    setIsSubmitting(true);
+    setError("");
+
+    const data = new FormData(e.currentTarget);
+    const payload = {
+      name: data.get("name") as string,
+      phoneNumber: data.get("phoneNumber") as string,
+      preferredYatra: data.get("preferredYatra") as string,
+      message: data.get("message") as string,
+    };
+
+    try {
+      const response = await fetch(API_ENDPOINTS.ENQUIRIES, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to submit enquiry. Please try again.");
+      }
+
+      setSubmitted(true);
+    } catch (err: any) {
+      setError(err.message || "Something went wrong. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -37,13 +70,13 @@ function EnquirePage() {
         className="relative py-32 px-4 bg-gradient-to-b from-[#1a0a1e] via-[#1c081e] to-[#120614] overflow-hidden min-h-screen flex items-center justify-center"
       >
         <FlowerField count={14} />
-        <div className="relative max-w-3xl mx-auto text-center text-white w-full">
-          <h2 className="text-4xl md:text-6xl font-display mt-8">Begin Your Transformation</h2>
+        <ScrollReveal variant="fade-up" className="relative max-w-3xl mx-auto text-center text-white w-full">
+          <h2 className="text-4xl md:text-6xl font-display mt-8">Begin Your Yatra</h2>
           <p className="mt-6 text-lg opacity-90 font-body">
             Your sacred journey awaits. Let us craft an experience that awakens your soul.
           </p>
 
-          <div className="mt-10 max-w-lg mx-auto bg-white/[0.03] text-white p-8 rounded-3xl shadow-glow border border-white/10">
+          <div className="mt-10 max-w-lg mx-auto bg-white/[0.03] text-white p-5 sm:p-8 rounded-3xl shadow-glow border border-white/10">
             {submitted ? (
               <div className="py-8 text-center space-y-4">
                 <span className="text-5xl animate-pulse block">ॐ</span>
@@ -55,6 +88,11 @@ function EnquirePage() {
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-4 text-left font-body">
+                {error && (
+                  <div className="p-3 bg-red-500/10 border border-red-500/20 text-red-200 text-xs rounded-2xl text-center">
+                    {error}
+                  </div>
+                )}
                 <div>
                   <label className="block text-xs font-semibold text-amber-400/85 mb-2 uppercase tracking-wider">
                     Name
@@ -62,6 +100,7 @@ function EnquirePage() {
                   <input
                     type="text"
                     required
+                    name="name"
                     className="w-full px-4 py-3 rounded-2xl bg-white/[0.04] border border-white/10 text-white placeholder-white/30 focus:outline-none focus:border-amber-400 focus:ring-1 focus:ring-amber-400/50 text-sm transition-all duration-300"
                     placeholder="Enter your name"
                   />
@@ -73,6 +112,7 @@ function EnquirePage() {
                   <input
                     type="tel"
                     required
+                    name="phoneNumber"
                     className="w-full px-4 py-3 rounded-2xl bg-white/[0.04] border border-white/10 text-white placeholder-white/30 focus:outline-none focus:border-amber-400 focus:ring-1 focus:ring-amber-400/50 text-sm transition-all duration-300"
                     placeholder="Enter your phone number"
                   />
@@ -81,11 +121,14 @@ function EnquirePage() {
                   <label className="block text-xs font-semibold text-amber-400/85 mb-2 uppercase tracking-wider">
                     Preferred Yatra
                   </label>
-                  <select className="w-full px-4 py-3 rounded-2xl bg-white/[0.04] border border-white/10 text-white focus:outline-none focus:border-amber-400 focus:ring-1 focus:ring-amber-400/50 text-sm transition-all duration-300 [&>option]:bg-[#1c081e] [&>option]:text-white">
-                    <option>General Enquiry</option>
-                    <option>Kashi Yatra</option>
-                    <option>Himachal Retreat</option>
-                    <option>Vrindavan Parikrama</option>
+                  <select
+                    name="preferredYatra"
+                    className="w-full px-4 py-3 rounded-2xl bg-white/[0.04] border border-white/10 text-white focus:outline-none focus:border-amber-400 focus:ring-1 focus:ring-amber-400/50 text-sm transition-all duration-300 [&>option]:bg-[#1c081e] [&>option]:text-white"
+                  >
+                    <option value="General Enquiry">General Enquiry</option>
+                    <option value="Kashi Yatra">Kashi Yatra</option>
+                    <option value="Himachal Retreat">Himachal Retreat</option>
+                    <option value="Vrindavan Parikrama">Vrindavan Parikrama</option>
                   </select>
                 </div>
                 <div>
@@ -94,15 +137,18 @@ function EnquirePage() {
                   </label>
                   <textarea
                     rows={3}
+                    required
+                    name="message"
                     className="w-full px-4 py-3 rounded-2xl bg-white/[0.04] border border-white/10 text-white placeholder-white/30 focus:outline-none focus:border-amber-400 focus:ring-1 focus:ring-amber-400/50 text-sm resize-none transition-all duration-300"
                     placeholder="Share any specific spiritual intent or requests..."
                   />
                 </div>
                 <button
                   type="submit"
-                  className="w-full py-4 rounded-full bg-gradient-cta text-white font-semibold shadow-glow hover:scale-[1.02] transition duration-300 cursor-pointer"
+                  disabled={isSubmitting}
+                  className="w-full py-4 rounded-full bg-gradient-cta text-white font-semibold shadow-glow hover:scale-[1.02] active:scale-[0.98] transition duration-300 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  Send Enquiry
+                  {isSubmitting ? "Sending..." : "Send Enquiry"}
                 </button>
               </form>
             )}
@@ -127,7 +173,7 @@ function EnquirePage() {
           <p className="mt-12 text-xs opacity-60 text-white font-body tracking-wider uppercase">
             Join 500+ seekers who have transformed through SAMYAM
           </p>
-        </div>
+        </ScrollReveal>
       </section>
 
       <Footer />

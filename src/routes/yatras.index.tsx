@@ -4,6 +4,8 @@ import { FlowerField } from "@/components/FlowerField";
 import { Footer } from "@/components/Footer";
 import yatra1 from "@/assets/Yatra-1.jpg";
 import { detailedYatras } from "@/constants/yatras";
+import { ScrollReveal } from "@/components/ui/ScrollReveal";
+import { API_ENDPOINTS } from "@/lib/api-config";
 
 import { useState } from "react";
 
@@ -21,17 +23,40 @@ export const Route = createFileRoute("/yatras/")({
   }),
 });
 
-// Map detailedYatras with regions for filter compatibility
-const yatrasWithRegion = detailedYatras.map((y) => {
-  let region = "North"; // Default for these 3
-  if (y.slug === "dwarka") region = "West";
-  if (y.slug === "rameshwaram") region = "South";
-  return { ...y, region };
-});
+import { useEffect } from "react";
 
 function YatrasPage() {
+  const [yatras, setYatras] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
   const [activeRegion, setActiveRegion] = useState("All");
   const [searchQuery, setSearchQuery] = useState("");
+
+  useEffect(() => {
+    const fetchYatras = async () => {
+      try {
+        const res = await fetch(API_ENDPOINTS.YATRAS);
+        const result = await res.json();
+        if (result.success && result.data && result.data.length > 0) {
+          setYatras(result.data.filter((y: any) => y.isPublished));
+        } else {
+          setYatras(detailedYatras);
+        }
+      } catch (err) {
+        console.error("Failed to fetch yatras:", err);
+        setYatras(detailedYatras);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchYatras();
+  }, []);
+
+  const yatrasWithRegion = yatras.map((y) => {
+    let region = "North"; // Default
+    if (y.slug === "dwarka") region = "West";
+    if (y.slug === "rameshwaram") region = "South";
+    return { ...y, region };
+  });
 
   const filteredYatras = yatrasWithRegion.filter((y) => {
     const matchesRegion = activeRegion === "All" || y.region === activeRegion;
@@ -140,63 +165,67 @@ function YatrasPage() {
             filteredYatras.map((yatra, idx) => {
               const isEven = idx % 2 === 1;
               return (
-                <div
+                <ScrollReveal
                   key={yatra.slug}
-                  className="p-6 sm:p-10 rounded-3xl bg-white border border-black/[0.06] shadow-soft hover:shadow-[0_20px_60px_-15px_rgba(92,36,94,0.1)] hover:border-amber-600/20 transition-all duration-500"
+                  variant={isEven ? "fade-left" : "fade-right"}
                 >
-                  <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center">
-                    {/* Content Column */}
-                    <div className={`space-y-6 text-left lg:col-span-7 order-2 ${isEven ? "lg:order-2" : "lg:order-1"}`}>
-                      <div>
-                        <h2 className="text-3xl sm:text-4xl font-display font-semibold text-foreground leading-tight">
-                          {yatra.name}
-                        </h2>
-                        <div className="flex items-center gap-3 mt-2 text-xs sm:text-sm font-semibold">
-                          <span className="text-amber-600">{yatra.date}</span>
-                          <span className="text-muted-foreground/30">•</span>
-                          <span className="text-muted-foreground font-body font-medium">{yatra.duration}</span>
+                  <div
+                    className="p-6 sm:p-10 rounded-3xl bg-white border border-black/[0.06] shadow-soft hover:shadow-[0_20px_60px_-15px_rgba(92,36,94,0.1)] hover:border-amber-600/20 transition-all duration-500"
+                  >
+                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center">
+                      {/* Content Column */}
+                      <div className={`space-y-6 text-left lg:col-span-7 order-2 ${isEven ? "lg:order-2" : "lg:order-1"}`}>
+                        <div>
+                          <h2 className="text-3xl sm:text-4xl font-display font-semibold text-foreground leading-tight">
+                            {yatra.name}
+                          </h2>
+                          <div className="flex items-center gap-3 mt-2 text-xs sm:text-sm font-semibold">
+                            <span className="text-amber-600">{yatra.date}</span>
+                            <span className="text-muted-foreground/30">•</span>
+                            <span className="text-muted-foreground font-body font-medium">{yatra.duration}</span>
+                          </div>
+                        </div>
+
+                        <p className="text-xs sm:text-sm md:text-base text-muted-foreground leading-relaxed font-body">
+                          {yatra.desc}
+                        </p>
+
+                        {/* Occupancy Badges */}
+                        <div className="flex flex-col gap-2 items-start">
+                          <span className="px-4 py-1.5 rounded-xl text-[10px] sm:text-xs font-semibold text-amber-700 bg-amber-500/10 border border-amber-500/20 shadow-sm select-none">
+                            {yatra.triplePrice}
+                          </span>
+                          <span className="px-4 py-1.5 rounded-xl text-[10px] sm:text-xs font-semibold text-purple-700 bg-purple-500/10 border border-purple-500/20 shadow-sm select-none">
+                            {yatra.doublePrice}
+                          </span>
+                        </div>
+
+                        {/* CTA Button */}
+                        <div className="pt-2">
+                          <Link
+                            to="/yatras/explore"
+                            search={{ yatra: yatra.slug }}
+                            className="px-6 py-3 bg-gradient-cta text-accent-foreground font-semibold rounded-full text-xs sm:text-sm shadow-soft hover:scale-[1.03] transition flex items-center justify-center gap-2 w-fit cursor-pointer"
+                          >
+                            Explore Itinerary ➔
+                          </Link>
                         </div>
                       </div>
 
-                      <p className="text-xs sm:text-sm md:text-base text-muted-foreground leading-relaxed font-body">
-                        {yatra.desc}
-                      </p>
-
-                      {/* Occupancy Badges */}
-                      <div className="flex flex-col gap-2 items-start">
-                        <span className="px-4 py-1.5 rounded-xl text-[10px] sm:text-xs font-semibold text-amber-700 bg-amber-500/10 border border-amber-500/20 shadow-sm select-none">
-                          {yatra.triplePrice}
-                        </span>
-                        <span className="px-4 py-1.5 rounded-xl text-[10px] sm:text-xs font-semibold text-purple-700 bg-purple-500/10 border border-purple-500/20 shadow-sm select-none">
-                          {yatra.doublePrice}
-                        </span>
-                      </div>
-
-                      {/* CTA Button */}
-                      <div className="pt-2">
-                        <Link
-                          to="/yatras/explore"
-                          search={{ yatra: yatra.slug }}
-                          className="px-6 py-3 bg-gradient-cta text-accent-foreground font-semibold rounded-full text-xs sm:text-sm shadow-soft hover:scale-[1.03] transition flex items-center justify-center gap-2 w-fit cursor-pointer"
-                        >
-                          Explore Itinerary ➔
-                        </Link>
-                      </div>
-                    </div>
-
-                    {/* Image Column */}
-                    <div className={`lg:col-span-5 order-1 ${isEven ? "lg:order-1" : "lg:order-2"}`}>
-                      <div className="aspect-[4/3] rounded-2xl overflow-hidden border border-black/[0.06] shadow-soft">
-                        <img
-                          src={yatra.img}
-                          alt={yatra.name}
-                          loading="lazy"
-                          className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
-                        />
+                      {/* Image Column */}
+                      <div className={`lg:col-span-5 order-1 ${isEven ? "lg:order-1" : "lg:order-2"}`}>
+                        <div className="aspect-[4/3] rounded-2xl overflow-hidden border border-black/[0.06] shadow-soft">
+                          <img
+                            src={yatra.img}
+                            alt={yatra.name}
+                            loading="lazy"
+                            className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
+                          />
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
+                </ScrollReveal>
               );
             })
           ) : (
@@ -218,13 +247,15 @@ function YatrasPage() {
       </section>
 
       {/* YOUR JOURNEY, YOUR WAY */}
-      <section data-nav-theme="dark" className="relative py-20 px-4 sm:px-6 bg-[#1c081e]/60 text-white overflow-hidden border-t border-white/5">
+      <section data-nav-theme="dark" className="relative py-20 px-4 sm:px-6 bg-gradient-to-b from-[#823883] to-[#3D0068] text-white overflow-hidden border-t border-white/5">
         <FlowerField count={6} />
         <div className="max-w-6xl mx-auto text-center relative z-10">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-display font-semibold text-white">Your Journey, Your Way</h2>
-          <p className="text-white/70 mt-4 text-xs sm:text-sm max-w-lg mx-auto leading-relaxed">
-            Choose the experience that resonates with your spiritual intent and inner calling.
-          </p>
+          <ScrollReveal variant="fade-up">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-display font-semibold text-white">Your Journey, Your Way</h2>
+            <p className="text-white/70 mt-4 text-xs sm:text-sm max-w-lg mx-auto leading-relaxed">
+              Choose the experience that resonates with your spiritual intent and inner calling.
+            </p>
+          </ScrollReveal>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12 text-left">
             {[
               {
@@ -242,16 +273,22 @@ function YatrasPage() {
                 t: "Corporate Immersion",
                 d: "Team retreats that combine spiritual awakening with team building.",
               },
-            ].map((c) => (
-              <Link
+            ].map((c, idx) => (
+              <ScrollReveal
                 key={c.t}
-                to="/enquire"
-                className="p-8 rounded-3xl bg-white/[0.03] border border-white/10 shadow-soft hover:shadow-glow hover:border-amber-400/40 transition-all duration-300 block"
+                variant="fade-up"
+                delay={idx * 150}
+                className="h-full"
               >
-                <div className="text-4xl">{c.i}</div>
-                <h3 className="text-2xl text-white mt-4 font-display font-semibold">{c.t}</h3>
-                <p className="text-xs sm:text-sm text-white/70 mt-2 leading-relaxed font-body">{c.d}</p>
-              </Link>
+                <Link
+                  to="/enquire"
+                  className="p-8 rounded-3xl bg-white/[0.03] border border-white/10 shadow-soft hover:shadow-glow hover:border-amber-400/40 transition-all duration-300 block h-full"
+                >
+                  <div className="text-4xl">{c.i}</div>
+                  <h3 className="text-2xl text-white mt-4 font-display font-semibold">{c.t}</h3>
+                  <p className="text-xs sm:text-sm text-white/70 mt-2 leading-relaxed font-body">{c.d}</p>
+                </Link>
+              </ScrollReveal>
             ))}
           </div>
         </div>
