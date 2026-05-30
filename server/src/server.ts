@@ -32,7 +32,7 @@ app.use(
     origin: (origin, callback) => {
       if (!origin) return callback(null, true);
       const isLocal = /^http:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/.test(origin);
-      const isCloudflare = origin.endsWith(".pages.dev");
+      const isCloudflare = origin.endsWith(".pages.dev") || origin.endsWith(".workers.dev");
       if (isLocal || isCloudflare || origin === "https://samyam.co") {
         return callback(null, true);
       }
