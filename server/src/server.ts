@@ -32,7 +32,8 @@ app.use(
     origin: (origin, callback) => {
       if (!origin) return callback(null, true);
       const isLocal = /^http:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/.test(origin);
-      if (isLocal || origin === "https://samyam.co") {
+      const isCloudflare = origin.endsWith(".pages.dev");
+      if (isLocal || isCloudflare || origin === "https://samyam.co") {
         return callback(null, true);
       }
       return callback(new Error("Not allowed by CORS"));
