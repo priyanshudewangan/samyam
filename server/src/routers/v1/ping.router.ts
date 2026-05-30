@@ -7,7 +7,7 @@ const pingRouter = express.Router();
 
 pingRouter.get('/', validateRequestBody(pingSchema), pingHandler); // TODO: Resolve this TS compilation issue
 
-pingRouter.get('/health', (req, res) => {
+pingRouter.get('/health', (req: any, res: any) => {
     res.status(200).send('OK');
 });
 

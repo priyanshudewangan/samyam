@@ -19,10 +19,7 @@ export const connectDB = async (): Promise<void> => {
      * =====================================================
      */
 
-    const connection = await mongoose.connect(MONGO_URL, {
-      serverSelectionTimeoutMS: 10000,
-      socketTimeoutMS: 45000,
-    });
+    const connection = await mongoose.connect(MONGO_URL);
 
     /**
      * =====================================================
@@ -91,7 +88,7 @@ mongoose.connection.on("close", () => {
   logger.warn("MongoDB connection closed");
 });
 
-mongoose.connection.on("error", (error) => {
+mongoose.connection.on("error", (error: any) => {
   logger.error("MongoDB connection error", {
     error: {
       name: error.name,

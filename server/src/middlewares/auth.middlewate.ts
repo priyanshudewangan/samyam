@@ -10,7 +10,7 @@ export interface AuthRequest extends Request {
 
 export const protect = asyncHandler(
   async (
-    req: AuthRequest,
+    req: any,
     _res: Response,
     next: NextFunction,
   ): Promise<void> => {
