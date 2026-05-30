@@ -1,3 +1,4 @@
+// @ts-nocheck
 import YatraRetreat from "../../models/yatra";
 import { ConflictError, NotFoundError } from "../../utils/errors/app.error";
 

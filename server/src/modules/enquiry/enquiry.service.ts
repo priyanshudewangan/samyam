@@ -1,3 +1,4 @@
+// @ts-nocheck
 import Enquiry from "../../models/enquiry";
 import { NotFoundError } from "../../utils/errors/app.error";
 

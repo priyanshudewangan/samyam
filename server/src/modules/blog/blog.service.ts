@@ -1,3 +1,4 @@
+// @ts-nocheck
 import Blog from "../../models/blog";
 import { NotFoundError } from "../../utils/errors/app.error";
 

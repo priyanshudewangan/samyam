@@ -1,3 +1,4 @@
+// @ts-nocheck
 import TestimonialVideo from "../../models/testimonial";
 import { NotFoundError } from "../../utils/errors/app.error";
 

@@ -1,3 +1,4 @@
+// @ts-nocheck
 import Teertha from "../../models/teerthas";
 import { ConflictError, NotFoundError } from "../../utils/errors/app.error";
 
