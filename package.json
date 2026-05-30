@@ -7,7 +7,7 @@
     "dev": "vite dev",
     "dev:all": "concurrently \"npm run dev\" \"npm --prefix server run dev\"",
     "all": "npm run dev:all",
-    "build": "vite build",
+    "build": "vite build && mkdir -p .output/public && cp -r dist/client/. .output/public/ && cp -r dist/samyam/. .output/public/ && [ -f .output/public/index.js ] && mv .output/public/index.js .output/public/_worker.js && rm -f .output/public/wrangler.json || true",
     "build:dev": "vite build --mode development",
     "preview": "vite preview",
     "lint": "eslint .",
