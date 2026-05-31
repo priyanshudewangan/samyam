@@ -88,83 +88,100 @@ export function Footer() {
             </div>
           </div>
 
-          {/* Explore Links - Matching Navbar links */}
-          <div className="md:col-span-3 text-left">
+          {/* Explore Links - Matching Navbar links in the exact same order */}
+          <div className="md:col-span-4 text-left">
             <h4 className="font-display font-semibold text-sm tracking-wider text-amber-400 uppercase mb-4 flex items-center gap-1.5">
               <Sparkles className="h-3.5 w-3.5 text-amber-400/85" />
               Explore
             </h4>
-            <ul className="space-y-3 font-body text-xs text-white/70">
+            <ul className="grid grid-cols-2 gap-x-4 gap-y-3 font-body text-xs text-white/70">
               <li>
                 <Link to="/" className="hover:text-amber-300 transition duration-200 flex items-center gap-2">
-                  <span className="h-1 w-1 bg-amber-400/50 rounded-full" />
+                  <span className="h-1 w-1 bg-amber-400/50 rounded-full shrink-0" />
                   Home
                 </Link>
               </li>
               <li>
                 <Link to="/yatras" className="hover:text-amber-300 transition duration-200 flex items-center gap-2">
-                  <span className="h-1 w-1 bg-amber-400/50 rounded-full" />
+                  <span className="h-1 w-1 bg-amber-400/50 rounded-full shrink-0" />
                   Yatra & Retreats
                 </Link>
               </li>
               <li>
                 <Link to="/teerthas" className="hover:text-amber-300 transition duration-200 flex items-center gap-2">
-                  <span className="h-1 w-1 bg-amber-400/50 rounded-full" />
+                  <span className="h-1 w-1 bg-amber-400/50 rounded-full shrink-0" />
                   Teerthas
                 </Link>
               </li>
               <li>
                 <Link to="/institutions" className="hover:text-amber-300 transition duration-200 flex items-center gap-2">
-                  <span className="h-1 w-1 bg-amber-400/50 rounded-full" />
+                  <span className="h-1 w-1 bg-amber-400/50 rounded-full shrink-0" />
                   Institutions
                 </Link>
               </li>
               <li>
                 <Link to="/methodology" className="hover:text-amber-300 transition duration-200 flex items-center gap-2">
-                  <span className="h-1 w-1 bg-amber-400/50 rounded-full" />
+                  <span className="h-1 w-1 bg-amber-400/50 rounded-full shrink-0" />
                   Methodology
                 </Link>
               </li>
               <li>
+                <Link to="/custom-yatra" className="hover:text-amber-300 transition duration-200 flex items-center gap-2">
+                  <span className="h-1 w-1 bg-amber-400/50 rounded-full shrink-0" />
+                  Customize Yatra
+                </Link>
+              </li>
+              <li>
+                <Link to="/knowledge-portal" className="hover:text-amber-300 transition duration-200 flex items-center gap-2">
+                  <span className="h-1 w-1 bg-amber-400/50 rounded-full shrink-0" />
+                  Knowledge Portal
+                </Link>
+              </li>
+              <li>
                 <Link to="/about" className="hover:text-amber-300 transition duration-200 flex items-center gap-2">
-                  <span className="h-1 w-1 bg-amber-400/50 rounded-full" />
+                  <span className="h-1 w-1 bg-amber-400/50 rounded-full shrink-0" />
                   About Us
                 </Link>
               </li>
             </ul>
           </div>
 
-          {/* Journeys Links - Matching Navbar Actions */}
-          <div className="md:col-span-4 text-left">
+          {/* Connect & Actions */}
+          <div className="md:col-span-3 text-left">
             <h4 className="font-display font-semibold text-sm tracking-wider text-amber-400 uppercase mb-4 flex items-center gap-1.5">
               <Sparkles className="h-3.5 w-3.5 text-amber-400/85" />
-              Journeys
+              Connect
             </h4>
             <ul className="space-y-3 font-body text-xs text-white/70">
               <li>
-                <Link to="/custom-yatra" className="hover:text-amber-300 transition duration-200 flex items-center gap-2">
-                  <span className="h-1 w-1 bg-amber-400/50 rounded-full" />
-                  Customize Yatra
-                </Link>
-              </li>
-              <li>
-                <Link to="/knowledge-portal" className="hover:text-amber-300 transition duration-200 flex items-center gap-2">
-                  <span className="h-1 w-1 bg-amber-400/50 rounded-full" />
-                  Knowledge Portal
-                </Link>
-              </li>
-              <li>
                 <Link to="/enquire" className="hover:text-amber-300 transition duration-200 flex items-center gap-2">
-                  <span className="h-1 w-1 bg-amber-400/50 rounded-full" />
+                  <span className="h-1 w-1 bg-amber-400/50 rounded-full shrink-0" />
                   Enquire Now
                 </Link>
+              </li>
+              <li>
+                <a 
+                  href="https://wa.me/919035225375" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="hover:text-amber-300 transition duration-200 flex items-center gap-2"
+                >
+                  <span className="h-1 w-1 bg-amber-400/50 rounded-full shrink-0" />
+                  WhatsApp Chat
+                </a>
+              </li>
+              <li>
+                <a href="mailto:samyamspirituals@gmail.com" className="hover:text-amber-300 transition duration-200 flex items-center gap-2">
+                  <span className="h-1 w-1 bg-amber-400/50 rounded-full shrink-0" />
+                  Email Support
+                </a>
               </li>
               <li className="pt-2 border-t border-white/5">
                 <Link 
                   to={isLoggedIn ? "/admin" : "/admin/login"} 
                   className="hover:text-amber-300 transition duration-200 flex items-center gap-2 text-amber-400/90 font-medium"
                 >
-                  <User className="h-3.5 w-3.5" />
+                  <User className="h-3.5 w-3.5 shrink-0" />
                   {isLoggedIn ? "Admin Panel" : "Login"}
                 </Link>
               </li>
