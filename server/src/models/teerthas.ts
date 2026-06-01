@@ -99,7 +99,6 @@ const teerthaSchema = new mongoose.Schema(
 teerthaSchema.index({ slug: 1 });
 teerthaSchema.index({ name: "text", desc: "text" });
 
-const Teertha =
-  mongoose.models.Teertha || mongoose.model("Teertha", teerthaSchema);
+const Teertha = mongoose.models.Teertha || mongoose.model("Teertha", teerthaSchema);
 
 export default Teertha;

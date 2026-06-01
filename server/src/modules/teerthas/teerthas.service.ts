@@ -127,10 +127,7 @@ interface UpdateTeerthaPayload {
   isPublished?: boolean;
 }
 
-export const updateTeerthaService = async (
-  teerthaId: string,
-  payload: UpdateTeerthaPayload,
-) => {
+export const updateTeerthaService = async (teerthaId: string, payload: UpdateTeerthaPayload) => {
   const teertha = await Teertha.findById(teerthaId);
 
   if (!teertha) {

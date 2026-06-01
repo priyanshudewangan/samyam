@@ -9,7 +9,7 @@ import { API_ENDPOINTS } from "@/lib/api-config";
 export const Route = createFileRoute("/enquire")({
   component: EnquirePage,
   head: () => ({
-    title: "Enquire Now — Samyam Sacred Journeys",
+    title: "Enquire Now | Samyam Sacred Journeys",
     meta: [
       {
         name: "description",
@@ -70,7 +70,10 @@ function EnquirePage() {
         className="relative py-32 px-4 bg-gradient-to-b from-[#1a0a1e] via-[#1c081e] to-[#120614] overflow-hidden min-h-screen flex items-center justify-center"
       >
         <FlowerField count={14} />
-        <ScrollReveal variant="fade-up" className="relative max-w-3xl mx-auto text-center text-white w-full">
+        <ScrollReveal
+          variant="fade-up"
+          className="relative max-w-3xl mx-auto text-center text-white w-full"
+        >
           <h2 className="text-4xl md:text-6xl font-display mt-8">Begin Your Yatra</h2>
           <p className="mt-6 text-lg opacity-90 font-body">
             Your sacred journey awaits. Let us craft an experience that awakens your soul.
@@ -80,7 +83,9 @@ function EnquirePage() {
             {submitted ? (
               <div className="py-8 text-center space-y-4">
                 <span className="text-5xl animate-pulse block">ॐ</span>
-                <h3 className="text-2xl text-amber-400 font-display font-semibold">Pranaam & Thank You</h3>
+                <h3 className="text-2xl text-amber-400 font-display font-semibold">
+                  Pranaam & Thank You
+                </h3>
                 <p className="text-white/70 text-sm leading-relaxed font-body">
                   We have received your request. Our spiritual journey curator will connect with you
                   shortly.

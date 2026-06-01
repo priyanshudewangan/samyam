@@ -30,9 +30,7 @@ interface CreateYatraRetreatPayload {
   isPublished?: boolean;
 }
 
-export const createYatraRetreatService = async (
-  payload: CreateYatraRetreatPayload,
-) => {
+export const createYatraRetreatService = async (payload: CreateYatraRetreatPayload) => {
   const existingYatraRetreat = await YatraRetreat.findOne({
     slug: payload.slug,
   });
@@ -138,14 +136,10 @@ export const updateYatraRetreatService = async (
     }
   }
 
-  const updatedYatraRetreat = await YatraRetreat.findByIdAndUpdate(
-    yatraRetreatId,
-    payload,
-    {
-      new: true,
-      runValidators: true,
-    },
-  );
+  const updatedYatraRetreat = await YatraRetreat.findByIdAndUpdate(yatraRetreatId, payload, {
+    new: true,
+    runValidators: true,
+  });
 
   return updatedYatraRetreat;
 };

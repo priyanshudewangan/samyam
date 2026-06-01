@@ -6,7 +6,7 @@ import {
   getSingleEnquiry,
   updateEnquiry,
 } from "./enquiry.controller";
-import { protect } from "../../middlewares/auth.middlewate";
+import { protect } from "../../middlewares/auth.middleware";
 
 const enquiryRouter = express.Router();
 

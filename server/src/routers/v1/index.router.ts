@@ -8,7 +8,7 @@ import testimonialRouter from "../../modules/testimonial/testimonial.route";
 import enquiryRouter from "../../modules/enquiry/enquiry.route";
 import dashboardRouter from "../../modules/dashboard/dashboard.route";
 import blogRouter from "../../modules/blog/blog.route";
-import { protect } from "../../middlewares/auth.middlewate";
+import { protect } from "../../middlewares/auth.middleware";
 
 const v1Router = express.Router();
 

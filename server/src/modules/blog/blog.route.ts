@@ -1,12 +1,6 @@
 import express from "express";
-import {
-  createBlog,
-  deleteBlog,
-  getAllBlogs,
-  getSingleBlog,
-  updateBlog,
-} from "./blog.controller";
-import { protect } from "../../middlewares/auth.middlewate";
+import { createBlog, deleteBlog, getAllBlogs, getSingleBlog, updateBlog } from "./blog.controller";
+import { protect } from "../../middlewares/auth.middleware";
 
 const blogRouter = express.Router();
 

@@ -12,7 +12,7 @@ import { ScrollReveal } from "@/components/ui/ScrollReveal";
 export const Route = createFileRoute("/methodology")({
   component: MethodologyPage,
   head: () => ({
-    title: "Samyam Methodology — Dridh Bhakti",
+    title: "Samyam Methodology | Dridh Bhakti",
     meta: [
       {
         name: "description",
@@ -25,7 +25,12 @@ export const Route = createFileRoute("/methodology")({
 
 function AnahataChakraSVG() {
   return (
-    <svg viewBox="0 0 200 200" className="w-24 h-24 text-accent mx-auto" fill="none" stroke="currentColor">
+    <svg
+      viewBox="0 0 200 200"
+      className="w-24 h-24 text-accent mx-auto"
+      fill="none"
+      stroke="currentColor"
+    >
       {/* 12 Petals */}
       {Array.from({ length: 12 }).map((_, i) => {
         const angle = i * 30;
@@ -62,38 +67,50 @@ const detailedPillars = [
   {
     icon: "🕉️",
     title: "Teertha Yatra",
-    desc1: "Sacred Teerthas in Bharat are charged with divine energies. Our meticulously planned pilgrimages, often with revered saints, are transformative paths to inner awakening.",
-    desc2: "A Yatra to these sites is a profound spiritual journey that cleanses and elevates the soul. We prepare travelers' bodies and minds to be receptive to these energies, leading to deep cleansing and reception of divine vibrations.",
+    desc1:
+      "Sacred Teerthas in Bharat are charged with divine energies. Our meticulously planned pilgrimages, often with revered saints, are transformative paths to inner awakening.",
+    desc2:
+      "A Yatra to these sites is a profound spiritual journey that cleanses and elevates the soul. We prepare travelers' bodies and minds to be receptive to these energies, leading to deep cleansing and reception of divine vibrations.",
   },
   {
     icon: "🧘",
     title: "Yoga | Dhyan | Pranayama",
-    desc1: "Integrating traditional asanas, meditation, and breathwork to align body, mind, and spirit with sacred energies.",
-    desc2: "Yoga enhances flexibility and strength. Dhyan cultivates stillness and awareness. Pranayama unlocks vitality, regulates energy, and fosters lasting inner peace.",
+    desc1:
+      "Integrating traditional asanas, meditation, and breathwork to align body, mind, and spirit with sacred energies.",
+    desc2:
+      "Yoga enhances flexibility and strength. Dhyan cultivates stillness and awareness. Pranayama unlocks vitality, regulates energy, and fosters lasting inner peace.",
   },
   {
     icon: "📿",
     title: "Mantra | Stotra Pathana",
-    desc1: "Experience the vibrational energy of divine sounds. Chanting powerful mantras and devotional hymns enhances focus, purifies the mind, and deepens spiritual connection.",
-    desc2: "Our sessions provide guidance to chant mantras daily, enabling seekers to immerse in an ancient yet timeless path to transcendence.",
+    desc1:
+      "Experience the vibrational energy of divine sounds. Chanting powerful mantras and devotional hymns enhances focus, purifies the mind, and deepens spiritual connection.",
+    desc2:
+      "Our sessions provide guidance to chant mantras daily, enabling seekers to immerse in an ancient yet timeless path to transcendence.",
   },
   {
     icon: "📖",
     title: "Swadhyay",
-    desc1: "Self-study of ancient scriptures with the blessings of learned masters. Scriptures play the role of a guiding light in leading a fulfilling life.",
-    desc2: "Our sessions give insights about various scriptures, relevant to one's journey, and the right methods to pursue studying them daily. Delving into timeless wisdom from the Upanishads, Bhagavad Gita, and Puranas helps seekers be in the company of saints, invoking their blessings.",
+    desc1:
+      "Self study of ancient scriptures with the blessings of learned masters. Scriptures play the role of a guiding light in leading a fulfilling life.",
+    desc2:
+      "Our sessions give insights about various scriptures, relevant to one's journey, and the right methods to pursue studying them daily. Delving into timeless wisdom from the Upanishads, Bhagavad Gita, and Puranas helps seekers be in the company of saints, invoking their blessings.",
   },
   {
     icon: "🙏",
     title: "Satsang | Guru Ashray",
-    desc1: "Be in the presence of enlightened masters through sacred satsangs and guru ashray. Immerse in divine wisdom, devotional chants, and enriching discourses.",
-    desc2: "The blessings and guidance of revered saints help seekers internalize teachings, refine their path, and experience deeper connections with the divine. These experiences create a sanctuary for transformation, elevating the soul towards enlightenment.",
+    desc1:
+      "Be in the presence of enlightened masters through sacred satsangs and guru ashray. Immerse in divine wisdom, devotional chants, and enriching discourses.",
+    desc2:
+      "The blessings and guidance of revered saints help seekers internalize teachings, refine their path, and experience deeper connections with the divine. These experiences create a sanctuary for transformation, elevating the soul towards enlightenment.",
   },
   {
     icon: "🎭",
     title: "Culture",
-    desc1: "Immerse in the rich cultural heritage of Bharat through traditional arts, music, dance, and customs that have been preserved for millennia.",
-    desc2: "Culture is the living expression of Sanatan Dharma. Through exposure to classical arts, traditional music, dance forms, and cultural practices, seekers connect with the timeless wisdom embedded in our heritage. This pillar helps integrate spiritual understanding with cultural appreciation, making the journey holistic and deeply enriching.",
+    desc1:
+      "Immerse in the rich cultural heritage of Bharat through traditional arts, music, dance, and customs that have been preserved for millennia.",
+    desc2:
+      "Culture is the living expression of Sanatan Dharma. Through exposure to classical arts, traditional music, dance forms, and cultural practices, seekers connect with the timeless wisdom embedded in our heritage. This pillar helps integrate spiritual understanding with cultural appreciation, making the journey holistic and deeply enriching.",
   },
 ];
 
@@ -101,7 +118,7 @@ const scripturesData = [
   {
     title: "Bhagavad Gita",
     type: "Text",
-    desc: "The Song of the Divine - Core teachings on duty, devotion, and liberation",
+    desc: "The Song of the Divine Core teachings on duty, devotion, and liberation",
   },
   {
     title: "Upanishads",
@@ -111,7 +128,7 @@ const scripturesData = [
   {
     title: "Bhagavatha Mahapuran",
     type: "Text",
-    desc: "Stories of divine incarnations and devotion-inspiring narratives",
+    desc: "Stories of divine incarnations and devotion inspiring narratives",
   },
   {
     title: "Puranas",
@@ -144,7 +161,9 @@ const mantrasData = [
 ];
 
 function MethodologyPage() {
-  const [activeTab, setActiveTab] = useState<"scriptures" | "mantras" | "videos" | "quizzes">("scriptures");
+  const [activeTab, setActiveTab] = useState<"scriptures" | "mantras" | "videos" | "quizzes">(
+    "scriptures",
+  );
   const isDarkTab = activeTab === "mantras";
   const [email, setEmail] = useState("");
   const [subscribed, setSubscribed] = useState(false);
@@ -161,8 +180,11 @@ function MethodologyPage() {
     <div className="relative min-h-screen overflow-x-hidden bg-background text-foreground flex flex-col justify-between">
       <Nav />
 
-      {/* HERO SECTION — Cinematic fullscreen */}
-      <section data-nav-theme="dark" className="relative min-h-[75vh] flex items-end justify-center overflow-hidden">
+      {/* HERO SECTION | Cinematic fullscreen */}
+      <section
+        data-nav-theme="dark"
+        className="relative min-h-[75vh] flex items-end justify-center overflow-hidden"
+      >
         {/* Ken Burns Background */}
         <div className="absolute inset-0 z-0">
           <img
@@ -178,46 +200,70 @@ function MethodologyPage() {
 
         {/* Decorative floating particles */}
         <div className="absolute inset-0 z-[1] pointer-events-none overflow-hidden">
-          <div className="absolute top-[20%] left-[10%] w-1.5 h-1.5 rounded-full bg-amber-400/40 animate-gentle-float" style={{ animationDelay: '0s' }}></div>
-          <div className="absolute top-[35%] right-[15%] w-1 h-1 rounded-full bg-amber-300/30 animate-gentle-float" style={{ animationDelay: '2s' }}></div>
-          <div className="absolute top-[50%] left-[60%] w-2 h-2 rounded-full bg-purple-300/20 animate-gentle-float" style={{ animationDelay: '4s' }}></div>
-          <div className="absolute top-[15%] right-[40%] w-1 h-1 rounded-full bg-white/20 animate-gentle-float" style={{ animationDelay: '1s' }}></div>
+          <div
+            className="absolute top-[20%] left-[10%] w-1.5 h-1.5 rounded-full bg-amber-400/40 animate-gentle-float"
+            style={{ animationDelay: "0s" }}
+          ></div>
+          <div
+            className="absolute top-[35%] right-[15%] w-1 h-1 rounded-full bg-amber-300/30 animate-gentle-float"
+            style={{ animationDelay: "2s" }}
+          ></div>
+          <div
+            className="absolute top-[50%] left-[60%] w-2 h-2 rounded-full bg-purple-300/20 animate-gentle-float"
+            style={{ animationDelay: "4s" }}
+          ></div>
+          <div
+            className="absolute top-[15%] right-[40%] w-1 h-1 rounded-full bg-white/20 animate-gentle-float"
+            style={{ animationDelay: "1s" }}
+          ></div>
         </div>
 
         <div className="max-w-5xl mx-auto px-6 text-center relative z-10 pb-20 space-y-8">
           {/* Decorative line */}
           <div className="flex items-center justify-center gap-4 animate-hero-reveal-delay">
             <span className="w-12 h-px bg-gradient-to-r from-transparent to-amber-400/60"></span>
-            <span className="text-amber-400/80 text-xs font-semibold uppercase tracking-[0.3em] font-body">Six Integrated Pillars</span>
+            <span className="text-amber-400/80 text-xs font-semibold uppercase tracking-[0.3em] font-body">
+              Six Integrated Pillars
+            </span>
             <span className="w-12 h-px bg-gradient-to-l from-transparent to-amber-400/60"></span>
           </div>
 
           <h1 className="text-6xl md:text-8xl font-display font-semibold text-white tracking-tight leading-[0.9] animate-hero-reveal">
-            Dridh<br />
-            <span className="bg-gradient-to-r from-amber-200 via-amber-400 to-orange-400 bg-clip-text text-transparent">Bhakti</span>
+            Dridh
+            <br />
+            <span className="bg-gradient-to-r from-amber-200 via-amber-400 to-orange-400 bg-clip-text text-transparent">
+              Bhakti
+            </span>
           </h1>
 
           <p className="text-white/70 text-sm md:text-lg max-w-2xl mx-auto font-body leading-relaxed animate-hero-reveal-delay">
-            Our integrated methodology works synergistically to open your Anahata Chakra, deepening your devotion and leading you towards true transformation.
+            Our integrated methodology works synergistically to open your Anahata Chakra, deepening
+            your devotion and leading you towards true transformation.
           </p>
         </div>
 
         {/* Bottom scroll indicator */}
         <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2 animate-gentle-float">
-          <span className="text-white/30 text-[10px] uppercase tracking-[0.2em] font-body">Scroll</span>
+          <span className="text-white/30 text-[10px] uppercase tracking-[0.2em] font-body">
+            Scroll
+          </span>
           <div className="w-px h-8 bg-gradient-to-b from-white/30 to-transparent"></div>
         </div>
       </section>
 
       {/* INTRO & THE PATH TO FIRM DEVOTION */}
-      <section data-nav-theme="light" className="relative py-20 px-6 bg-background text-foreground overflow-hidden">
+      <section
+        data-nav-theme="light"
+        className="relative py-20 px-6 bg-background text-foreground overflow-hidden"
+      >
         <FlowerField count={10} />
         <div className="max-w-4xl mx-auto text-center space-y-16 relative z-10">
           {/* Paragraph quote */}
           <ScrollReveal variant="fade-up">
             <p className="text-base md:text-xl text-muted-foreground font-body leading-relaxed max-w-3xl mx-auto italic font-light">
-              We don't just take you on journeys — we guide you through a complete spiritual transformation
-              by integrating pilgrimage, practice, and wisdom into one harmonious path.
+              We don't just take you on journeys, we guide you through a complete spiritual
+              transformation by integrating pilgrimage, practice, and wisdom into one harmonious
+              path.
             </p>
           </ScrollReveal>
 
@@ -228,9 +274,10 @@ function MethodologyPage() {
                 The Path to Firm Devotion
               </h2>
               <p className="text-sm md:text-base text-muted-foreground leading-relaxed max-w-2xl mx-auto font-body">
-                Dridh Bhakti (Firm Devotion) is the central outcome of our integrated approach. Each of the
-                six pillars works synergistically to open your Anahata Chakra (heart chakra), deepening your
-                bhakti (devotion), leading you towards true jnana (wisdom) and vairagya (mindful detachment).
+                Dridh Bhakti (Firm Devotion) is the central outcome of our integrated approach. Each
+                of the six pillars works synergistically to open your Anahata Chakra (heart chakra),
+                deepening your bhakti (devotion), leading you towards true jnana (wisdom) and
+                vairagya (mindful detachment).
               </p>
             </div>
           </ScrollReveal>
@@ -245,9 +292,10 @@ function MethodologyPage() {
                 Activating the Anahata Chakra
               </h3>
               <p className="text-xs md:text-sm text-muted-foreground leading-relaxed max-w-md mx-auto font-body">
-                Our primary objective is to activate your heart chakra — the 12-petalled lotus of love and devotion.
-                Through our integrated methodology, we help you open the doorways of bhakti in your Anahata Chakra,
-                transforming your journey from a physical visit to a profound inner awakening.
+                Our primary objective is to activate your heart chakra, the 12 petalled lotus of
+                love and devotion. Through our integrated methodology, we help you open the doorways
+                of bhakti in your Anahata Chakra, transforming your journey from a physical visit to
+                a profound inner awakening.
               </p>
             </div>
           </ScrollReveal>
@@ -255,7 +303,10 @@ function MethodologyPage() {
       </section>
 
       {/* SIX INTEGRATED PILLARS */}
-      <section data-nav-theme="dark" className="relative py-20 px-6 bg-gradient-to-b from-[#823883] to-[#3D0068] text-white overflow-hidden border-t border-white/5">
+      <section
+        data-nav-theme="dark"
+        className="relative py-20 px-6 bg-gradient-to-b from-[#823883] to-[#3D0068] text-white overflow-hidden border-t border-white/5"
+      >
         {/* Subtle background glow */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-amber-500/5 blur-[120px] pointer-events-none" />
         <FlowerField count={8} />
@@ -267,7 +318,8 @@ function MethodologyPage() {
                 Six Integrated Pillars
               </h2>
               <p className="text-white/60 text-xs md:text-sm tracking-wider uppercase font-body">
-                Each pillar is essential. Together, all six create a complete spiritual transformation.
+                Each pillar is essential. Together, all six create a complete spiritual
+                transformation.
               </p>
             </div>
           </ScrollReveal>
@@ -275,14 +327,8 @@ function MethodologyPage() {
           {/* Cards Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {detailedPillars.map((p, idx) => (
-              <ScrollReveal
-                key={idx}
-                variant="fade-up"
-                delay={idx * 150}
-              >
-                <div
-                  className="p-8 rounded-3xl bg-white/5 border border-white/10 hover:bg-white/10 hover:border-amber-400/30 transition-all duration-300 group text-left flex flex-col justify-between h-full"
-                >
+              <ScrollReveal key={idx} variant="fade-up" delay={idx * 150}>
+                <div className="p-8 rounded-3xl bg-white/5 border border-white/10 hover:bg-white/10 hover:border-amber-400/30 transition-all duration-300 group text-left flex flex-col justify-between h-full">
                   <div>
                     <div className="w-12 h-12 rounded-2xl bg-white/10 flex items-center justify-center text-2xl mb-6 group-hover:scale-110 group-hover:bg-white/15 transition-all duration-300">
                       {p.icon}
@@ -366,14 +412,8 @@ function MethodologyPage() {
             {activeTab === "scriptures" && (
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
                 {scripturesData.map((item, idx) => (
-                  <ScrollReveal
-                    key={idx}
-                    variant="fade-up"
-                    delay={idx * 100}
-                  >
-                    <div
-                      className="p-8 rounded-[2rem] bg-white/[0.04] border border-white/10 shadow-soft hover:border-[#FF7722]/30 transition-all duration-300 text-left relative overflow-hidden group backdrop-blur-md h-full"
-                    >
+                  <ScrollReveal key={idx} variant="fade-up" delay={idx * 100}>
+                    <div className="p-8 rounded-[2rem] bg-white/[0.04] border border-white/10 shadow-soft hover:border-[#FF7722]/30 transition-all duration-300 text-left relative overflow-hidden group backdrop-blur-md h-full">
                       <div className="absolute top-0 right-0 bg-[#FF7722]/15 border-b border-l border-white/10 text-[#FF7722] text-[10px] font-bold tracking-wider px-3.5 py-1 rounded-bl-xl uppercase font-body font-semibold">
                         {item.type}
                       </div>
@@ -395,14 +435,8 @@ function MethodologyPage() {
             {activeTab === "mantras" && (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
                 {mantrasData.map((item, idx) => (
-                  <ScrollReveal
-                    key={idx}
-                    variant="fade-up"
-                    delay={idx * 100}
-                  >
-                    <div
-                      className="p-8 rounded-[2rem] bg-white/[0.04] border border-white/10 shadow-soft hover:border-[#FF7722]/30 transition-all duration-300 text-left relative overflow-hidden group backdrop-blur-md h-full"
-                    >
+                  <ScrollReveal key={idx} variant="fade-up" delay={idx * 100}>
+                    <div className="p-8 rounded-[2rem] bg-white/[0.04] border border-white/10 shadow-soft hover:border-[#FF7722]/30 transition-all duration-300 text-left relative overflow-hidden group backdrop-blur-md h-full">
                       <div className="inline-block px-3 py-0.5 bg-[#FF7722]/15 border border-[#FF7722]/30 text-[#FF7722] text-[10px] font-bold tracking-wider rounded-full uppercase mb-4 font-body font-semibold">
                         {item.type}
                       </div>
@@ -426,7 +460,8 @@ function MethodologyPage() {
                     Preparing Authentic Materials
                   </h4>
                   <p className="text-sm text-white/70 leading-relaxed max-w-md mx-auto font-body">
-                    Our scholars are currently indexing ancient audio tracks, mantra chants, visual guides, and quizzes aligned with classical scriptures.
+                    Our scholars are currently indexing ancient audio tracks, mantra chants, visual
+                    guides, and quizzes aligned with classical scriptures.
                   </p>
                 </div>
               </ScrollReveal>
@@ -448,7 +483,9 @@ function MethodologyPage() {
                   Resource Library Coming Soon
                 </h3>
                 <p className="text-white/80 text-xs md:text-sm leading-relaxed max-w-xl mx-auto font-body">
-                  We're building a comprehensive library of scriptures, mantras, videos, and interactive quizzes to support your spiritual journey. Join our community to be notified when resources become available.
+                  We're building a comprehensive library of scriptures, mantras, videos, and
+                  interactive quizzes to support your spiritual journey. Join our community to be
+                  notified when resources become available.
                 </p>
 
                 {/* Sub Form */}
@@ -458,7 +495,10 @@ function MethodologyPage() {
                       ✨ Thank you! We will notify you when the library opens.
                     </div>
                   ) : (
-                    <form onSubmit={handleSubscribe} className="flex flex-col sm:flex-row gap-2 bg-black/40 p-1.5 rounded-full border border-white/10 focus-within:border-amber-400 transition-all duration-300">
+                    <form
+                      onSubmit={handleSubscribe}
+                      className="flex flex-col sm:flex-row gap-2 bg-black/40 p-1.5 rounded-full border border-white/10 focus-within:border-amber-400 transition-all duration-300"
+                    >
                       <input
                         type="email"
                         required
@@ -483,7 +523,10 @@ function MethodologyPage() {
       </section>
 
       {/* HOW THEY WORK TOGETHER & THE RESULT */}
-      <section data-nav-theme="light" className="relative py-20 px-6 bg-background text-foreground overflow-hidden border-t border-border">
+      <section
+        data-nav-theme="light"
+        className="relative py-20 px-6 bg-background text-foreground overflow-hidden border-t border-border"
+      >
         <FlowerField count={6} />
         <div className="max-w-5xl mx-auto relative z-10 space-y-16">
           {/* Header */}
@@ -517,14 +560,8 @@ function MethodologyPage() {
                 icon: "💡",
               },
             ].map((step, idx) => (
-              <ScrollReveal
-                key={idx}
-                variant="fade-up"
-                delay={idx * 150}
-              >
-                <div
-                  className="p-6 md:p-8 rounded-3xl bg-white border border-black/[0.06] text-left hover:border-amber-600/30 hover:bg-muted transition duration-300 flex flex-col justify-between shadow-soft h-full"
-                >
+              <ScrollReveal key={idx} variant="fade-up" delay={idx * 150}>
+                <div className="p-6 md:p-8 rounded-3xl bg-white border border-black/[0.06] text-left hover:border-amber-600/30 hover:bg-muted transition duration-300 flex flex-col justify-between shadow-soft h-full">
                   <div>
                     <div className="text-2xl mb-4 text-amber-600">{step.icon}</div>
                     <h4 className="text-lg font-semibold font-display mb-3 text-foreground">
@@ -550,7 +587,10 @@ function MethodologyPage() {
                   🏆 The Result: 100% Phal (Complete Benefit)
                 </div>
                 <p className="text-base md:text-lg text-white/95 font-body leading-relaxed max-w-2xl mx-auto">
-                  When all five pillars are integrated, you receive the complete spiritual benefit as described in sacred phala shrutis. Your journey becomes a true transformation—not just visiting holy sites, but awakening your true nature of ever-existent bliss through knowledge, devotion, and experience.
+                  When all five pillars are integrated, you receive the complete spiritual benefit
+                  as described in sacred phala shrutis. Your journey becomes a true transformation,
+                  not just visiting holy sites, but awakening your true nature of ever existent
+                  bliss through knowledge, devotion, and experience.
                 </p>
               </div>
             </div>

@@ -63,10 +63,7 @@ export interface UpdateEnquiryPayload {
   status?: "New" | "Contacted" | "Resolved";
 }
 
-export const updateEnquiryService = async (
-  id: string,
-  payload: UpdateEnquiryPayload,
-) => {
+export const updateEnquiryService = async (id: string, payload: UpdateEnquiryPayload) => {
   const enquiry = await Enquiry.findById(id);
 
   if (!enquiry) {

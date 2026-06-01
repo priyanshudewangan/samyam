@@ -22,6 +22,7 @@ type ServerConfig = {
   SENDGRID_API_KEY: string;
   MAIL_FROM: string;
   CLIENT_URL: string;
+  ALLOWED_ADMIN_EMAILS: string[];
 };
 
 /* =========================
@@ -58,12 +59,13 @@ export const serverConfig: ServerConfig = {
 
   JWT_REFRESH_SECRET: process.env.JWT_REFRESH_SECRET!,
 
-  JWT_EXPIRES_IN:
-    (process.env.JWT_EXPIRES_IN as jwt.SignOptions["expiresIn"]) || "7d",
+  JWT_EXPIRES_IN: (process.env.JWT_EXPIRES_IN as jwt.SignOptions["expiresIn"]) || "7d",
   JWT_REFRESH_EXPIRES_IN:
-    (process.env.JWT_REFRESH_EXPIRES_IN as jwt.SignOptions["expiresIn"]) ||
-    "30d",
+    (process.env.JWT_REFRESH_EXPIRES_IN as jwt.SignOptions["expiresIn"]) || "30d",
   SENDGRID_API_KEY: process.env.SENDGRID_API_KEY!,
   MAIL_FROM: process.env.MAIL_FROM!,
   CLIENT_URL: process.env.CLIENT_URL!,
+  ALLOWED_ADMIN_EMAILS: process.env.ALLOWED_ADMIN_EMAILS
+    ? process.env.ALLOWED_ADMIN_EMAILS.split(",").map((email) => email.trim().toLowerCase())
+    : ["admin@samyam.co"],
 };

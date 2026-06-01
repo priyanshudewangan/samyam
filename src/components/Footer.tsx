@@ -1,15 +1,15 @@
 import { Link } from "@tanstack/react-router";
 import logo from "@/assets/logo.png";
 import { useEffect, useState } from "react";
-import { 
-  Instagram, 
-  Youtube, 
-  MessageCircle, 
-  Mail, 
-  Phone, 
-  MapPin, 
+import {
+  Instagram,
+  Youtube,
+  MessageCircle,
+  Mail,
+  Phone,
+  MapPin,
   Sparkles,
-  User
+  User,
 } from "lucide-react";
 
 export function Footer() {
@@ -46,7 +46,7 @@ export function Footer() {
                 </span>
               </div>
             </div>
-            
+
             <div className="space-y-2 max-w-sm">
               <p className="font-body text-xs font-semibold text-amber-200/90">
                 Samyam Spiritual Tourism Private Limited
@@ -55,7 +55,7 @@ export function Footer() {
                 "Travel Beyond. Discover Within."
               </p>
               <p className="font-body text-xs text-white/70 leading-relaxed">
-                We craft spiritually-rooted pilgrimages across Bharat's sacred teerthas for seekers
+                We craft spiritually rooted pilgrimages across Bharat's sacred teerthas for seekers
                 who want awakening, not sightseeing.
               </p>
             </div>
@@ -96,49 +96,73 @@ export function Footer() {
             </h4>
             <ul className="grid grid-cols-2 gap-x-4 gap-y-3 font-body text-xs text-white/70">
               <li>
-                <Link to="/" className="hover:text-amber-300 transition duration-200 flex items-center gap-2">
+                <Link
+                  to="/"
+                  className="hover:text-amber-300 transition duration-200 flex items-center gap-2"
+                >
                   <span className="h-1 w-1 bg-amber-400/50 rounded-full shrink-0" />
                   Home
                 </Link>
               </li>
               <li>
-                <Link to="/yatras" className="hover:text-amber-300 transition duration-200 flex items-center gap-2">
+                <Link
+                  to="/yatras"
+                  className="hover:text-amber-300 transition duration-200 flex items-center gap-2"
+                >
                   <span className="h-1 w-1 bg-amber-400/50 rounded-full shrink-0" />
                   Yatra & Retreats
                 </Link>
               </li>
               <li>
-                <Link to="/teerthas" className="hover:text-amber-300 transition duration-200 flex items-center gap-2">
+                <Link
+                  to="/teerthas"
+                  className="hover:text-amber-300 transition duration-200 flex items-center gap-2"
+                >
                   <span className="h-1 w-1 bg-amber-400/50 rounded-full shrink-0" />
                   Teerthas
                 </Link>
               </li>
               <li>
-                <Link to="/institutions" className="hover:text-amber-300 transition duration-200 flex items-center gap-2">
+                <Link
+                  to="/institutions"
+                  className="hover:text-amber-300 transition duration-200 flex items-center gap-2"
+                >
                   <span className="h-1 w-1 bg-amber-400/50 rounded-full shrink-0" />
                   Institutions
                 </Link>
               </li>
               <li>
-                <Link to="/methodology" className="hover:text-amber-300 transition duration-200 flex items-center gap-2">
+                <Link
+                  to="/methodology"
+                  className="hover:text-amber-300 transition duration-200 flex items-center gap-2"
+                >
                   <span className="h-1 w-1 bg-amber-400/50 rounded-full shrink-0" />
                   Methodology
                 </Link>
               </li>
               <li>
-                <Link to="/custom-yatra" className="hover:text-amber-300 transition duration-200 flex items-center gap-2">
+                <Link
+                  to="/custom-yatra"
+                  className="hover:text-amber-300 transition duration-200 flex items-center gap-2"
+                >
                   <span className="h-1 w-1 bg-amber-400/50 rounded-full shrink-0" />
                   Customize Yatra
                 </Link>
               </li>
               <li>
-                <Link to="/knowledge-portal" className="hover:text-amber-300 transition duration-200 flex items-center gap-2">
+                <Link
+                  to="/knowledge-portal"
+                  className="hover:text-amber-300 transition duration-200 flex items-center gap-2"
+                >
                   <span className="h-1 w-1 bg-amber-400/50 rounded-full shrink-0" />
                   Knowledge Portal
                 </Link>
               </li>
               <li>
-                <Link to="/about" className="hover:text-amber-300 transition duration-200 flex items-center gap-2">
+                <Link
+                  to="/about"
+                  className="hover:text-amber-300 transition duration-200 flex items-center gap-2"
+                >
                   <span className="h-1 w-1 bg-amber-400/50 rounded-full shrink-0" />
                   About Us
                 </Link>
@@ -154,16 +178,19 @@ export function Footer() {
             </h4>
             <ul className="space-y-3 font-body text-xs text-white/70">
               <li>
-                <Link to="/enquire" className="hover:text-amber-300 transition duration-200 flex items-center gap-2">
+                <Link
+                  to="/enquire"
+                  className="hover:text-amber-300 transition duration-200 flex items-center gap-2"
+                >
                   <span className="h-1 w-1 bg-amber-400/50 rounded-full shrink-0" />
                   Enquire Now
                 </Link>
               </li>
               <li>
-                <a 
-                  href="https://wa.me/919035225375" 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
+                <a
+                  href="https://wa.me/919035225375"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="hover:text-amber-300 transition duration-200 flex items-center gap-2"
                 >
                   <span className="h-1 w-1 bg-amber-400/50 rounded-full shrink-0" />
@@ -171,14 +198,17 @@ export function Footer() {
                 </a>
               </li>
               <li>
-                <a href="mailto:samyamspirituals@gmail.com" className="hover:text-amber-300 transition duration-200 flex items-center gap-2">
+                <a
+                  href="mailto:samyamspirituals@gmail.com"
+                  className="hover:text-amber-300 transition duration-200 flex items-center gap-2"
+                >
                   <span className="h-1 w-1 bg-amber-400/50 rounded-full shrink-0" />
                   Email Support
                 </a>
               </li>
               <li className="pt-2 border-t border-white/5">
-                <Link 
-                  to={isLoggedIn ? "/admin" : "/admin/login"} 
+                <Link
+                  to={isLoggedIn ? "/admin" : "/admin/login"}
                   className="hover:text-amber-300 transition duration-200 flex items-center gap-2 text-amber-400/90 font-medium"
                 >
                   <User className="h-3.5 w-3.5 shrink-0" />
@@ -200,13 +230,19 @@ export function Footer() {
               Contact
             </h4>
             <div className="space-y-2.5 font-body text-xs text-white/80">
-              <a href="mailto:samyamspirituals@gmail.com" className="flex items-center gap-2.5 hover:text-amber-300 transition">
+              <a
+                href="mailto:samyamspirituals@gmail.com"
+                className="flex items-center gap-2.5 hover:text-amber-300 transition"
+              >
                 <Mail className="h-3.5 w-3.5 text-amber-400/70" />
                 samyamspirituals@gmail.com
               </a>
-              <a href="tel:+919035225375" className="flex items-center gap-2.5 hover:text-amber-300 transition">
+              <a
+                href="tel:+919035225375"
+                className="flex items-center gap-2.5 hover:text-amber-300 transition"
+              >
                 <Phone className="h-3.5 w-3.5 text-amber-400/70" />
-                +91-9035225375
+                +91 9035225375
               </a>
               <div className="flex items-start gap-2.5 leading-relaxed">
                 <MapPin className="h-3.5 w-3.5 text-amber-400/70 shrink-0 mt-0.5" />
@@ -221,7 +257,9 @@ export function Footer() {
               Devotion
             </h4>
             <div className="relative pl-6 border-l-2 border-amber-400/50">
-              <span className="absolute top-0 left-1.5 font-display text-4xl text-amber-400/20 leading-none">“</span>
+              <span className="absolute top-0 left-1.5 font-display text-4xl text-amber-400/20 leading-none">
+                “
+              </span>
               <p className="font-display italic text-sm md:text-base text-purple-100 leading-relaxed max-w-xl">
                 Let the journey not be just movement of the body to a holy place, but the softening
                 of the heart into devotion.

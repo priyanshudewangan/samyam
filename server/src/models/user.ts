@@ -1,6 +1,7 @@
 import mongoose, { Document, Model, Schema } from "mongoose";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
+import { serverConfig } from "../config";
 
 /* =========================
    INTERFACE
@@ -64,9 +65,7 @@ userSchema.pre<IUser>("save", async function (next) {
    COMPARE PASSWORD
 ========================= */
 
-userSchema.methods.comparePassword = async function (
-  password: string,
-): Promise<boolean> {
+userSchema.methods.comparePassword = async function (password: string): Promise<boolean> {
   return await bcrypt.compare(password, this.password);
 };
 
@@ -80,9 +79,9 @@ userSchema.methods.generateToken = function (): string {
       id: this._id,
       email: this.email,
     },
-    process.env.JWT_SECRET as string,
+    serverConfig.JWT_SECRET,
     {
-      expiresIn: "7d",
+      expiresIn: serverConfig.JWT_EXPIRES_IN,
     },
   );
 };
@@ -91,7 +90,6 @@ userSchema.methods.generateToken = function (): string {
    MODEL
 ========================= */
 
-const User: Model<IUser> =
-  mongoose.models.User || mongoose.model<IUser>("User", userSchema);
+const User: Model<IUser> = mongoose.models.User || mongoose.model<IUser>("User", userSchema);
 
 export default User;

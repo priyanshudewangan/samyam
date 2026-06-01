@@ -36,7 +36,7 @@ export function Nav() {
       {
         rootMargin: "-10% 0px -85% 0px",
         threshold: 0,
-      }
+      },
     );
 
     const sections = document.querySelectorAll("section[data-nav-theme], div[data-nav-theme]");

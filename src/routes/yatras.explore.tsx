@@ -7,6 +7,7 @@ import { Footer } from "@/components/Footer";
 import { yatraDetailsDb, YatraDetail } from "@/constants/yatra-details";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
 import { API_ENDPOINTS } from "@/lib/api-config";
+import { formatNormalDash } from "@/lib/utils";
 
 // Define search query schema for TanStack Router
 const exploreSearchSchema = z.object({
@@ -17,11 +18,12 @@ export const Route = createFileRoute("/yatras/explore")({
   validateSearch: exploreSearchSchema,
   component: ExploreYatrasPage,
   head: () => ({
-    title: "Explore Journeys — Samyam",
+    title: "Explore Journeys | Samyam",
     meta: [
       {
         name: "description",
-        content: "Explore the deep spiritual itinerary, inclusions, and scriptural preparations for Samyam Spiritual Tourism journeys.",
+        content:
+          "Explore the deep spiritual itinerary, inclusions, and scriptural preparations for Samyam Spiritual Tourism journeys.",
       },
     ],
   }),
@@ -30,7 +32,7 @@ export const Route = createFileRoute("/yatras/explore")({
 function ExploreYatrasPage() {
   const search = Route.useSearch();
   const initialSlug = search.yatra || "ayodhya-kashi";
-  
+
   const [yatras, setYatras] = useState<any[]>([]);
   const [selectedYatra, setSelectedYatra] = useState<string>(initialSlug);
   const [activeSubTab, setActiveSubTab] = useState<"overview" | "itinerary" | "prep">("overview");
@@ -60,14 +62,18 @@ function ExploreYatrasPage() {
     }
   }, [search.yatra]);
 
-  const activeYatra = yatras.find(y => y.slug === selectedYatra) || yatras[0] || Object.values(yatraDetailsDb)[0];
+  const activeYatra =
+    yatras.find((y) => y.slug === selectedYatra) || yatras[0] || Object.values(yatraDetailsDb)[0];
 
   return (
     <div className="relative min-h-screen overflow-x-hidden bg-background text-foreground">
       <Nav />
 
       {/* HERO SECTION */}
-      <section data-nav-theme="dark" className="relative min-h-[50vh] flex items-center justify-center overflow-hidden">
+      <section
+        data-nav-theme="dark"
+        className="relative min-h-[50vh] flex items-center justify-center overflow-hidden"
+      >
         {/* Background Image & Overlay */}
         <div className="absolute inset-0 z-0">
           <img
@@ -87,7 +93,7 @@ function ExploreYatrasPage() {
           </ScrollReveal>
           <ScrollReveal variant="fade-up" delay={250}>
             <h1 className="text-4xl md:text-6xl font-display font-semibold text-white tracking-wide leading-tight">
-              {activeYatra.name}
+              {formatNormalDash(activeYatra.name, "text-white/50")}
             </h1>
           </ScrollReveal>
           <ScrollReveal variant="fade-up" delay={400}>
@@ -134,15 +140,17 @@ function ExploreYatrasPage() {
       </div>
 
       {/* DETAILED CONTENT SECTION */}
-      <section data-nav-theme="light" className="relative py-12 px-4 md:px-8 bg-background text-foreground min-h-[60vh]">
+      <section
+        data-nav-theme="light"
+        className="relative py-12 px-4 md:px-8 bg-background text-foreground min-h-[60vh]"
+      >
         <FlowerField count={8} />
         <div className="max-w-6xl mx-auto relative z-10">
-          
           {/* Sub Navigation Bar inside Content */}
           <div className="flex justify-center border-b border-border mb-8 max-w-md mx-auto">
             {[
               { id: "overview", label: "Overview" },
-              { id: "itinerary", label: "Day-wise Itinerary" },
+              { id: "itinerary", label: "Day wise Itinerary" },
               { id: "prep", label: "Preparation Guide" },
             ].map((subTab) => (
               <button
@@ -171,10 +179,14 @@ function ExploreYatrasPage() {
                         <span className="text-amber-600 font-bold text-xs uppercase tracking-wider block">
                           Spiritual Calling
                         </span>
-                        <h3 className="text-3xl font-display font-semibold text-foreground">
-                          {activeYatra.name} — Overview
+                        <h3 className="text-3xl font-display font-semibold text-foreground flex items-center gap-1.5 flex-wrap">
+                          {formatNormalDash(activeYatra.name)}
+                          <span className="font-sans font-normal text-muted-foreground/60 select-none">
+                            |
+                          </span>
+                          <span>Overview</span>
                         </h3>
-                        <p className="text-xs md:text-sm font-medium text-muted-foreground">
+                        <p className="text-xs md:text-sm font-body font-medium text-muted-foreground">
                           📅 {activeYatra.date} &nbsp;•&nbsp; ⏱️ {activeYatra.duration}
                         </p>
                       </div>
@@ -194,12 +206,20 @@ function ExploreYatrasPage() {
                         </h4>
                         <div className="flex flex-col sm:flex-row gap-3">
                           <div className="flex-1 p-3.5 rounded-2xl bg-muted border border-border flex flex-col justify-center items-center shadow-soft hover:border-amber-600/30 transition duration-300">
-                            <span className="text-[10px] text-muted-foreground uppercase font-bold">Triple Occupancy</span>
-                            <span className="text-sm md:text-base font-semibold text-amber-600 mt-1">{activeYatra.triplePrice}</span>
+                            <span className="text-[10px] text-muted-foreground uppercase font-bold">
+                              Triple Occupancy
+                            </span>
+                            <span className="text-sm md:text-base font-semibold text-amber-600 mt-1">
+                              {activeYatra.triplePrice}
+                            </span>
                           </div>
                           <div className="flex-1 p-3.5 rounded-2xl bg-muted border border-border flex flex-col justify-center items-center shadow-soft hover:border-amber-600/30 transition duration-300">
-                            <span className="text-[10px] text-muted-foreground uppercase font-bold">Double Occupancy</span>
-                            <span className="text-sm md:text-base font-semibold text-amber-600 mt-1">{activeYatra.doublePrice}</span>
+                            <span className="text-[10px] text-muted-foreground uppercase font-bold">
+                              Double Occupancy
+                            </span>
+                            <span className="text-sm md:text-base font-semibold text-amber-600 mt-1">
+                              {activeYatra.doublePrice}
+                            </span>
                           </div>
                         </div>
                       </div>
@@ -290,9 +310,7 @@ function ExploreYatrasPage() {
                         delay={cIdx * 150}
                         className="h-full"
                       >
-                        <div
-                          className="p-6 md:p-8 rounded-3xl bg-white border border-black/[0.06] shadow-soft hover:shadow-glow hover:border-amber-600/30 transition-all duration-300 flex flex-col justify-between h-full"
-                        >
+                        <div className="p-6 md:p-8 rounded-3xl bg-white border border-black/[0.06] shadow-soft hover:shadow-glow hover:border-amber-600/30 transition-all duration-300 flex flex-col justify-between h-full">
                           <div>
                             <span className="text-[10px] uppercase tracking-[0.2em] font-bold text-amber-600 mb-2 block">
                               Sacred Circuit
@@ -321,7 +339,7 @@ function ExploreYatrasPage() {
               <div className="max-w-4xl mx-auto text-left">
                 <div className="text-center mb-10">
                   <h3 className="text-3xl font-display font-semibold text-foreground">
-                    Day-wise Itinerary
+                    Day wise Itinerary
                   </h3>
                   <p className="text-xs md:text-sm text-muted-foreground mt-2 italic">
                     Schedule subject to shift in timings
@@ -331,26 +349,25 @@ function ExploreYatrasPage() {
                 {/* Timeline */}
                 <div className="relative border-l border-border ml-4 md:ml-8 pl-8 md:pl-10 space-y-8 py-4">
                   {activeYatra.itinerary.map((dayItem: any, idx: number) => (
-                    <ScrollReveal
-                      key={idx}
-                      variant="fade-up"
-                    >
+                    <ScrollReveal key={idx} variant="fade-up">
                       <div className="relative group">
                         {/* Timeline dot */}
                         <span className="absolute -left-[45px] md:-left-[53px] top-2.5 w-6 h-6 rounded-full bg-background border-2 border-amber-600 flex items-center justify-center text-[10px] font-bold text-amber-600 group-hover:bg-amber-600 group-hover:text-white transition duration-300">
                           {dayItem.day}
                         </span>
-                        
+
                         {/* Content Card with Bullet Points */}
                         <div className="p-6 md:p-8 rounded-3xl bg-white border border-black/[0.06] shadow-soft hover:shadow-glow hover:border-amber-600/20 transition duration-300">
                           <span className="text-[10px] font-bold uppercase tracking-wider text-amber-600 bg-amber-500/10 px-3 py-1 rounded-full border border-amber-500/25">
                             Day {dayItem.day}
                           </span>
-                          
+
                           <ul className="mt-4 space-y-3.5 text-xs md:text-sm text-muted-foreground list-none font-body">
                             {dayItem.points.map((pointText: string, pIdx: number) => (
                               <li key={pIdx} className="flex gap-3 items-start leading-relaxed">
-                                <span className="text-amber-600 text-base leading-none select-none mt-0.5">•</span>
+                                <span className="text-amber-600 text-base leading-none select-none mt-0.5">
+                                  •
+                                </span>
                                 <span>{pointText}</span>
                               </li>
                             ))}
@@ -360,7 +377,7 @@ function ExploreYatrasPage() {
                     </ScrollReveal>
                   ))}
                 </div>
-                
+
                 {/* Book callout at the end of itinerary */}
                 <div className="mt-12 text-center">
                   <Link
@@ -385,7 +402,9 @@ function ExploreYatrasPage() {
                       Spiritual Swadhyay & Prep
                     </h3>
                     <p className="text-xs md:text-sm text-muted-foreground leading-relaxed font-body">
-                      Unlike ordinary tours, a Samyam yatra is an energetic experience. We request all seekers to engage in spiritual preparation before departure to make their system receptive.
+                      Unlike ordinary tours, a Samyam yatra is an energetic experience. We request
+                      all seekers to engage in spiritual preparation before departure to make their
+                      system receptive.
                     </p>
                     <ul className="space-y-4 text-xs md:text-sm text-muted-foreground font-body">
                       <li className="flex gap-3 items-start leading-relaxed">
@@ -394,11 +413,15 @@ function ExploreYatrasPage() {
                       </li>
                       <li className="flex gap-3 items-start leading-relaxed">
                         <span className="text-amber-600 font-bold mt-0.5">•</span>
-                        <span>Read scripture passages relating to the history of the teerthas.</span>
+                        <span>
+                          Read scripture passages relating to the history of the teerthas.
+                        </span>
                       </li>
                       <li className="flex gap-3 items-start leading-relaxed">
                         <span className="text-amber-600 font-bold mt-0.5">•</span>
-                        <span>Maintaining a clean, devotional mindset leading up to departure.</span>
+                        <span>
+                          Maintaining a clean, devotional mindset leading up to departure.
+                        </span>
                       </li>
                     </ul>
                   </div>
@@ -416,15 +439,24 @@ function ExploreYatrasPage() {
                     <ul className="space-y-4 text-xs md:text-sm text-muted-foreground font-body">
                       <li className="flex gap-3 items-start leading-relaxed">
                         <span className="text-amber-600 font-bold mt-0.5">1.</span>
-                        <span><strong>Sattvik Diet:</strong> Seekers must adhere to strictly vegetarian, eggless meals throughout the yatra duration.</span>
+                        <span>
+                          <strong>Sattvik Diet:</strong> Seekers must adhere to strictly vegetarian,
+                          eggless meals throughout the yatra duration.
+                        </span>
                       </li>
                       <li className="flex gap-3 items-start leading-relaxed">
                         <span className="text-amber-600 font-bold mt-0.5">2.</span>
-                        <span><strong>Dress Code:</strong> Traditional Indian clothing (kurta/dhoti/saree/salwar suit) is highly encouraged inside temples.</span>
+                        <span>
+                          <strong>Dress Code:</strong> Traditional Indian clothing
+                          (kurta/dhoti/saree/salwar suit) is highly encouraged inside temples.
+                        </span>
                       </li>
                       <li className="flex gap-3 items-start leading-relaxed">
                         <span className="text-amber-600 font-bold mt-0.5">3.</span>
-                        <span><strong>Eco-Conscious Conduct:</strong> Respect the local ecology of sacred sites; strictly avoid plastic waste.</span>
+                        <span>
+                          <strong>Eco Conscious Conduct:</strong> Respect the local ecology of
+                          sacred sites; strictly avoid plastic waste.
+                        </span>
                       </li>
                     </ul>
                   </div>
@@ -432,7 +464,6 @@ function ExploreYatrasPage() {
               </div>
             )}
           </div>
-
         </div>
       </section>
 

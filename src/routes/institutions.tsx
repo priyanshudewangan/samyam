@@ -17,12 +17,12 @@ import { ScrollReveal } from "@/components/ui/ScrollReveal";
 export const Route = createFileRoute("/institutions")({
   component: InstitutionsPage,
   head: () => ({
-    title: "Samyam for Institutions — Sacred Learning Journeys",
+    title: "Samyam for Institutions | Sacred Learning Journeys",
     meta: [
       {
         name: "description",
         content:
-          "More than study tours—immersions that blend civilizational wisdom with contemporary pedagogy, curated especially for students, faculty, and parent communities.",
+          "More than study tours immersions that blend civilizational wisdom with contemporary pedagogy, curated especially for students, faculty, and parent communities.",
       },
     ],
   }),
@@ -32,12 +32,12 @@ const whyChooseSchools = [
   {
     icon: "🎓",
     title: "Curriculum Aligned",
-    desc: "Programs co-created with school faculty to match age, boards, and learning objectives.",
+    desc: "Programs co created with school faculty to match age, boards, and learning objectives.",
   },
   {
     icon: "🕉️",
     title: "Spiritual Authenticity",
-    desc: "Scholar-led rituals, mantra sessions, and cultural immersions that honour the shastra.",
+    desc: "Scholarled rituals, mantra sessions, and cultural immersions that honour the shastra.",
   },
   {
     icon: "🌱",
@@ -53,7 +53,7 @@ const whyChooseSchools = [
 
 const threeStreamFramework = [
   {
-    title: "Pre-Yatra Classroom",
+    title: "Pre Yatra Classroom",
     points: [
       "Orientation assemblies",
       "Storytelling & quizzes",
@@ -62,7 +62,7 @@ const threeStreamFramework = [
     ],
   },
   {
-    title: "On-ground Immersion",
+    title: "On ground Immersion",
     points: [
       "Guided darshans & seva",
       "Workshops with artisans",
@@ -71,7 +71,7 @@ const threeStreamFramework = [
     ],
   },
   {
-    title: "Post-Yatra Integration",
+    title: "Post Yatra Integration",
     points: [
       "Portfolio of learnings",
       "Service projects",
@@ -88,30 +88,30 @@ const experienceArc = [
   },
   {
     phase: "Immersion",
-    detail: "Multi-day experiential journey with curated modules and reflective pauses.",
+    detail: "Multi day experiential journey with curated modules and reflective pauses.",
   },
   {
     phase: "Integration",
-    detail: "Digital keepsakes, gratitude circles, and follow-up sessions with mentors.",
+    detail: "Digital keepsakes, gratitude circles, and follow up sessions with mentors.",
   },
 ];
 
 const immersionLabs = [
   {
     title: "Yoga & Breathwork Labs",
-    desc: "Short, age-appropriate practices to anchor energy before temple immersions.",
+    desc: "Short, age appropriate practices to anchor energy before temple immersions.",
   },
   {
     title: "Culture Studios",
-    desc: "Hands-on modules with classical artists, temple architects, and textile revivalists.",
+    desc: "Hands on modules with classical artists, temple architects, and textile revivalists.",
   },
   {
     title: "Service Pods",
-    desc: "Seva activities that build empathy—gaushala care, annadanam prep, or heritage clean ups.",
+    desc: "Seva activities that build empathy, such as gaushala care, annadanam prep, or heritage clean ups.",
   },
   {
     title: "Wisdom Circles",
-    desc: "Dialogue-led sessions with scholars translating scriptures into modern life lessons.",
+    desc: "Dialogue led sessions with scholars translating scriptures into modern life lessons.",
   },
 ];
 
@@ -121,7 +121,10 @@ function InstitutionsPage() {
       <Nav />
 
       {/* HERO SECTION */}
-      <section data-nav-theme="dark" className="relative min-h-[75vh] md:min-h-[85vh] flex items-center justify-center overflow-hidden">
+      <section
+        data-nav-theme="dark"
+        className="relative min-h-[75vh] md:min-h-[85vh] flex items-center justify-center overflow-hidden"
+      >
         {/* Background Image & Overlay */}
         <div className="absolute inset-0 z-0">
           <img
@@ -147,15 +150,18 @@ function InstitutionsPage() {
           </ScrollReveal>
           <ScrollReveal variant="fade-up" delay={500}>
             <p className="text-white/95 text-base md:text-xl max-w-3xl mx-auto leading-relaxed font-body font-light">
-              More than study tours—immersions that blend civilizational wisdom with contemporary pedagogy,
-              curated especially for students, faculty, and parent communities.
+              More than study tours immersions that blend civilizational wisdom with contemporary
+              pedagogy, curated especially for students, faculty, and parent communities.
             </p>
           </ScrollReveal>
         </div>
       </section>
 
       {/* OUR INTENT SECTION */}
-      <section data-nav-theme="light" className="relative py-20 px-6 bg-background overflow-hidden border-t border-border">
+      <section
+        data-nav-theme="light"
+        className="relative py-20 px-6 bg-background overflow-hidden border-t border-border"
+      >
         <FlowerField count={8} />
         <div className="max-w-5xl mx-auto relative z-10">
           <ScrollReveal variant="fade-up">
@@ -164,11 +170,12 @@ function InstitutionsPage() {
                 Our Intent
               </span>
               <h2 className="text-2xl md:text-4xl font-display font-semibold text-foreground max-w-3xl mx-auto leading-tight">
-                Not “just” sightseeing. We help students experience living Sanatan culture with awe, sensitivity, and relevance.
+                Not “just” sightseeing. We help students experience living Sanatan culture with awe,
+                sensitivity, and relevance.
               </h2>
               <p className="text-sm md:text-base text-muted-foreground max-w-3xl mx-auto leading-relaxed font-body">
-                Every program is co-designed with school leadership—aligning with academic goals while initiating
-                young minds into gratitude, seva, and inner leadership.
+                Every program is co designed with school leadership, aligning with academic goals
+                while initiating young minds into gratitude, seva, and inner leadership.
               </p>
             </div>
           </ScrollReveal>
@@ -176,7 +183,10 @@ function InstitutionsPage() {
       </section>
 
       {/* WHY SCHOOLS CHOOSE SAMYAM */}
-      <section data-nav-theme="dark" className="relative py-20 px-6 bg-[#1c081e] text-white overflow-hidden border-t border-white/5">
+      <section
+        data-nav-theme="dark"
+        className="relative py-20 px-6 bg-[#1c081e] text-white overflow-hidden border-t border-white/5"
+      >
         <FlowerField count={8} />
         <div className="max-w-6xl mx-auto relative z-10 space-y-12">
           {/* Header */}
@@ -189,8 +199,8 @@ function InstitutionsPage() {
                 Learning that transforms
               </h2>
               <p className="text-white/60 text-xs md:text-sm max-w-2xl mx-auto leading-relaxed font-body">
-                We combine scholar guidance, stellar logistics, and thoughtful facilitation so every student
-                completes the journey with clarity and pride.
+                We combine scholar guidance, stellar logistics, and thoughtful facilitation so every
+                student completes the journey with clarity and pride.
               </p>
             </div>
           </ScrollReveal>
@@ -198,14 +208,8 @@ function InstitutionsPage() {
           {/* Cards Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {whyChooseSchools.map((item, idx) => (
-              <ScrollReveal
-                key={idx}
-                variant="fade-up"
-                delay={idx * 150}
-              >
-                <div
-                  className="p-6 md:p-8 rounded-3xl bg-white/[0.03] border border-white/10 hover:bg-white/[0.06] hover:border-amber-400/30 transition-all duration-300 group text-left h-full"
-                >
+              <ScrollReveal key={idx} variant="fade-up" delay={idx * 150}>
+                <div className="p-6 md:p-8 rounded-3xl bg-white/[0.03] border border-white/10 hover:bg-white/[0.06] hover:border-amber-400/30 transition-all duration-300 group text-left h-full">
                   <div className="w-12 h-12 rounded-2xl bg-white/5 flex items-center justify-center text-3xl mb-4 group-hover:scale-110 transition-transform duration-300">
                     {item.icon}
                   </div>
@@ -223,7 +227,10 @@ function InstitutionsPage() {
       </section>
 
       {/* THREE STREAM FRAMEWORK */}
-      <section data-nav-theme="light" className="relative py-20 px-6 bg-background overflow-hidden border-t border-border">
+      <section
+        data-nav-theme="light"
+        className="relative py-20 px-6 bg-background overflow-hidden border-t border-border"
+      >
         <FlowerField count={8} />
         <div className="max-w-6xl mx-auto relative z-10 space-y-12">
           {/* Header */}
@@ -233,7 +240,7 @@ function InstitutionsPage() {
                 Three Stream Framework
               </span>
               <h2 className="text-3xl md:text-4xl font-display font-semibold text-foreground">
-                How we co-create each journey
+                How we co create each journey
               </h2>
             </div>
           </ScrollReveal>
@@ -241,14 +248,8 @@ function InstitutionsPage() {
           {/* Grid */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-left">
             {threeStreamFramework.map((stream, idx) => (
-              <ScrollReveal
-                key={idx}
-                variant="scale-up"
-                delay={idx * 150}
-              >
-                <div
-                  className="p-6 md:p-8 rounded-3xl bg-white border border-black/[0.06] shadow-soft hover:shadow-glow hover:border-amber-600/30 transition-all duration-300 h-full"
-                >
+              <ScrollReveal key={idx} variant="scale-up" delay={idx * 150}>
+                <div className="p-6 md:p-8 rounded-3xl bg-white border border-black/[0.06] shadow-soft hover:shadow-glow hover:border-amber-600/30 transition-all duration-300 h-full">
                   <h3 className="text-lg md:text-xl font-display font-semibold text-foreground mb-4 border-b border-border pb-2">
                     {stream.title}
                   </h3>
@@ -268,7 +269,10 @@ function InstitutionsPage() {
       </section>
 
       {/* EXPERIENCE ARC SECTION */}
-      <section data-nav-theme="dark" className="relative py-20 px-6 bg-gradient-to-b from-[#823883] to-[#3D0068] text-white overflow-hidden border-t border-white/5">
+      <section
+        data-nav-theme="dark"
+        className="relative py-20 px-6 bg-gradient-to-b from-[#823883] to-[#3D0068] text-white overflow-hidden border-t border-white/5"
+      >
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-amber-500/5 blur-[120px] pointer-events-none" />
         <div className="max-w-6xl mx-auto relative z-10 space-y-12">
           {/* Header */}
@@ -286,14 +290,8 @@ function InstitutionsPage() {
           {/* Grid */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-left">
             {experienceArc.map((arc, idx) => (
-              <ScrollReveal
-                key={idx}
-                variant="fade-up"
-                delay={idx * 150}
-              >
-                <div
-                  className="p-6 md:p-8 rounded-3xl bg-white/[0.03] border border-white/10 hover:bg-white/[0.06] hover:border-amber-400/30 transition-all duration-300 h-full"
-                >
+              <ScrollReveal key={idx} variant="fade-up" delay={idx * 150}>
+                <div className="p-6 md:p-8 rounded-3xl bg-white/[0.03] border border-white/10 hover:bg-white/[0.06] hover:border-amber-400/30 transition-all duration-300 h-full">
                   <span className="text-[10px] uppercase tracking-wider text-amber-400 font-bold block mb-2 font-body">
                     Phase {idx + 1}
                   </span>
@@ -311,7 +309,10 @@ function InstitutionsPage() {
       </section>
 
       {/* IMMERSION LABS */}
-      <section data-nav-theme="light" className="relative py-20 px-6 bg-background overflow-hidden border-t border-border">
+      <section
+        data-nav-theme="light"
+        className="relative py-20 px-6 bg-background overflow-hidden border-t border-border"
+      >
         <FlowerField count={8} />
         <div className="max-w-6xl mx-auto relative z-10 space-y-12">
           {/* Header */}
@@ -329,14 +330,8 @@ function InstitutionsPage() {
           {/* Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-left">
             {immersionLabs.map((lab, idx) => (
-              <ScrollReveal
-                key={idx}
-                variant="fade-up"
-                delay={idx * 150}
-              >
-                <div
-                  className="p-6 md:p-8 rounded-3xl bg-white border border-black/[0.06] shadow-soft hover:shadow-glow hover:border-amber-600/30 transition-all duration-300 h-full"
-                >
+              <ScrollReveal key={idx} variant="fade-up" delay={idx * 150}>
+                <div className="p-6 md:p-8 rounded-3xl bg-white border border-black/[0.06] shadow-soft hover:shadow-glow hover:border-amber-600/30 transition-all duration-300 h-full">
                   <h3 className="text-lg md:text-xl font-display font-semibold text-foreground mb-3">
                     {lab.title}
                   </h3>
@@ -351,17 +346,20 @@ function InstitutionsPage() {
       </section>
 
       {/* FINAL CTA SECTION */}
-      <section data-nav-theme="dark" className="relative py-20 px-6 bg-gradient-to-br from-[#260e28] via-[#1a0a1e] to-[#2d0f30] border-t border-white/5 overflow-hidden">
+      <section
+        data-nav-theme="dark"
+        className="relative py-20 px-6 bg-gradient-to-br from-[#260e28] via-[#1a0a1e] to-[#2d0f30] border-t border-white/5 overflow-hidden"
+      >
         <div className="max-w-5xl mx-auto text-center space-y-8 relative z-10">
           <ScrollReveal variant="fade-up">
             <h2 className="text-3xl md:text-5xl font-display font-semibold text-white leading-tight max-w-3xl mx-auto">
-              Let’s co-create your school’s next transformative journey
+              Let’s co create your school’s next transformative journey
             </h2>
           </ScrollReveal>
           <ScrollReveal variant="fade-up" delay={150}>
             <p className="text-base md:text-lg text-white/60 max-w-2xl mx-auto leading-relaxed font-body">
-              Share your preferred destination, batch size, timeline, and learning objectives. Our academic strategists
-              will design an immersive program deck within 3 working days.
+              Share your preferred destination, batch size, timeline, and learning objectives. Our
+              academic strategists will design an immersive program deck within 3 working days.
             </p>
           </ScrollReveal>
 
@@ -369,9 +367,7 @@ function InstitutionsPage() {
             <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
               <Dialog>
                 <DialogTrigger asChild>
-                  <button
-                    className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-gradient-cta text-white font-semibold rounded-full text-base shadow-soft hover:scale-[1.02] transition cursor-pointer border-none"
-                  >
+                  <button className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-gradient-cta text-white font-semibold rounded-full text-base shadow-soft hover:scale-[1.02] transition cursor-pointer border-none">
                     <span>Speak with our Schools Team</span>
                     <span>→</span>
                   </button>
@@ -401,7 +397,9 @@ function InstitutionsPage() {
                             <Mail className="w-6 h-6" />
                           </div>
                           <div className="text-left">
-                            <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-amber-400/80">Email Us</p>
+                            <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-amber-400/80">
+                              Email Us
+                            </p>
                             <p className="text-white font-medium">samyamspirituals@gmail.com</p>
                           </div>
                         </a>
@@ -416,8 +414,10 @@ function InstitutionsPage() {
                               <Phone className="w-6 h-6" />
                             </div>
                             <div className="text-left">
-                              <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-amber-400/80">Call Now</p>
-                              <p className="text-white font-medium text-sm">+91-9035225375</p>
+                              <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-amber-400/80">
+                                Call Now
+                              </p>
+                              <p className="text-white font-medium text-sm">+91 9035225375</p>
                             </div>
                           </a>
 
@@ -429,12 +429,18 @@ function InstitutionsPage() {
                             className="flex items-center gap-4 p-5 rounded-2xl bg-green-950/20 border border-green-500/30 hover:bg-green-900/40 hover:border-green-500/60 transition-all group shadow-sm"
                           >
                             <div className="w-12 h-12 rounded-xl bg-green-500/10 flex items-center justify-center text-green-400 group-hover:text-white transition-colors">
-                              <svg viewBox="0 0 24 24" className="w-6 h-6 fill-current" xmlns="http://www.w3.org/2000/svg">
+                              <svg
+                                viewBox="0 0 24 24"
+                                className="w-6 h-6 fill-current"
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
                                 <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L0 24l6.335-1.662c1.72.937 3.659 1.432 5.631 1.432h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z" />
                               </svg>
                             </div>
                             <div className="text-left">
-                              <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-green-400">WhatsApp</p>
+                              <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-green-400">
+                                WhatsApp
+                              </p>
                               <p className="font-medium text-sm text-green-300">Message</p>
                             </div>
                           </a>

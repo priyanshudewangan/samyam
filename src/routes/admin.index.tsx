@@ -1,8 +1,6 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { API_ENDPOINTS } from "@/lib/api-config";
-import { Nav } from "@/components/Nav";
-import { Footer } from "@/components/Footer";
 import { FlowerField } from "@/components/FlowerField";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
 import {
@@ -29,13 +27,13 @@ import {
   Edit,
   Plus,
   PlusCircle,
-  Database
+  Database,
 } from "lucide-react";
 
 export const Route = createFileRoute("/admin/")({
   component: AdminDashboardPage,
   head: () => ({
-    title: "Admin Dashboard — Samyam Sacred Journeys",
+    title: "Admin Dashboard | Samyam Sacred Journeys",
     meta: [
       {
         name: "description",
@@ -111,7 +109,10 @@ interface Teertha {
 
 interface Video {
   _id?: string;
-  category: "Kashi Knowledge Portal" | "Kashi Knowledge Portal • Quick Bits" | "Testimonials (Coming Soon)";
+  category:
+    | "Kashi Knowledge Portal"
+    | "Kashi Knowledge Portal • Quick Bits"
+    | "Testimonials (Coming Soon)";
   youtubeLink: string;
 }
 
@@ -185,15 +186,17 @@ function AdminDashboardPage() {
   const navigate = useNavigate();
   const [token, setToken] = useState<string | null>(null);
   const [adminEmail, setAdminEmail] = useState("");
-  const [activeTab, setActiveTab] = useState<"dashboard" | "enquiries" | "yatras" | "teerthas" | "videos" | "blogs">("dashboard");
-  
+  const [activeTab, setActiveTab] = useState<
+    "dashboard" | "enquiries" | "yatras" | "teerthas" | "videos" | "blogs"
+  >("dashboard");
+
   // Data lists
   const [enquiries, setEnquiries] = useState<Enquiry[]>([]);
   const [yatras, setYatras] = useState<Yatra[]>([]);
   const [teerthas, setTeerthas] = useState<Teertha[]>([]);
   const [videos, setVideos] = useState<Video[]>([]);
   const [blogs, setBlogs] = useState<Blog[]>([]);
-  
+
   const [stats, setStats] = useState<Stats | null>(null);
   const [loading, setLoading] = useState(true);
   const [migrating, setMigrating] = useState(false);
@@ -216,15 +219,17 @@ function AdminDashboardPage() {
     setExpandedTeerthas((prev) => ({ ...prev, [id]: !prev[id] }));
   };
 
-
   // Modals & Forms states
   const [selectedEnquiry, setSelectedEnquiry] = useState<Enquiry | null>(null);
-  const [deleteConfirm, setDeleteConfirm] = useState<{ id: string; type: "enquiry" | "yatra" | "teertha" | "video" | "blog" } | null>(null);
-  
+  const [deleteConfirm, setDeleteConfirm] = useState<{
+    id: string;
+    type: "enquiry" | "yatra" | "teertha" | "video" | "blog";
+  } | null>(null);
+
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [formMode, setFormMode] = useState<"add" | "edit">("add");
   const [formType, setFormType] = useState<"yatra" | "teertha" | "video" | "blog">("yatra");
-  
+
   const [yatraForm, setYatraForm] = useState<Yatra>(initialYatraState);
   const [teerthaForm, setTeerthaForm] = useState<Teertha>(initialTeerthaState);
   const [videoForm, setVideoForm] = useState<Video>(initialVideoState);
@@ -242,66 +247,68 @@ function AdminDashboardPage() {
     }
   }, [navigate]);
 
-  const fetchData = async (authToken: string) => {
-    setLoading(true);
-    setError("");
-    try {
-      // 1. Fetch Stats
-      const statsRes = await fetch(API_ENDPOINTS.DASHBOARD.STATS, {
-        headers: { Authorization: `Bearer ${authToken}` },
-      });
-      if (statsRes.status === 401) {
-        handleLogout();
-        return;
+  const handleLogout = useCallback(() => {
+    localStorage.removeItem("samyam_token");
+    localStorage.removeItem("samyam_email");
+    navigate({ to: "/admin/login" });
+  }, [navigate]);
+
+  const fetchData = useCallback(
+    async (authToken: string) => {
+      setLoading(true);
+      setError("");
+      try {
+        // 1. Fetch Stats
+        const statsRes = await fetch(API_ENDPOINTS.DASHBOARD.STATS, {
+          headers: { Authorization: `Bearer ${authToken}` },
+        });
+        if (statsRes.status === 401) {
+          handleLogout();
+          return;
+        }
+        const statsResult = await statsRes.json();
+        if (statsRes.ok) setStats(statsResult.data);
+
+        // 2. Fetch Enquiries
+        const enquiriesRes = await fetch(API_ENDPOINTS.ENQUIRIES, {
+          headers: { Authorization: `Bearer ${authToken}` },
+        });
+        const enquiriesResult = await enquiriesRes.json();
+        if (enquiriesRes.ok) setEnquiries(enquiriesResult.data || []);
+
+        // 3. Fetch Yatras
+        const yatrasRes = await fetch(API_ENDPOINTS.YATRAS);
+        const yatrasResult = await yatrasRes.json();
+        if (yatrasRes.ok) setYatras(yatrasResult.data || []);
+
+        // 4. Fetch Teerthas
+        const teerthasRes = await fetch(API_ENDPOINTS.TEERTHAS);
+        const teerthasResult = await teerthasRes.json();
+        if (teerthasRes.ok) setTeerthas(teerthasResult.data || []);
+
+        // 5. Fetch Videos
+        const videosRes = await fetch(API_ENDPOINTS.TESTIMONIALS);
+        const videosResult = await videosRes.json();
+        if (videosRes.ok) setVideos(videosResult.data || []);
+
+        // 6. Fetch Blogs
+        const blogsRes = await fetch(API_ENDPOINTS.BLOGS);
+        const blogsResult = await blogsRes.json();
+        if (blogsRes.ok) setBlogs(blogsResult.data || []);
+      } catch (err: any) {
+        setError(err.message || "Failed to load dashboard data.");
+      } finally {
+        setLoading(false);
       }
-      const statsResult = await statsRes.json();
-      if (statsRes.ok) setStats(statsResult.data);
-
-      // 2. Fetch Enquiries
-      const enquiriesRes = await fetch(API_ENDPOINTS.ENQUIRIES, {
-        headers: { Authorization: `Bearer ${authToken}` },
-      });
-      const enquiriesResult = await enquiriesRes.json();
-      if (enquiriesRes.ok) setEnquiries(enquiriesResult.data || []);
-
-      // 3. Fetch Yatras
-      const yatrasRes = await fetch(API_ENDPOINTS.YATRAS);
-      const yatrasResult = await yatrasRes.json();
-      if (yatrasRes.ok) setYatras(yatrasResult.data || []);
-
-      // 4. Fetch Teerthas
-      const teerthasRes = await fetch(API_ENDPOINTS.TEERTHAS);
-      const teerthasResult = await teerthasRes.json();
-      if (teerthasRes.ok) setTeerthas(teerthasResult.data || []);
-
-      // 5. Fetch Videos
-      const videosRes = await fetch(API_ENDPOINTS.TESTIMONIALS);
-      const videosResult = await videosRes.json();
-      if (videosRes.ok) setVideos(videosResult.data || []);
-
-      // 6. Fetch Blogs
-      const blogsRes = await fetch(API_ENDPOINTS.BLOGS);
-      const blogsResult = await blogsRes.json();
-      if (blogsRes.ok) setBlogs(blogsResult.data || []);
-
-    } catch (err: any) {
-      setError(err.message || "Failed to load dashboard data.");
-    } finally {
-      setLoading(false);
-    }
-  };
+    },
+    [handleLogout],
+  );
 
   useEffect(() => {
     if (token) {
       fetchData(token);
     }
-  }, [token]);
-
-  const handleLogout = () => {
-    localStorage.removeItem("samyam_token");
-    localStorage.removeItem("samyam_email");
-    navigate({ to: "/admin/login" });
-  };
+  }, [token, fetchData]);
 
   // Seeder call
   const handleMigrateData = async () => {
@@ -316,7 +323,7 @@ function AdminDashboardPage() {
       });
       const result = await res.json();
       if (!res.ok) throw new Error(result.message || "Migration failed");
-      
+
       setSuccessMsg("Success! Seeder executed. All database tables refreshed.");
       await fetchData(token);
       setTimeout(() => setSuccessMsg(""), 4000);
@@ -340,12 +347,12 @@ function AdminDashboardPage() {
         body: JSON.stringify({ status: newStatus }),
       });
       if (!response.ok) throw new Error("Failed to update status");
-      
+
       setEnquiries((prev) =>
-        prev.map((item) => (item._id === id ? { ...item, status: newStatus } : item))
+        prev.map((item) => (item._id === id ? { ...item, status: newStatus } : item)),
       );
       if (selectedEnquiry?._id === id) {
-        setSelectedEnquiry((prev) => prev ? { ...prev, status: newStatus } : null);
+        setSelectedEnquiry((prev) => (prev ? { ...prev, status: newStatus } : null));
       }
     } catch (err: any) {
       alert(err.message);
@@ -356,7 +363,7 @@ function AdminDashboardPage() {
   const handleDeleteItem = async () => {
     if (!token || !deleteConfirm) return;
     const { id, type } = deleteConfirm;
-    
+
     let url = "";
     if (type === "enquiry") url = `${API_ENDPOINTS.ENQUIRIES}/${id}`;
     if (type === "yatra") url = `${API_ENDPOINTS.YATRAS}/${id}`;
@@ -377,7 +384,7 @@ function AdminDashboardPage() {
       if (type === "teertha") setTeerthas((prev) => prev.filter((item) => item._id !== id));
       if (type === "video") setVideos((prev) => prev.filter((item) => item._id !== id));
       if (type === "blog") setBlogs((prev) => prev.filter((item) => item._id !== id));
-      
+
       // Update statistics
       if (token) {
         const statsRes = await fetch(API_ENDPOINTS.DASHBOARD.STATS, {
@@ -401,10 +408,8 @@ function AdminDashboardPage() {
     setLoading(true);
     try {
       const isEdit = formMode === "edit";
-      const url = isEdit
-        ? `${API_ENDPOINTS.YATRAS}/${yatraForm._id}`
-        : API_ENDPOINTS.YATRAS;
-      
+      const url = isEdit ? `${API_ENDPOINTS.YATRAS}/${yatraForm._id}` : API_ENDPOINTS.YATRAS;
+
       const response = await fetch(url, {
         method: isEdit ? "PUT" : "POST",
         headers: {
@@ -433,9 +438,7 @@ function AdminDashboardPage() {
     setLoading(true);
     try {
       const isEdit = formMode === "edit";
-      const url = isEdit
-        ? `${API_ENDPOINTS.TEERTHAS}/${teerthaForm._id}`
-        : API_ENDPOINTS.TEERTHAS;
+      const url = isEdit ? `${API_ENDPOINTS.TEERTHAS}/${teerthaForm._id}` : API_ENDPOINTS.TEERTHAS;
 
       const response = await fetch(url, {
         method: isEdit ? "PUT" : "POST",
@@ -539,9 +542,7 @@ function AdminDashboardPage() {
     setLoading(true);
     try {
       const isEdit = formMode === "edit";
-      const url = isEdit
-        ? `${API_ENDPOINTS.BLOGS}/${blogForm._id}`
-        : API_ENDPOINTS.BLOGS;
+      const url = isEdit ? `${API_ENDPOINTS.BLOGS}/${blogForm._id}` : API_ENDPOINTS.BLOGS;
 
       const response = await fetch(url, {
         method: isEdit ? "PUT" : "POST",
@@ -596,18 +597,15 @@ function AdminDashboardPage() {
 
   return (
     <div className="relative min-h-screen overflow-x-hidden bg-[#0d040f] text-white flex flex-col justify-between">
-      <Nav />
-
       <section
         data-nav-theme="dark"
         className="relative py-24 px-4 md:px-8 bg-gradient-to-b from-[#0d040f] via-[#140817] to-[#0a020b] overflow-hidden min-h-[92vh] flex-grow flex"
       >
         <FlowerField count={5} />
 
-        <div className="max-w-7xl mx-auto w-full relative z-10 flex flex-col md:flex-row gap-8 mt-4">
-          
+        <div className="max-w-[95%] 2xl:max-w-[1800px] mx-auto w-full relative z-10 flex flex-col md:flex-row gap-8 mt-4">
           {/* LEFT SIDEBAR NAVIGATION */}
-          <aside className="w-full md:w-64 shrink-0 space-y-6">
+          <aside className="w-full md:w-80 shrink-0 space-y-6">
             <div className="bg-white/[0.02] border border-white/10 rounded-3xl p-6 shadow-soft space-y-4">
               <div className="border-b border-white/10 pb-4">
                 <h2 className="font-display font-semibold text-lg text-white">Admin Dashboard</h2>
@@ -674,8 +672,12 @@ function AdminDashboardPage() {
               <div className="space-y-8">
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-white/10 pb-5">
                   <div>
-                    <h1 className="text-2xl md:text-3xl font-display font-semibold">Welcome to Admin Dashboard</h1>
-                    <p className="text-xs text-white/50 font-body mt-0.5">Samyam Spiritual Tourism Console</p>
+                    <h1 className="text-2xl md:text-3xl font-display font-semibold">
+                      Welcome to Admin Dashboard
+                    </h1>
+                    <p className="text-xs text-white/50 font-body mt-0.5">
+                      Samyam Spiritual Tourism Console
+                    </p>
                   </div>
                   <button
                     onClick={handleMigrateData}
@@ -689,18 +691,47 @@ function AdminDashboardPage() {
 
                 {/* Statistics Overview */}
                 <div className="space-y-4">
-                  <h3 className="text-sm font-semibold uppercase tracking-wider text-amber-400 font-body">Statistics Overview</h3>
+                  <h3 className="text-sm font-semibold uppercase tracking-wider text-amber-400 font-body">
+                    Statistics Overview
+                  </h3>
                   <div className="grid grid-cols-2 lg:grid-cols-5 gap-4">
                     {[
-                      { label: "Total Enquiries", val: stats?.totalEnquiries ?? enquiries.length, color: "text-amber-400" },
-                      { label: "Yatra and Retreats", val: stats?.totalRetreats ?? yatras.length, color: "text-sky-400" },
-                      { label: "Knowledge Videos", val: stats?.totalVideos ?? videos.length, color: "text-purple-400" },
-                      { label: "Teerthas", val: stats?.totalTeerthas ?? teerthas.length, color: "text-emerald-400" },
-                      { label: "CEO Blogs & Quotes", val: stats?.totalBlogs ?? blogs.length, color: "text-rose-400" },
+                      {
+                        label: "Total Enquiries",
+                        val: stats?.totalEnquiries ?? enquiries.length,
+                        color: "text-amber-400",
+                      },
+                      {
+                        label: "Yatra and Retreats",
+                        val: stats?.totalRetreats ?? yatras.length,
+                        color: "text-sky-400",
+                      },
+                      {
+                        label: "Knowledge Videos",
+                        val: stats?.totalVideos ?? videos.length,
+                        color: "text-purple-400",
+                      },
+                      {
+                        label: "Teerthas",
+                        val: stats?.totalTeerthas ?? teerthas.length,
+                        color: "text-emerald-400",
+                      },
+                      {
+                        label: "CEO Blogs & Quotes",
+                        val: stats?.totalBlogs ?? blogs.length,
+                        color: "text-rose-400",
+                      },
                     ].map((st, i) => (
-                      <div key={i} className="bg-white/[0.02] border border-white/5 p-6 rounded-2xl shadow-soft">
-                        <p className={`text-3xl font-display font-bold mt-1 ${st.color}`}>{st.val}</p>
-                        <p className="text-[10px] text-white/45 font-body uppercase tracking-wider mt-1">{st.label}</p>
+                      <div
+                        key={i}
+                        className="bg-white/[0.02] border border-white/5 p-6 rounded-2xl shadow-soft"
+                      >
+                        <p className={`text-3xl font-display font-bold mt-1 ${st.color}`}>
+                          {st.val}
+                        </p>
+                        <p className="text-[10px] text-white/45 font-body uppercase tracking-wider mt-1">
+                          {st.label}
+                        </p>
                       </div>
                     ))}
                   </div>
@@ -708,12 +739,18 @@ function AdminDashboardPage() {
 
                 {/* Quick Actions */}
                 <div className="space-y-4 pt-4">
-                  <h3 className="text-sm font-semibold uppercase tracking-wider text-amber-400 font-body">Quick Actions</h3>
+                  <h3 className="text-sm font-semibold uppercase tracking-wider text-amber-400 font-body">
+                    Quick Actions
+                  </h3>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="bg-white/[0.02] border border-white/5 p-6 rounded-2xl hover:border-amber-500/20 transition-all flex flex-col justify-between group">
                       <div className="space-y-2 text-left">
-                        <h4 className="text-base font-semibold font-display text-white">✉ Enquiry Management</h4>
-                        <p className="text-xs text-white/55 font-body leading-relaxed">View and manage contact form submissions</p>
+                        <h4 className="text-base font-semibold font-display text-white">
+                          ✉ Enquiry Management
+                        </h4>
+                        <p className="text-xs text-white/55 font-body leading-relaxed">
+                          View and manage contact form submissions
+                        </p>
                       </div>
                       <button
                         onClick={() => setActiveTab("enquiries")}
@@ -725,8 +762,12 @@ function AdminDashboardPage() {
 
                     <div className="bg-white/[0.02] border border-white/5 p-6 rounded-2xl hover:border-amber-500/20 transition-all flex flex-col justify-between group">
                       <div className="space-y-2 text-left">
-                        <h4 className="text-base font-semibold font-display text-white">🕉 Teerthas Management</h4>
-                        <p className="text-xs text-white/55 font-body leading-relaxed">Add, edit, and manage sacred destinations</p>
+                        <h4 className="text-base font-semibold font-display text-white">
+                          🕉 Teerthas Management
+                        </h4>
+                        <p className="text-xs text-white/55 font-body leading-relaxed">
+                          Add, edit, and manage sacred destinations
+                        </p>
                       </div>
                       <button
                         onClick={() => setActiveTab("teerthas")}
@@ -738,8 +779,12 @@ function AdminDashboardPage() {
 
                     <div className="bg-white/[0.02] border border-white/5 p-6 rounded-2xl hover:border-amber-500/20 transition-all flex flex-col justify-between group">
                       <div className="space-y-2 text-left">
-                        <h4 className="text-base font-semibold font-display text-white">📚 Knowledge Videos</h4>
-                        <p className="text-xs text-white/55 font-body leading-relaxed">Manage videos in the Knowledge Portal</p>
+                        <h4 className="text-base font-semibold font-display text-white">
+                          📚 Knowledge Videos
+                        </h4>
+                        <p className="text-xs text-white/55 font-body leading-relaxed">
+                          Manage videos in the Knowledge Portal
+                        </p>
                       </div>
                       <button
                         onClick={() => setActiveTab("videos")}
@@ -758,7 +803,7 @@ function AdminDashboardPage() {
               <div className="space-y-6">
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-white/10 pb-5">
                   <h1 className="text-2xl font-display font-semibold">Enquiry Management</h1>
-                  
+
                   {/* Search Bar */}
                   <div className="relative w-full sm:w-64 font-body">
                     <Search className="absolute left-4 top-3 text-white/30" size={14} />
@@ -775,9 +820,10 @@ function AdminDashboardPage() {
                 {/* Filter tabs */}
                 <div className="flex flex-wrap items-center gap-1.5 p-1 bg-white/[0.02] border border-white/5 rounded-2xl font-body max-w-fit">
                   {(["All", "New", "Contacted", "Resolved"] as const).map((status) => {
-                    const count = status === "All"
-                      ? enquiries.length
-                      : enquiries.filter((e) => e.status === status).length;
+                    const count =
+                      status === "All"
+                        ? enquiries.length
+                        : enquiries.filter((e) => e.status === status).length;
                     return (
                       <button
                         key={status}
@@ -797,22 +843,30 @@ function AdminDashboardPage() {
                 {/* List */}
                 {filteredEnquiries.length === 0 ? (
                   <div className="py-20 text-center space-y-3 bg-white/[0.01] border border-white/5 rounded-3xl">
-                    <p className="text-white/40 text-xs font-body">No pilgrim requests match your current filters.</p>
+                    <p className="text-white/40 text-xs font-body">
+                      No pilgrim requests match your current filters.
+                    </p>
                   </div>
                 ) : (
                   <div className="space-y-4">
                     {filteredEnquiries.map((enquiry) => (
-                      <div key={enquiry._id} className="bg-white/[0.02] border border-white/5 p-6 rounded-3xl space-y-4 text-left font-body text-xs relative hover:border-white/10 transition-all">
-                        
+                      <div
+                        key={enquiry._id}
+                        className="bg-white/[0.02] border border-white/5 p-6 rounded-3xl space-y-4 text-left font-body text-xs relative hover:border-white/10 transition-all"
+                      >
                         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-white/5 pb-3">
                           <div className="space-y-1">
                             <div className="flex items-center gap-3">
-                              <h4 className="text-base font-semibold font-display text-white">{enquiry.name}</h4>
-                              <span className={`px-2 py-0.5 rounded-full text-[9px] font-bold uppercase tracking-wider ${
-                                enquiry.preferredYatra.includes("Custom")
-                                  ? "bg-purple-500/10 border border-purple-500/20 text-purple-300"
-                                  : "bg-amber-400/10 border border-amber-400/20 text-amber-300"
-                              }`}>
+                              <h4 className="text-base font-semibold font-display text-white">
+                                {enquiry.name}
+                              </h4>
+                              <span
+                                className={`px-2 py-0.5 rounded-full text-[9px] font-bold uppercase tracking-wider ${
+                                  enquiry.preferredYatra.includes("Custom")
+                                    ? "bg-purple-500/10 border border-purple-500/20 text-purple-300"
+                                    : "bg-amber-400/10 border border-amber-400/20 text-amber-300"
+                                }`}
+                              >
                                 {enquiry.preferredYatra}
                               </span>
                             </div>
@@ -826,13 +880,18 @@ function AdminDashboardPage() {
                           <div className="flex items-center gap-2">
                             <select
                               value={enquiry.status}
-                              onChange={(e) => handleUpdateEnquiryStatus(enquiry._id, e.target.value as Enquiry["status"])}
+                              onChange={(e) =>
+                                handleUpdateEnquiryStatus(
+                                  enquiry._id,
+                                  e.target.value as Enquiry["status"],
+                                )
+                              }
                               className={`px-3 py-1.5 rounded-2xl text-[10px] font-semibold focus:outline-none border cursor-pointer ${
                                 enquiry.status === "New"
                                   ? "bg-sky-500/10 border-sky-500/20 text-sky-400"
                                   : enquiry.status === "Contacted"
-                                  ? "bg-amber-400/10 border-amber-400/20 text-amber-400"
-                                  : "bg-emerald-500/10 border-emerald-500/20 text-emerald-400"
+                                    ? "bg-amber-400/10 border-amber-400/20 text-amber-400"
+                                    : "bg-emerald-500/10 border-emerald-500/20 text-emerald-400"
                               } [&>option]:bg-[#140817] [&>option]:text-white`}
                             >
                               <option value="New">New</option>
@@ -854,27 +913,45 @@ function AdminDashboardPage() {
                         {enquiry.preferredYatra.includes("Custom") && (
                           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 bg-white/[0.01] border border-white/5 p-4 rounded-2xl">
                             <div>
-                              <p className="text-white/40 text-[9px] uppercase tracking-wider mb-0.5">Destination</p>
-                              <p className="font-semibold text-white">{enquiry.journeyType || "N/A"}</p>
+                              <p className="text-white/40 text-[9px] uppercase tracking-wider mb-0.5">
+                                Destination
+                              </p>
+                              <p className="font-semibold text-white">
+                                {enquiry.journeyType || "N/A"}
+                              </p>
                             </div>
                             <div>
-                              <p className="text-white/40 text-[9px] uppercase tracking-wider mb-0.5">Dates</p>
-                              <p className="font-semibold text-white">{enquiry.message.slice(0, 20) || "N/A"}</p> 
+                              <p className="text-white/40 text-[9px] uppercase tracking-wider mb-0.5">
+                                Dates
+                              </p>
+                              <p className="font-semibold text-white">
+                                {enquiry.message.slice(0, 20) || "N/A"}
+                              </p>
                             </div>
                             <div>
-                              <p className="text-white/40 text-[9px] uppercase tracking-wider mb-0.5">Travelers</p>
-                              <p className="font-semibold text-white">{enquiry.travelers || "N/A"}</p>
+                              <p className="text-white/40 text-[9px] uppercase tracking-wider mb-0.5">
+                                Travelers
+                              </p>
+                              <p className="font-semibold text-white">
+                                {enquiry.travelers || "N/A"}
+                              </p>
                             </div>
                             <div>
-                              <p className="text-white/40 text-[9px] uppercase tracking-wider mb-0.5">Budget</p>
+                              <p className="text-white/40 text-[9px] uppercase tracking-wider mb-0.5">
+                                Budget
+                              </p>
                               <p className="font-semibold text-white">{enquiry.budget || "N/A"}</p>
                             </div>
                           </div>
                         )}
 
                         <div className="space-y-1">
-                          <p className="text-white/40 text-[9px] uppercase tracking-wider">Seeker message / intent</p>
-                          <p className="text-white/85 leading-relaxed bg-white/[0.01] p-3 rounded-xl border border-white/5 whitespace-pre-wrap">{enquiry.message}</p>
+                          <p className="text-white/40 text-[9px] uppercase tracking-wider">
+                            Seeker message / intent
+                          </p>
+                          <p className="text-white/85 leading-relaxed bg-white/[0.01] p-3 rounded-xl border border-white/5 whitespace-pre-wrap">
+                            {enquiry.message}
+                          </p>
                         </div>
                       </div>
                     ))}
@@ -888,8 +965,12 @@ function AdminDashboardPage() {
               <div className="space-y-6">
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-white/10 pb-5">
                   <div>
-                    <h1 className="text-2xl font-display font-semibold">Yatra and Retreats Management</h1>
-                    <p className="text-xs text-white/50 font-body">Add, update, or remove dynamic spiritual travel itineraries</p>
+                    <h1 className="text-2xl font-display font-semibold">
+                      Yatra and Retreats Management
+                    </h1>
+                    <p className="text-xs text-white/50 font-body">
+                      Add, update, or remove dynamic spiritual travel itineraries
+                    </p>
                   </div>
                   <button
                     onClick={openAddYatra}
@@ -902,12 +983,17 @@ function AdminDashboardPage() {
                 {/* Grid list */}
                 {yatras.length === 0 ? (
                   <div className="py-20 text-center bg-white/[0.01] border border-white/5 rounded-3xl">
-                    <p className="text-white/40 text-xs font-body">No Yatra records found. Seed initial data or add new.</p>
+                    <p className="text-white/40 text-xs font-body">
+                      No Yatra records found. Seed initial data or add new.
+                    </p>
                   </div>
                 ) : (
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-left">
                     {yatras.map((y) => (
-                      <div key={y._id} className="bg-white/[0.02] border border-white/5 rounded-3xl overflow-hidden shadow-soft flex flex-col justify-between hover:border-white/10 transition duration-300">
+                      <div
+                        key={y._id}
+                        className="bg-white/[0.02] border border-white/5 rounded-3xl overflow-hidden shadow-soft flex flex-col justify-between hover:border-white/10 transition duration-300"
+                      >
                         <div>
                           {/* Image */}
                           <div className="aspect-video bg-black/40 relative overflow-hidden">
@@ -917,19 +1003,24 @@ function AdminDashboardPage() {
                               className="w-full h-full object-cover"
                               onError={(e) => {
                                 // fallback if image fails to load
-                                (e.target as HTMLImageElement).src = "https://samyam.co/images/knowledge.jpeg";
+                                (e.target as HTMLImageElement).src =
+                                  "https://samyam.co/images/knowledge.jpeg";
                               }}
                             />
                             <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
                             <div className="absolute bottom-4 left-4 right-4">
-                              <h3 className="text-lg font-semibold font-display text-white leading-tight">{y.name}</h3>
-                              <p className="text-[10px] text-amber-300 font-semibold font-body uppercase mt-0.5">{y.date} • {y.duration}</p>
+                              <h3 className="text-lg font-semibold font-display text-white leading-tight">
+                                {y.name}
+                              </h3>
+                              <p className="text-[10px] text-amber-300 font-semibold font-body uppercase mt-0.5">
+                                {y.date} • {y.duration}
+                              </p>
                             </div>
                           </div>
 
                           <div className="p-5 space-y-4 font-body text-xs">
                             <p className="text-white/60 leading-relaxed line-clamp-3">{y.desc}</p>
-                            
+
                             {/* Badges counts */}
                             <div className="flex flex-wrap gap-2 pt-2">
                               <span className="px-2.5 py-1 rounded-lg bg-white/5 border border-white/5 text-[9px] font-bold text-white/70">
@@ -956,33 +1047,53 @@ function AdminDashboardPage() {
                                 <div className="space-y-4 px-1 pb-3 text-white/80 animate-fade-in mt-3 text-left">
                                   {y.slogan && (
                                     <div className="p-2 bg-white/[0.02] border border-white/5 rounded-xl">
-                                      <span className="text-[9px] text-amber-400/80 font-bold uppercase tracking-wider block">Slogan</span>
-                                      <p className="text-[10px] font-semibold italic text-amber-100">{y.slogan}</p>
+                                      <span className="text-[9px] text-amber-400/80 font-bold uppercase tracking-wider block">
+                                        Slogan
+                                      </span>
+                                      <p className="text-[10px] font-semibold italic text-amber-100">
+                                        {y.slogan}
+                                      </p>
                                     </div>
                                   )}
 
                                   <div className="grid grid-cols-2 gap-2">
                                     <div className="p-2 bg-white/[0.02] border border-white/5 rounded-xl">
-                                      <span className="text-[9px] text-white/40 font-bold uppercase tracking-wider block">Double Price</span>
-                                      <p className="text-[10px] text-white font-medium">{y.doublePrice || "N/A"}</p>
+                                      <span className="text-[9px] text-white/40 font-bold uppercase tracking-wider block">
+                                        Double Price
+                                      </span>
+                                      <p className="text-[10px] text-white font-medium">
+                                        {y.doublePrice || "N/A"}
+                                      </p>
                                     </div>
                                     <div className="p-2 bg-white/[0.02] border border-white/5 rounded-xl">
-                                      <span className="text-[9px] text-white/40 font-bold uppercase tracking-wider block">Triple Price</span>
-                                      <p className="text-[10px] text-white font-medium">{y.triplePrice || "N/A"}</p>
+                                      <span className="text-[9px] text-white/40 font-bold uppercase tracking-wider block">
+                                        Triple Price
+                                      </span>
+                                      <p className="text-[10px] text-white font-medium">
+                                        {y.triplePrice || "N/A"}
+                                      </p>
                                     </div>
                                   </div>
 
                                   {y.staysHeading && (
                                     <div className="p-2.5 bg-white/[0.02] border border-white/5 rounded-xl space-y-1">
-                                      <span className="text-[9px] text-amber-400/80 font-bold uppercase tracking-wider block">Stays Info</span>
-                                      <p className="text-[10px] text-white font-semibold">{y.staysHeading}</p>
-                                      <p className="text-[10px] text-white/60 leading-normal">{y.staysDesc}</p>
+                                      <span className="text-[9px] text-amber-400/80 font-bold uppercase tracking-wider block">
+                                        Stays Info
+                                      </span>
+                                      <p className="text-[10px] text-white font-semibold">
+                                        {y.staysHeading}
+                                      </p>
+                                      <p className="text-[10px] text-white/60 leading-normal">
+                                        {y.staysDesc}
+                                      </p>
                                     </div>
                                   )}
 
                                   {y.inclusions && y.inclusions.length > 0 && (
                                     <div className="space-y-1">
-                                      <span className="text-[9px] text-white/40 font-bold uppercase tracking-wider block font-semibold mb-1">Inclusions</span>
+                                      <span className="text-[9px] text-white/40 font-bold uppercase tracking-wider block font-semibold mb-1">
+                                        Inclusions
+                                      </span>
                                       <ul className="list-disc list-inside text-[10px] text-white/70 space-y-1 leading-normal pl-1">
                                         {y.inclusions.map((inc, i) => (
                                           <li key={i}>{inc}</li>
@@ -993,11 +1104,18 @@ function AdminDashboardPage() {
 
                                   {y.itinerary && y.itinerary.length > 0 && (
                                     <div className="space-y-2 border-t border-white/5 pt-2">
-                                      <span className="text-[9px] text-white/40 font-bold uppercase tracking-wider block font-semibold">Day-wise Itinerary</span>
+                                      <span className="text-[9px] text-white/40 font-bold uppercase tracking-wider block font-semibold">
+                                        Day-wise Itinerary
+                                      </span>
                                       <div className="space-y-2 max-h-48 overflow-y-auto pr-1">
                                         {y.itinerary.map((day) => (
-                                          <div key={day.day} className="p-2.5 bg-white/[0.01] border border-white/5 rounded-xl">
-                                            <span className="text-[10px] font-bold text-amber-400 block">Day {day.day}</span>
+                                          <div
+                                            key={day.day}
+                                            className="p-2.5 bg-white/[0.01] border border-white/5 rounded-xl"
+                                          >
+                                            <span className="text-[10px] font-bold text-amber-400 block">
+                                              Day {day.day}
+                                            </span>
                                             <ul className="list-disc list-inside text-[10px] text-white/75 mt-1 space-y-1 leading-normal pl-1">
                                               {day.points.map((pt, pIdx) => (
                                                 <li key={pIdx}>{pt}</li>
@@ -1011,11 +1129,18 @@ function AdminDashboardPage() {
 
                                   {y.darshans && y.darshans.length > 0 && (
                                     <div className="space-y-2 border-t border-white/5 pt-2">
-                                      <span className="text-[9px] text-white/40 font-bold uppercase tracking-wider block font-semibold">Sacred Darshans</span>
+                                      <span className="text-[9px] text-white/40 font-bold uppercase tracking-wider block font-semibold">
+                                        Sacred Darshans
+                                      </span>
                                       <div className="space-y-2 max-h-40 overflow-y-auto pr-1">
                                         {y.darshans.map((d, dIdx) => (
-                                          <div key={dIdx} className="p-2.5 bg-white/[0.01] border border-white/5 rounded-xl">
-                                            <span className="text-[10px] font-bold text-white block">{d.title}</span>
+                                          <div
+                                            key={dIdx}
+                                            className="p-2.5 bg-white/[0.01] border border-white/5 rounded-xl"
+                                          >
+                                            <span className="text-[10px] font-bold text-white block">
+                                              {d.title}
+                                            </span>
                                             <ul className="list-disc list-inside text-[10px] text-white/75 mt-1 space-y-1 leading-normal pl-1">
                                               {d.items.map((item, itemIdx) => (
                                                 <li key={itemIdx}>{item}</li>
@@ -1029,10 +1154,8 @@ function AdminDashboardPage() {
                                 </div>
                               )}
                             </div>
-
                           </div>
                         </div>
-
 
                         {/* Actions */}
                         <div className="px-5 py-4 bg-white/[0.01] border-t border-white/5 flex items-center justify-end gap-2">
@@ -1062,7 +1185,9 @@ function AdminDashboardPage() {
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-white/10 pb-5">
                   <div>
                     <h1 className="text-2xl font-display font-semibold">Teerthas Management</h1>
-                    <p className="text-xs text-white/50 font-body">Add, edit, and manage sacred destinations</p>
+                    <p className="text-xs text-white/50 font-body">
+                      Add, edit, and manage sacred destinations
+                    </p>
                   </div>
                   <button
                     onClick={openAddTeertha}
@@ -1075,27 +1200,43 @@ function AdminDashboardPage() {
                 {/* Grid list */}
                 {teerthas.length === 0 ? (
                   <div className="py-20 text-center bg-white/[0.01] border border-white/5 rounded-3xl">
-                    <p className="text-white/40 text-xs font-body">No Teertha records found. Seed initial data or add new.</p>
+                    <p className="text-white/40 text-xs font-body">
+                      No Teertha records found. Seed initial data or add new.
+                    </p>
                   </div>
                 ) : (
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 text-left">
                     {teerthas.map((t) => (
-                      <div key={t._id} className="bg-white/[0.02] border border-white/5 rounded-3xl overflow-hidden shadow-soft flex flex-col justify-between hover:border-white/10 transition duration-300">
+                      <div
+                        key={t._id}
+                        className="bg-white/[0.02] border border-white/5 rounded-3xl overflow-hidden shadow-soft flex flex-col justify-between hover:border-white/10 transition duration-300"
+                      >
                         <div>
                           {/* Image */}
                           <div className="aspect-[4/3] bg-black/40 relative overflow-hidden">
                             <img
-                              src={t.img.startsWith("http") ? t.img : t.img.startsWith("/") ? t.img : `/images/${t.img}`}
+                              src={
+                                t.img.startsWith("http")
+                                  ? t.img
+                                  : t.img.startsWith("/")
+                                    ? t.img
+                                    : `/images/${t.img}`
+                              }
                               alt={t.name}
                               className="w-full h-full object-cover"
                               onError={(e) => {
-                                (e.target as HTMLImageElement).src = "https://samyam.co/images/knowledge.jpeg";
+                                (e.target as HTMLImageElement).src =
+                                  "https://samyam.co/images/knowledge.jpeg";
                               }}
                             />
                             <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
                             <div className="absolute bottom-4 left-4 right-4">
-                              <h3 className="text-base font-semibold font-display text-white leading-tight">{t.name}</h3>
-                              <p className="text-[9px] text-white/45 font-semibold font-body uppercase mt-0.5">{t.region} • {t.significance || t.tagline} • {t.duration}</p>
+                              <h3 className="text-base font-semibold font-display text-white leading-tight">
+                                {t.name}
+                              </h3>
+                              <p className="text-[9px] text-white/45 font-semibold font-body uppercase mt-0.5">
+                                {t.region} • {t.significance || t.tagline} • {t.duration}
+                              </p>
                             </div>
                           </div>
 
@@ -1130,47 +1271,73 @@ function AdminDashboardPage() {
                                 onClick={() => toggleTeerthaExpand(t._id!)}
                                 className="w-full py-2 text-center text-[10px] uppercase font-bold text-amber-400 hover:text-amber-300 transition flex items-center justify-center gap-1 cursor-pointer"
                               >
-                                {expandedTeerthas[t._id!] ? "Hide Details ▴" : "Show Full Details ▾"}
+                                {expandedTeerthas[t._id!]
+                                  ? "Hide Details ▴"
+                                  : "Show Full Details ▾"}
                               </button>
 
                               {expandedTeerthas[t._id!] && (
                                 <div className="space-y-4 px-1 pb-3 text-white/80 animate-fade-in mt-3 text-left">
                                   {t.tagline && (
                                     <div className="p-2 bg-white/[0.02] border border-white/5 rounded-xl">
-                                      <span className="text-[9px] text-amber-400/80 font-bold uppercase tracking-wider block">Tagline</span>
-                                      <p className="text-[10px] font-semibold text-amber-100">{t.tagline}</p>
+                                      <span className="text-[9px] text-amber-400/80 font-bold uppercase tracking-wider block">
+                                        Tagline
+                                      </span>
+                                      <p className="text-[10px] font-semibold text-amber-100">
+                                        {t.tagline}
+                                      </p>
                                     </div>
                                   )}
 
                                   {t.slogan && (
                                     <div className="p-2 bg-white/[0.02] border border-white/5 rounded-xl">
-                                      <span className="text-[9px] text-amber-400/80 font-bold uppercase tracking-wider block font-semibold mb-0.5">Slogan Banner</span>
-                                      <p className="text-[10px] font-semibold italic text-amber-100">{t.slogan}</p>
+                                      <span className="text-[9px] text-amber-400/80 font-bold uppercase tracking-wider block font-semibold mb-0.5">
+                                        Slogan Banner
+                                      </span>
+                                      <p className="text-[10px] font-semibold italic text-amber-100">
+                                        {t.slogan}
+                                      </p>
                                     </div>
                                   )}
 
                                   <div className="grid grid-cols-2 gap-2">
                                     <div className="p-2 bg-white/[0.02] border border-white/5 rounded-xl">
-                                      <span className="text-[9px] text-white/40 font-bold uppercase tracking-wider block">Double Price</span>
-                                      <p className="text-[10px] text-white font-medium">{t.doublePrice || "N/A"}</p>
+                                      <span className="text-[9px] text-white/40 font-bold uppercase tracking-wider block">
+                                        Double Price
+                                      </span>
+                                      <p className="text-[10px] text-white font-medium">
+                                        {t.doublePrice || "N/A"}
+                                      </p>
                                     </div>
                                     <div className="p-2 bg-white/[0.02] border border-white/5 rounded-xl">
-                                      <span className="text-[9px] text-white/40 font-bold uppercase tracking-wider block">Triple Price</span>
-                                      <p className="text-[10px] text-white font-medium">{t.triplePrice || "N/A"}</p>
+                                      <span className="text-[9px] text-white/40 font-bold uppercase tracking-wider block">
+                                        Triple Price
+                                      </span>
+                                      <p className="text-[10px] text-white font-medium">
+                                        {t.triplePrice || "N/A"}
+                                      </p>
                                     </div>
                                   </div>
 
                                   {t.staysHeading && (
                                     <div className="p-2.5 bg-white/[0.02] border border-white/5 rounded-xl space-y-1">
-                                      <span className="text-[9px] text-amber-400/80 font-bold uppercase tracking-wider block font-semibold mb-0.5">Stays Info</span>
-                                      <p className="text-[10px] text-white font-semibold">{t.staysHeading}</p>
-                                      <p className="text-[10px] text-white/60 leading-normal">{t.staysDesc}</p>
+                                      <span className="text-[9px] text-amber-400/80 font-bold uppercase tracking-wider block font-semibold mb-0.5">
+                                        Stays Info
+                                      </span>
+                                      <p className="text-[10px] text-white font-semibold">
+                                        {t.staysHeading}
+                                      </p>
+                                      <p className="text-[10px] text-white/60 leading-normal">
+                                        {t.staysDesc}
+                                      </p>
                                     </div>
                                   )}
 
                                   {t.highlights && t.highlights.length > 0 && (
                                     <div className="space-y-1">
-                                      <span className="text-[9px] text-white/40 font-bold uppercase tracking-wider block font-semibold mb-1">Highlights</span>
+                                      <span className="text-[9px] text-white/40 font-bold uppercase tracking-wider block font-semibold mb-1">
+                                        Highlights
+                                      </span>
                                       <ul className="list-disc list-inside text-[10px] text-white/70 space-y-1 leading-normal pl-1">
                                         {t.highlights.map((hl, i) => (
                                           <li key={i}>{hl}</li>
@@ -1181,7 +1348,9 @@ function AdminDashboardPage() {
 
                                   {t.inclusions && t.inclusions.length > 0 && (
                                     <div className="space-y-1">
-                                      <span className="text-[9px] text-white/40 font-bold uppercase tracking-wider block font-semibold mb-1">Inclusions</span>
+                                      <span className="text-[9px] text-white/40 font-bold uppercase tracking-wider block font-semibold mb-1">
+                                        Inclusions
+                                      </span>
                                       <ul className="list-disc list-inside text-[10px] text-white/70 space-y-1 leading-normal pl-1">
                                         {t.inclusions.map((inc, i) => (
                                           <li key={i}>{inc}</li>
@@ -1192,11 +1361,18 @@ function AdminDashboardPage() {
 
                                   {t.itinerary && t.itinerary.length > 0 && (
                                     <div className="space-y-2 border-t border-white/5 pt-2">
-                                      <span className="text-[9px] text-white/40 font-bold uppercase tracking-wider block font-semibold">Day-wise Itinerary</span>
+                                      <span className="text-[9px] text-white/40 font-bold uppercase tracking-wider block font-semibold">
+                                        Day-wise Itinerary
+                                      </span>
                                       <div className="space-y-2 max-h-48 overflow-y-auto pr-1">
                                         {t.itinerary.map((day) => (
-                                          <div key={day.day} className="p-2.5 bg-white/[0.01] border border-white/5 rounded-xl">
-                                            <span className="text-[10px] font-bold text-amber-400 block">Day {day.day}</span>
+                                          <div
+                                            key={day.day}
+                                            className="p-2.5 bg-white/[0.01] border border-white/5 rounded-xl"
+                                          >
+                                            <span className="text-[10px] font-bold text-amber-400 block">
+                                              Day {day.day}
+                                            </span>
                                             <ul className="list-disc list-inside text-[10px] text-white/75 mt-1 space-y-1 leading-normal pl-1">
                                               {day.points.map((pt, pIdx) => (
                                                 <li key={pIdx}>{pt}</li>
@@ -1210,11 +1386,18 @@ function AdminDashboardPage() {
 
                                   {t.darshans && t.darshans.length > 0 && (
                                     <div className="space-y-2 border-t border-white/5 pt-2">
-                                      <span className="text-[9px] text-white/40 font-bold uppercase tracking-wider block font-semibold">Sacred Darshans</span>
+                                      <span className="text-[9px] text-white/40 font-bold uppercase tracking-wider block font-semibold">
+                                        Sacred Darshans
+                                      </span>
                                       <div className="space-y-2 max-h-40 overflow-y-auto pr-1">
                                         {t.darshans.map((d, dIdx) => (
-                                          <div key={dIdx} className="p-2.5 bg-white/[0.01] border border-white/5 rounded-xl">
-                                            <span className="text-[10px] font-bold text-white block">{d.title}</span>
+                                          <div
+                                            key={dIdx}
+                                            className="p-2.5 bg-white/[0.01] border border-white/5 rounded-xl"
+                                          >
+                                            <span className="text-[10px] font-bold text-white block">
+                                              {d.title}
+                                            </span>
                                             <ul className="list-disc list-inside text-[10px] text-white/75 mt-1 space-y-1 leading-normal pl-1">
                                               {d.items.map((item, itemIdx) => (
                                                 <li key={itemIdx}>{item}</li>
@@ -1228,10 +1411,8 @@ function AdminDashboardPage() {
                                 </div>
                               )}
                             </div>
-
                           </div>
                         </div>
-
 
                         {/* Actions */}
                         <div className="px-4 py-3 bg-white/[0.01] border-t border-white/5 flex items-center justify-end gap-2">
@@ -1261,7 +1442,9 @@ function AdminDashboardPage() {
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-white/10 pb-5">
                   <div>
                     <h1 className="text-2xl font-display font-semibold">Knowledge Videos</h1>
-                    <p className="text-xs text-white/50 font-body">Manage videos and seeker testimonials in the Knowledge Portal</p>
+                    <p className="text-xs text-white/50 font-body">
+                      Manage videos and seeker testimonials in the Knowledge Portal
+                    </p>
                   </div>
                   <button
                     onClick={openAddVideo}
@@ -1274,20 +1457,31 @@ function AdminDashboardPage() {
                 {/* List grouped by category */}
                 {videos.length === 0 ? (
                   <div className="py-20 text-center bg-white/[0.01] border border-white/5 rounded-3xl">
-                    <p className="text-white/40 text-xs font-body">No Video records found. Seed initial data or add new.</p>
+                    <p className="text-white/40 text-xs font-body">
+                      No Video records found. Seed initial data or add new.
+                    </p>
                   </div>
                 ) : (
                   <div className="space-y-8 text-left font-body">
-                    {["Kashi Knowledge Portal", "Kashi Knowledge Portal • Quick Bits", "Testimonials (Coming Soon)"].map((cat) => {
+                    {[
+                      "Kashi Knowledge Portal",
+                      "Kashi Knowledge Portal • Quick Bits",
+                      "Testimonials (Coming Soon)",
+                    ].map((cat) => {
                       const catVideos = videos.filter((v) => v.category === cat);
                       if (catVideos.length === 0) return null;
                       return (
                         <div key={cat} className="space-y-4">
-                          <h3 className="text-sm font-semibold uppercase tracking-wider text-amber-400 border-b border-white/5 pb-2">{cat}</h3>
-                          
+                          <h3 className="text-sm font-semibold uppercase tracking-wider text-amber-400 border-b border-white/5 pb-2">
+                            {cat}
+                          </h3>
+
                           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                             {catVideos.map((video) => (
-                              <div key={video._id} className="bg-white/[0.02] border border-white/5 rounded-2xl overflow-hidden flex flex-col justify-between hover:border-white/10 transition duration-300 shadow-soft">
+                              <div
+                                key={video._id}
+                                className="bg-white/[0.02] border border-white/5 rounded-2xl overflow-hidden flex flex-col justify-between hover:border-white/10 transition duration-300 shadow-soft"
+                              >
                                 <div>
                                   {/* Iframe embed */}
                                   <div className="aspect-video bg-black/50">
@@ -1313,7 +1507,9 @@ function AdminDashboardPage() {
                                     <Edit size={12} />
                                   </button>
                                   <button
-                                    onClick={() => setDeleteConfirm({ id: video._id!, type: "video" })}
+                                    onClick={() =>
+                                      setDeleteConfirm({ id: video._id!, type: "video" })
+                                    }
                                     className="p-1.5 bg-red-500/10 border border-red-500/10 rounded-lg hover:bg-red-500 hover:text-white transition cursor-pointer text-red-400"
                                     title="Delete"
                                   >
@@ -1337,7 +1533,10 @@ function AdminDashboardPage() {
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-white/10 pb-5">
                   <div>
                     <h1 className="text-2xl font-display font-semibold">CEO Blogs & Quotes</h1>
-                    <p className="text-xs text-white/50 font-body">Manage philosophical blogs and idea quotes by the CEO/Founder shown on the home page</p>
+                    <p className="text-xs text-white/50 font-body">
+                      Manage philosophical blogs and idea quotes by the CEO/Founder shown on the
+                      home page
+                    </p>
                   </div>
                   <button
                     onClick={openAddBlog}
@@ -1349,23 +1548,36 @@ function AdminDashboardPage() {
 
                 {blogs.length === 0 ? (
                   <div className="py-20 text-center bg-white/[0.01] border border-white/5 rounded-3xl">
-                    <p className="text-white/40 text-xs font-body">No Blog posts found. Click Add Blog Post or seed data.</p>
+                    <p className="text-white/40 text-xs font-body">
+                      No Blog posts found. Click Add Blog Post or seed data.
+                    </p>
                   </div>
                 ) : (
                   <div className="space-y-6 text-left font-body">
                     {blogs.map((b) => (
-                      <div key={b._id} className="bg-white/[0.02] border border-white/10 p-6 rounded-3xl flex flex-col justify-between gap-6 hover:border-white/20 transition-all duration-300">
+                      <div
+                        key={b._id}
+                        className="bg-white/[0.02] border border-white/10 p-6 rounded-3xl flex flex-col justify-between gap-6 hover:border-white/20 transition-all duration-300"
+                      >
                         <div className="space-y-4">
                           <div className="flex justify-between items-start gap-4">
                             <div>
-                              <h3 className="text-lg font-display font-semibold text-white">{b.title}</h3>
+                              <h3 className="text-lg font-display font-semibold text-white">
+                                {b.title}
+                              </h3>
                               <div className="flex items-center gap-2 mt-1">
-                                <span className="text-[10px] text-amber-400 font-bold uppercase tracking-wider">{b.authorName || "Nileema Shenoy"}</span>
+                                <span className="text-[10px] text-amber-400 font-bold uppercase tracking-wider">
+                                  {b.authorName || "Nileema Shenoy"}
+                                </span>
                                 <span className="text-white/30 text-[10px]">•</span>
-                                <span className="text-[9px] text-white/50 uppercase font-semibold">{b.authorTitle || "Founder & CEO"}</span>
+                                <span className="text-[9px] text-white/50 uppercase font-semibold">
+                                  {b.authorTitle || "Founder & CEO"}
+                                </span>
                               </div>
                             </div>
-                            <span className={`px-2 py-0.5 rounded text-[8px] font-bold uppercase tracking-wider ${b.isPublished ? 'bg-green-500/20 text-green-300 border border-green-500/30' : 'bg-white/10 text-white/40'}`}>
+                            <span
+                              className={`px-2 py-0.5 rounded text-[8px] font-bold uppercase tracking-wider ${b.isPublished ? "bg-green-500/20 text-green-300 border border-green-500/30" : "bg-white/10 text-white/40"}`}
+                            >
                               {b.isPublished ? "Published" : "Draft"}
                             </span>
                           </div>
@@ -1396,13 +1608,11 @@ function AdminDashboardPage() {
                           </button>
                         </div>
                       </div>
-                    ))
-                  }
+                    ))}
                   </div>
                 )}
               </div>
             )}
-
           </main>
         </div>
       </section>
@@ -1413,10 +1623,17 @@ function AdminDashboardPage() {
           <div className="bg-[#140817] border border-white/10 rounded-3xl w-full max-w-lg overflow-hidden shadow-2xl relative font-body text-xs text-left">
             <div className="p-6 border-b border-white/10 flex justify-between items-center bg-white/[0.01]">
               <div>
-                <p className="text-[9px] uppercase tracking-wider text-amber-400 font-semibold">Enquiry details</p>
-                <h3 className="text-xl font-display font-semibold text-white mt-0.5">{selectedEnquiry.name}</h3>
+                <p className="text-[9px] uppercase tracking-wider text-amber-400 font-semibold">
+                  Enquiry details
+                </p>
+                <h3 className="text-xl font-display font-semibold text-white mt-0.5">
+                  {selectedEnquiry.name}
+                </h3>
               </div>
-              <button onClick={() => setSelectedEnquiry(null)} className="p-1.5 hover:bg-white/5 rounded-full transition text-white/60 hover:text-white cursor-pointer">
+              <button
+                onClick={() => setSelectedEnquiry(null)}
+                className="p-1.5 hover:bg-white/5 rounded-full transition text-white/60 hover:text-white cursor-pointer"
+              >
                 <X size={18} />
               </button>
             </div>
@@ -1429,15 +1646,21 @@ function AdminDashboardPage() {
                 </div>
                 {selectedEnquiry.email && (
                   <div>
-                    <p className="text-[9px] uppercase text-white/40 tracking-wider">Email Address</p>
-                    <p className="text-white font-medium mt-0.5 truncate">✉ {selectedEnquiry.email}</p>
+                    <p className="text-[9px] uppercase text-white/40 tracking-wider">
+                      Email Address
+                    </p>
+                    <p className="text-white font-medium mt-0.5 truncate">
+                      ✉ {selectedEnquiry.email}
+                    </p>
                   </div>
                 )}
               </div>
 
               <div className="p-4 bg-white/[0.02] border border-white/5 rounded-2xl flex justify-between items-center">
                 <span className="text-white/50 uppercase tracking-wider">Preferred Yatra</span>
-                <span className="text-amber-400 font-semibold">{selectedEnquiry.preferredYatra}</span>
+                <span className="text-amber-400 font-semibold">
+                  {selectedEnquiry.preferredYatra}
+                </span>
               </div>
 
               <div className="space-y-1.5">
@@ -1458,11 +1681,12 @@ function AdminDashboardPage() {
             <div className="w-12 h-12 bg-red-500/10 border border-red-500/20 rounded-full flex items-center justify-center text-red-500 mx-auto text-lg">
               ⚠️
             </div>
-            
+
             <div className="space-y-2">
               <h3 className="text-lg font-display font-semibold text-white">Delete Item?</h3>
               <p className="text-white/60 text-xs leading-relaxed max-w-xs mx-auto">
-                This action is irreversible. It will permanently remove this {deleteConfirm.type} from the database.
+                This action is irreversible. It will permanently remove this {deleteConfirm.type}{" "}
+                from the database.
               </p>
             </div>
 
@@ -1488,26 +1712,34 @@ function AdminDashboardPage() {
       {isFormOpen && (
         <div className="fixed inset-0 bg-[#000]/85 backdrop-blur-md z-50 flex items-center justify-center p-4 overflow-y-auto">
           <div className="bg-[#140817] border border-white/10 rounded-3xl w-full max-w-2xl overflow-hidden shadow-2xl relative font-body text-xs text-left max-h-[90vh] flex flex-col">
-            
             {/* Modal Header */}
             <div className="p-6 border-b border-white/10 flex justify-between items-center bg-white/[0.01] shrink-0">
               <h2 className="text-xl font-display font-semibold text-white">
-                {formMode === "add" ? "Create New" : "Edit"} {formType === "yatra" ? "Yatra & Retreat" : formType === "teertha" ? "Teertha" : "Knowledge Video"}
+                {formMode === "add" ? "Create New" : "Edit"}{" "}
+                {formType === "yatra"
+                  ? "Yatra & Retreat"
+                  : formType === "teertha"
+                    ? "Teertha"
+                    : "Knowledge Video"}
               </h2>
-              <button onClick={() => setIsFormOpen(false)} className="p-1.5 hover:bg-white/5 rounded-full transition text-white/60 hover:text-white cursor-pointer">
+              <button
+                onClick={() => setIsFormOpen(false)}
+                className="p-1.5 hover:bg-white/5 rounded-full transition text-white/60 hover:text-white cursor-pointer"
+              >
                 <X size={18} />
               </button>
             </div>
 
             {/* Modal Body Scroll Container */}
             <div className="p-6 overflow-y-auto space-y-6 flex-1">
-              
               {/* YATRA FORM */}
               {formType === "yatra" && (
                 <form onSubmit={handleYatraSubmit} className="space-y-4">
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-[10px] uppercase tracking-wider text-amber-400 mb-1">Name *</label>
+                      <label className="block text-[10px] uppercase tracking-wider text-amber-400 mb-1">
+                        Name *
+                      </label>
                       <input
                         type="text"
                         required
@@ -1518,12 +1750,19 @@ function AdminDashboardPage() {
                       />
                     </div>
                     <div>
-                      <label className="block text-[10px] uppercase tracking-wider text-amber-400 mb-1">Slug *</label>
+                      <label className="block text-[10px] uppercase tracking-wider text-amber-400 mb-1">
+                        Slug *
+                      </label>
                       <input
                         type="text"
                         required
                         value={yatraForm.slug}
-                        onChange={(e) => setYatraForm({ ...yatraForm, slug: e.target.value.toLowerCase().replace(/\s+/g, "-") })}
+                        onChange={(e) =>
+                          setYatraForm({
+                            ...yatraForm,
+                            slug: e.target.value.toLowerCase().replace(/\s+/g, "-"),
+                          })
+                        }
                         className="w-full p-3 rounded-xl bg-white/[0.03] border border-white/10 text-white placeholder-white/20 focus:outline-none focus:border-amber-400"
                         placeholder="e.g. ayodhya-kashi"
                       />
@@ -1532,7 +1771,9 @@ function AdminDashboardPage() {
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-[10px] uppercase tracking-wider text-amber-400 mb-1">Date *</label>
+                      <label className="block text-[10px] uppercase tracking-wider text-amber-400 mb-1">
+                        Date *
+                      </label>
                       <input
                         type="text"
                         required
@@ -1543,7 +1784,9 @@ function AdminDashboardPage() {
                       />
                     </div>
                     <div>
-                      <label className="block text-[10px] uppercase tracking-wider text-amber-400 mb-1">Duration *</label>
+                      <label className="block text-[10px] uppercase tracking-wider text-amber-400 mb-1">
+                        Duration *
+                      </label>
                       <input
                         type="text"
                         required
@@ -1556,7 +1799,9 @@ function AdminDashboardPage() {
                   </div>
 
                   <div>
-                    <label className="block text-[10px] uppercase tracking-wider text-amber-400 mb-1">Image Path/URL *</label>
+                    <label className="block text-[10px] uppercase tracking-wider text-amber-400 mb-1">
+                      Image Path/URL *
+                    </label>
                     <input
                       type="text"
                       required
@@ -1568,7 +1813,9 @@ function AdminDashboardPage() {
                   </div>
 
                   <div>
-                    <label className="block text-[10px] uppercase tracking-wider text-amber-400 mb-1">Description *</label>
+                    <label className="block text-[10px] uppercase tracking-wider text-amber-400 mb-1">
+                      Description *
+                    </label>
                     <textarea
                       required
                       rows={3}
@@ -1581,21 +1828,29 @@ function AdminDashboardPage() {
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 border-t border-white/5 pt-4">
                     <div>
-                      <label className="block text-[10px] uppercase tracking-wider text-amber-400 mb-1">Triple Occupancy Price</label>
+                      <label className="block text-[10px] uppercase tracking-wider text-amber-400 mb-1">
+                        Triple Occupancy Price
+                      </label>
                       <input
                         type="text"
                         value={yatraForm.triplePrice}
-                        onChange={(e) => setYatraForm({ ...yatraForm, triplePrice: e.target.value })}
+                        onChange={(e) =>
+                          setYatraForm({ ...yatraForm, triplePrice: e.target.value })
+                        }
                         className="w-full p-3 rounded-xl bg-white/[0.03] border border-white/10 text-white placeholder-white/20 focus:outline-none focus:border-amber-400"
                         placeholder="e.g. Rs. 39000 per Head"
                       />
                     </div>
                     <div>
-                      <label className="block text-[10px] uppercase tracking-wider text-amber-400 mb-1">Double Occupancy Price</label>
+                      <label className="block text-[10px] uppercase tracking-wider text-amber-400 mb-1">
+                        Double Occupancy Price
+                      </label>
                       <input
                         type="text"
                         value={yatraForm.doublePrice}
-                        onChange={(e) => setYatraForm({ ...yatraForm, doublePrice: e.target.value })}
+                        onChange={(e) =>
+                          setYatraForm({ ...yatraForm, doublePrice: e.target.value })
+                        }
                         className="w-full p-3 rounded-xl bg-white/[0.03] border border-white/10 text-white placeholder-white/20 focus:outline-none focus:border-amber-400"
                         placeholder="e.g. Rs. 42000 per Head"
                       />
@@ -1603,7 +1858,9 @@ function AdminDashboardPage() {
                   </div>
 
                   <div className="border-t border-white/5 pt-4">
-                    <label className="block text-[10px] uppercase tracking-wider text-amber-400 mb-1">Brand Slogan Banner</label>
+                    <label className="block text-[10px] uppercase tracking-wider text-amber-400 mb-1">
+                      Brand Slogan Banner
+                    </label>
                     <input
                       type="text"
                       value={yatraForm.slogan}
@@ -1615,17 +1872,23 @@ function AdminDashboardPage() {
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 border-t border-white/5 pt-4">
                     <div>
-                      <label className="block text-[10px] uppercase tracking-wider text-amber-400 mb-1">Stays Section Heading</label>
+                      <label className="block text-[10px] uppercase tracking-wider text-amber-400 mb-1">
+                        Stays Section Heading
+                      </label>
                       <input
                         type="text"
                         value={yatraForm.staysHeading}
-                        onChange={(e) => setYatraForm({ ...yatraForm, staysHeading: e.target.value })}
+                        onChange={(e) =>
+                          setYatraForm({ ...yatraForm, staysHeading: e.target.value })
+                        }
                         className="w-full p-3 rounded-xl bg-white/[0.03] border border-white/10 text-white placeholder-white/20 focus:outline-none focus:border-amber-400"
                         placeholder="e.g. We Curate Divine Heritage Stays"
                       />
                     </div>
                     <div>
-                      <label className="block text-[10px] uppercase tracking-wider text-amber-400 mb-1">Stays Section Description</label>
+                      <label className="block text-[10px] uppercase tracking-wider text-amber-400 mb-1">
+                        Stays Section Description
+                      </label>
                       <textarea
                         rows={2}
                         value={yatraForm.staysDesc}
@@ -1638,11 +1901,18 @@ function AdminDashboardPage() {
 
                   {/* Inclusions text area (one per line) */}
                   <div className="border-t border-white/5 pt-4">
-                    <label className="block text-[10px] uppercase tracking-wider text-amber-400 mb-1">Inclusions (one per line)</label>
+                    <label className="block text-[10px] uppercase tracking-wider text-amber-400 mb-1">
+                      Inclusions (one per line)
+                    </label>
                     <textarea
                       rows={4}
                       value={yatraForm.inclusions?.join("\n")}
-                      onChange={(e) => setYatraForm({ ...yatraForm, inclusions: e.target.value.split("\n").filter(Boolean) })}
+                      onChange={(e) =>
+                        setYatraForm({
+                          ...yatraForm,
+                          inclusions: e.target.value.split("\n").filter(Boolean),
+                        })
+                      }
                       className="w-full p-3 rounded-xl bg-white/[0.03] border border-white/10 text-white placeholder-white/20 focus:outline-none focus:border-amber-400"
                       placeholder="Premium accommodation...&#10;Yoga sessions..."
                     />
@@ -1651,14 +1921,16 @@ function AdminDashboardPage() {
                   {/* Itinerary builder */}
                   <div className="border-t border-white/5 pt-4 space-y-3">
                     <div className="flex justify-between items-center">
-                      <label className="block text-[10px] uppercase tracking-wider text-amber-400">Day-wise Itinerary</label>
+                      <label className="block text-[10px] uppercase tracking-wider text-amber-400">
+                        Day-wise Itinerary
+                      </label>
                       <button
                         type="button"
                         onClick={() => {
                           const current = yatraForm.itinerary || [];
                           setYatraForm({
                             ...yatraForm,
-                            itinerary: [...current, { day: current.length + 1, points: [] }]
+                            itinerary: [...current, { day: current.length + 1, points: [] }],
                           });
                         }}
                         className="px-3 py-1 bg-white/5 hover:bg-white/10 rounded-xl text-[10px] font-bold cursor-pointer"
@@ -1669,7 +1941,10 @@ function AdminDashboardPage() {
 
                     <div className="space-y-4">
                       {yatraForm.itinerary?.map((day, idx) => (
-                        <div key={idx} className="bg-white/[0.01] border border-white/5 p-4 rounded-2xl relative space-y-2">
+                        <div
+                          key={idx}
+                          className="bg-white/[0.01] border border-white/5 p-4 rounded-2xl relative space-y-2"
+                        >
                           <button
                             type="button"
                             onClick={() => {
@@ -1683,7 +1958,7 @@ function AdminDashboardPage() {
                           >
                             <Trash2 size={12} />
                           </button>
-                          
+
                           <p className="font-semibold text-white">Day {day.day}</p>
                           <textarea
                             rows={3}
@@ -1704,14 +1979,16 @@ function AdminDashboardPage() {
                   {/* Darshans builder */}
                   <div className="border-t border-white/5 pt-4 space-y-3">
                     <div className="flex justify-between items-center">
-                      <label className="block text-[10px] uppercase tracking-wider text-amber-400">Sacred Darshans</label>
+                      <label className="block text-[10px] uppercase tracking-wider text-amber-400">
+                        Sacred Darshans
+                      </label>
                       <button
                         type="button"
                         onClick={() => {
                           const current = yatraForm.darshans || [];
                           setYatraForm({
                             ...yatraForm,
-                            darshans: [...current, { title: "", items: [] }]
+                            darshans: [...current, { title: "", items: [] }],
                           });
                         }}
                         className="px-3 py-1 bg-white/5 hover:bg-white/10 rounded-xl text-[10px] font-bold cursor-pointer"
@@ -1722,7 +1999,10 @@ function AdminDashboardPage() {
 
                     <div className="space-y-4">
                       {yatraForm.darshans?.map((cat, idx) => (
-                        <div key={idx} className="bg-white/[0.01] border border-white/5 p-4 rounded-2xl relative space-y-2">
+                        <div
+                          key={idx}
+                          className="bg-white/[0.01] border border-white/5 p-4 rounded-2xl relative space-y-2"
+                        >
                           <button
                             type="button"
                             onClick={() => {
@@ -1734,7 +2014,7 @@ function AdminDashboardPage() {
                           >
                             <Trash2 size={12} />
                           </button>
-                          
+
                           <input
                             type="text"
                             required
@@ -1747,7 +2027,7 @@ function AdminDashboardPage() {
                             className="w-full p-2 bg-white/[0.03] border border-white/10 text-white placeholder-white/20 focus:outline-none"
                             placeholder="Category Title (e.g. Kashi Sacred Sites)"
                           />
-                          
+
                           <textarea
                             rows={3}
                             value={cat.items.join("\n")}
@@ -1788,7 +2068,9 @@ function AdminDashboardPage() {
                 <form onSubmit={handleTeerthaSubmit} className="space-y-4">
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-[10px] uppercase tracking-wider text-amber-400 mb-1">Name *</label>
+                      <label className="block text-[10px] uppercase tracking-wider text-amber-400 mb-1">
+                        Name *
+                      </label>
                       <input
                         type="text"
                         required
@@ -1799,12 +2081,19 @@ function AdminDashboardPage() {
                       />
                     </div>
                     <div>
-                      <label className="block text-[10px] uppercase tracking-wider text-amber-400 mb-1">Slug *</label>
+                      <label className="block text-[10px] uppercase tracking-wider text-amber-400 mb-1">
+                        Slug *
+                      </label>
                       <input
                         type="text"
                         required
                         value={teerthaForm.slug}
-                        onChange={(e) => setTeerthaForm({ ...teerthaForm, slug: e.target.value.toLowerCase().replace(/\s+/g, "-") })}
+                        onChange={(e) =>
+                          setTeerthaForm({
+                            ...teerthaForm,
+                            slug: e.target.value.toLowerCase().replace(/\s+/g, "-"),
+                          })
+                        }
                         className="w-full p-3 rounded-xl bg-white/[0.03] border border-white/10 text-white placeholder-white/20 focus:outline-none focus:border-amber-400"
                         placeholder="e.g. ayodhya"
                       />
@@ -1813,7 +2102,9 @@ function AdminDashboardPage() {
 
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                     <div>
-                      <label className="block text-[10px] uppercase tracking-wider text-amber-400 mb-1">Region *</label>
+                      <label className="block text-[10px] uppercase tracking-wider text-amber-400 mb-1">
+                        Region *
+                      </label>
                       <select
                         value={teerthaForm.region}
                         onChange={(e) => setTeerthaForm({ ...teerthaForm, region: e.target.value })}
@@ -1826,23 +2117,31 @@ function AdminDashboardPage() {
                       </select>
                     </div>
                     <div>
-                      <label className="block text-[10px] uppercase tracking-wider text-amber-400 mb-1">Significance *</label>
+                      <label className="block text-[10px] uppercase tracking-wider text-amber-400 mb-1">
+                        Significance *
+                      </label>
                       <input
                         type="text"
                         required
                         value={teerthaForm.significance || ""}
-                        onChange={(e) => setTeerthaForm({ ...teerthaForm, significance: e.target.value })}
+                        onChange={(e) =>
+                          setTeerthaForm({ ...teerthaForm, significance: e.target.value })
+                        }
                         className="w-full p-3 rounded-xl bg-white/[0.03] border border-white/10 text-white placeholder-white/20 focus:outline-none focus:border-amber-400"
                         placeholder="e.g. Ramayana"
                       />
                     </div>
                     <div>
-                      <label className="block text-[10px] uppercase tracking-wider text-amber-400 mb-1">Duration *</label>
+                      <label className="block text-[10px] uppercase tracking-wider text-amber-400 mb-1">
+                        Duration *
+                      </label>
                       <input
                         type="text"
                         required
                         value={teerthaForm.duration}
-                        onChange={(e) => setTeerthaForm({ ...teerthaForm, duration: e.target.value })}
+                        onChange={(e) =>
+                          setTeerthaForm({ ...teerthaForm, duration: e.target.value })
+                        }
                         className="w-full p-3 rounded-xl bg-white/[0.03] border border-white/10 text-white placeholder-white/20 focus:outline-none focus:border-amber-400"
                         placeholder="e.g. 2-3 days"
                       />
@@ -1850,7 +2149,9 @@ function AdminDashboardPage() {
                   </div>
 
                   <div>
-                    <label className="block text-[10px] uppercase tracking-wider text-amber-400 mb-1">Tagline</label>
+                    <label className="block text-[10px] uppercase tracking-wider text-amber-400 mb-1">
+                      Tagline
+                    </label>
                     <input
                       type="text"
                       value={teerthaForm.tagline}
@@ -1862,7 +2163,9 @@ function AdminDashboardPage() {
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-[10px] uppercase tracking-wider text-amber-400 mb-1">Image Path/URL *</label>
+                      <label className="block text-[10px] uppercase tracking-wider text-amber-400 mb-1">
+                        Image Path/URL *
+                      </label>
                       <input
                         type="text"
                         required
@@ -1873,7 +2176,9 @@ function AdminDashboardPage() {
                       />
                     </div>
                     <div>
-                      <label className="block text-[10px] uppercase tracking-wider text-amber-400 mb-1">Date</label>
+                      <label className="block text-[10px] uppercase tracking-wider text-amber-400 mb-1">
+                        Date
+                      </label>
                       <input
                         type="text"
                         value={teerthaForm.date}
@@ -1885,7 +2190,9 @@ function AdminDashboardPage() {
                   </div>
 
                   <div>
-                    <label className="block text-[10px] uppercase tracking-wider text-amber-400 mb-1">Description *</label>
+                    <label className="block text-[10px] uppercase tracking-wider text-amber-400 mb-1">
+                      Description *
+                    </label>
                     <textarea
                       required
                       rows={3}
@@ -1899,21 +2206,35 @@ function AdminDashboardPage() {
                   {/* Highlights and Inclusions */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 border-t border-white/5 pt-4">
                     <div>
-                      <label className="block text-[10px] uppercase tracking-wider text-amber-400 mb-1">Highlights (one per line)</label>
+                      <label className="block text-[10px] uppercase tracking-wider text-amber-400 mb-1">
+                        Highlights (one per line)
+                      </label>
                       <textarea
                         rows={4}
                         value={teerthaForm.highlights?.join("\n")}
-                        onChange={(e) => setTeerthaForm({ ...teerthaForm, highlights: e.target.value.split("\n").filter(Boolean) })}
+                        onChange={(e) =>
+                          setTeerthaForm({
+                            ...teerthaForm,
+                            highlights: e.target.value.split("\n").filter(Boolean),
+                          })
+                        }
                         className="w-full p-3 rounded-xl bg-white/[0.03] border border-white/10 text-white placeholder-white/20 focus:outline-none focus:border-amber-400"
                         placeholder="VIP Darshan...&#10;Sarayu snan..."
                       />
                     </div>
                     <div>
-                      <label className="block text-[10px] uppercase tracking-wider text-amber-400 mb-1">Inclusions (one per line)</label>
+                      <label className="block text-[10px] uppercase tracking-wider text-amber-400 mb-1">
+                        Inclusions (one per line)
+                      </label>
                       <textarea
                         rows={4}
                         value={teerthaForm.inclusions?.join("\n")}
-                        onChange={(e) => setTeerthaForm({ ...teerthaForm, inclusions: e.target.value.split("\n").filter(Boolean) })}
+                        onChange={(e) =>
+                          setTeerthaForm({
+                            ...teerthaForm,
+                            inclusions: e.target.value.split("\n").filter(Boolean),
+                          })
+                        }
                         className="w-full p-3 rounded-xl bg-white/[0.03] border border-white/10 text-white placeholder-white/20 focus:outline-none focus:border-amber-400"
                         placeholder="Comfortable stays...&#10;Meals included..."
                       />
@@ -1922,21 +2243,29 @@ function AdminDashboardPage() {
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 border-t border-white/5 pt-4">
                     <div>
-                      <label className="block text-[10px] uppercase tracking-wider text-amber-400 mb-1">Triple Occupancy Price</label>
+                      <label className="block text-[10px] uppercase tracking-wider text-amber-400 mb-1">
+                        Triple Occupancy Price
+                      </label>
                       <input
                         type="text"
                         value={teerthaForm.triplePrice}
-                        onChange={(e) => setTeerthaForm({ ...teerthaForm, triplePrice: e.target.value })}
+                        onChange={(e) =>
+                          setTeerthaForm({ ...teerthaForm, triplePrice: e.target.value })
+                        }
                         className="w-full p-3 rounded-xl bg-white/[0.03] border border-white/10 text-white placeholder-white/20 focus:outline-none focus:border-amber-400"
                         placeholder="e.g. Rs. 16,000 per Head"
                       />
                     </div>
                     <div>
-                      <label className="block text-[10px] uppercase tracking-wider text-amber-400 mb-1">Double Occupancy Price</label>
+                      <label className="block text-[10px] uppercase tracking-wider text-amber-400 mb-1">
+                        Double Occupancy Price
+                      </label>
                       <input
                         type="text"
                         value={teerthaForm.doublePrice}
-                        onChange={(e) => setTeerthaForm({ ...teerthaForm, doublePrice: e.target.value })}
+                        onChange={(e) =>
+                          setTeerthaForm({ ...teerthaForm, doublePrice: e.target.value })
+                        }
                         className="w-full p-3 rounded-xl bg-white/[0.03] border border-white/10 text-white placeholder-white/20 focus:outline-none focus:border-amber-400"
                         placeholder="e.g. Rs. 20,000 per Head"
                       />
@@ -1945,21 +2274,29 @@ function AdminDashboardPage() {
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 border-t border-white/5 pt-4">
                     <div>
-                      <label className="block text-[10px] uppercase tracking-wider text-amber-400 mb-1">Stays Heading</label>
+                      <label className="block text-[10px] uppercase tracking-wider text-amber-400 mb-1">
+                        Stays Heading
+                      </label>
                       <input
                         type="text"
                         value={teerthaForm.staysHeading}
-                        onChange={(e) => setTeerthaForm({ ...teerthaForm, staysHeading: e.target.value })}
+                        onChange={(e) =>
+                          setTeerthaForm({ ...teerthaForm, staysHeading: e.target.value })
+                        }
                         className="w-full p-3 rounded-xl bg-white/[0.03] border border-white/10 text-white placeholder-white/20 focus:outline-none focus:border-amber-400"
                         placeholder="e.g. Stay Near Ram Janmabhoomi"
                       />
                     </div>
                     <div>
-                      <label className="block text-[10px] uppercase tracking-wider text-amber-400 mb-1">Stays Description</label>
+                      <label className="block text-[10px] uppercase tracking-wider text-amber-400 mb-1">
+                        Stays Description
+                      </label>
                       <textarea
                         rows={2}
                         value={teerthaForm.staysDesc}
-                        onChange={(e) => setTeerthaForm({ ...teerthaForm, staysDesc: e.target.value })}
+                        onChange={(e) =>
+                          setTeerthaForm({ ...teerthaForm, staysDesc: e.target.value })
+                        }
                         className="w-full p-3 rounded-xl bg-white/[0.03] border border-white/10 text-white placeholder-white/20 focus:outline-none focus:border-amber-400 resize-none"
                         placeholder="Enter stays info..."
                       />
@@ -1967,7 +2304,9 @@ function AdminDashboardPage() {
                   </div>
 
                   <div className="border-t border-white/5 pt-4">
-                    <label className="block text-[10px] uppercase tracking-wider text-amber-400 mb-1">Slogan Banner</label>
+                    <label className="block text-[10px] uppercase tracking-wider text-amber-400 mb-1">
+                      Slogan Banner
+                    </label>
                     <input
                       type="text"
                       value={teerthaForm.slogan}
@@ -1980,14 +2319,16 @@ function AdminDashboardPage() {
                   {/* Itinerary builder */}
                   <div className="border-t border-white/5 pt-4 space-y-3">
                     <div className="flex justify-between items-center">
-                      <label className="block text-[10px] uppercase tracking-wider text-amber-400">Day-wise Itinerary</label>
+                      <label className="block text-[10px] uppercase tracking-wider text-amber-400">
+                        Day-wise Itinerary
+                      </label>
                       <button
                         type="button"
                         onClick={() => {
                           const current = teerthaForm.itinerary || [];
                           setTeerthaForm({
                             ...teerthaForm,
-                            itinerary: [...current, { day: current.length + 1, points: [] }]
+                            itinerary: [...current, { day: current.length + 1, points: [] }],
                           });
                         }}
                         className="px-3 py-1 bg-white/5 hover:bg-white/10 rounded-xl text-[10px] font-bold cursor-pointer"
@@ -1998,7 +2339,10 @@ function AdminDashboardPage() {
 
                     <div className="space-y-4">
                       {teerthaForm.itinerary?.map((day, idx) => (
-                        <div key={idx} className="bg-white/[0.01] border border-white/5 p-4 rounded-2xl relative space-y-2">
+                        <div
+                          key={idx}
+                          className="bg-white/[0.01] border border-white/5 p-4 rounded-2xl relative space-y-2"
+                        >
                           <button
                             type="button"
                             onClick={() => {
@@ -2011,7 +2355,7 @@ function AdminDashboardPage() {
                           >
                             <Trash2 size={12} />
                           </button>
-                          
+
                           <p className="font-semibold text-white">Day {day.day}</p>
                           <textarea
                             rows={3}
@@ -2032,14 +2376,16 @@ function AdminDashboardPage() {
                   {/* Darshans builder */}
                   <div className="border-t border-white/5 pt-4 space-y-3">
                     <div className="flex justify-between items-center">
-                      <label className="block text-[10px] uppercase tracking-wider text-amber-400">Sacred Darshans</label>
+                      <label className="block text-[10px] uppercase tracking-wider text-amber-400">
+                        Sacred Darshans
+                      </label>
                       <button
                         type="button"
                         onClick={() => {
                           const current = teerthaForm.darshans || [];
                           setTeerthaForm({
                             ...teerthaForm,
-                            darshans: [...current, { title: "", items: [] }]
+                            darshans: [...current, { title: "", items: [] }],
                           });
                         }}
                         className="px-3 py-1 bg-white/5 hover:bg-white/10 rounded-xl text-[10px] font-bold cursor-pointer"
@@ -2050,7 +2396,10 @@ function AdminDashboardPage() {
 
                     <div className="space-y-4">
                       {teerthaForm.darshans?.map((cat, idx) => (
-                        <div key={idx} className="bg-white/[0.01] border border-white/5 p-4 rounded-2xl relative space-y-2">
+                        <div
+                          key={idx}
+                          className="bg-white/[0.01] border border-white/5 p-4 rounded-2xl relative space-y-2"
+                        >
                           <button
                             type="button"
                             onClick={() => {
@@ -2062,7 +2411,7 @@ function AdminDashboardPage() {
                           >
                             <Trash2 size={12} />
                           </button>
-                          
+
                           <input
                             type="text"
                             required
@@ -2075,7 +2424,7 @@ function AdminDashboardPage() {
                             className="w-full p-2 bg-white/[0.03] border border-white/10 text-white placeholder-white/20 focus:outline-none"
                             placeholder="Category Title"
                           />
-                          
+
                           <textarea
                             rows={3}
                             value={cat.items.join("\n")}
@@ -2115,20 +2464,28 @@ function AdminDashboardPage() {
               {formType === "video" && (
                 <form onSubmit={handleVideoSubmit} className="space-y-4">
                   <div>
-                    <label className="block text-[10px] uppercase tracking-wider text-amber-400 mb-1">Category *</label>
+                    <label className="block text-[10px] uppercase tracking-wider text-amber-400 mb-1">
+                      Category *
+                    </label>
                     <select
                       value={videoForm.category}
-                      onChange={(e) => setVideoForm({ ...videoForm, category: e.target.value as any })}
+                      onChange={(e) =>
+                        setVideoForm({ ...videoForm, category: e.target.value as any })
+                      }
                       className="w-full p-3 rounded-xl bg-white/[0.03] border border-white/10 text-white focus:outline-none focus:border-amber-400 [&>option]:bg-[#140817]"
                     >
                       <option value="Kashi Knowledge Portal">Kashi Knowledge Portal</option>
-                      <option value="Kashi Knowledge Portal • Quick Bits">Kashi Knowledge Portal • Quick Bits</option>
+                      <option value="Kashi Knowledge Portal • Quick Bits">
+                        Kashi Knowledge Portal • Quick Bits
+                      </option>
                       <option value="Testimonials (Coming Soon)">Testimonials (Coming Soon)</option>
                     </select>
                   </div>
 
                   <div>
-                    <label className="block text-[10px] uppercase tracking-wider text-amber-400 mb-1">YouTube Embed URL *</label>
+                    <label className="block text-[10px] uppercase tracking-wider text-amber-400 mb-1">
+                      YouTube Embed URL *
+                    </label>
                     <input
                       type="text"
                       required
@@ -2138,7 +2495,8 @@ function AdminDashboardPage() {
                       placeholder="e.g. https://www.youtube.com/embed/LOqXUmuFGI4"
                     />
                     <p className="text-[10px] text-white/45 mt-1.5 leading-relaxed">
-                      Must be a valid YouTube embed URL containing "/embed/". (Example: https://www.youtube.com/embed/XXXXXX)
+                      Must be a valid YouTube embed URL containing "/embed/". (Example:
+                      https://www.youtube.com/embed/XXXXXX)
                     </p>
                   </div>
 
@@ -2178,7 +2536,9 @@ function AdminDashboardPage() {
               {formType === "blog" && (
                 <form onSubmit={handleBlogSubmit} className="space-y-4">
                   <div>
-                    <label className="block text-[10px] uppercase tracking-wider text-amber-400 mb-1">Title *</label>
+                    <label className="block text-[10px] uppercase tracking-wider text-amber-400 mb-1">
+                      Title *
+                    </label>
                     <input
                       type="text"
                       required
@@ -2190,7 +2550,9 @@ function AdminDashboardPage() {
                   </div>
 
                   <div>
-                    <label className="block text-[10px] uppercase tracking-wider text-amber-400 mb-1">Quote (CEO Statement)</label>
+                    <label className="block text-[10px] uppercase tracking-wider text-amber-400 mb-1">
+                      Quote (CEO Statement)
+                    </label>
                     <input
                       type="text"
                       value={blogForm.quote}
@@ -2201,7 +2563,9 @@ function AdminDashboardPage() {
                   </div>
 
                   <div>
-                    <label className="block text-[10px] uppercase tracking-wider text-amber-400 mb-1">Content / Body *</label>
+                    <label className="block text-[10px] uppercase tracking-wider text-amber-400 mb-1">
+                      Content / Body *
+                    </label>
                     <textarea
                       required
                       rows={6}
@@ -2214,7 +2578,9 @@ function AdminDashboardPage() {
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 border-t border-white/5 pt-4">
                     <div>
-                      <label className="block text-[10px] uppercase tracking-wider text-amber-400 mb-1">Author Name</label>
+                      <label className="block text-[10px] uppercase tracking-wider text-amber-400 mb-1">
+                        Author Name
+                      </label>
                       <input
                         type="text"
                         value={blogForm.authorName}
@@ -2224,7 +2590,9 @@ function AdminDashboardPage() {
                       />
                     </div>
                     <div>
-                      <label className="block text-[10px] uppercase tracking-wider text-amber-400 mb-1">Author Title</label>
+                      <label className="block text-[10px] uppercase tracking-wider text-amber-400 mb-1">
+                        Author Title
+                      </label>
                       <input
                         type="text"
                         value={blogForm.authorTitle}
@@ -2237,7 +2605,9 @@ function AdminDashboardPage() {
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 border-t border-white/5 pt-4">
                     <div>
-                      <label className="block text-[10px] uppercase tracking-wider text-amber-400 mb-1">Author Image Path/URL</label>
+                      <label className="block text-[10px] uppercase tracking-wider text-amber-400 mb-1">
+                        Author Image Path/URL
+                      </label>
                       <input
                         type="text"
                         value={blogForm.authorImage}
@@ -2247,10 +2617,14 @@ function AdminDashboardPage() {
                       />
                     </div>
                     <div>
-                      <label className="block text-[10px] uppercase tracking-wider text-amber-400 mb-1">Status</label>
+                      <label className="block text-[10px] uppercase tracking-wider text-amber-400 mb-1">
+                        Status
+                      </label>
                       <select
                         value={blogForm.isPublished ? "true" : "false"}
-                        onChange={(e) => setBlogForm({ ...blogForm, isPublished: e.target.value === "true" })}
+                        onChange={(e) =>
+                          setBlogForm({ ...blogForm, isPublished: e.target.value === "true" })
+                        }
                         className="w-full p-3 rounded-xl bg-white/[0.03] border border-white/10 text-white focus:outline-none focus:border-amber-400 [&>option]:bg-[#140817]"
                       >
                         <option value="true">Published</option>
@@ -2277,13 +2651,10 @@ function AdminDashboardPage() {
                   </div>
                 </form>
               )}
-
             </div>
           </div>
         </div>
       )}
-
-      <Footer />
     </div>
   );
 }

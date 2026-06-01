@@ -6,7 +6,7 @@ import {
   getSingleYatraRetreat,
   updateYatraRetreat,
 } from "../yatra/yatra.controller";
-import { protect } from "../../middlewares/auth.middlewate";
+import { protect } from "../../middlewares/auth.middleware";
 
 const yatraRouter = express.Router();
 

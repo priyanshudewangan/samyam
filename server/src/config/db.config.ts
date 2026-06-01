@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 import "dotenv/config";
 import { serverConfig } from ".";
 import logger from "./logger.config";
+import User from "../models/user";
 
 const MONGO_URL = serverConfig.MONGODB_URI!;
 
@@ -27,11 +28,21 @@ export const connectDB = async (): Promise<void> => {
      * =====================================================
      */
 
-    logger.info(
-      `MongoDB connected successfully: ${connection.connection.host}`,
-    );
+    logger.info(`MongoDB connected successfully: ${connection.connection.host}`);
 
     logger.info(`Database Name: ${connection.connection.name}`);
+
+    // Seed default admin if user collection is empty
+    const userCount = await User.countDocuments();
+    if (userCount === 0) {
+      const defaultEmail = serverConfig.ALLOWED_ADMIN_EMAILS[0] || "admin@samyam.co";
+      const defaultPassword = process.env.DEFAULT_ADMIN_PASSWORD || "samyamadmin123";
+      await User.create({
+        email: defaultEmail,
+        password: defaultPassword,
+      });
+      logger.info(`Default admin user seeded: ${defaultEmail}`);
+    }
   } catch (error) {
     /**
      * =====================================================

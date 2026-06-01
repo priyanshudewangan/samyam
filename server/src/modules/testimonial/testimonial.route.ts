@@ -6,7 +6,7 @@ import {
   getSingleTestimonialVideo,
   updateTestimonialVideo,
 } from "./testimonial.controller";
-import { protect } from "../../middlewares/auth.middlewate";
+import { protect } from "../../middlewares/auth.middleware";
 
 const testimonialRouter = express.Router();
 

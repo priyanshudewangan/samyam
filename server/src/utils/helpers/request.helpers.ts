@@ -8,7 +8,5 @@ export const asyncLocalStorage = new AsyncLocalStorage<AsyncLocalStorageType>();
 
 export const getCorrelationId = () => {
   const asyncStore = asyncLocalStorage.getStore();
-  return (
-    asyncStore?.correlationId || "unknown-error-while-creating-correlation-id"
-  );
+  return asyncStore?.correlationId || "unknown-error-while-creating-correlation-id";
 };

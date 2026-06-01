@@ -5,10 +5,7 @@ import { serverConfig } from "./config";
 import logger from "./config/logger.config";
 import { connectDB } from "./config/db.config";
 import v1Router from "./routers/v1/index.router";
-import {
-  appErrorHandler,
-  genericErrorHandler,
-} from "./middlewares/error.middleware";
+import { appErrorHandler, genericErrorHandler } from "./middlewares/error.middleware";
 import { attachCorrelationIdMiddleware } from "./middlewares/correlation.middleware";
 
 /* =========================
@@ -32,7 +29,8 @@ app.use(
     origin: (origin, callback) => {
       if (!origin) return callback(null, true);
       const isLocal = /^http:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/.test(origin);
-      const isCloudflare = origin.endsWith(".pages.dev") || origin.endsWith(".workers.dev");
+      const isCloudflare =
+        origin.endsWith(".samyam.pages.dev") || origin.endsWith(".samyam.workers.dev");
       if (isLocal || isCloudflare || origin === "https://samyam.co") {
         return callback(null, true);
       }

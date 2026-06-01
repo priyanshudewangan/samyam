@@ -9,7 +9,7 @@ import { API_ENDPOINTS } from "@/lib/api-config";
 export const Route = createFileRoute("/knowledge-portal")({
   component: KnowledgePortalPage,
   head: () => ({
-    title: "Knowledge Portal — Samyam Spiritual Tourism",
+    title: "Knowledge Portal | Samyam Spiritual Tourism",
     meta: [
       {
         name: "description",
@@ -62,15 +62,13 @@ const JW = [
     id: "testimonials",
     title: "Testimonials",
     desc: "Video essays from seekers coming soon.",
-    videos: [
-      { id: "testimonial-1", url: "https://www.youtube.com/embed/ZRXdapTdvCI" },
-    ],
+    videos: [{ id: "testimonial-1", url: "https://www.youtube.com/embed/ZRXdapTdvCI" }],
   },
 ];
 
 const sidebarGuidelines = [
   {
-    title: "Pre-yatra orientation",
+    title: "Pre yatra orientation",
     desc: "Assign these videos as homework so seekers arrive prepared for ritual flow and cultural nuances.",
   },
   {
@@ -79,7 +77,7 @@ const sidebarGuidelines = [
   },
   {
     title: "Retreat highlights recap",
-    desc: "Use the highlight reels as post-journey keepsakes for students, parents, or corporate teams.",
+    desc: "Use the highlight reels as post journey keepsakes for students, parents, or corporate teams.",
   },
 ];
 
@@ -108,20 +106,20 @@ function KnowledgePortalPage() {
         id: "kashi",
         title: "Kashi Knowledge Portal",
         desc: "Deep insights into the spiritual significance and mysticism of Kashi",
-        videos: [] as { id: string; url: string }[]
+        videos: [] as { id: string; url: string }[],
       },
       {
         id: "quick-bits",
         title: "Kashi Knowledge Portal • Quick Bits",
         desc: "Short, snackable highlights from seeker testimonials and retreat diaries.",
-        videos: [] as { id: string; url: string }[]
+        videos: [] as { id: string; url: string }[],
       },
       {
         id: "testimonials",
         title: "Testimonials",
         desc: "Video essays from seekers coming soon.",
-        videos: [] as { id: string; url: string }[]
-      }
+        videos: [] as { id: string; url: string }[],
+      },
     ];
 
     if (videos.length === 0) {
@@ -134,11 +132,11 @@ function KnowledgePortalPage() {
       if (v.category === "Kashi Knowledge Portal • Quick Bits") catId = "quick-bits";
       if (v.category === "Testimonials (Coming Soon)") catId = "testimonials";
 
-      const cat = categories.find(c => c.id === catId);
+      const cat = categories.find((c) => c.id === catId);
       if (cat) {
         cat.videos.push({
           id: v._id || `vid-${idx}`,
-          url: v.youtubeLink
+          url: v.youtubeLink,
         });
       }
     });
@@ -155,9 +153,7 @@ function KnowledgePortalPage() {
   const isKashi = activeTab === "kashi";
 
   return (
-    <div
-      className="relative min-h-screen overflow-x-hidden transition-colors duration-500 bg-background text-foreground flex flex-col justify-between"
-    >
+    <div className="relative min-h-screen overflow-x-hidden transition-colors duration-500 bg-background text-foreground flex flex-col justify-between">
       <Nav />
 
       {/* HERO SECTION */}
@@ -172,9 +168,7 @@ function KnowledgePortalPage() {
             alt="Sacred Wisdom"
             className="w-full h-full object-cover object-center filter brightness-50"
           />
-          <div
-            className="absolute inset-0 bg-gradient-to-b from-[#1c081e]/40 via-[#1c081e]/60 to-[#1c081e] transition-colors duration-500"
-          ></div>
+          <div className="absolute inset-0 bg-gradient-to-b from-[#1c081e]/40 via-[#1c081e]/60 to-[#1c081e] transition-colors duration-500"></div>
         </div>
 
         <FlowerField count={18} />
@@ -189,8 +183,7 @@ function KnowledgePortalPage() {
             <h1
               className="text-5xl md:text-8xl font-display font-semibold text-white tracking-tight leading-none"
               style={{
-                textShadow:
-                  "0 6px 40px rgba(0,0,0,0.8), 0 0 60px rgba(174,49,100,0.3)",
+                textShadow: "0 6px 40px rgba(0,0,0,0.8), 0 0 60px rgba(174,49,100,0.3)",
               }}
             >
               Knowledge Portal
@@ -239,14 +232,10 @@ function KnowledgePortalPage() {
         {/* Tab Intro Header */}
         <ScrollReveal variant="fade-up">
           <div className="text-center mb-10 md:mb-16 space-y-4">
-            <h2
-              className="text-3xl md:text-5xl font-display font-semibold text-foreground"
-            >
+            <h2 className="text-3xl md:text-5xl font-display font-semibold text-foreground">
               {currentCategory.title}
             </h2>
-            <p
-              className="text-sm md:text-lg max-w-2xl mx-auto font-body text-muted-foreground"
-            >
+            <p className="text-sm md:text-lg max-w-2xl mx-auto font-body text-muted-foreground">
               {currentCategory.desc}
             </p>
           </div>
@@ -257,9 +246,7 @@ function KnowledgePortalPage() {
           {/* Featured Video Frame */}
           {featuredVideo ? (
             <ScrollReveal variant="fade-up" className="h-full">
-              <div
-                className="group rounded-3xl overflow-hidden shadow-glow flex flex-col border bg-white border-black/[0.06] transition-all duration-300 h-full"
-              >
+              <div className="group rounded-3xl overflow-hidden shadow-glow flex flex-col border bg-white border-black/[0.06] transition-all duration-300 h-full">
                 <div className="aspect-video bg-black/40 relative">
                   <iframe
                     src={featuredVideo.url}
@@ -274,9 +261,7 @@ function KnowledgePortalPage() {
                   <span className="text-[10px] font-bold text-amber-600 uppercase tracking-widest font-body">
                     Featured Capsule
                   </span>
-                  <p
-                    className="text-sm leading-relaxed font-body text-muted-foreground transition-colors duration-500"
-                  >
+                  <p className="text-sm leading-relaxed font-body text-muted-foreground transition-colors duration-500">
                     Use this video to prime your seekers and align your group's consciousness before
                     stepping onto the sacred kshetra.
                   </p>
@@ -292,25 +277,17 @@ function KnowledgePortalPage() {
           {/* Sidebar Orientation Guidelines */}
           <div className="space-y-4 md:space-y-6 text-left w-full">
             <ScrollReveal variant="fade-up">
-              <h3
-                className="text-xs font-bold uppercase tracking-widest font-body text-muted-foreground"
-              >
+              <h3 className="text-xs font-bold uppercase tracking-widest font-body text-muted-foreground">
                 How to use these resources
               </h3>
             </ScrollReveal>
             {sidebarGuidelines.map((guide, idx) => (
-              <ScrollReveal
-                key={idx}
-                variant="fade-up"
-                delay={idx * 150}
-              >
-                <div
-                  className="p-6 rounded-2xl border transition-all duration-300 space-y-2 bg-white border-black/[0.06] shadow-soft hover:border-amber-600/30 hover:bg-muted"
-                >
-                  <h4 className="text-lg font-display font-semibold text-amber-600">{guide.title}</h4>
-                  <p
-                    className="text-sm font-body leading-relaxed text-muted-foreground"
-                  >
+              <ScrollReveal key={idx} variant="fade-up" delay={idx * 150}>
+                <div className="p-6 rounded-2xl border transition-all duration-300 space-y-2 bg-white border-black/[0.06] shadow-soft hover:border-amber-600/30 hover:bg-muted">
+                  <h4 className="text-lg font-display font-semibold text-amber-600">
+                    {guide.title}
+                  </h4>
+                  <p className="text-sm font-body leading-relaxed text-muted-foreground">
                     {guide.desc}
                   </p>
                 </div>
@@ -323,22 +300,14 @@ function KnowledgePortalPage() {
         {otherVideos.length > 0 && (
           <div className="space-y-8 text-left">
             <ScrollReveal variant="fade-up">
-              <h3
-                className="text-xl md:text-3xl font-display font-semibold border-b pb-4 text-foreground border-border"
-              >
+              <h3 className="text-xl md:text-3xl font-display font-semibold border-b pb-4 text-foreground border-border">
                 More Insights
               </h3>
             </ScrollReveal>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
               {otherVideos.map((video, idx) => (
-                <ScrollReveal
-                  key={video.id}
-                  variant="fade-up"
-                  delay={(idx % 3) * 150}
-                >
-                  <div
-                    className="group rounded-2xl overflow-hidden shadow-soft hover:shadow-glow hover:-translate-y-1 transition-all duration-300 flex flex-col border bg-white border-black/[0.06] hover:border-amber-600/30 hover:bg-muted"
-                  >
+                <ScrollReveal key={video.id} variant="fade-up" delay={(idx % 3) * 150}>
+                  <div className="group rounded-2xl overflow-hidden shadow-soft hover:shadow-glow hover:-translate-y-1 transition-all duration-300 flex flex-col border bg-white border-black/[0.06] hover:border-amber-600/30 hover:bg-muted">
                     <div className="aspect-video relative bg-black/30">
                       <iframe
                         src={video.url}
@@ -364,8 +333,8 @@ function KnowledgePortalPage() {
               Share Your Experience
             </h3>
             <p className="text-white/80 max-w-xl mx-auto text-sm leading-relaxed font-body">
-              Have a profound spiritual testimony, chanting recording, or knowledge capsule you'd like
-              us to feature in our library? Connect with our team.
+              Have a profound spiritual testimony, chanting recording, or knowledge capsule you'd
+              like us to feature in our library? Connect with our team.
             </p>
             <div className="pt-2 font-body">
               <a

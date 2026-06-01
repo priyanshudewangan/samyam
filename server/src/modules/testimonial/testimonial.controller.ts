@@ -70,10 +70,7 @@ export const updateTestimonialVideo = asyncHandler(
   async (req: Request, res: Response): Promise<void> => {
     const { id } = req.params;
 
-    const updatedTestimonialVideo = await updateTestimonialVideoService(
-      id,
-      req.body,
-    );
+    const updatedTestimonialVideo = await updateTestimonialVideoService(id, req.body);
 
     res.status(200).json({
       success: true,

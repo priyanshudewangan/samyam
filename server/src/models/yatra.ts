@@ -81,7 +81,6 @@ const yatraRetreatSchema = new mongoose.Schema(
 );
 
 const YatraRetreat =
-  mongoose.models.YatraRetreat ||
-  mongoose.model("YatraRetreat", yatraRetreatSchema);
+  mongoose.models.YatraRetreat || mongoose.model("YatraRetreat", yatraRetreatSchema);
 
 export default YatraRetreat;

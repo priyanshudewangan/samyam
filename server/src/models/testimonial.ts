@@ -24,7 +24,6 @@ const testimonialVideoSchema = new mongoose.Schema(
 );
 
 const TestimonialVideo =
-  mongoose.models.TestimonialVideo ||
-  mongoose.model("TestimonialVideo", testimonialVideoSchema);
+  mongoose.models.TestimonialVideo || mongoose.model("TestimonialVideo", testimonialVideoSchema);
 
 export default TestimonialVideo;

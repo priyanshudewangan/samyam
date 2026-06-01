@@ -1,5 +1,4 @@
 import React, { useEffect, useRef } from "react";
-import heroBg from "@/assets/hero-bg.jpg";
 import samyamHeroVideo from "@/assets/samyamhero.mp4";
 
 export function HeroVideo() {
@@ -24,7 +23,6 @@ export function HeroVideo() {
         loop
         playsInline
         preload="auto"
-        poster={heroBg}
         className="w-full h-full object-cover opacity-100 transition-opacity duration-1000"
       >
         <source src={samyamHeroVideo} type="video/mp4" />
@@ -33,4 +31,3 @@ export function HeroVideo() {
     </div>
   );
 }
-

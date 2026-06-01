@@ -6,6 +6,7 @@ import { useState } from "react";
 import teerthas1 from "@/assets/teerthas1.jpg";
 import { Mail, Phone, MapPin, Sparkles } from "lucide-react";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
+import { formatNormalDash } from "@/lib/utils";
 import {
   Dialog,
   DialogContent,
@@ -18,7 +19,7 @@ import {
 export const Route = createFileRoute("/teerthas/")({
   component: TeerthasPage,
   head: () => ({
-    title: "Sacred Teerthas — Samyam Spiritual Tourism",
+    title: "Sacred Teerthas | Samyam Spiritual Tourism",
     meta: [
       {
         name: "description",
@@ -35,7 +36,7 @@ const teerthasData = [
     slug: "kashi",
     desc: "City of Liberation. A living field of divine charge along the Ganga.",
     region: "North",
-    duration: "3-7 days",
+    duration: "3 to 7 days",
     img: "https://samyam.co/images/kashi.jpg",
   },
   {
@@ -43,7 +44,7 @@ const teerthasData = [
     slug: "rameshwaram",
     desc: "One of the Char Dhams, known for sacred rituals and ocean purity.",
     region: "South",
-    duration: "2-4 days",
+    duration: "2 to 4 days",
     img: "https://samyam.co/images/rameshwaram.jpg",
   },
   {
@@ -51,7 +52,7 @@ const teerthasData = [
     slug: "dwarka",
     desc: "Krishna's realm by the sea, steeped in devotion and wisdom.",
     region: "West",
-    duration: "3-5 days",
+    duration: "3 to 5 days",
     img: "https://samyam.co/images/dwarka.jpg",
   },
   {
@@ -59,7 +60,7 @@ const teerthasData = [
     slug: "badrinath",
     desc: "The abode of Lord Vishnu, nestled in the Himalayas.",
     region: "North",
-    duration: "4-6 days",
+    duration: "4 to 6 days",
     img: "https://samyam.co/images/badrinath.jpg",
   },
   {
@@ -67,7 +68,7 @@ const teerthasData = [
     slug: "jagannath-puri",
     desc: "The coastal shrine of Lord Jagannath, one of the Char Dhams.",
     region: "East",
-    duration: "3-5 days",
+    duration: "3 to 5 days",
     img: "https://samyam.co/images/jagannath%20puri.jpg",
   },
   {
@@ -75,7 +76,7 @@ const teerthasData = [
     slug: "haridwar",
     desc: "Gateway to the Gods, where the Ganga enters the plains.",
     region: "North",
-    duration: "2-4 days",
+    duration: "2 to 4 days",
     img: "https://samyam.co/images/haridwar.jpg",
   },
   {
@@ -83,15 +84,15 @@ const teerthasData = [
     slug: "ayodhya",
     desc: "The birthplace of Lord Rama, the city of righteousness.",
     region: "North",
-    duration: "2-3 days",
+    duration: "2 to 3 days",
     img: "https://samyam.co/images/aayodhya.jpg",
   },
   {
-    name: "Mathura-Vrindavan",
+    name: "Mathura Vrindavan",
     slug: "mathura-vrindavan",
     desc: "The land where Krishna performed his divine leelas.",
     region: "North",
-    duration: "3-5 days",
+    duration: "3 to 5 days",
     img: "https://samyam.co/images/mathura-vrindavan.jpg",
   },
   {
@@ -99,23 +100,51 @@ const teerthasData = [
     slug: "shaktipeethas-himachal",
     desc: "Sacred abodes of the Divine Mother, where the power of Shakti manifests in the pristine Himalayas.",
     region: "North",
-    duration: "5-7 days",
+    duration: "5 to 7 days",
     img: "https://samyam.co/images/haridwar.jpg",
   },
 ];
 
 const exploreOtherTeerthas = [
-  { name: "Mathura Vrindavan", slug: "mathura-vrindavan", img: "https://samyam.co/images/mathura-vrindavan.jpg" },
-  { name: "Dwarka Somnath", slug: "dwarka", img: "https://hldak.mmtcdn.com/prod-s3-hld-hpcmsadmin/holidays/images/cities/4004/Imposing%20architecture%20of%20Somnath%20Temple.jpg?downsize=328:200" },
+  {
+    name: "Mathura Vrindavan",
+    slug: "mathura-vrindavan",
+    img: "https://samyam.co/images/mathura-vrindavan.jpg",
+  },
+  {
+    name: "Dwarka Somnath",
+    slug: "dwarka",
+    img: "https://hldak.mmtcdn.com/prod-s3-hld-hpcmsadmin/holidays/images/cities/4004/Imposing%20architecture%20of%20Somnath%20Temple.jpg?downsize=328:200",
+  },
   { name: "Char Dham circuit", img: "https://www.chardham.in/uploads/chardham-yatra-guide.jpg" },
-  { name: "Uttarakhand chardham", img: "https://www.uttarakhandtourism.gov.in/assets/media/UTDB_media_1740661833CHAR-DHAM.jpg" },
-  { name: "Ayodhya", slug: "ayodhya", img: "https://upload.wikimedia.org/wikipedia/commons/d/df/Ayodhya_Ram_Mandir_Inauguration_Day_Picture.jpg" },
+  {
+    name: "Uttarakhand chardham",
+    img: "https://www.uttarakhandtourism.gov.in/assets/media/UTDB_media_1740661833CHAR-DHAM.jpg",
+  },
+  {
+    name: "Ayodhya",
+    slug: "ayodhya",
+    img: "https://upload.wikimedia.org/wikipedia/commons/d/df/Ayodhya_Ram_Mandir_Inauguration_Day_Picture.jpg",
+  },
   { name: "Haridwar Rishikesh", slug: "haridwar", img: "https://samyam.co/images/haridwar.jpg" },
-  { name: "Kancheepuram", img: "https://s7ap1.scene7.com/is/image/incredibleindia/sri-vardaraja-perumal-temple-kanchipuram-tamil-nadu-tri-hero?qlt=82&ts=1727166926084" },
-  { name: "Puri Odissa", slug: "jagannath-puri", img: "https://hblimg.mmtcdn.com/content/hubble/img/desttvimg/mmt/destination/m_puri_tv_destination_img_1_l_1193_1788.jpg" },
+  {
+    name: "Kancheepuram",
+    img: "https://s7ap1.scene7.com/is/image/incredibleindia/sri-vardaraja-perumal-temple-kanchipuram-tamil-nadu-tri-hero?qlt=82&ts=1727166926084",
+  },
+  {
+    name: "Puri Odissa",
+    slug: "jagannath-puri",
+    img: "https://hblimg.mmtcdn.com/content/hubble/img/desttvimg/mmt/destination/m_puri_tv_destination_img_1_l_1193_1788.jpg",
+  },
   { name: "Rameshwaram", slug: "rameshwaram", img: "https://samyam.co/images/rameshwaram.jpg" },
-  { name: "Tiruvannamalai", img: "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0d/fc/42/19/the-raja-kopuram-the.jpg?w=600&h=-1&s=1" },
-  { name: "Udaipur yatra circuit", img: "https://www.rajasthancab.com/uploads/1756712211-68b54d130bd5e.webp" },
+  {
+    name: "Tiruvannamalai",
+    img: "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0d/fc/42/19/the-raja-kopuram-the.jpg?w=600&h=-1&s=1",
+  },
+  {
+    name: "Udaipur yatra circuit",
+    img: "https://www.rajasthancab.com/uploads/1756712211-68b54d130bd5e.webp",
+  },
 ];
 
 import { API_ENDPOINTS } from "@/lib/api-config";
@@ -148,15 +177,18 @@ function TeerthasPage() {
   }, []);
 
   const filteredTeerthas = teerthas.filter(
-    (t) => activeRegion === "All" || t.region === activeRegion
+    (t) => activeRegion === "All" || t.region === activeRegion,
   );
 
   return (
     <div className="relative min-h-screen overflow-x-hidden bg-background text-foreground">
       <Nav />
 
-      {/* HERO SECTION — Cinematic fullscreen */}
-      <section data-nav-theme="dark" className="relative min-h-[85vh] flex items-end justify-center overflow-hidden">
+      {/* HERO SECTION | Cinematic fullscreen */}
+      <section
+        data-nav-theme="dark"
+        className="relative min-h-[85vh] flex items-end justify-center overflow-hidden"
+      >
         {/* Ken Burns Background */}
         <div className="absolute inset-0 z-0">
           <img
@@ -171,34 +203,62 @@ function TeerthasPage() {
 
         {/* Decorative floating particles */}
         <div className="absolute inset-0 z-[1] pointer-events-none overflow-hidden">
-          <div className="absolute top-[20%] left-[10%] w-1.5 h-1.5 rounded-full bg-amber-400/40 animate-gentle-float" style={{ animationDelay: '0s' }}></div>
-          <div className="absolute top-[35%] right-[15%] w-1 h-1 rounded-full bg-amber-300/30 animate-gentle-float" style={{ animationDelay: '2s' }}></div>
-          <div className="absolute top-[50%] left-[60%] w-2 h-2 rounded-full bg-purple-300/20 animate-gentle-float" style={{ animationDelay: '4s' }}></div>
-          <div className="absolute top-[15%] right-[40%] w-1 h-1 rounded-full bg-white/20 animate-gentle-float" style={{ animationDelay: '1s' }}></div>
+          <div
+            className="absolute top-[20%] left-[10%] w-1.5 h-1.5 rounded-full bg-amber-400/40 animate-gentle-float"
+            style={{ animationDelay: "0s" }}
+          ></div>
+          <div
+            className="absolute top-[35%] right-[15%] w-1 h-1 rounded-full bg-amber-300/30 animate-gentle-float"
+            style={{ animationDelay: "2s" }}
+          ></div>
+          <div
+            className="absolute top-[50%] left-[60%] w-2 h-2 rounded-full bg-purple-300/20 animate-gentle-float"
+            style={{ animationDelay: "4s" }}
+          ></div>
+          <div
+            className="absolute top-[15%] right-[40%] w-1 h-1 rounded-full bg-white/20 animate-gentle-float"
+            style={{ animationDelay: "1s" }}
+          ></div>
         </div>
 
         <div className="max-w-5xl mx-auto px-6 text-center relative z-10 pb-20 space-y-8">
           {/* Decorative line */}
           <div className="flex items-center justify-center gap-4 animate-hero-reveal-delay">
             <span className="w-12 h-px bg-gradient-to-r from-transparent to-amber-400/60"></span>
-            <span className="text-amber-400/80 text-xs font-semibold uppercase tracking-[0.3em] font-body">Sacred Geography of Bharat</span>
+            <span className="text-amber-400/80 text-xs font-semibold uppercase tracking-[0.3em] font-body">
+              Sacred Geography of Bharat
+            </span>
             <span className="w-12 h-px bg-gradient-to-l from-transparent to-amber-400/60"></span>
           </div>
 
           <h1 className="text-6xl md:text-8xl lg:text-9xl font-display font-semibold text-white tracking-tight leading-[0.9] animate-hero-reveal">
-            Sacred<br />
-            <span className="bg-gradient-to-r from-amber-200 via-amber-400 to-orange-400 bg-clip-text text-transparent">Teerthas</span>
+            Sacred
+            <br />
+            <span className="bg-gradient-to-r from-amber-200 via-amber-400 to-orange-400 bg-clip-text text-transparent">
+              Teerthas
+            </span>
           </h1>
 
           <p className="text-white/70 text-sm md:text-lg max-w-2xl mx-auto font-body leading-relaxed animate-hero-reveal-delay">
-            Each kshetra awakens something precise in you. The land remembers, the rivers carry wisdom, and the temples hold frequencies that transform.
+            Each kshetra awakens something precise in you. The land remembers, the rivers carry
+            wisdom, and the temples hold frequencies that transform.
           </p>
 
-          {/* Search Bar — Glassmorphic */}
+          {/* Search Bar | Glassmorphic */}
           <div className="max-w-lg mx-auto relative mt-6 animate-hero-reveal-delay">
             <div className="absolute inset-y-0 left-5 flex items-center pointer-events-none text-white/40">
-              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+              <svg
+                className="w-4 h-4"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                strokeWidth={2}
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                />
               </svg>
             </div>
             <input
@@ -211,26 +271,35 @@ function TeerthasPage() {
 
         {/* Bottom scroll indicator */}
         <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2 animate-gentle-float">
-          <span className="text-white/30 text-[10px] uppercase tracking-[0.2em] font-body">Scroll</span>
+          <span className="text-white/30 text-[10px] uppercase tracking-[0.2em] font-body">
+            Scroll
+          </span>
           <div className="w-px h-8 bg-gradient-to-b from-white/30 to-transparent"></div>
         </div>
       </section>
 
-      {/* FILTERS SECTION — Glassmorphic strip */}
-      <section data-nav-theme="light" className="sticky top-0 z-30 py-5 px-6 border-b border-border" style={{ background: 'rgba(255, 255, 255, 0.85)', backdropFilter: 'blur(20px)' }}>
+      {/* FILTERS SECTION | Glassmorphic strip */}
+      <section
+        data-nav-theme="light"
+        className="sticky top-0 z-30 py-5 px-6 border-b border-border"
+        style={{ background: "rgba(255, 255, 255, 0.85)", backdropFilter: "blur(20px)" }}
+      >
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row gap-6 md:items-center">
           {/* Regions */}
           <div className="flex items-center gap-3 flex-1">
-            <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-[0.15em] font-body shrink-0">Region</span>
+            <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-[0.15em] font-body shrink-0">
+              Region
+            </span>
             <div className="flex items-center gap-2 overflow-x-auto no-scrollbar pb-1">
               {["All", "North", "South", "West", "East"].map((region) => (
                 <button
                   key={region}
                   onClick={() => setActiveRegion(region)}
-                  className={`shrink-0 px-5 py-2 rounded-xl text-[11px] font-semibold transition-all duration-300 cursor-pointer ${activeRegion === region
-                    ? "bg-gradient-to-r from-amber-500 to-orange-500 text-white shadow-[0_4px_20px_rgba(245,158,11,0.3)]"
-                    : "bg-muted text-muted-foreground hover:bg-muted/80 hover:text-foreground"
-                    }`}
+                  className={`shrink-0 px-5 py-2 rounded-xl text-[11px] font-semibold transition-all duration-300 cursor-pointer ${
+                    activeRegion === region
+                      ? "bg-gradient-to-r from-amber-500 to-orange-500 text-white shadow-[0_4px_20px_rgba(245,158,11,0.3)]"
+                      : "bg-muted text-muted-foreground hover:bg-muted/80 hover:text-foreground"
+                  }`}
                 >
                   {region}
                 </button>
@@ -242,29 +311,41 @@ function TeerthasPage() {
 
           {/* Significance */}
           <div className="flex items-center gap-3 flex-1">
-            <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-[0.15em] font-body shrink-0">Type</span>
+            <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-[0.15em] font-body shrink-0">
+              Type
+            </span>
             <div className="flex items-center gap-2 overflow-x-auto no-scrollbar pb-1">
-              {["All", "Moksha", "Char Dham", "Kumbh Mela", "Ramayana", "Krishna", "Shaktipeethas"].map(
-                (sig) => (
-                  <button
-                    key={sig}
-                    onClick={() => setActiveSignificance(sig)}
-                    className={`shrink-0 px-5 py-2 rounded-xl text-[11px] font-semibold transition-all duration-300 cursor-pointer ${activeSignificance === sig
+              {[
+                "All",
+                "Moksha",
+                "Char Dham",
+                "Kumbh Mela",
+                "Ramayana",
+                "Krishna",
+                "Shaktipeethas",
+              ].map((sig) => (
+                <button
+                  key={sig}
+                  onClick={() => setActiveSignificance(sig)}
+                  className={`shrink-0 px-5 py-2 rounded-xl text-[11px] font-semibold transition-all duration-300 cursor-pointer ${
+                    activeSignificance === sig
                       ? "bg-gradient-to-r from-amber-500 to-orange-500 text-white shadow-[0_4px_20px_rgba(245,158,11,0.3)]"
                       : "bg-muted text-muted-foreground hover:bg-muted/80 hover:text-foreground"
-                      }`}
-                  >
-                    {sig}
-                  </button>
-                )
-              )}
+                  }`}
+                >
+                  {sig}
+                </button>
+              ))}
             </div>
           </div>
         </div>
       </section>
 
-      {/* TEERTHAS GRID — Premium cards */}
-      <section data-nav-theme="light" className="px-6 py-20 max-w-7xl mx-auto bg-background text-foreground">
+      {/* TEERTHAS GRID | Premium cards */}
+      <section
+        data-nav-theme="light"
+        className="px-6 py-20 max-w-7xl mx-auto bg-background text-foreground"
+      >
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredTeerthas.map((teertha, idx) => (
             <ScrollReveal
@@ -273,9 +354,7 @@ function TeerthasPage() {
               delay={(idx % 3) * 150}
               className="h-full"
             >
-              <div
-                className="group relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-500 hover:-translate-y-2 hover:shadow-soft border border-border bg-white h-full flex flex-col justify-between"
-              >
+              <div className="group relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-500 hover:-translate-y-2 hover:shadow-soft border border-border bg-white h-full flex flex-col justify-between">
                 {/* Image with parallax hover */}
                 <div className="aspect-[4/3] overflow-hidden relative flex-1">
                   <img
@@ -306,7 +385,7 @@ function TeerthasPage() {
                   {/* Bottom content overlay */}
                   <div className="absolute bottom-0 left-0 right-0 p-6">
                     <h3 className="text-2xl md:text-3xl font-display font-semibold text-white leading-tight mb-2 group-hover:text-amber-100 transition-colors">
-                      {teertha.name}
+                      {formatNormalDash(teertha.name)}
                     </h3>
                     <p className="text-sm text-white/60 font-body leading-relaxed line-clamp-2 group-hover:text-white/80 transition-colors">
                       {teertha.desc}
@@ -322,7 +401,9 @@ function TeerthasPage() {
                     className="inline-flex items-center gap-2 text-[11px] font-bold text-amber-600 hover:text-amber-700 transition-colors group/link uppercase tracking-wider"
                   >
                     Explore Journey
-                    <span className="group-hover/link:translate-x-1.5 transition-transform duration-300">→</span>
+                    <span className="group-hover/link:translate-x-1.5 transition-transform duration-300">
+                      →
+                    </span>
                   </Link>
                   <div className="flex items-center gap-1">
                     <span className="w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
@@ -344,7 +425,7 @@ function TeerthasPage() {
         </div>
       </section>
 
-      {/* EXPLORE OTHER TEERTHAS — Immersive gallery */}
+      {/* EXPLORE OTHER TEERTHAS | Immersive gallery */}
       <section data-nav-theme="light" className="relative py-28 px-6 bg-[#faf7f5] overflow-hidden">
         {/* Decorative background */}
         <div className="absolute top-0 left-0 w-full h-full pointer-events-none">
@@ -355,13 +436,19 @@ function TeerthasPage() {
         <div className="max-w-7xl mx-auto relative z-10">
           <ScrollReveal variant="fade-up">
             <div className="text-center mb-20 space-y-5">
-              <span className="text-[11px] font-bold text-amber-600/70 uppercase tracking-[0.3em] font-body">Discover More</span>
+              <span className="text-[11px] font-bold text-amber-600/70 uppercase tracking-[0.3em] font-body">
+                Discover More
+              </span>
               <h2 className="text-4xl md:text-6xl font-display font-semibold text-[#2a1030] leading-tight">
-                Explore Other<br />
-                <span className="bg-gradient-to-r from-amber-600 to-orange-500 bg-clip-text text-transparent">Sacred Destinations</span>
+                Explore Other
+                <br />
+                <span className="bg-gradient-to-r from-amber-600 to-orange-500 bg-clip-text text-transparent">
+                  Sacred Destinations
+                </span>
               </h2>
               <p className="text-[#5c245e]/60 text-sm md:text-base max-w-xl mx-auto font-body leading-relaxed">
-                Each land holds a unique spiritual frequency. Discover the teertha that calls to your soul.
+                Each land holds a unique spiritual frequency. Discover the teertha that calls to
+                your soul.
               </p>
             </div>
           </ScrollReveal>
@@ -382,7 +469,7 @@ function TeerthasPage() {
                   {/* Content */}
                   <div className="absolute inset-0 flex flex-col justify-end p-4">
                     <h4 className="text-sm md:text-base font-display font-semibold text-white leading-tight group-hover:text-amber-100 transition-colors">
-                      {item.name}
+                      {formatNormalDash(item.name)}
                     </h4>
                     <span className="text-[10px] text-white/50 font-body mt-1 group-hover:text-white/70 transition-colors uppercase tracking-wider">
                       Tap to explore →
@@ -405,9 +492,7 @@ function TeerthasPage() {
                 </Link>
               ) : (
                 <Dialog>
-                  <DialogTrigger asChild>
-                    {cardContent}
-                  </DialogTrigger>
+                  <DialogTrigger asChild>{cardContent}</DialogTrigger>
                   <DialogContent className="sm:max-w-md bg-background/95 backdrop-blur-2xl border-accent/20 rounded-[2.5rem] overflow-hidden p-0 shadow-glow">
                     <div className="relative">
                       <div className="h-2 w-full bg-gradient-cta" />
@@ -430,14 +515,22 @@ function TeerthasPage() {
                               <Sparkles className="w-7 h-7" />
                             </div>
                             <div className="text-left flex-1">
-                              <h5 className="text-xl font-display font-semibold text-primary">Customize your Yatra</h5>
-                              <p className="text-sm text-muted-foreground">Design a personalized spiritual experience</p>
+                              <h5 className="text-xl font-display font-semibold text-primary">
+                                Customize your Yatra
+                              </h5>
+                              <p className="text-sm text-muted-foreground">
+                                Design a personalized spiritual experience
+                              </p>
                             </div>
-                            <span className="text-accent group-hover:translate-x-1 transition-transform">→</span>
+                            <span className="text-accent group-hover:translate-x-1 transition-transform">
+                              →
+                            </span>
                           </Link>
 
                           <div className="pt-6 border-t border-border/50">
-                            <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-accent text-center mb-5">Or speak with our team</p>
+                            <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-accent text-center mb-5">
+                              Or speak with our team
+                            </p>
                             <div className="grid grid-cols-1 gap-3">
                               <a
                                 href="mailto:samyamspirituals@gmail.com"
@@ -446,7 +539,9 @@ function TeerthasPage() {
                                 <div className="w-10 h-10 rounded-xl bg-primary/5 flex items-center justify-center text-primary group-hover:text-accent transition-colors">
                                   <Mail className="w-5 h-5" />
                                 </div>
-                                <span className="text-sm font-medium text-primary/80 group-hover:text-primary transition-colors">samyamspirituals@gmail.com</span>
+                                <span className="text-sm font-medium text-primary/80 group-hover:text-primary transition-colors">
+                                  samyamspirituals@gmail.com
+                                </span>
                               </a>
                               <div className="flex gap-3">
                                 <a
@@ -456,7 +551,9 @@ function TeerthasPage() {
                                   <div className="w-10 h-10 rounded-xl bg-primary/5 flex items-center justify-center text-primary group-hover:text-accent transition-colors">
                                     <Phone className="w-5 h-5" />
                                   </div>
-                                  <span className="text-sm font-medium text-primary/80 group-hover:text-primary transition-colors">+91-9035225375</span>
+                                  <span className="text-sm font-medium text-primary/80 group-hover:text-primary transition-colors">
+                                    +91 9035225375
+                                  </span>
                                 </a>
                                 <a
                                   href="https://wa.me/919035225375"
@@ -465,7 +562,11 @@ function TeerthasPage() {
                                   className="w-14 h-14 rounded-2xl bg-green-500/10 border border-green-500/20 flex items-center justify-center text-green-600 hover:bg-green-500 hover:text-white transition-all shadow-sm"
                                   title="WhatsApp"
                                 >
-                                  <svg viewBox="0 0 24 24" className="w-6 h-6 fill-current" xmlns="http://www.w3.org/2000/svg">
+                                  <svg
+                                    viewBox="0 0 24 24"
+                                    className="w-6 h-6 fill-current"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                  >
                                     <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L0 24l6.335-1.662c1.72.937 3.659 1.432 5.631 1.432h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z" />
                                   </svg>
                                 </a>
@@ -494,31 +595,43 @@ function TeerthasPage() {
         </div>
       </section>
 
-      {/* FINAL CTA — Dramatic gradient */}
-      <section data-nav-theme="dark" className="relative py-32 px-6 text-center overflow-hidden bg-gradient-to-b from-[#823883] to-[#3D0068]">
+      {/* FINAL CTA | Dramatic gradient */}
+      <section
+        data-nav-theme="dark"
+        className="relative py-32 px-6 text-center overflow-hidden bg-gradient-to-b from-[#823883] to-[#3D0068]"
+      >
         {/* Animated background orbs */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-[#5c245e]/20 blur-[120px] animate-gentle-float"></div>
-          <div className="absolute top-1/3 left-1/4 w-[300px] h-[300px] rounded-full bg-amber-500/5 blur-[80px] animate-gentle-float" style={{ animationDelay: '3s' }}></div>
+          <div
+            className="absolute top-1/3 left-1/4 w-[300px] h-[300px] rounded-full bg-amber-500/5 blur-[80px] animate-gentle-float"
+            style={{ animationDelay: "3s" }}
+          ></div>
         </div>
 
         <div className="max-w-4xl mx-auto relative z-10 space-y-10">
           <ScrollReveal variant="fade-up">
             <div className="flex items-center justify-center gap-4 mb-6">
               <span className="w-16 h-px bg-gradient-to-r from-transparent to-amber-400/40"></span>
-              <span className="text-amber-400/60 text-xs uppercase tracking-[0.3em] font-body">Begin Your Pilgrimage</span>
+              <span className="text-amber-400/60 text-xs uppercase tracking-[0.3em] font-body">
+                Begin Your Pilgrimage
+              </span>
               <span className="w-16 h-px bg-gradient-to-l from-transparent to-amber-400/40"></span>
             </div>
 
             <h2 className="text-5xl md:text-7xl font-display font-semibold text-white leading-[0.95]">
-              Ready to Begin<br />
-              <span className="bg-gradient-to-r from-amber-200 via-amber-400 to-orange-400 bg-clip-text text-transparent">Your Journey?</span>
+              Ready to Begin
+              <br />
+              <span className="bg-gradient-to-r from-amber-200 via-amber-400 to-orange-400 bg-clip-text text-transparent">
+                Your Journey?
+              </span>
             </h2>
           </ScrollReveal>
 
           <ScrollReveal variant="fade-up" delay={150}>
             <p className="text-white/50 text-base md:text-lg font-body max-w-xl mx-auto leading-relaxed">
-              Let us help you choose the perfect teertha aligned with your spiritual intent and inner calling.
+              Let us help you choose the perfect teertha aligned with your spiritual intent and
+              inner calling.
             </p>
           </ScrollReveal>
 

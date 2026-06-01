@@ -49,7 +49,7 @@ export function ScrollReveal({
         threshold,
         // Start the animation slightly before the element is in full view
         rootMargin: "0px 0px -80px 0px",
-      }
+      },
     );
 
     observer.observe(el);
@@ -62,31 +62,19 @@ export function ScrollReveal({
   const getVariantStyles = () => {
     switch (variant) {
       case "fade-up":
-        return isIntersecting
-          ? "opacity-100 translate-y-0"
-          : "opacity-0 translate-y-12";
+        return isIntersecting ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12";
       case "fade-in":
         return isIntersecting ? "opacity-100" : "opacity-0";
       case "fade-left":
-        return isIntersecting
-          ? "opacity-100 translate-x-0"
-          : "opacity-0 -translate-x-12";
+        return isIntersecting ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-12";
       case "fade-right":
-        return isIntersecting
-          ? "opacity-100 translate-x-0"
-          : "opacity-0 translate-x-12";
+        return isIntersecting ? "opacity-100 translate-x-0" : "opacity-0 translate-x-12";
       case "scale-up":
-        return isIntersecting
-          ? "opacity-100 scale-100"
-          : "opacity-0 scale-95";
+        return isIntersecting ? "opacity-100 scale-100" : "opacity-0 scale-95";
       case "zoom-in":
-        return isIntersecting
-          ? "opacity-100 scale-100"
-          : "opacity-0 scale-90";
+        return isIntersecting ? "opacity-100 scale-100" : "opacity-0 scale-90";
       default:
-        return isIntersecting
-          ? "opacity-100 translate-y-0"
-          : "opacity-0 translate-y-12";
+        return isIntersecting ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12";
     }
   };
 

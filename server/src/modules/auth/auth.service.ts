@@ -4,6 +4,7 @@ import sgMail from "../../config/sendgrid";
 import User from "../../models/user";
 import {
   ConflictError,
+  ForbiddenError,
   NotFoundError,
   UnauthorizedError,
 } from "../../utils/errors/app.error";
@@ -17,14 +18,19 @@ import {
    REGISTER SERVICE
 ========================= */
 export const registerUserService = async (email: string, password: string) => {
-  const existingUser = await User.findOne({ email });
+  const emailNormalized = email.trim().toLowerCase();
+  if (!serverConfig.ALLOWED_ADMIN_EMAILS.includes(emailNormalized)) {
+    throw new ForbiddenError("Registration is restricted to authorized admin emails only.");
+  }
+
+  const existingUser = await User.findOne({ email: emailNormalized });
 
   if (existingUser) {
     throw new ConflictError("User already exists");
   }
 
   const user = await User.create({
-    email,
+    email: emailNormalized,
     password,
   });
 
@@ -43,7 +49,12 @@ export const registerUserService = async (email: string, password: string) => {
 ========================= */
 
 export const loginUserService = async (email: string, password: string) => {
-  const user = await User.findOne({ email }).select("+password");
+  const emailNormalized = email.trim().toLowerCase();
+  if (!serverConfig.ALLOWED_ADMIN_EMAILS.includes(emailNormalized)) {
+    throw new ForbiddenError("Login is restricted to authorized admin emails only.");
+  }
+
+  const user = await User.findOne({ email: emailNormalized }).select("+password");
 
   if (!user) {
     throw new UnauthorizedError("Invalid credentials");
@@ -106,10 +117,7 @@ export const forgotPasswordService = async (email: string) => {
   }
 
   const resetToken = crypto.randomBytes(32).toString("hex");
-  const hashedResetToken = crypto
-    .createHash("sha256")
-    .update(resetToken)
-    .digest("hex");
+  const hashedResetToken = crypto.createHash("sha256").update(resetToken).digest("hex");
 
   user.resetPasswordToken = hashedResetToken;
 

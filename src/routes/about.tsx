@@ -9,16 +9,15 @@ import logo from "@/assets/logo.png";
 import { Footer } from "@/components/Footer";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
 
-
 export const Route = createFileRoute("/about")({
   component: AboutPage,
   head: () => ({
-    title: "About Samyam — Philosophy & Purpose",
+    title: "About Samyam | Philosophy & Purpose",
     meta: [
       {
         name: "description",
         content:
-          "Welcome to Samyam Spiritual Tourism—where spiritual travel is not just a journey, but an exquisite transcendental experience.",
+          "Welcome to Samyam Spiritual Tourism, where spiritual travel is not just a journey, but an exquisite transcendental experience.",
       },
     ],
   }),
@@ -30,7 +29,10 @@ function AboutPage() {
       <Nav />
 
       {/* PHILOSOPHY & PURPOSE HERO */}
-      <section data-nav-theme="dark" className="relative pt-36 pb-24 px-4 text-center overflow-hidden min-h-[60vh] md:min-h-[70vh] flex items-center justify-center">
+      <section
+        data-nav-theme="dark"
+        className="relative pt-36 pb-24 px-4 text-center overflow-hidden min-h-[60vh] md:min-h-[70vh] flex items-center justify-center"
+      >
         <img
           src={bgAbout}
           alt="Samyam Background"
@@ -73,7 +75,10 @@ function AboutPage() {
       </section>
 
       {/* INTRO GRID */}
-      <section data-nav-theme="light" className="py-16 px-4 bg-background overflow-hidden border-t border-border relative">
+      <section
+        data-nav-theme="light"
+        className="py-16 px-4 bg-background overflow-hidden border-t border-border relative"
+      >
         <FlowerField count={8} />
         <div className="max-w-6xl mx-auto grid lg:grid-cols-12 gap-8 items-stretch">
           {/* Left Column - Content Card */}
@@ -94,11 +99,11 @@ function AboutPage() {
 
                 <div className="space-y-4 text-muted-foreground text-sm md:text-base leading-relaxed font-body">
                   <p>
-                    Welcome to Samyam Spiritual Tourism—where spiritual travel is not just a journey,
-                    but an exquisite transcendental experience. Founded by Nileema Shenoy and a team
-                    of Sanatani scholars, Samyam redefines the very essence of teerth yatra by
-                    seamlessly blending tools to invoke divine energies, inner tranquility, and
-                    luxurious comfort.
+                    Welcome to Samyam Spiritual Tourism, where spiritual travel is not just a
+                    journey, but an exquisite transcendental experience. Founded by Nileema Shenoy
+                    and a team of Sanatani scholars, Samyam redefines the very essence of teerth
+                    yatra by seamlessly blending tools to invoke divine energies, inner tranquility,
+                    and luxurious comfort.
                   </p>
                   <p>
                     We cater to seekers who aspire to elevate their spiritual consciousness while
@@ -107,19 +112,20 @@ function AboutPage() {
                   </p>
                   <p>
                     At Samyam, we believe that a pilgrimage is not merely an itinerary, but an
-                    intimate dialogue with the divine—an opportunity to spiritually advance.
+                    intimate dialogue with the divine, offering an opportunity to spiritually
+                    advance.
                   </p>
                   <p>
                     By imbibing our spiritual and cultural exuberance, we ensure that each traveller
                     experiences an awakening that aligns their soul with the supreme, unlocking the
-                    highest potential of bhakti, jnana, and vairagya using the traditional methods and
-                    tools prescribed in our ancient texts.
+                    highest potential of bhakti, jnana, and vairagya using the traditional methods
+                    and tools prescribed in our ancient texts.
                   </p>
                 </div>
 
                 <div className="flex flex-wrap gap-2 mt-8">
                   {[
-                    "Scholar-led rituals",
+                    "Scholar led rituals",
                     "Guided yoga & dhyan",
                     "Satsang immersion",
                     "Boutique curation",
@@ -153,11 +159,17 @@ function AboutPage() {
                   <p className="text-[10px] uppercase tracking-wider text-muted-foreground">
                     Signature
                   </p>
-                  <p className="text-sm font-semibold text-foreground mt-1">Premium Ritual Immersions</p>
+                  <p className="text-sm font-semibold text-foreground mt-1">
+                    Premium Ritual Immersions
+                  </p>
                 </div>
                 <div className="p-4 rounded-2xl bg-muted border border-border">
-                  <p className="text-[10px] uppercase tracking-wider text-muted-foreground">Focus</p>
-                  <p className="text-sm font-semibold text-foreground mt-1">Inner & Outer Exploration</p>
+                  <p className="text-[10px] uppercase tracking-wider text-muted-foreground">
+                    Focus
+                  </p>
+                  <p className="text-sm font-semibold text-foreground mt-1">
+                    Inner & Outer Exploration
+                  </p>
                 </div>
               </div>
             </div>
@@ -182,7 +194,7 @@ function AboutPage() {
                   Sanatan Wisdom × Contemporary Care
                 </h3>
                 <p className="text-xs text-white/80 leading-relaxed font-light font-body">
-                  Scholar-led rituals · Guided yoga & dhyan · Curated satsangs · Bespoke stays
+                  Scholar led rituals · Guided yoga & dhyan · Curated satsangs · Bespoke stays
                 </p>
               </div>
             </div>
@@ -191,26 +203,41 @@ function AboutPage() {
       </section>
 
       {/* SACRED DESIGN HOUSE */}
-      <section data-nav-theme="light" className="relative py-24 px-4 overflow-hidden bg-gradient-to-br from-[#f8efe6] via-[#fbf7f2] to-[#f3e6d8] text-foreground border-t border-border">
+      <section
+        data-nav-theme="light"
+        className="relative py-24 px-4 overflow-hidden bg-gradient-to-br from-[#f8efe6] via-[#fbf7f2] to-[#f3e6d8] text-foreground border-t border-border"
+      >
         <FlowerField count={8} />
 
         <div className="relative max-w-6xl mx-auto text-center z-10">
           <ScrollReveal variant="fade-up">
-            <p className="text-xs tracking-[0.3em] uppercase text-amber-600 font-semibold mb-3">We Are</p>
+            <p className="text-xs tracking-[0.3em] uppercase text-amber-600 font-semibold mb-3">
+              We Are
+            </p>
             <h2 className="text-4xl md:text-5xl font-display font-semibold text-foreground leading-tight mb-8">
               A Sacred Design House
             </h2>
             <div className="max-w-3xl mx-auto space-y-6 text-sm md:text-base text-muted-foreground leading-relaxed mb-16 font-body">
               <p>
-                We are committed to <span className="text-amber-600 font-semibold">reviving the true essence of teerth yatra</span>, ensuring that every
-                seeker embarks on a spiritually enriching journey. Our exquisitely curated programs
-                are designed to align with the <span className="text-amber-600 font-semibold">sacred teachings of ancient scriptures</span>, offering not
-                just a visit to holy sites but a profound inner transformation.
+                We are committed to{" "}
+                <span className="text-amber-600 font-semibold">
+                  reviving the true essence of teerth yatra
+                </span>
+                , ensuring that every seeker embarks on a spiritually enriching journey. Our
+                exquisitely curated programs are designed to align with the{" "}
+                <span className="text-amber-600 font-semibold">
+                  sacred teachings of ancient scriptures
+                </span>
+                , offering not just a visit to holy sites but a profound inner transformation.
               </p>
               <p>
-                With <span className="text-amber-600 font-semibold">scholar-led guidance</span>, immersive rituals, and curated comforts, we create journeys
-                that honour tradition while welcoming modern seekers into a space of <span className="text-amber-600 font-semibold">reverence,
-                  reflection, and renewal</span>.
+                With <span className="text-amber-600 font-semibold">scholar led guidance</span>,
+                immersive rituals, and curated comforts, we create journeys that honour tradition
+                while welcoming modern seekers into a space of{" "}
+                <span className="text-amber-600 font-semibold">
+                  reverence, reflection, and renewal
+                </span>
+                .
               </p>
             </div>
           </ScrollReveal>
@@ -235,14 +262,8 @@ function AboutPage() {
                 desc: "Practices blessed by parampara",
               },
             ].map((f, idx) => (
-              <ScrollReveal
-                key={f.label}
-                variant="scale-up"
-                delay={idx * 100}
-              >
-                <div
-                  className="bg-white border border-black/[0.05] p-6 rounded-2xl hover:bg-white/[0.8] hover:border-amber-600/40 hover:scale-[1.02] transition-all duration-300 group shadow-soft h-full"
-                >
+              <ScrollReveal key={f.label} variant="scale-up" delay={idx * 100}>
+                <div className="bg-white border border-black/[0.05] p-6 rounded-2xl hover:bg-white/[0.8] hover:border-amber-600/40 hover:scale-[1.02] transition-all duration-300 group shadow-soft h-full">
                   <p className="text-[10px] uppercase tracking-wider text-amber-600 mb-2 font-semibold">
                     {f.label}
                   </p>
@@ -259,11 +280,11 @@ function AboutPage() {
             {[
               {
                 t: "Prepare",
-                d: "Pre-yatra swadhyay & sankalp design",
+                d: "Pre yatra swadhyay & sankalp design",
               },
               {
                 t: "Immerse",
-                d: "On-ground rituals, seva & dhyan",
+                d: "On ground rituals, seva & dhyan",
               },
               {
                 t: "Absorb",
@@ -271,22 +292,21 @@ function AboutPage() {
               },
               {
                 t: "Integrate",
-                d: "Post-yatra anchors for daily life",
+                d: "Post yatra anchors for daily life",
               },
             ].map((step, idx, arr) => (
-              <ScrollReveal
-                key={step.t}
-                variant="fade-up"
-                delay={idx * 150}
-              >
+              <ScrollReveal key={step.t} variant="fade-up" delay={idx * 150}>
                 <div
-                  className={`relative flex flex-col items-center justify-center px-4 group hover:scale-105 transition-transform duration-300 h-full ${idx < arr.length - 1 ? "md:border-r md:border-black/10" : ""
-                    }`}
+                  className={`relative flex flex-col items-center justify-center px-4 group hover:scale-105 transition-transform duration-300 h-full ${
+                    idx < arr.length - 1 ? "md:border-r md:border-black/10" : ""
+                  }`}
                 >
                   <p className="text-xs uppercase tracking-[0.2em] text-amber-600 font-bold mb-2 group-hover:text-primary transition-colors">
                     {step.t}
                   </p>
-                  <p className="text-xs text-muted-foreground leading-relaxed max-w-[200px]">{step.d}</p>
+                  <p className="text-xs text-muted-foreground leading-relaxed max-w-[200px]">
+                    {step.d}
+                  </p>
                 </div>
               </ScrollReveal>
             ))}
@@ -312,25 +332,24 @@ function AboutPage() {
               },
               {
                 num: "4",
-                t: "Heart-Centred Awakening",
+                t: "Heart Centred Awakening",
                 d: "Our journeys focus on <span class='text-amber-600 font-semibold'>opening the anahata chakra</span>, deepening one's bhakti (devotion), and leading towards true jnana (wisdom) and vairagya.",
               },
             ].map((card, idx) => (
-              <ScrollReveal
-                key={card.num}
-                variant="fade-up"
-                delay={idx * 100}
-              >
-                <div
-                  className="bg-white border border-black/[0.05] p-8 rounded-3xl flex flex-col gap-3 relative hover:bg-white/[0.8] hover:border-amber-600/30 hover:scale-[1.01] transition-all duration-300 group shadow-lg shadow-black/5 h-full"
-                >
+              <ScrollReveal key={card.num} variant="fade-up" delay={idx * 100}>
+                <div className="bg-white border border-black/[0.05] p-8 rounded-3xl flex flex-col gap-3 relative hover:bg-white/[0.8] hover:border-amber-600/30 hover:scale-[1.01] transition-all duration-300 group shadow-lg shadow-black/5 h-full">
                   <div className="flex items-center gap-4">
                     <div className="w-10 h-10 rounded-full bg-muted border border-border flex items-center justify-center text-sm font-bold text-amber-600 shadow-soft group-hover:border-amber-600/50 transition-colors font-body">
                       {card.num}
                     </div>
-                    <h3 className="font-semibold text-lg md:text-xl text-foreground group-hover:text-amber-600 transition-colors">{card.t}</h3>
+                    <h3 className="font-semibold text-lg md:text-xl text-foreground group-hover:text-amber-600 transition-colors">
+                      {card.t}
+                    </h3>
                   </div>
-                  <p className="text-sm text-muted-foreground leading-relaxed pl-14 font-body" dangerouslySetInnerHTML={{ __html: card.d }} />
+                  <p
+                    className="text-sm text-muted-foreground leading-relaxed pl-14 font-body"
+                    dangerouslySetInnerHTML={{ __html: card.d }}
+                  />
                 </div>
               </ScrollReveal>
             ))}
@@ -339,7 +358,7 @@ function AboutPage() {
           {/* Closing italic quote */}
           <ScrollReveal variant="fade-up">
             <p className="font-display italic text-lg md:text-xl text-[#5c245e] leading-relaxed max-w-4xl mx-auto drop-shadow-sm">
-              "With Samyam, every yatra becomes a sacred passage—one that transforms the seeker from
+              "With Samyam, every yatra becomes a sacred passage, transforming the seeker from
               within, paving the way for divine spiritual awakening and eternal bliss."
             </p>
           </ScrollReveal>
@@ -347,7 +366,10 @@ function AboutPage() {
       </section>
 
       {/* TRAVEL BEYOND SECTION */}
-      <section data-nav-theme="light" className="py-16 px-4 bg-background overflow-hidden border-t border-border relative">
+      <section
+        data-nav-theme="light"
+        className="py-16 px-4 bg-background overflow-hidden border-t border-border relative"
+      >
         <FlowerField count={8} />
         <div className="max-w-6xl mx-auto bg-white border border-black/[0.06] rounded-[2rem] p-8 md:p-12 shadow-glow text-foreground">
           <div className="grid lg:grid-cols-12 gap-8 items-center">
@@ -362,20 +384,21 @@ function AboutPage() {
                   </h2>
                   <div className="space-y-4 text-sm md:text-base text-muted-foreground leading-relaxed font-body">
                     <p>
-                      SAMYAM offers premium pilgrimages that are more than journeys—they are sacred
-                      experiences designed to align the soul with divine vibrations. We blend Sanatan
-                      wisdom with contemporary comfort, guiding both inner exploration and immersive
-                      darshans across Bharat.
+                      SAMYAM offers premium pilgrimages that are more than journeys, they are sacred
+                      experiences designed to align the soul with divine vibrations. We blend
+                      Sanatan wisdom with contemporary comfort, guiding both inner exploration and
+                      immersive darshans across Bharat.
                     </p>
                     <p>
-                      Spirituality is not a privilege but a birthright. Our journeys are crafted to be
-                      profound yet welcoming for young seekers, modern explorers, and families alike.
-                      Every itinerary is a living dialogue between tradition and the present moment.
+                      Spirituality is not a privilege but a birthright. Our journeys are crafted to
+                      be profound yet welcoming for young seekers, modern explorers, and families
+                      alike. Every itinerary is a living dialogue between tradition and the present
+                      moment.
                     </p>
                     <p>
                       We challenge the notion that spirituality belongs only to the past or to
-                      isolation. Spirituality is alive, relevant, and deeply personal. Journeys should
-                      be immersive, enriching, and timeless.
+                      isolation. Spirituality is alive, relevant, and deeply personal. Journeys
+                      should be immersive, enriching, and timeless.
                     </p>
                   </div>
                 </div>
@@ -387,31 +410,25 @@ function AboutPage() {
               {[
                 {
                   t: "Devotional Luxury",
-                  d: "Handpicked stays, curated culinary experiences, and bespoke care that honour the sanctity of the journey."
+                  d: "Handpicked stays, curated culinary experiences, and bespoke care that honour the sanctity of the journey.",
                 },
                 {
-                  t: "Scripture-Aligned Design",
-                  d: "Each day’s rhythm references shastra, ensuring seekers receive the spiritual phal promised in phala shruthis."
+                  t: "Scripture Aligned Design",
+                  d: "Each day’s rhythm references shastra, ensuring seekers receive the spiritual phal promised in phala shruthis.",
                 },
                 {
                   t: "Inner & Outer Exploration",
-                  d: "Morning sadhanas, riverside meditations, temple darshans, and evening satsangs harmonise inner stillness with outer awe."
+                  d: "Morning sadhanas, riverside meditations, temple darshans, and evening satsangs harmonise inner stillness with outer awe.",
                 },
                 {
                   t: "Living Spirituality",
-                  d: "We make Sanatan wisdom contemporary—relevant for families, leaders, young seekers, and those in golden years."
-                }
+                  d: "We make Sanatan wisdom contemporary, relevant for families, leaders, young seekers, and those in golden years.",
+                },
               ].map((card, idx) => (
-                <ScrollReveal
-                  key={card.t}
-                  variant="fade-up"
-                  delay={idx * 100}
-                >
+                <ScrollReveal key={card.t} variant="fade-up" delay={idx * 100}>
                   <div className="p-6 rounded-2xl bg-muted border border-border shadow-soft hover:border-amber-600/30 transition h-full">
                     <h4 className="font-semibold text-foreground mb-2 text-base">{card.t}</h4>
-                    <p className="text-xs text-muted-foreground leading-relaxed">
-                      {card.d}
-                    </p>
+                    <p className="text-xs text-muted-foreground leading-relaxed">{card.d}</p>
                   </div>
                 </ScrollReveal>
               ))}
@@ -424,7 +441,7 @@ function AboutPage() {
                 "Let’s not just visit the sacred. Let’s transform the way we experience the soul."
               </p>
               <p className="text-xs uppercase tracking-widest text-amber-600 mt-2 font-body font-semibold">
-                — Nileema Shenoy, Founder
+                - Nileema Shenoy, Founder
               </p>
             </div>
           </ScrollReveal>
@@ -432,7 +449,10 @@ function AboutPage() {
       </section>
 
       {/* & MISSION & GOALS (DARK MODE) */}
-      <section data-nav-theme="dark" className="py-20 px-4 bg-gradient-to-b from-[#823883] to-[#3D0068] text-white border-t border-white/5">
+      <section
+        data-nav-theme="dark"
+        className="py-20 px-4 bg-gradient-to-b from-[#823883] to-[#3D0068] text-white border-t border-white/5"
+      >
         <div className="max-w-6xl mx-auto">
           <ScrollReveal variant="fade-up">
             <h2 className="text-4xl md:text-5xl font-display font-semibold text-center mb-16">
@@ -446,12 +466,14 @@ function AboutPage() {
               <div className="p-8 rounded-3xl bg-white/[0.03] border border-white/10 shadow-soft flex flex-col justify-between hover:border-amber-400/30 transition-all duration-300 h-full">
                 <div>
                   <span className="text-3xl">🌟</span>
-                  <h3 className="text-2xl font-display font-semibold text-white mt-4 mb-4">Vision</h3>
+                  <h3 className="text-2xl font-display font-semibold text-white mt-4 mb-4">
+                    Vision
+                  </h3>
                   <p className="text-sm text-white/70 leading-relaxed">
-                    To be the global pioneer in spiritual travel, seamlessly blending luxury, culture,
-                    authentic roots, and divinity. To raise benchmarks in spiritual tourism and
-                    position Bharat as the world’s foremost destination for seekers, facilitating
-                    inner awakening and meaningful exploration.
+                    To be the global pioneer in spiritual travel, seamlessly blending luxury,
+                    culture, authentic roots, and divinity. To raise benchmarks in spiritual tourism
+                    and position Bharat as the world’s foremost destination for seekers,
+                    facilitating inner awakening and meaningful exploration.
                   </p>
                 </div>
               </div>
@@ -479,27 +501,30 @@ function AboutPage() {
               <div className="p-8 rounded-3xl bg-white/[0.03] border border-white/10 shadow-soft flex flex-col justify-between hover:border-amber-400/30 transition-all duration-300 h-full">
                 <div>
                   <span className="text-3xl">💫</span>
-                  <h3 className="text-2xl font-display font-semibold text-white mt-4 mb-4">Goals</h3>
+                  <h3 className="text-2xl font-display font-semibold text-white mt-4 mb-4">
+                    Goals
+                  </h3>
                   <ul className="space-y-4 text-sm text-white/70 leading-relaxed">
                     <li className="flex items-start gap-2">
                       <span className="text-amber-400 mt-1">•</span>
                       <span>
-                        <strong className="text-white">Inspire Awakening:</strong> Spark consciousness through curated
-                        sadhanas, rituals, and divine encounters.
+                        <strong className="text-white">Inspire Awakening:</strong> Spark
+                        consciousness through curated sadhanas, rituals, and divine encounters.
                       </span>
                     </li>
                     <li className="flex items-start gap-2">
                       <span className="text-amber-400 mt-1">•</span>
                       <span>
-                        <strong className="text-white">Uphold Dharma:</strong> Share Bharat’s heritage and values with
-                        authenticity and reverence.
+                        <strong className="text-white">Uphold Dharma:</strong> Share Bharat’s
+                        heritage and values with authenticity and reverence.
                       </span>
                     </li>
                     <li className="flex items-start gap-2">
                       <span className="text-amber-400 mt-1">•</span>
                       <span>
-                        <strong className="text-white">Craft Experiences:</strong> Offer soulful journeys for young seekers
-                        and retired explorers, uniting comfort with depth.
+                        <strong className="text-white">Craft Experiences:</strong> Offer soulful
+                        journeys for young seekers and retired explorers, uniting comfort with
+                        depth.
                       </span>
                     </li>
                   </ul>
@@ -511,7 +536,10 @@ function AboutPage() {
       </section>
 
       {/* OUR DIVINE EMBLEM */}
-      <section data-nav-theme="light" className="py-24 px-4 bg-background text-foreground border-t border-border relative">
+      <section
+        data-nav-theme="light"
+        className="py-24 px-4 bg-background text-foreground border-t border-border relative"
+      >
         <FlowerField count={6} />
         <div className="max-w-6xl mx-auto">
           <ScrollReveal variant="fade-up">
@@ -568,15 +596,11 @@ function AboutPage() {
                   d: "Top arc: Teerthas (Tourism). Bottom arc: An ecstatic feeling",
                 },
               ].map((item, idx) => (
-                <ScrollReveal
-                  key={item.t}
-                  variant="fade-left"
-                  delay={idx * 100}
-                >
-                  <div
-                    className="p-5 rounded-2xl bg-white border border-black/[0.06] shadow-soft hover:border-amber-600/30 hover:bg-muted transition-all text-left"
-                  >
-                    <h4 className="font-semibold text-foreground text-sm md:text-base font-display">{item.t}</h4>
+                <ScrollReveal key={item.t} variant="fade-left" delay={idx * 100}>
+                  <div className="p-5 rounded-2xl bg-white border border-black/[0.06] shadow-soft hover:border-amber-600/30 hover:bg-muted transition-all text-left">
+                    <h4 className="font-semibold text-foreground text-sm md:text-base font-display">
+                      {item.t}
+                    </h4>
                     <p className="text-xs md:text-sm text-muted-foreground mt-1 leading-relaxed font-body">
                       {item.d}
                     </p>
@@ -589,7 +613,10 @@ function AboutPage() {
       </section>
 
       {/* OUR VALUES */}
-      <section data-nav-theme="dark" className="py-20 px-4 bg-gradient-to-b from-[#823883] to-[#3D0068] text-white border-t border-white/5">
+      <section
+        data-nav-theme="dark"
+        className="py-20 px-4 bg-gradient-to-b from-[#823883] to-[#3D0068] text-white border-t border-white/5"
+      >
         <div className="max-w-6xl mx-auto text-center">
           <ScrollReveal variant="fade-up">
             <h2 className="text-4xl md:text-5xl font-display font-semibold mb-14">Our Values</h2>
@@ -618,18 +645,13 @@ function AboutPage() {
                 d: "Every journey is designed for spiritual awakening and personal growth.",
               },
             ].map((f, idx) => (
-              <ScrollReveal
-                key={f.t}
-                variant="scale-up"
-                delay={idx * 100}
-                className="h-full"
-              >
-                <div
-                  className="p-6 rounded-3xl bg-white/[0.03] border border-white/10 hover:border-amber-400/30 transition-all duration-300 flex flex-col justify-between h-full"
-                >
+              <ScrollReveal key={f.t} variant="scale-up" delay={idx * 100} className="h-full">
+                <div className="p-6 rounded-3xl bg-white/[0.03] border border-white/10 hover:border-amber-400/30 transition-all duration-300 flex flex-col justify-between h-full">
                   <div>
                     <span className="text-3xl">{f.icon}</span>
-                    <h3 className="text-lg font-semibold text-white mt-3 mb-2 font-display">{f.t}</h3>
+                    <h3 className="text-lg font-semibold text-white mt-3 mb-2 font-display">
+                      {f.t}
+                    </h3>
                     <p className="text-xs text-white/60 leading-relaxed">{f.d}</p>
                   </div>
                 </div>
@@ -640,7 +662,10 @@ function AboutPage() {
       </section>
 
       {/* OUR JOURNEY */}
-      <section data-nav-theme="light" className="py-20 px-4 bg-background text-foreground border-t border-border relative">
+      <section
+        data-nav-theme="light"
+        className="py-20 px-4 bg-background text-foreground border-t border-border relative"
+      >
         <FlowerField count={8} />
         <div className="max-w-4xl mx-auto text-center">
           <ScrollReveal variant="fade-up">
@@ -655,7 +680,7 @@ function AboutPage() {
               {
                 year: "2024",
                 t: "SAMYAM Founded",
-                d: "Established to craft authentic, scripture-aligned spiritual journeys.",
+                d: "Established to craft authentic, scripture aligned spiritual journeys.",
               },
               {
                 year: "Apr 2025",
@@ -668,11 +693,7 @@ function AboutPage() {
                 d: "Successfully hosted seven yatras and retreats across sacred circuits within our first year of operations.",
               },
             ].map((m, idx) => (
-              <ScrollReveal
-                key={m.year}
-                variant="fade-up"
-                delay={idx * 150}
-              >
+              <ScrollReveal key={m.year} variant="fade-up" delay={idx * 150}>
                 <div className="relative pl-8 md:pl-12">
                   {/* Timeline Dot */}
                   <div className="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-amber-400 border-2 border-background shadow-soft" />
@@ -682,7 +703,9 @@ function AboutPage() {
                     <span className="text-xs font-semibold uppercase tracking-wider text-amber-600 px-3 py-1 rounded-full bg-muted font-body border border-border">
                       {m.year}
                     </span>
-                    <h3 className="text-xl font-bold text-foreground mt-3 mb-2 font-display">{m.t}</h3>
+                    <h3 className="text-xl font-bold text-foreground mt-3 mb-2 font-display">
+                      {m.t}
+                    </h3>
                     <p className="text-sm text-muted-foreground leading-relaxed font-body">{m.d}</p>
                   </div>
                 </div>
@@ -693,41 +716,46 @@ function AboutPage() {
       </section>
 
       {/* MEET THE FOUNDER */}
-      <section data-nav-theme="light" className="py-24 px-6 bg-background text-foreground border-t border-border relative overflow-hidden">
+      <section
+        data-nav-theme="light"
+        className="py-24 px-6 bg-background text-foreground border-t border-border relative overflow-hidden"
+      >
         <FlowerField count={8} />
-        
+
         <div className="max-w-5xl mx-auto relative z-10">
           <div className="grid md:grid-cols-12 gap-12 items-center mb-12">
-            
             {/* Founder Bio Column */}
             <div className="md:col-span-7 text-left">
               <ScrollReveal variant="fade-left">
                 <div>
-                  <p className="text-xs tracking-[0.3em] uppercase text-[#FF7722] mb-3 font-bold">Meet the Founder</p>
+                  <p className="text-xs tracking-[0.3em] uppercase text-[#FF7722] mb-3 font-bold">
+                    Meet the Founder
+                  </p>
                   <h2 className="text-4xl md:text-5xl font-display font-semibold text-foreground mb-6">
                     Nileema Shenoy
                   </h2>
-                  
+
                   <div className="space-y-4 text-sm md:text-base text-muted-foreground leading-relaxed font-body">
                     <p>
-                      Nileema Shenoy is a young, qualified Chartered Accountant from the sacred town of
-                      Karkala in Udupi. An academic achiever, she pursued graduation and Chartered
-                      Accountancy simultaneously—clearing every level in her first attempt.
+                      Nileema Shenoy is a young, qualified Chartered Accountant from the sacred town
+                      of Karkala in Udupi. An academic achiever, she pursued graduation and
+                      Chartered Accountancy simultaneously, clearing every level in her first
+                      attempt.
                     </p>
                     <p>
                       Growing up amidst Karkala’s scriptural heritage immersed her in ancient Indian
-                      wisdom from childhood. Guided by her spiritual masters, she continues to study the
-                      shastras with devotion.
+                      wisdom from childhood. Guided by her spiritual masters, she continues to study
+                      the shastras with devotion.
                     </p>
                     <p>
-                      A passionate traveller, Nileema has explored spiritual geographies across Bharat and
-                      the world, especially the Himalayas and other sacred teerthas, seeking deeper
-                      communion with divinity.
+                      A passionate traveller, Nileema has explored spiritual geographies across
+                      Bharat and the world, especially the Himalayas and other sacred teerthas,
+                      seeking deeper communion with divinity.
                     </p>
                     <p>
-                      Observing how others experienced yatras differently inspired her to design journeys
-                      that follow a structured, scripture-aligned approach—ensuring seekers receive the
-                      full spiritual potency of each pilgrimage.
+                      Observing how others experienced yatras differently inspired her to design
+                      journeys that follow a structured, scripture aligned approach, ensuring
+                      seekers receive the full spiritual potency of each pilgrimage.
                     </p>
                   </div>
                 </div>
@@ -744,16 +772,20 @@ function AboutPage() {
                     className="w-full h-full object-cover group-hover:scale-102 transition duration-500"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/35 to-transparent flex flex-col justify-end p-6 md:p-8 text-left">
-                    <span className="text-[10px] uppercase tracking-[0.25em] text-white/60 font-bold font-body mb-1">Founder</span>
-                    <h3 className="text-2xl font-display font-semibold text-white mb-2">Nileema Shenoy</h3>
+                    <span className="text-[10px] uppercase tracking-[0.25em] text-white/60 font-bold font-body mb-1">
+                      Founder
+                    </span>
+                    <h3 className="text-2xl font-display font-semibold text-white mb-2">
+                      Nileema Shenoy
+                    </h3>
                     <p className="text-xs text-white/80 leading-relaxed font-body font-light">
-                      Bridging authenticity, ancient scriptures, devotion & hospitality for modern age seekers.
+                      Bridging authenticity, ancient scriptures, devotion & hospitality for modern
+                      age seekers.
                     </p>
                   </div>
                 </div>
               </ScrollReveal>
             </div>
-
           </div>
 
           {/* Highlights Cards Row */}
@@ -762,33 +794,26 @@ function AboutPage() {
               {
                 emoji: "📜",
                 category: "Academic Excellence",
-                text: "Qualified Chartered Accountant; cleared all levels alongside graduation."
+                text: "Qualified Chartered Accountant; cleared all levels alongside graduation.",
               },
               {
                 emoji: "📚",
                 category: "Scripture Seeker",
-                text: "Trained under revered masters; steeped in Sanatan studies since childhood."
+                text: "Trained under revered masters; steeped in Sanatan studies since childhood.",
               },
               {
                 emoji: "🗺️",
                 category: "Spiritual Explorer",
-                text: "Journeyed across Bharat's teerthas with a quest to decode living divinity."
+                text: "Journeyed across Bharat's teerthas with a quest to decode living divinity.",
               },
               {
                 emoji: "🕉️",
                 category: "Sacred Design Mind",
-                text: "Crafts yatras with structured, scripture-aligned processes for seekers."
-              }
+                text: "Crafts yatras with structured, scripture aligned processes for seekers.",
+              },
             ].map((card, idx) => (
-              <ScrollReveal
-                key={idx}
-                variant="scale-up"
-                delay={idx * 100}
-                className="h-full"
-              >
-                <div
-                  className="p-6 bg-white border border-black/[0.06] rounded-3xl shadow-soft hover:shadow-glow hover:-translate-y-1 transition-all duration-300 text-left flex flex-col justify-between h-full"
-                >
+              <ScrollReveal key={idx} variant="scale-up" delay={idx * 100} className="h-full">
+                <div className="p-6 bg-white border border-black/[0.06] rounded-3xl shadow-soft hover:shadow-glow hover:-translate-y-1 transition-all duration-300 text-left flex flex-col justify-between h-full">
                   <div>
                     <span className="text-3xl mb-3 block select-none">{card.emoji}</span>
                     <h4 className="text-[#FF7722] text-[10px] md:text-xs font-bold uppercase tracking-[0.2em] mb-2 font-body">
@@ -810,11 +835,11 @@ function AboutPage() {
                 Her Intention
               </p>
               <blockquote className="font-display italic text-xl md:text-2xl text-foreground leading-relaxed font-medium">
-                “Every yatra must be a living scripture—designed with devotion, discipline, and divine grace so that each seeker truly feels the awakening they came for.”
+                “Every yatra must be a living scripture, designed with devotion, discipline, and
+                divine grace so that each seeker truly feels the awakening they came for.”
               </blockquote>
             </div>
           </ScrollReveal>
-
         </div>
       </section>
 

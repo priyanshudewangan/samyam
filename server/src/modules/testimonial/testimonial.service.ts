@@ -14,9 +14,7 @@ interface CreateTestimonialVideoPayload {
   youtubeLink: string;
 }
 
-export const createTestimonialVideoService = async (
-  payload: CreateTestimonialVideoPayload,
-) => {
+export const createTestimonialVideoService = async (payload: CreateTestimonialVideoPayload) => {
   const testimonialVideo = await TestimonialVideo.create({
     category: payload.category,
     youtubeLink: payload.youtubeLink,
@@ -88,9 +86,7 @@ export const updateTestimonialVideoService = async (
    DELETE TESTIMONIAL VIDEO
 ========================= */
 
-export const deleteTestimonialVideoService = async (
-  testimonialVideoId: string,
-) => {
+export const deleteTestimonialVideoService = async (testimonialVideoId: string) => {
   const testimonialVideo = await TestimonialVideo.findById(testimonialVideoId);
 
   if (!testimonialVideo) {

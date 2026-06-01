@@ -48,7 +48,7 @@ function isCatastrophicSsrErrorBody(body: string, responseStatus: number): boole
 }
 
 // h3 swallows in-handler throws into a normal 500 Response with body
-// {"unhandled":true,"message":"HTTPError"} — try/catch alone never fires for those.
+// {"unhandled":true,"message":"HTTPError"} - try/catch alone never fires for those.
 // Cloudflare Workers do not support globalThis "error"/"unhandledrejection" listeners,
 // so we reconstruct the best error we can from the JSON body itself.
 async function normalizeCatastrophicSsrResponse(response: Response): Promise<Response> {

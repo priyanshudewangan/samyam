@@ -1,6 +1,6 @@
 /**
  * API Configuration
- * 
+ *
  * In development, this defaults to http://localhost:5005.
  * In production, it uses the VITE_API_URL environment variable.
  */

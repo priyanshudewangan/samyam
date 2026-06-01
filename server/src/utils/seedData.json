@@ -70,12 +70,7 @@
       "darshans": [
         {
           "title": "Ayodhya Temples",
-          "items": [
-            "Ram Janmabhoomi Mandir",
-            "Hanuman Garhi",
-            "Dashrath Mahal",
-            "Kanak Bhawan"
-          ]
+          "items": ["Ram Janmabhoomi Mandir", "Hanuman Garhi", "Dashrath Mahal", "Kanak Bhawan"]
         },
         {
           "title": "Kashi Sacred Sites",
@@ -309,10 +304,7 @@
         },
         {
           "title": "Power Seats",
-          "items": [
-            "Maa Baglamukhi Temple",
-            "Dharamshala Spiritual Circle"
-          ]
+          "items": ["Maa Baglamukhi Temple", "Dharamshala Spiritual Circle"]
         },
         {
           "title": "Divine Experiences",
@@ -342,7 +334,7 @@
       "region": "North",
       "duration": "5 Days / 4 Nights",
       "date": "Multiple Departures Available",
-      "desc": "Kashi is the oldest living city in the world — a living field of divine charge along the Ganga. Here, liberation is not a concept but the very air you breathe. Every ghat, every temple, every alley hums with the frequency of Shiva's eternal presence. A pilgrimage to Kashi is a pilgrimage to the very source of spiritual civilization.",
+      "desc": "Kashi is the oldest living city in the world, a living field of divine charge along the Ganga. Here, liberation is not a concept but the very air you breathe. Every ghat, every temple, every alley hums with the frequency of Shiva's eternal presence. A pilgrimage to Kashi is a pilgrimage to the very source of spiritual civilization.",
       "img": "https://samyam.co/images/kashi.jpg",
       "triplePrice": "Rs. 32,000 per Head",
       "doublePrice": "Rs. 36,000 per Head",
@@ -353,7 +345,7 @@
         {
           "day": 1,
           "points": [
-            "Arrive at Varanasi Airport / Railway Station — warm traditional welcome",
+            "Arrive at Varanasi Airport / Railway Station with a warm traditional welcome",
             "Transfer to heritage ghat-side accommodation",
             "Evening boat ride on the holy Ganga",
             "Witness the world-famous Ganga Aarti at Dashashwamedh Ghat",
@@ -374,7 +366,7 @@
           "day": 3,
           "points": [
             "Morning Yoga and Pranayama session overlooking the river",
-            "Visit Sarnath — where Buddha gave his first sermon",
+            "Visit Sarnath, where Buddha gave his first sermon",
             "Explore the Dhamek Stupa and Sarnath Museum",
             "Afternoon mantra chanting workshop",
             "Evening free for self-exploration of Kashi's magical lanes"
@@ -387,7 +379,7 @@
             "Visit Durga Temple (Monkey Temple), Sankat Mochan Hanuman Temple",
             "Tulsi Manas Mandir and BHU campus visit",
             "Special Rudra Abhishek puja arranged for the group",
-            "Musical Baithak — evening of classical devotional music by artists"
+            "Musical Baithak: an evening of classical devotional music by artists"
           ]
         },
         {
@@ -469,7 +461,7 @@
         {
           "day": 1,
           "points": [
-            "Arrive at Madurai Airport — transfer to Rameshwaram (3.5 hrs scenic drive)",
+            "Arrive at Madurai Airport and transfer to Rameshwaram (3.5 hrs scenic drive)",
             "Cross the iconic Pamban Bridge over the ocean",
             "Check-in and evening visit to Agnitheertham (sacred shore)",
             "Witness the stunning sunset over the ocean",
@@ -480,7 +472,7 @@
           "day": 2,
           "points": [
             "Early morning sacred bath at Agnitheertham",
-            "22 Theertham Snan — ritual bathing at all 22 sacred wells inside the temple",
+            "22 Theertham Snan: ritual bathing at all 22 sacred wells inside the temple",
             "Darshan at Sri Ramanathaswamy Temple (Jyotirlinga)",
             "Walk through the world's longest temple corridor (1220 meters)",
             "Evening discourse on the Ramayana and significance of Rameshwaram"
@@ -490,9 +482,9 @@
           "day": 3,
           "points": [
             "Morning Yoga & Pranayama by the ocean",
-            "Visit Dhanushkodi — the tip of the subcontinent where two oceans meet",
+            "Visit Dhanushkodi, the tip of the subcontinent where two oceans meet",
             "Explore the ruins of the old Dhanushkodi town",
-            "Visit Gandhamadhana Parvatham — footprint of Lord Rama",
+            "Visit Gandhamadhana Parvatham, the footprint of Lord Rama",
             "Visit Viloondi Theertham and Five-faced Hanuman Temple",
             "Evening free for peaceful ocean meditation"
           ]
@@ -549,7 +541,7 @@
       ],
       "highlights": [
         "22 Theertham sacred bath ritual",
-        "Dhanushkodi — where two oceans meet",
+        "Dhanushkodi, where two oceans meet",
         "World's longest temple corridor",
         "Ocean meditation sessions",
         "Ramayana discourse by scholars"
@@ -562,7 +554,7 @@
       "region": "West",
       "duration": "4 Days / 3 Nights",
       "date": "Multiple Departures Available",
-      "desc": "Dwarka, the legendary kingdom of Lord Krishna, stands where the ocean meets ancient devotion. One of the four Char Dhams and one of the seven Mokshapuris, Dwarka's Dwarkadhish Temple rises majestically on the banks of the Gomti river. The temple's shikhar with the 52-yard flag (Dwarkadhish Dhwaja) is visible from miles away — a beacon of Krishna's eternal presence.",
+      "desc": "Dwarka, the legendary kingdom of Lord Krishna, stands where the ocean meets ancient devotion. One of the four Char Dhams and one of the seven Mokshapuris, Dwarka's Dwarkadhish Temple rises majestically on the banks of the Gomti river. The temple's shikhar with the 52-yard flag (Dwarkadhish Dhwaja) is visible from miles away, a beacon of Krishna's eternal presence.",
       "img": "https://samyam.co/images/dwarka.jpg",
       "triplePrice": "Rs. 30,000 per Head",
       "doublePrice": "Rs. 34,000 per Head",
@@ -573,7 +565,7 @@
         {
           "day": 1,
           "points": [
-            "Arrive at Jamnagar Airport — transfer to Dwarka (2.5 hrs drive)",
+            "Arrive at Jamnagar Airport and transfer to Dwarka (2.5 hrs drive)",
             "Check-in and evening visit to Dwarkadhish Temple for darshan",
             "Witness the mesmerizing sunset from the Gomti Ghat",
             "Evening Aarti at Dwarkadhish Temple",
@@ -606,7 +598,7 @@
             "Final morning prayers at Dwarkadhish Temple",
             "Visit Lighthouse and panoramic ocean views",
             "Collect sacred prasad, checkout from stay",
-            "Transfer to Jamnagar Airport — departure with Krishna's blessings"
+            "Transfer to Jamnagar Airport for departure with Krishna's blessings"
           ]
         }
       ],
@@ -622,12 +614,7 @@
         },
         {
           "title": "Sacred Sites",
-          "items": [
-            "Gomti Ghat",
-            "Gopi Talav",
-            "Sudama Setu",
-            "Dwarka Lighthouse"
-          ]
+          "items": ["Gomti Ghat", "Gopi Talav", "Sudama Setu", "Dwarka Lighthouse"]
         },
         {
           "title": "Divine Experiences",
@@ -664,7 +651,7 @@
       "region": "North",
       "duration": "6 Days / 5 Nights",
       "date": "May – October (Season)",
-      "desc": "Badrinath Dham, nestled at 3,133 meters in the Garhwal Himalayas, is the abode of Lord Vishnu. One of the Char Dhams, this sacred shrine has been the spiritual goal of millions of seekers for millennia. The hot spring of Tapt Kund, the eternal Neelkanth peak, and the ancient Mana village — the last inhabited village before Tibet — all create an atmosphere of profound divine energy.",
+      "desc": "Badrinath Dham, nestled at 3,133 meters in the Garhwal Himalayas, is the abode of Lord Vishnu. One of the Char Dhams, this sacred shrine has been the spiritual goal of millions of seekers for millennia. The hot spring of Tapt Kund, the eternal Neelkanth peak, and the ancient Mana village (the last inhabited village before Tibet) all create an atmosphere of profound divine energy.",
       "img": "https://samyam.co/images/badrinath.jpg",
       "triplePrice": "Rs. 48,000 per Head",
       "doublePrice": "Rs. 54,000 per Head",
@@ -675,7 +662,7 @@
         {
           "day": 1,
           "points": [
-            "Arrive at Dehradun / Rishikesh — group assembly",
+            "Arrive at Dehradun / Rishikesh for group assembly",
             "Scenic drive through Devprayag (confluence of Alaknanda & Bhagirathi)",
             "Overnight stay at Rudraprayag or Pipalkoti",
             "Evening orientation and Himalayan prayer session"
@@ -685,7 +672,7 @@
           "day": 2,
           "points": [
             "Morning drive through breathtaking Himalayan valleys to Joshimath",
-            "Visit Jyotirmath — the seat of Adi Shankaracharya",
+            "Visit Jyotirmath, the seat of Adi Shankaracharya",
             "Continue to Badrinath Dham (3,133m altitude)",
             "Check-in and evening Darshan at Badrinath Temple",
             "Hot spring bath at Tapt Kund"
@@ -695,7 +682,7 @@
           "day": 3,
           "points": [
             "Early morning special VIP Abhishek Darshan at Badrinath Temple",
-            "Visit Mana Village — the last village of India",
+            "Visit Mana Village, the last village of India",
             "See Vyas Cave where Mahabharata was composed",
             "Walk to Bhim Pul and Vasudhara Falls",
             "Visit the origin of River Saraswati",
@@ -708,7 +695,7 @@
             "Morning meditation facing Neelkanth peak",
             "Special group Puja at Badrinath Temple",
             "Explore Charanpaduka (footprint of Lord Vishnu)",
-            "Begin return journey — overnight at Joshimath/Auli",
+            "Begin return journey, staying overnight at Joshimath/Auli",
             "Evening satsang under the stars"
           ]
         },
@@ -739,7 +726,7 @@
             "Badrinath Temple (Char Dham)",
             "Tapt Kund Hot Springs",
             "Charanpaduka (Vishnu's Footprint)",
-            "Mana Village — Last Village of India"
+            "Mana Village: Last Village of India"
           ]
         },
         {
@@ -775,7 +762,7 @@
       ],
       "highlights": [
         "VIP Abhishek Darshan at Badrinath",
-        "Mana — Last Village of India",
+        "Mana: Last Village of India",
         "Vyas Cave where Mahabharata was written",
         "Tapt Kund hot spring bath",
         "Auli panoramic Himalayan views"
@@ -788,7 +775,7 @@
       "region": "East",
       "duration": "4 Days / 3 Nights",
       "date": "Multiple Departures Available",
-      "desc": "Puri, one of the four Char Dhams, is the land of Lord Jagannath — the Lord of the Universe. The grand Jagannath Temple, built in the 12th century, stands as one of the most sacred sites in India. The Rath Yatra (chariot festival) is the world's largest annual religious gathering. The sacred Mahaprasad of Lord Jagannath is believed to be cooked by Goddess Mahalakshmi herself.",
+      "desc": "Puri, one of the four Char Dhams, is the land of Lord Jagannath, the Lord of the Universe. The grand Jagannath Temple, built in the 12th century, stands as one of the most sacred sites in India. The Rath Yatra (chariot festival) is the world's largest annual religious gathering. The sacred Mahaprasad of Lord Jagannath is believed to be cooked by Goddess Mahalakshmi herself.",
       "img": "https://samyam.co/images/jagannath%20puri.jpg",
       "triplePrice": "Rs. 26,000 per Head",
       "doublePrice": "Rs. 30,000 per Head",
@@ -799,7 +786,7 @@
         {
           "day": 1,
           "points": [
-            "Arrive at Bhubaneswar Airport — transfer to Puri (1.5 hrs drive)",
+            "Arrive at Bhubaneswar Airport and transfer to Puri (1.5 hrs drive)",
             "Check-in at seaside accommodation near Jagannath Temple",
             "Evening visit to Puri Beach for sunset",
             "Welcome dinner with introduction to Jagannath tradition",
@@ -824,7 +811,7 @@
             "Day trip to Konark Sun Temple (UNESCO World Heritage)",
             "Explore the magnificent stone chariot and temple architecture",
             "Visit Chandrabhaga Beach near Konark",
-            "Return to Puri — evening free for temple revisit or ocean meditation"
+            "Return to Puri, with the evening free for temple revisit or ocean meditation"
           ]
         },
         {
@@ -892,7 +879,7 @@
       "region": "North",
       "duration": "3 Days / 2 Nights",
       "date": "Multiple Departures Available",
-      "desc": "Haridwar — the Gateway to the Gods — is where the sacred Ganga emerges from the mountains into the plains. This is one of the seven Mokshapuris and a site of the Kumbh Mela. The evening Ganga Aarti at Har Ki Pauri is one of the most spectacular spiritual experiences in the world. The city pulses with the energy of millions of seekers who have bathed in its sacred waters.",
+      "desc": "Haridwar, the Gateway to the Gods, is where the sacred Ganga emerges from the mountains into the plains. This is one of the seven Mokshapuris and a site of the Kumbh Mela. The evening Ganga Aarti at Har Ki Pauri is one of the most spectacular spiritual experiences in the world. The city pulses with the energy of millions of seekers who have bathed in its sacred waters.",
       "img": "https://samyam.co/images/haridwar.jpg",
       "triplePrice": "Rs. 18,000 per Head",
       "doublePrice": "Rs. 22,000 per Head",
@@ -903,7 +890,7 @@
         {
           "day": 1,
           "points": [
-            "Arrive at Dehradun Airport / Haridwar Station — traditional welcome",
+            "Arrive at Dehradun Airport / Haridwar Station with a traditional welcome",
             "Check-in at riverside accommodation",
             "Evening Ganga Snan (holy bath) at Har Ki Pauri",
             "Witness the world-famous Ganga Aarti at Har Ki Pauri",
@@ -944,12 +931,7 @@
         },
         {
           "title": "Sacred Ghats",
-          "items": [
-            "Har Ki Pauri",
-            "Vishnu Ghat",
-            "Brahmakund",
-            "Sati Kund"
-          ]
+          "items": ["Har Ki Pauri", "Vishnu Ghat", "Brahmakund", "Sati Kund"]
         },
         {
           "title": "Divine Experiences",
@@ -996,7 +978,7 @@
         {
           "day": 1,
           "points": [
-            "Arrive at Ayodhya Airport / Railway Station — warm welcome",
+            "Arrive at Ayodhya Airport / Railway Station with a warm welcome",
             "Check-in at premium accommodation near Ram Mandir",
             "Evening visit to the serene Sarayu Ghat for sunset aarti",
             "Walk along the decorated ghats and explore the sacred city",
@@ -1008,7 +990,7 @@
           "points": [
             "Early morning visit to the grand Sri Ram Janmabhoomi Temple",
             "VIP Darshan of Ram Lalla",
-            "Visit Hanuman Garhi — the fortress temple of Hanuman",
+            "Visit Hanuman Garhi, the fortress temple of Hanuman",
             "Explore Dashrath Mahal and Kanak Bhawan",
             "Afternoon Ramayana discourse and satsang",
             "Evening Sarayu Aarti and free time for exploration"
@@ -1028,21 +1010,11 @@
       "darshans": [
         {
           "title": "Ayodhya Temples",
-          "items": [
-            "Sri Ram Janmabhoomi Mandir",
-            "Hanuman Garhi",
-            "Dashrath Mahal",
-            "Kanak Bhawan"
-          ]
+          "items": ["Sri Ram Janmabhoomi Mandir", "Hanuman Garhi", "Dashrath Mahal", "Kanak Bhawan"]
         },
         {
           "title": "Sacred Sites",
-          "items": [
-            "Sarayu Ghat",
-            "Nageshwarnath Temple",
-            "Ram Ki Paidi",
-            "Treta Ke Thakur"
-          ]
+          "items": ["Sarayu Ghat", "Nageshwarnath Temple", "Ram Ki Paidi", "Treta Ke Thakur"]
         },
         {
           "title": "Divine Experiences",
@@ -1089,7 +1061,7 @@
         {
           "day": 1,
           "points": [
-            "Arrive at Delhi/Agra — transfer to Mathura (2-3 hrs drive)",
+            "Arrive at Delhi/Agra and transfer to Mathura (2-3 hrs drive)",
             "Check-in and evening visit to Vishram Ghat on the Yamuna",
             "Explore the vibrant lanes and temples of Mathura",
             "Evening Yamuna Aarti at Vishram Ghat",
@@ -1101,8 +1073,8 @@
           "points": [
             "Early morning visit to Krishna Janmabhoomi Temple",
             "VIP Darshan at Sri Krishna Janmasthan",
-            "Visit Dwarkadhish Temple — the grandest temple of Mathura",
-            "Transfer to Vrindavan — check-in at ashram stay",
+            "Visit Dwarkadhish Temple, the grandest temple of Mathura",
+            "Transfer to Vrindavan and check-in at ashram stay",
             "Evening kirtan and darshan at Banke Bihari Temple",
             "Explore the magical evening atmosphere of Vrindavan"
           ]
@@ -1113,7 +1085,7 @@
             "Morning Parikrama (circumambulation) of sacred Vrindavan",
             "Visit ISKCON Temple, Prem Mandir (light & sound show)",
             "Darshan at Radha Vallabh Temple and Govind Dev Temple",
-            "Visit Seva Kunj — where Radha and Krishna performed Raas Leela",
+            "Visit Seva Kunj, where Radha and Krishna performed Raas Leela",
             "Evening discourse on Bhagavata Purana and Krishna's leelas",
             "Musical kirtan evening"
           ]
@@ -1175,7 +1147,7 @@
         "Banke Bihari Temple kirtan",
         "Vrindavan sacred Parikrama",
         "Prem Mandir light & sound show",
-        "Seva Kunj — Raas Leela spot"
+        "Seva Kunj: Raas Leela spot"
       ]
     },
     {
@@ -1185,7 +1157,7 @@
       "region": "North",
       "duration": "5 Days / 4 Nights",
       "date": "17 Jun - 21 Jun",
-      "desc": "Journey to the sacred abodes of the Divine Mother in the pristine Himalayas. These Shaktipeethas — Jwala Ji with its eternal flames, Chintpurni the dispeller of worries, Vajreshwari at Kangra, and Chamunda Devi — form a powerful circuit of Shakti worship. The energy of the Goddess is palpable in the mountain air, in the ancient rituals, and in the hearts of every devotee who walks this path.",
+      "desc": "Journey to the sacred abodes of the Divine Mother in the pristine Himalayas. These Shaktipeethas (Jwala Ji with its eternal flames, Chintpurni the dispeller of worries, Vajreshwari at Kangra, and Chamunda Devi) form a powerful circuit of Shakti worship. The energy of the Goddess is palpable in the mountain air, in the ancient rituals, and in the hearts of every devotee who walks this path.",
       "img": "https://samyam.co/images/haridwar.jpg",
       "triplePrice": "On Request",
       "doublePrice": "On Request",
@@ -1199,7 +1171,7 @@
             "Arrive at Dharamshala Airport / Pathankot Station",
             "Transfer to heritage resort in Dharamshala",
             "Evening visit to the miraculous Jwala Ji Temple (the eternal flame)",
-            "Witness the natural eternal flames — a divine mystery",
+            "Witness the natural eternal flames, a divine mystery",
             "Devotional prayers & orientation talk"
           ]
         },

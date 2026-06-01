@@ -15,7 +15,7 @@ export const yatras = [
     name: "Vrindavan Mathura",
     date: "12–15 March 2026",
     dur: "4 Days • 3 Nights",
-    desc: "Experience the divine leelas of Lord Krishna in the sacred land of Vrindavan and Mathura — a journey through the spiritual heart of Braj.",
+    desc: "Experience the divine leelas of Lord Krishna in the sacred land of Vrindavan and Mathura, a journey through the spiritual heart of Braj.",
   },
   {
     img: himachal,
@@ -41,10 +41,10 @@ export const differences = [
     t: "Authentic Experiences",
     d: "All journeys are crafted from instructions in the scriptures of Bharat, deeply rooted in Sanatan.",
   },
-  { icon: "👥", t: "Expert Guidance", d: "Travels are led by learned scholars — not tour guides." },
+  { icon: "👥", t: "Expert Guidance", d: "Travels are led by learned scholars, not tour guides." },
   {
     icon: "🌿",
-    t: "Eco-Conscious Travel",
+    t: "Eco Conscious Travel",
     d: "Respecting both the sacred sites and Mother Earth in every journey we craft.",
   },
   {

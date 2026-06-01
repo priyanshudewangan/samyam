@@ -7,6 +7,7 @@ import { Footer } from "@/components/Footer";
 import { teerthaDetailsDb, TeerthaDetail } from "@/constants/teertha-details";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
 import { API_ENDPOINTS } from "@/lib/api-config";
+import { formatNormalDash } from "@/lib/utils";
 
 // Define search query schema for TanStack Router
 const exploreSearchSchema = z.object({
@@ -17,11 +18,12 @@ export const Route = createFileRoute("/teerthas/explore")({
   validateSearch: exploreSearchSchema,
   component: ExploreTeerthasPage,
   head: () => ({
-    title: "Explore Teertha — Samyam Spiritual Tourism",
+    title: "Explore Teertha | Samyam Spiritual Tourism",
     meta: [
       {
         name: "description",
-        content: "Explore the deep spiritual itinerary, inclusions, and sacred darshans for Samyam's curated teertha journeys.",
+        content:
+          "Explore the deep spiritual itinerary, inclusions, and sacred darshans for Samyam's curated teertha journeys.",
       },
     ],
   }),
@@ -60,7 +62,10 @@ function ExploreTeerthasPage() {
     }
   }, [search.teertha]);
 
-  const activeTeertha = teerthas.find(t => t.slug === selectedTeertha) || teerthas[0] || Object.values(teerthaDetailsDb)[0];
+  const activeTeertha =
+    teerthas.find((t) => t.slug === selectedTeertha) ||
+    teerthas[0] ||
+    Object.values(teerthaDetailsDb)[0];
 
   // Get all teertha slugs for the selector
   const allTeerthas = teerthas;
@@ -70,7 +75,10 @@ function ExploreTeerthasPage() {
       <Nav />
 
       {/* HERO SECTION */}
-      <section data-nav-theme="dark" className="relative min-h-[50vh] flex items-center justify-center overflow-hidden">
+      <section
+        data-nav-theme="dark"
+        className="relative min-h-[50vh] flex items-center justify-center overflow-hidden"
+      >
         {/* Background Image & Overlay */}
         <div className="absolute inset-0 z-0">
           <img
@@ -90,7 +98,7 @@ function ExploreTeerthasPage() {
           </ScrollReveal>
           <ScrollReveal variant="fade-up" delay={250}>
             <h1 className="text-4xl md:text-6xl font-display font-semibold text-white tracking-wide leading-tight">
-              {activeTeertha.name}
+              {formatNormalDash(activeTeertha.name, "text-white/50")}
             </h1>
           </ScrollReveal>
           <ScrollReveal variant="fade-up" delay={400}>
@@ -131,15 +139,17 @@ function ExploreTeerthasPage() {
       </div>
 
       {/* DETAILED CONTENT SECTION */}
-      <section data-nav-theme="light" className="relative py-12 px-4 md:px-8 bg-background text-foreground min-h-[60vh]">
+      <section
+        data-nav-theme="light"
+        className="relative py-12 px-4 md:px-8 bg-background text-foreground min-h-[60vh]"
+      >
         <FlowerField count={8} />
         <div className="max-w-6xl mx-auto relative z-10">
-
           {/* Sub Navigation Bar */}
           <div className="flex justify-center border-b border-border mb-8 max-w-md mx-auto">
             {[
               { id: "overview", label: "Overview" },
-              { id: "itinerary", label: "Day-wise Itinerary" },
+              { id: "itinerary", label: "Day wise Itinerary" },
               { id: "prep", label: "Preparation Guide" },
             ].map((subTab) => (
               <button
@@ -168,10 +178,14 @@ function ExploreTeerthasPage() {
                         <span className="text-amber-600 font-bold text-xs uppercase tracking-wider block">
                           Spiritual Calling
                         </span>
-                        <h3 className="text-3xl font-display font-semibold text-foreground">
-                          {activeTeertha.name} — Overview
+                        <h3 className="text-3xl font-display font-semibold text-foreground flex items-center gap-1.5 flex-wrap">
+                          {formatNormalDash(activeTeertha.name)}
+                          <span className="font-sans font-normal text-muted-foreground/60 select-none">
+                            |
+                          </span>
+                          <span>Overview</span>
                         </h3>
-                        <p className="text-xs md:text-sm font-medium text-muted-foreground">
+                        <p className="text-xs md:text-sm font-body font-medium text-muted-foreground">
                           📅 {activeTeertha.date} &nbsp;•&nbsp; ⏱️ {activeTeertha.duration}
                         </p>
                       </div>
@@ -205,12 +219,20 @@ function ExploreTeerthasPage() {
                         </h4>
                         <div className="flex flex-col sm:flex-row gap-3">
                           <div className="flex-1 p-3.5 rounded-2xl bg-muted border border-border flex flex-col justify-center items-center shadow-soft hover:border-amber-600/30 transition duration-300">
-                            <span className="text-[10px] text-muted-foreground uppercase font-bold">Triple Occupancy</span>
-                            <span className="text-sm md:text-base font-semibold text-amber-600 mt-1">{activeTeertha.triplePrice}</span>
+                            <span className="text-[10px] text-muted-foreground uppercase font-bold">
+                              Triple Occupancy
+                            </span>
+                            <span className="text-sm md:text-base font-semibold text-amber-600 mt-1">
+                              {activeTeertha.triplePrice}
+                            </span>
                           </div>
                           <div className="flex-1 p-3.5 rounded-2xl bg-muted border border-border flex flex-col justify-center items-center shadow-soft hover:border-amber-600/30 transition duration-300">
-                            <span className="text-[10px] text-muted-foreground uppercase font-bold">Double Occupancy</span>
-                            <span className="text-sm md:text-base font-semibold text-amber-600 mt-1">{activeTeertha.doublePrice}</span>
+                            <span className="text-[10px] text-muted-foreground uppercase font-bold">
+                              Double Occupancy
+                            </span>
+                            <span className="text-sm md:text-base font-semibold text-amber-600 mt-1">
+                              {activeTeertha.doublePrice}
+                            </span>
                           </div>
                         </div>
                       </div>
@@ -257,7 +279,7 @@ function ExploreTeerthasPage() {
                   </ScrollReveal>
                 </div>
 
-                 {/* Stays Section */}
+                {/* Stays Section */}
                 <ScrollReveal variant="fade-up">
                   <div className="p-8 md:p-10 rounded-3xl bg-white border border-black/[0.06] shadow-soft hover:border-amber-600/30 transition-all duration-300">
                     <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
@@ -301,9 +323,7 @@ function ExploreTeerthasPage() {
                         delay={cIdx * 150}
                         className="h-full"
                       >
-                        <div
-                          className="p-6 md:p-8 rounded-3xl bg-white border border-black/[0.06] shadow-soft hover:shadow-glow hover:border-amber-600/30 transition-all duration-300 flex flex-col justify-between h-full"
-                        >
+                        <div className="p-6 md:p-8 rounded-3xl bg-white border border-black/[0.06] shadow-soft hover:shadow-glow hover:border-amber-600/30 transition-all duration-300 flex flex-col justify-between h-full">
                           <div>
                             <span className="text-[10px] uppercase tracking-[0.2em] font-bold text-amber-600 mb-2 block">
                               Sacred Circuit
@@ -332,7 +352,7 @@ function ExploreTeerthasPage() {
               <div className="max-w-4xl mx-auto text-left">
                 <div className="text-center mb-10">
                   <h3 className="text-3xl font-display font-semibold text-foreground">
-                    Day-wise Itinerary
+                    Day wise Itinerary
                   </h3>
                   <p className="text-xs md:text-sm text-muted-foreground mt-2 italic">
                     Schedule subject to shift in timings based on local conditions
@@ -342,10 +362,7 @@ function ExploreTeerthasPage() {
                 {/* Timeline */}
                 <div className="relative border-l border-border ml-4 md:ml-8 pl-8 md:pl-10 space-y-8 py-4">
                   {activeTeertha.itinerary.map((dayItem: any, idx: number) => (
-                    <ScrollReveal
-                      key={idx}
-                      variant="fade-up"
-                    >
+                    <ScrollReveal key={idx} variant="fade-up">
                       <div className="relative group">
                         {/* Timeline dot */}
                         <span className="absolute -left-[45px] md:-left-[53px] top-2.5 w-6 h-6 rounded-full bg-background border-2 border-amber-600 flex items-center justify-center text-[10px] font-bold text-amber-600 group-hover:bg-amber-600 group-hover:text-white transition duration-300">
@@ -361,7 +378,9 @@ function ExploreTeerthasPage() {
                           <ul className="mt-4 space-y-3.5 text-xs md:text-sm text-muted-foreground list-none font-body">
                             {dayItem.points.map((pointText: string, pIdx: number) => (
                               <li key={pIdx} className="flex gap-3 items-start leading-relaxed">
-                                <span className="text-amber-600 text-base leading-none select-none mt-0.5">•</span>
+                                <span className="text-amber-600 text-base leading-none select-none mt-0.5">
+                                  •
+                                </span>
                                 <span>{pointText}</span>
                               </li>
                             ))}
@@ -396,24 +415,38 @@ function ExploreTeerthasPage() {
                       Spiritual Swadhyay & Prep
                     </h3>
                     <p className="text-xs md:text-sm text-muted-foreground leading-relaxed font-body">
-                      Unlike ordinary tours, a Samyam yatra is an energetic experience. We request all seekers to engage in spiritual preparation before departure to make their system receptive.
+                      Unlike ordinary tours, a Samyam yatra is an energetic experience. We request
+                      all seekers to engage in spiritual preparation before departure to make their
+                      system receptive.
                     </p>
                     <ul className="space-y-4 text-xs md:text-sm text-muted-foreground font-body">
                       <li className="flex gap-3 items-start leading-relaxed">
                         <span className="text-amber-600 font-bold mt-0.5">•</span>
-                        <span>Engage in regular mantra chanting or light dhyan practice for at least 2 weeks before the yatra.</span>
+                        <span>
+                          Engage in regular mantra chanting or light dhyan practice for at least 2
+                          weeks before the yatra.
+                        </span>
                       </li>
                       <li className="flex gap-3 items-start leading-relaxed">
                         <span className="text-amber-600 font-bold mt-0.5">•</span>
-                        <span>Read scripture passages relating to the history and significance of {activeTeertha.name}.</span>
+                        <span>
+                          Read scripture passages relating to the history and significance of{" "}
+                          {activeTeertha.name}.
+                        </span>
                       </li>
                       <li className="flex gap-3 items-start leading-relaxed">
                         <span className="text-amber-600 font-bold mt-0.5">•</span>
-                        <span>Maintain a clean, devotional mindset leading up to departure. Reduce screen time and worldly distractions.</span>
+                        <span>
+                          Maintain a clean, devotional mindset leading up to departure. Reduce
+                          screen time and worldly distractions.
+                        </span>
                       </li>
                       <li className="flex gap-3 items-start leading-relaxed">
                         <span className="text-amber-600 font-bold mt-0.5">•</span>
-                        <span>Begin a sattvik diet at least one week before the journey to prepare your body and mind.</span>
+                        <span>
+                          Begin a sattvik diet at least one week before the journey to prepare your
+                          body and mind.
+                        </span>
                       </li>
                     </ul>
                   </div>
@@ -431,23 +464,38 @@ function ExploreTeerthasPage() {
                     <ul className="space-y-4 text-xs md:text-sm text-muted-foreground font-body">
                       <li className="flex gap-3 items-start leading-relaxed">
                         <span className="text-amber-600 font-bold mt-0.5">1.</span>
-                        <span><strong>Sattvik Diet:</strong> Seekers must adhere to strictly vegetarian, eggless meals throughout the yatra duration.</span>
+                        <span>
+                          <strong>Sattvik Diet:</strong> Seekers must adhere to strictly vegetarian,
+                          eggless meals throughout the yatra duration.
+                        </span>
                       </li>
                       <li className="flex gap-3 items-start leading-relaxed">
                         <span className="text-amber-600 font-bold mt-0.5">2.</span>
-                        <span><strong>Dress Code:</strong> Traditional Indian clothing (kurta/dhoti/saree/salwar suit) is highly encouraged inside temples.</span>
+                        <span>
+                          <strong>Dress Code:</strong> Traditional Indian clothing
+                          (kurta/dhoti/saree/salwar suit) is highly encouraged inside temples.
+                        </span>
                       </li>
                       <li className="flex gap-3 items-start leading-relaxed">
                         <span className="text-amber-600 font-bold mt-0.5">3.</span>
-                        <span><strong>Eco-Conscious Conduct:</strong> Respect the local ecology of sacred sites; strictly avoid plastic waste.</span>
+                        <span>
+                          <strong>Eco Conscious Conduct:</strong> Respect the local ecology of
+                          sacred sites; strictly avoid plastic waste.
+                        </span>
                       </li>
                       <li className="flex gap-3 items-start leading-relaxed">
                         <span className="text-amber-600 font-bold mt-0.5">4.</span>
-                        <span><strong>Group Harmony:</strong> Maintain punctuality and respect fellow seekers' space during meditation and darshan.</span>
+                        <span>
+                          <strong>Group Harmony:</strong> Maintain punctuality and respect fellow
+                          seekers' space during meditation and darshan.
+                        </span>
                       </li>
                       <li className="flex gap-3 items-start leading-relaxed">
                         <span className="text-amber-600 font-bold mt-0.5">5.</span>
-                        <span><strong>Digital Detox:</strong> Minimize phone usage during sacred experiences. Be present in the moment.</span>
+                        <span>
+                          <strong>Digital Detox:</strong> Minimize phone usage during sacred
+                          experiences. Be present in the moment.
+                        </span>
                       </li>
                     </ul>
                   </div>
@@ -455,7 +503,6 @@ function ExploreTeerthasPage() {
               </div>
             )}
           </div>
-
         </div>
       </section>
 
