@@ -28,24 +28,24 @@ export const Route = createFileRoute("/institutions/corporate")({
 
 const corporatePrograms = [
   {
-    icon: "🏛️",
-    title: "Leadership Retreats",
-    desc: "Curated journeys for executives to reflect and lead with consciousness and stability.",
+    icon: "🧘",
+    title: "Enhanced Well-being",
+    desc: "Reduce stress and improve mental clarity through spiritual practices.",
   },
   {
     icon: "🤝",
-    title: "Team Pilgrimages",
-    desc: "Building team synergy through shared spiritual experiences and cultural discovery.",
+    title: "Team Bonding",
+    desc: "Deep connections through shared spiritual experiences.",
   },
   {
-    icon: "🧘",
-    title: "Mindfulness Workshops",
-    desc: "Vedic principles for professional growth, stress reduction, and conscious work culture.",
+    icon: "💡",
+    title: "Leadership Growth",
+    desc: "Ancient wisdom for modern leadership challenges.",
   },
   {
-    icon: "📜",
-    title: "Swadhyay for Business",
-    desc: "Ancient wisdom applied to modern decision-making and sustainable leadership.",
+    icon: "🌱",
+    title: "Cultural Immersion",
+    desc: "Authentic experiences of India's rich spiritual heritage.",
   },
 ];
 
@@ -122,15 +122,11 @@ function CorporatePage() {
           <ScrollReveal variant="fade-up">
             <div className="text-center space-y-3">
               <span className="text-xs uppercase tracking-[0.5em] text-amber-400 font-semibold">
-                Why Choose Samyam for Corporate
+                Why Choose SAMYAM for Corporate Journeys?
               </span>
               <h2 className="text-3xl md:text-4xl font-display font-semibold">
-                Excellence through stability
+                Blend ancient wisdom with modern leadership needs
               </h2>
-              <p className="text-white/60 text-xs md:text-sm max-w-2xl mx-auto leading-relaxed font-body">
-                We help professionals reconnect with their inner selves to navigate the complexities
-                of modern business with a steady mind and visionary heart.
-              </p>
             </div>
           </ScrollReveal>
 
@@ -165,20 +161,20 @@ function CorporatePage() {
             <ScrollReveal variant="fade-right">
               <div className="space-y-6">
                 <h2 className="text-4xl md:text-5xl font-display font-semibold text-foreground leading-tight">
-                  Fostering Conscious <br />
-                  <span className="text-amber-600">Work Culture</span>
+                  The SAMYAM <br />
+                  <span className="text-amber-600">Difference</span>
                 </h2>
                 <p className="text-lg text-muted-foreground leading-relaxed font-body">
-                  We move beyond the temporary fixes of traditional corporate retreats. Samyam
-                  spiritual journeys for organizations are designed to create lasting impact on
-                  employee well-being, team cohesion, and leadership integrity.
+                  Our corporate journeys are not team-building activities disguised as trips. They
+                  are authentic spiritual experiences designed to awaken deeper purpose, enhance
+                  decision-making, and build genuine connections.
                 </p>
                 <ul className="space-y-4">
                   {[
-                    "Stress reduction through ancient mindfulness",
-                    "Increased productivity and visionary thinking",
-                    "Enhanced team empathy and communication",
-                    "Building a purpose-driven work environment",
+                    "Expert guides with corporate experience",
+                    "Flexible itineraries for business needs",
+                    "Integration of Vedic wisdom with leadership",
+                    "Focus on sustainable and responsible travel",
                   ].map((item, i) => (
                     <li key={i} className="flex items-center gap-3 text-muted-foreground font-body">
                       <div className="w-1.5 h-1.5 rounded-full bg-amber-500" />
