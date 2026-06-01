@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { FlowerField } from "@/components/FlowerField";
-import { Mail, Phone } from "lucide-react";
+import { Mail, Phone, CheckCircle2, Clock, Globe, ShieldCheck } from "lucide-react";
 import {
   Dialog,
   DialogContent,
@@ -10,6 +10,7 @@ import {
   DialogDescription,
 } from "@/components/ui/dialog";
 import studentsImg from "@/assets/students.png";
+import corporatePackagesImg from "@/assets/corporate_packages.png";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
 
 export const Route = createFileRoute("/institutions/corporate")({
@@ -46,6 +47,46 @@ const corporatePrograms = [
     icon: "🌱",
     title: "Cultural Immersion",
     desc: "Authentic experiences of India's rich spiritual heritage.",
+  },
+];
+
+const corporatePackages = [
+  {
+    title: "Team Immersion",
+    duration: "3-5 Days",
+    desc: "Perfect for teams seeking spiritual growth and deeper connection.",
+    features: ["Accommodation", "All Meals", "Daily Satsang", "Team Activities", "Expert Guides"],
+    pricing: "Pricing on request",
+    accent: "amber",
+  },
+  {
+    title: "Leadership Retreat",
+    duration: "5-7 Days",
+    desc: "Transform leadership through ancient wisdom and spiritual practices.",
+    features: [
+      "Luxury Accommodation",
+      "Gourmet Meals",
+      "Personal Sessions",
+      "Yoga & Meditation",
+      "Cultural Experiences",
+    ],
+    pricing: "Pricing on request",
+    accent: "purple",
+    popular: true,
+  },
+  {
+    title: "Custom Corporate Journey",
+    duration: "Flexible",
+    desc: "Tailored experiences designed for your organization's unique needs.",
+    features: [
+      "Fully Customizable",
+      "Multiple Destinations",
+      "Workshop Sessions",
+      "Team Building",
+      "Flexible Schedule",
+    ],
+    pricing: "Custom Quote",
+    accent: "orange",
   },
 ];
 
@@ -200,6 +241,160 @@ function CorporatePage() {
               </div>
             </ScrollReveal>
           </div>
+        </div>
+      </section>
+
+      {/* CORPORATE PACKAGES SECTION */}
+      <section
+        data-nav-theme="light"
+        className="relative py-24 px-6 bg-[#faf7f5] overflow-hidden border-t border-border"
+      >
+        <FlowerField count={5} />
+        <div className="max-w-7xl mx-auto relative z-10">
+          <ScrollReveal variant="fade-up">
+            <div className="text-center mb-16 space-y-4">
+              <span className="text-xs uppercase tracking-[0.5em] text-amber-600 font-bold">
+                Tailored Experiences
+              </span>
+              <h2 className="text-4xl md:text-6xl font-display font-semibold text-foreground">
+                Corporate Wellness Packages
+              </h2>
+              <p className="text-sm md:text-base text-muted-foreground max-w-2xl mx-auto font-body">
+                Choose the journey that best aligns with your organization's goals and timeline.
+              </p>
+            </div>
+          </ScrollReveal>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
+            {corporatePackages.map((pkg, idx) => (
+              <ScrollReveal key={idx} variant="fade-up" delay={idx * 150}>
+                <div
+                  className={`relative group p-8 rounded-[2.5rem] bg-white border border-black/[0.05] shadow-soft hover:shadow-glow hover:-translate-y-2 transition-all duration-500 h-full flex flex-col ${
+                    pkg.popular ? "ring-2 ring-amber-500/20" : ""
+                  }`}
+                >
+                  {pkg.popular && (
+                    <div className="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1 bg-amber-500 text-white text-[10px] font-bold uppercase tracking-widest rounded-full shadow-glow-amber">
+                      Most Recommended
+                    </div>
+                  )}
+
+                  <div className="mb-6">
+                    <div className="flex items-center justify-between mb-4">
+                      <span className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-muted text-[10px] font-bold text-muted-foreground uppercase tracking-wider">
+                        <Clock size={12} className="text-amber-600" />
+                        {pkg.duration}
+                      </span>
+                    </div>
+                    <h3 className="text-2xl font-display font-semibold text-foreground mb-3">
+                      {pkg.title}
+                    </h3>
+                    <p className="text-xs text-muted-foreground leading-relaxed font-body">
+                      {pkg.desc}
+                    </p>
+                  </div>
+
+                  <div className="space-y-4 mb-8 flex-grow">
+                    <div className="h-px w-full bg-gradient-to-r from-transparent via-border to-transparent" />
+                    <ul className="space-y-3">
+                      {pkg.features.map((feature, fIdx) => (
+                        <li
+                          key={fIdx}
+                          className="flex items-center gap-3 text-xs text-muted-foreground font-body"
+                        >
+                          <CheckCircle2 size={14} className="text-amber-600 shrink-0" />
+                          {feature}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <div className="mt-auto space-y-6">
+                    <div className="text-center">
+                      <p className="text-xs text-muted-foreground/60 uppercase tracking-widest mb-1 font-body">
+                        Investment
+                      </p>
+                      <p className="text-lg font-semibold text-foreground">{pkg.pricing}</p>
+                    </div>
+                    <Dialog>
+                      <DialogTrigger asChild>
+                        <button className="w-full py-4 rounded-2xl bg-muted border border-border text-foreground font-semibold text-sm hover:bg-amber-600 hover:text-white hover:border-amber-600 transition-all duration-300 cursor-pointer shadow-sm">
+                          Request Quote
+                        </button>
+                      </DialogTrigger>
+                      <DialogContent className="sm:max-w-md bg-[#1a0a1e]/95 backdrop-blur-2xl border border-white/10 rounded-[2.5rem] overflow-hidden p-0 shadow-glow text-white">
+                        <div className="relative">
+                          <div className="h-2 w-full bg-gradient-cta" />
+                          <div className="p-8 space-y-8">
+                            <DialogHeader>
+                              <DialogTitle className="text-3xl md:text-4xl font-display font-semibold text-white text-center">
+                                Request for {pkg.title}
+                              </DialogTitle>
+                              <DialogDescription className="text-center text-white/60 pt-2 font-body">
+                                We'll help you design a transformative experience for your team.
+                              </DialogDescription>
+                            </DialogHeader>
+
+                            <div className="grid gap-4 font-body">
+                              <a
+                                href={`mailto:samyamspirituals@gmail.com?subject=Inquiry for ${pkg.title}`}
+                                className="flex items-center gap-4 p-5 rounded-2xl bg-white/[0.03] border border-white/10 hover:bg-white/[0.08] hover:border-amber-400/40 transition-all group"
+                              >
+                                <div className="w-12 h-12 rounded-xl bg-white/5 flex items-center justify-center text-amber-400 group-hover:text-amber-400 transition-colors">
+                                  <Mail className="w-6 h-6" />
+                                </div>
+                                <div className="text-left">
+                                  <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-amber-400/80">
+                                    Email Us
+                                  </p>
+                                  <p className="text-white font-medium">
+                                    samyamspirituals@gmail.com
+                                  </p>
+                                </div>
+                              </a>
+                              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <a
+                                  href="tel:+919035225375"
+                                  className="flex items-center gap-4 p-5 rounded-2xl bg-white/[0.03] border border-white/10 hover:bg-white/[0.08] hover:border-amber-400/40 transition-all group"
+                                >
+                                  <div className="w-12 h-12 rounded-xl bg-white/5 flex items-center justify-center text-amber-400 group-hover:text-amber-400 transition-colors">
+                                    <Phone className="w-6 h-6" />
+                                  </div>
+                                  <div className="text-left">
+                                    <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-amber-400/80">
+                                      Call Now
+                                    </p>
+                                    <p className="text-white font-medium text-sm">+91 9035225375</p>
+                                  </div>
+                                </a>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </DialogContent>
+                    </Dialog>
+                  </div>
+                </div>
+              </ScrollReveal>
+            ))}
+          </div>
+
+          {/* Visual Reference / Summary Image */}
+          <ScrollReveal variant="fade-up" delay={500}>
+            <div className="text-center space-y-8">
+              <div className="h-px w-24 bg-amber-600/30 mx-auto" />
+              <p className="text-xs uppercase tracking-[0.3em] text-amber-600/60 font-bold">
+                Comprehensive Overview
+              </p>
+              <div className="relative rounded-[2rem] md:rounded-[3.5rem] overflow-hidden shadow-2xl border-4 border-white bg-white p-2">
+                <img
+                  src={corporatePackagesImg}
+                  alt="Samyam Corporate Wellness Structure"
+                  className="w-full h-auto rounded-[1.5rem] md:rounded-[2.5rem]"
+                />
+              </div>
+            </div>
+          </ScrollReveal>
         </div>
       </section>
 
