@@ -104,7 +104,16 @@ function CorporatePage() {
             alt="Corporate Wellness and Spiritual Leadership"
             className="w-full h-full object-cover object-center filter brightness-[0.4]"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-[#1c081e]/30 via-[#1c081e]/60 to-[#1c081e]"></div>
+          <div
+            className="absolute inset-0"
+            style={{
+              background: `radial-gradient(circle at 50% 0%, #763B7D 0%, transparent 70%), 
+                           radial-gradient(circle at 0% 0%, #443741 0%, transparent 70%), 
+                           radial-gradient(circle at 100% 50%, #64307A 0%, transparent 70%), 
+                           #6D317B`,
+              opacity: 0.85,
+            }}
+          ></div>
         </div>
 
         <div className="relative z-10 max-w-5xl mx-auto px-6 text-center pt-24 space-y-6">
@@ -156,7 +165,12 @@ function CorporatePage() {
       {/* WHY CORPORATE CHOOSE SAMYAM */}
       <section
         data-nav-theme="dark"
-        className="relative py-20 px-6 bg-[#1c081e] text-white overflow-hidden border-t border-white/5"
+        className="relative py-20 px-6 text-white overflow-hidden border-t border-white/5"
+        style={{
+          background: `radial-gradient(circle at 0% 0%, #443741 0%, transparent 60%), 
+                       radial-gradient(circle at 100% 100%, #64307A 0%, transparent 60%), 
+                       #6D317B`,
+        }}
       >
         <FlowerField count={8} />
         <div className="max-w-6xl mx-auto relative z-10 space-y-12">
@@ -401,7 +415,12 @@ function CorporatePage() {
       {/* FINAL CTA SECTION */}
       <section
         data-nav-theme="dark"
-        className="relative py-20 px-6 bg-gradient-to-br from-[#260e28] via-[#1a0a1e] to-[#2d0f30] border-t border-white/5 overflow-hidden"
+        className="relative py-20 px-6 border-t border-white/5 overflow-hidden"
+        style={{
+          background: `radial-gradient(circle at 100% 0%, #763B7D 0%, transparent 60%), 
+                       radial-gradient(circle at 0% 100%, #443741 0%, transparent 60%), 
+                       #6D317B`,
+        }}
       >
         <div className="max-w-5xl mx-auto text-center space-y-8 relative z-10">
           <ScrollReveal variant="fade-up">
