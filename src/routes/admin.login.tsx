@@ -1,5 +1,7 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import React, { useState, useEffect } from "react";
+import { Nav } from "@/components/Nav";
+import { Footer } from "@/components/Footer";
 import { FlowerField } from "@/components/FlowerField";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
 import { API_ENDPOINTS } from "@/lib/api-config";
@@ -71,6 +73,7 @@ function AdminLoginPage() {
 
   return (
     <div className="relative min-h-screen overflow-x-hidden bg-[#1a0a1e] text-white flex flex-col justify-between">
+      <Nav />
       <section
         data-nav-theme="dark"
         className="relative py-32 px-4 bg-gradient-to-b from-[#1a0a1e] via-[#1c081e] to-[#120614] overflow-hidden min-h-[90vh] flex items-center justify-center flex-grow"
@@ -149,6 +152,7 @@ function AdminLoginPage() {
           </div>
         </ScrollReveal>
       </section>
+      <Footer />
     </div>
   );
 }
