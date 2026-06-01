@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { FlowerField } from "@/components/FlowerField";
-import { Mail, Phone, CheckCircle2, Clock, Globe, ShieldCheck } from "lucide-react";
+import { Mail, Phone, CheckCircle2, Clock } from "lucide-react";
 import {
   Dialog,
   DialogContent,
@@ -260,20 +260,25 @@ function CorporatePage() {
 
       {/* CORPORATE PACKAGES SECTION */}
       <section
-        data-nav-theme="light"
-        className="relative py-24 px-6 bg-[#faf7f5] overflow-hidden border-t border-border"
+        data-nav-theme="dark"
+        className="relative py-24 px-6 text-white overflow-hidden border-t border-border"
+        style={{
+          background: `radial-gradient(circle at 100% 0%, #763B7D 0%, transparent 60%), 
+                       radial-gradient(circle at 0% 100%, #443741 0%, transparent 60%), 
+                       #6D317B`,
+        }}
       >
         <FlowerField count={5} />
         <div className="max-w-7xl mx-auto relative z-10">
           <ScrollReveal variant="fade-up">
             <div className="text-center mb-16 space-y-4">
-              <span className="text-xs uppercase tracking-[0.5em] text-amber-600 font-bold">
+              <span className="text-xs uppercase tracking-[0.5em] text-amber-400 font-bold">
                 Tailored Experiences
               </span>
-              <h2 className="text-4xl md:text-6xl font-display font-semibold text-foreground">
+              <h2 className="text-4xl md:text-6xl font-display font-semibold text-white">
                 Corporate Wellness Packages
               </h2>
-              <p className="text-sm md:text-base text-muted-foreground max-w-2xl mx-auto font-body">
+              <p className="text-sm md:text-base text-white/70 max-w-2xl mx-auto font-body">
                 Choose the journey that best aligns with your organization's goals and timeline.
               </p>
             </div>
@@ -283,7 +288,7 @@ function CorporatePage() {
             {corporatePackages.map((pkg, idx) => (
               <ScrollReveal key={idx} variant="fade-up" delay={idx * 150}>
                 <div
-                  className={`relative group p-8 rounded-[2.5rem] bg-white border border-black/[0.05] shadow-soft hover:shadow-glow hover:-translate-y-2 transition-all duration-500 h-full flex flex-col ${
+                  className={`relative group p-8 rounded-[2.5rem] bg-white/[0.03] border border-white/10 shadow-soft hover:shadow-glow hover:-translate-y-2 transition-all duration-500 h-full flex flex-col ${
                     pkg.popular ? "ring-2 ring-amber-500/20" : ""
                   }`}
                 >
@@ -295,28 +300,26 @@ function CorporatePage() {
 
                   <div className="mb-6">
                     <div className="flex items-center justify-between mb-4">
-                      <span className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-muted text-[10px] font-bold text-muted-foreground uppercase tracking-wider">
-                        <Clock size={12} className="text-amber-600" />
+                      <span className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/5 text-[10px] font-bold text-amber-400 uppercase tracking-wider">
+                        <Clock size={12} className="text-amber-400" />
                         {pkg.duration}
                       </span>
                     </div>
-                    <h3 className="text-2xl font-display font-semibold text-foreground mb-3">
+                    <h3 className="text-2xl font-display font-semibold text-white mb-3">
                       {pkg.title}
                     </h3>
-                    <p className="text-xs text-muted-foreground leading-relaxed font-body">
-                      {pkg.desc}
-                    </p>
+                    <p className="text-xs text-white/60 leading-relaxed font-body">{pkg.desc}</p>
                   </div>
 
                   <div className="space-y-4 mb-8 flex-grow">
-                    <div className="h-px w-full bg-gradient-to-r from-transparent via-border to-transparent" />
+                    <div className="h-px w-full bg-gradient-to-r from-transparent via-white/10 to-transparent" />
                     <ul className="space-y-3">
                       {pkg.features.map((feature, fIdx) => (
                         <li
                           key={fIdx}
-                          className="flex items-center gap-3 text-xs text-muted-foreground font-body"
+                          className="flex items-center gap-3 text-xs text-white/60 font-body"
                         >
-                          <CheckCircle2 size={14} className="text-amber-600 shrink-0" />
+                          <CheckCircle2 size={14} className="text-amber-400 shrink-0" />
                           {feature}
                         </li>
                       ))}
@@ -325,14 +328,14 @@ function CorporatePage() {
 
                   <div className="mt-auto space-y-6">
                     <div className="text-center">
-                      <p className="text-xs text-muted-foreground/60 uppercase tracking-widest mb-1 font-body">
+                      <p className="text-xs text-white/40 uppercase tracking-widest mb-1 font-body">
                         Investment
                       </p>
-                      <p className="text-lg font-semibold text-foreground">{pkg.pricing}</p>
+                      <p className="text-lg font-semibold text-white">{pkg.pricing}</p>
                     </div>
                     <Dialog>
                       <DialogTrigger asChild>
-                        <button className="w-full py-4 rounded-2xl bg-muted border border-border text-foreground font-semibold text-sm hover:bg-amber-600 hover:text-white hover:border-amber-600 transition-all duration-300 cursor-pointer shadow-sm">
+                        <button className="w-full py-4 rounded-2xl bg-white/5 border border-white/10 text-white font-semibold text-sm hover:bg-amber-600 hover:text-white hover:border-amber-600 transition-all duration-300 cursor-pointer shadow-sm">
                           Request Quote
                         </button>
                       </DialogTrigger>
@@ -396,15 +399,15 @@ function CorporatePage() {
           {/* Visual Reference / Summary Image */}
           <ScrollReveal variant="fade-up" delay={500}>
             <div className="text-center space-y-8">
-              <div className="h-px w-24 bg-amber-600/30 mx-auto" />
-              <p className="text-xs uppercase tracking-[0.3em] text-amber-600/60 font-bold">
+              <div className="h-px w-24 bg-amber-400/30 mx-auto" />
+              <p className="text-xs uppercase tracking-[0.3em] text-amber-400/60 font-bold">
                 Comprehensive Overview
               </p>
-              <div className="relative rounded-[2rem] md:rounded-[3.5rem] overflow-hidden shadow-2xl border-4 border-white bg-white p-2">
+              <div className="relative rounded-[2rem] md:rounded-[3.5rem] overflow-hidden shadow-2xl border-4 border-white/10 bg-white/5 p-2">
                 <img
                   src={corporatePackagesImg}
                   alt="Samyam Corporate Wellness Structure"
-                  className="w-full h-auto rounded-[1.5rem] md:rounded-[2.5rem]"
+                  className="w-full h-auto rounded-[1.5rem] md:rounded-[2.5rem] opacity-90"
                 />
               </div>
             </div>
@@ -415,12 +418,7 @@ function CorporatePage() {
       {/* FINAL CTA SECTION */}
       <section
         data-nav-theme="dark"
-        className="relative py-20 px-6 border-t border-white/5 overflow-hidden"
-        style={{
-          background: `radial-gradient(circle at 100% 0%, #763B7D 0%, transparent 60%), 
-                       radial-gradient(circle at 0% 100%, #443741 0%, transparent 60%), 
-                       #6D317B`,
-        }}
+        className="relative py-20 px-6 bg-gradient-to-br from-[#260e28] via-[#1a0a1e] to-[#2d0f30] border-t border-white/5 overflow-hidden"
       >
         <div className="max-w-5xl mx-auto text-center space-y-8 relative z-10">
           <ScrollReveal variant="fade-up">
