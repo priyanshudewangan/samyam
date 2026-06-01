@@ -1,13 +1,26 @@
 import { Link } from "@tanstack/react-router";
 import logo from "@/assets/logo.png";
 import { useEffect, useState } from "react";
-import { Menu, X } from "lucide-react";
+import { Menu, X, ChevronDown, GraduationCap, Briefcase } from "lucide-react";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 const links = [
   { label: "Home", to: "/" },
   { label: "Yatra & retreats", to: "/yatras" },
   { label: "Teerthas", to: "/teerthas" },
-  { label: "Institutions", to: "/institutions" },
+  {
+    label: "Institutions",
+    to: "/institutions",
+    children: [
+      { label: "Schools", to: "/institutions/school", icon: <GraduationCap size={14} /> },
+      { label: "Corporate", to: "/institutions/corporate", icon: <Briefcase size={14} /> },
+    ],
+  },
   { label: "Methodology", to: "/methodology" },
   { label: "Customize Yatra", to: "/custom-yatra" },
   { label: "Knowledge Portal", to: "/knowledge-portal" },
@@ -68,22 +81,45 @@ export function Nav() {
           <img src={logo} alt="Samyam Logo" className="w-full h-full object-contain" />
         </Link>
 
-        {/* Navigation list (visible everywhere, with horizontal scrolling) */}
+        {/* Navigation list */}
         <nav className="flex-1 flex items-center justify-start lg:justify-center gap-1 overflow-x-auto no-scrollbar">
-          {links.map((l) => (
-            <Link
-              key={l.label}
-              to={l.to}
-              activeProps={{
-                className: "font-semibold",
-                style: { backgroundColor: "var(--nav-button-bg)" },
-              }}
-              style={{ color: "var(--nav-text)" }}
-              className="shrink-0 px-4 py-2 text-xs md:text-sm rounded-full hover:bg-white/10 transition whitespace-nowrap"
-            >
-              {l.label}
-            </Link>
-          ))}
+          {links.map((l) =>
+            "children" in l ? (
+              <DropdownMenu key={l.label}>
+                <DropdownMenuTrigger className="shrink-0 px-4 py-2 text-xs md:text-sm rounded-full hover:bg-white/10 transition whitespace-nowrap flex items-center gap-1.5 outline-none cursor-pointer">
+                  {l.label}
+                  <ChevronDown size={14} className="opacity-50" />
+                </DropdownMenuTrigger>
+                <DropdownMenuContent className="bg-[#1a0a1e]/95 backdrop-blur-2xl border border-white/10 rounded-2xl p-2 min-w-[180px] shadow-glow z-[60]">
+                  {l.children.map((child) => (
+                    <DropdownMenuItem key={child.label} asChild className="focus:bg-white/5">
+                      <Link
+                        to={child.to as any}
+                        onClick={handleLinkClick}
+                        className="flex items-center gap-3 px-4 py-2.5 rounded-xl text-xs font-medium text-white/80 hover:text-white transition-all cursor-pointer"
+                      >
+                        <span className="text-amber-400">{child.icon}</span>
+                        {child.label}
+                      </Link>
+                    </DropdownMenuItem>
+                  ))}
+                </DropdownMenuContent>
+              </DropdownMenu>
+            ) : (
+              <Link
+                key={l.label}
+                to={l.to}
+                activeProps={{
+                  className: "font-semibold",
+                  style: { backgroundColor: "var(--nav-button-bg)" },
+                }}
+                style={{ color: "var(--nav-text)" }}
+                className="shrink-0 px-4 py-2 text-xs md:text-sm rounded-full hover:bg-white/10 transition whitespace-nowrap"
+              >
+                {l.label}
+              </Link>
+            ),
+          )}
         </nav>
 
         {/* Desktop CTA Action Buttons */}
@@ -117,7 +153,7 @@ export function Nav() {
         </button>
       </div>
 
-      {/* Mobile Navigation Drawer (Actions only) */}
+      {/* Mobile Navigation Drawer */}
       {isOpen && (
         <div
           className="lg:hidden absolute top-20 left-0 w-full border-b border-white/10 shadow-glow backdrop-blur-xl animate-fade-in flex flex-col p-6 space-y-4"
@@ -126,6 +162,29 @@ export function Nav() {
             color: "var(--nav-text)",
           }}
         >
+          {/* Mobile sub-menu for Institutions */}
+          <div className="flex flex-col space-y-2 pb-4 border-b border-white/5">
+            <p className="text-[10px] uppercase tracking-widest text-white/40 px-2 mb-1">
+              Institutions
+            </p>
+            <Link
+              to="/institutions/school"
+              onClick={handleLinkClick}
+              className="flex items-center gap-3 px-4 py-3 rounded-2xl bg-white/5 text-sm font-medium"
+            >
+              <GraduationCap size={16} className="text-amber-400" />
+              Schools
+            </Link>
+            <Link
+              to="/institutions/corporate"
+              onClick={handleLinkClick}
+              className="flex items-center gap-3 px-4 py-3 rounded-2xl bg-white/5 text-sm font-medium"
+            >
+              <Briefcase size={16} className="text-amber-400" />
+              Corporate
+            </Link>
+          </div>
+
           <div className="flex flex-col space-y-3">
             <Link
               to={isLoggedIn ? "/admin" : "/admin/login"}
