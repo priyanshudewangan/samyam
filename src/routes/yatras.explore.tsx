@@ -206,7 +206,7 @@ function ExploreYatrasPage() {
                         </h4>
                         <div className="flex flex-col sm:flex-row gap-3">
                           <div className="flex-1 p-3.5 rounded-2xl bg-muted border border-border flex flex-col justify-center items-center shadow-soft hover:border-amber-600/30 transition duration-300">
-                            <span className="text-[10px] text-muted-foreground uppercase font-bold">
+                            <span className="text-[10px] text-muted-foreground uppercase font-bold tracking-wider">
                               Triple Occupancy
                             </span>
                             <span className="text-sm md:text-base font-semibold text-amber-600 mt-1">
@@ -214,14 +214,14 @@ function ExploreYatrasPage() {
                             </span>
                           </div>
                           <div className="flex-1 p-3.5 rounded-2xl bg-muted border border-border flex flex-col justify-center items-center shadow-soft hover:border-amber-600/30 transition duration-300">
-                            <span className="text-[10px] text-muted-foreground uppercase font-bold">
+                            <span className="text-[10px] text-muted-foreground uppercase font-bold tracking-wider">
                               Double Occupancy
                             </span>
                             <span className="text-sm md:text-base font-semibold text-amber-600 mt-1">
                               {activeYatra.doublePrice}
                             </span>
                           </div>
-                        </div>
+                        </div>{" "}
                       </div>
                     </ScrollReveal>
 

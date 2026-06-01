@@ -427,29 +427,17 @@ function Index() {
                       </p>
                     </div>
                     <div className="mt-6 pt-5 border-t border-white/10">
-                      <div className="flex flex-col gap-2.5">
-                        <div className="flex items-center gap-2">
-                          <span className="w-1.5 h-1.5 rounded-full bg-amber-500 shadow-[0_0_8px_rgba(245,158,11,0.6)]"></span>
-                          <p className="text-[11px] text-white/60 font-body">
-                            <span className="font-semibold text-amber-400/90 tracking-wide uppercase text-[9px] mr-1.5">
-                              Triple:
-                            </span>
-                            {y.triplePrice ||
-                              (y.pricing ? y.pricing.tripleOccupancy : "On Request")}
-                          </p>
-                        </div>
-                        <div className="flex items-center gap-2">
-                          <span className="w-1.5 h-1.5 rounded-full bg-[#FF7722] shadow-[0_0_8px_rgba(255,119,34,0.6)]"></span>
-                          <p className="text-[11px] text-white/60 font-body">
-                            <span className="font-semibold text-[#FF883D] tracking-wide uppercase text-[9px] mr-1.5">
-                              Double:
-                            </span>
-                            {y.doublePrice ||
-                              (y.pricing ? y.pricing.doubleOccupancy : "On Request")}
-                          </p>
-                        </div>
+                      <div className="space-y-1 text-xs text-white/60">
+                        <p>
+                          ✨{" "}
+                          {y.triplePrice || (y.pricing ? y.pricing.tripleOccupancy : "On Request")}
+                        </p>
+                        <p>
+                          ✨{" "}
+                          {y.doublePrice || (y.pricing ? y.pricing.doubleOccupancy : "On Request")}
+                        </p>
                       </div>
-                      <div className="mt-5 flex items-center justify-between">
+                      <div className="mt-4 flex items-center justify-between">
                         <a
                           href={`/yatras/explore?yatra=${y.slug}`}
                           className="text-sm font-semibold text-[#FF883D] hover:text-[#FF7722] transition flex items-center gap-1 uppercase tracking-wider text-[11px]"

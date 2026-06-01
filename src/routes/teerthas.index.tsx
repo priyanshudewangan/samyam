@@ -387,6 +387,16 @@ function TeerthasPage() {
                     <h3 className="text-2xl md:text-3xl font-display font-semibold text-white leading-tight mb-2 group-hover:text-amber-100 transition-colors">
                       {formatNormalDash(teertha.name)}
                     </h3>
+                    <div className="flex flex-wrap gap-2 mb-3">
+                      <span className="text-[9px] font-bold text-amber-300/80 uppercase tracking-wider flex items-center gap-1">
+                        <span className="w-1 h-1 rounded-full bg-amber-400"></span>
+                        Triple: {teertha.triplePrice}
+                      </span>
+                      <span className="text-[9px] font-bold text-amber-300/80 uppercase tracking-wider flex items-center gap-1">
+                        <span className="w-1 h-1 rounded-full bg-amber-400"></span>
+                        Double: {teertha.doublePrice}
+                      </span>
+                    </div>
                     <p className="text-sm text-white/60 font-body leading-relaxed line-clamp-2 group-hover:text-white/80 transition-colors">
                       {teertha.desc}
                     </p>

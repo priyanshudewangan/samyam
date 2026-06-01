@@ -234,13 +234,19 @@ function YatrasPage() {
                         </p>
 
                         {/* Occupancy Badges */}
-                        <div className="flex flex-col gap-2 items-start">
-                          <span className="px-4 py-1.5 rounded-xl text-[10px] sm:text-xs font-semibold text-amber-700 bg-amber-500/10 border border-amber-500/20 shadow-sm select-none">
+                        <div className="flex flex-col sm:flex-row gap-3 items-start sm:items-center">
+                          <div className="px-4 py-2 rounded-xl text-[10px] font-bold text-amber-700 bg-amber-500/10 border border-amber-500/20 shadow-sm flex items-center gap-2">
+                            <span className="uppercase tracking-[0.1em] text-[9px] opacity-60">
+                              Triple:
+                            </span>
                             {yatra.triplePrice}
-                          </span>
-                          <span className="px-4 py-1.5 rounded-xl text-[10px] sm:text-xs font-semibold text-purple-700 bg-purple-500/10 border border-purple-500/20 shadow-sm select-none">
+                          </div>
+                          <div className="px-4 py-2 rounded-xl text-[10px] font-bold text-purple-700 bg-purple-500/10 border border-purple-500/20 shadow-sm flex items-center gap-2">
+                            <span className="uppercase tracking-[0.1em] text-[9px] opacity-60">
+                              Double:
+                            </span>
                             {yatra.doublePrice}
-                          </span>
+                          </div>
                         </div>
 
                         {/* CTA Button */}
