@@ -256,7 +256,7 @@ function YatrasPage() {
                             search={{ yatra: yatra.slug }}
                             className="px-6 py-3 bg-gradient-cta text-accent-foreground font-semibold rounded-full text-xs sm:text-sm shadow-soft hover:scale-[1.03] transition flex items-center justify-center gap-2 w-fit cursor-pointer"
                           >
-                            Explore Itinerary ➔
+                            Explore ➔
                           </Link>
                         </div>
                       </div>

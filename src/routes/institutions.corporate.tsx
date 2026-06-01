@@ -107,10 +107,6 @@ function CorporatePage() {
           <div
             className="absolute inset-0"
             style={{
-              background: `radial-gradient(circle at 50% 0%, #763B7D 0%, transparent 70%), 
-                           radial-gradient(circle at 0% 0%, #443741 0%, transparent 70%), 
-                           radial-gradient(circle at 100% 50%, #64307A 0%, transparent 70%), 
-                           #6D317B`,
               opacity: 0.85,
             }}
           ></div>
@@ -395,23 +391,6 @@ function CorporatePage() {
               </ScrollReveal>
             ))}
           </div>
-
-          {/* Visual Reference / Summary Image */}
-          <ScrollReveal variant="fade-up" delay={500}>
-            <div className="text-center space-y-8">
-              <div className="h-px w-24 bg-amber-400/30 mx-auto" />
-              <p className="text-xs uppercase tracking-[0.3em] text-amber-400/60 font-bold">
-                Comprehensive Overview
-              </p>
-              <div className="relative rounded-[2rem] md:rounded-[3.5rem] overflow-hidden shadow-2xl border-4 border-white/10 bg-white/5 p-2">
-                <img
-                  src={corporatePackagesImg}
-                  alt="Samyam Corporate Wellness Structure"
-                  className="w-full h-auto rounded-[1.5rem] md:rounded-[2.5rem] opacity-90"
-                />
-              </div>
-            </div>
-          </ScrollReveal>
         </div>
       </section>
 

@@ -4,11 +4,13 @@ import {
   Link,
   createRootRouteWithContext,
   useRouter,
+  useLocation,
   HeadContent,
   Scripts,
 } from "@tanstack/react-router";
 
 import appCss from "../styles.css?url";
+import { FloatingContact } from "@/components/FloatingContact";
 
 function NotFoundComponent() {
   return (
@@ -112,10 +114,16 @@ function RootShell({ children }: { children: React.ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+  const location = useLocation();
+
+  // Exclude admin dashboard from floating contact bar
+  const isAdminDashboard =
+    location.pathname.startsWith("/admin") && location.pathname !== "/admin/login";
 
   return (
     <QueryClientProvider client={queryClient}>
       <Outlet />
+      {!isAdminDashboard && <FloatingContact />}
     </QueryClientProvider>
   );
 }
