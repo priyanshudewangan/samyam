@@ -591,35 +591,40 @@ function AdminDashboardPage() {
     return matchesSearch && matchesStatus;
   });
 
-  const newCount = enquiries.filter((e) => e.status === "New").length;
-  const contactedCount = enquiries.filter((e) => e.status === "Contacted").length;
-  const resolvedCount = enquiries.filter((e) => e.status === "Resolved").length;
-
   return (
-    <div className="relative min-h-screen overflow-x-hidden bg-[#0d040f] text-white flex flex-col justify-between">
-      <section
-        data-nav-theme="dark"
-        className="relative py-24 px-4 md:px-8 bg-gradient-to-b from-[#0d040f] via-[#140817] to-[#0a020b] overflow-hidden min-h-[92vh] flex-grow flex"
-      >
+    <div
+      className="relative min-h-screen overflow-x-hidden text-white flex flex-col justify-between"
+      style={{
+        background: `radial-gradient(circle at 50% 0%, #763B7D 0%, transparent 70%), 
+                     radial-gradient(circle at 0% 0%, #443741 0%, transparent 70%), 
+                     radial-gradient(circle at 100% 50%, #64307A 0%, transparent 70%), 
+                     #6D317B`,
+      }}
+    >
+      <section className="relative py-12 px-4 md:px-12 overflow-hidden min-h-[92vh] flex-grow flex">
         <FlowerField count={5} />
 
-        <div className="max-w-[95%] 2xl:max-w-[1800px] mx-auto w-full relative z-10 flex flex-col md:flex-row gap-8 mt-4">
+        <div className="w-full mx-auto relative z-10 flex flex-col md:flex-row gap-10 mt-4">
           {/* LEFT SIDEBAR NAVIGATION */}
-          <aside className="w-full md:w-80 shrink-0 space-y-6">
-            <div className="bg-white/[0.02] border border-white/10 rounded-3xl p-6 shadow-soft space-y-4">
-              <div className="border-b border-white/10 pb-4">
-                <h2 className="font-display font-semibold text-lg text-white">Admin Dashboard</h2>
-                <p className="text-[10px] text-amber-400 font-body truncate mt-0.5">{adminEmail}</p>
+          <aside className="w-full md:w-96 shrink-0 space-y-8">
+            <div className="bg-white/10 backdrop-blur-2xl border border-white/20 rounded-[2.5rem] p-10 shadow-glow space-y-10">
+              <div className="border-b border-white/10 pb-8">
+                <h2 className="font-display font-bold text-3xl text-white tracking-tight">
+                  Admin <span className="text-amber-400">Portal</span>
+                </h2>
+                <p className="text-xs text-white/50 font-body uppercase tracking-[0.2em] mt-3">
+                  Logged as: <span className="text-amber-400/80">{adminEmail}</span>
+                </p>
               </div>
 
-              <nav className="flex flex-col gap-1.5 font-body">
+              <nav className="flex flex-col gap-3 font-body">
                 {[
-                  { id: "dashboard", label: "Dashboard", icon: LayoutDashboard },
+                  { id: "dashboard", label: "Overview", icon: LayoutDashboard },
                   { id: "enquiries", label: "Enquiries", icon: Mail },
-                  { id: "yatras", label: "Yatra and Retreats", icon: Compass },
+                  { id: "yatras", label: "Yatras & Retreats", icon: Compass },
                   { id: "teerthas", label: "Teerthas", icon: MapPin },
-                  { id: "videos", label: "Knowledge Videos", icon: Film },
-                  { id: "blogs", label: "CEO Blogs & Quotes", icon: FileText },
+                  { id: "videos", label: "Knowledge Bank", icon: Film },
+                  { id: "blogs", label: "CEO Thoughts", icon: FileText },
                 ].map((item) => {
                   const Icon = item.icon;
                   return (
@@ -629,170 +634,190 @@ function AdminDashboardPage() {
                         setActiveTab(item.id as any);
                         setSearchTerm("");
                       }}
-                      className={`w-full px-4 py-3 rounded-2xl text-xs font-semibold uppercase tracking-wider flex items-center gap-3 transition-all duration-300 cursor-pointer ${
+                      className={`w-full px-6 py-5 rounded-[1.5rem] text-sm font-bold uppercase tracking-widest flex items-center gap-4 transition-all duration-500 cursor-pointer ${
                         activeTab === item.id
-                          ? "bg-gradient-cta text-white shadow-glow border border-amber-500/20"
-                          : "text-white/60 hover:text-white hover:bg-white/5 border border-transparent"
+                          ? "bg-gradient-cta text-white shadow-glow-amber border border-amber-400/20 scale-[1.02]"
+                          : "text-white/40 hover:text-white hover:bg-white/5 border border-transparent"
                       }`}
                     >
-                      <Icon size={16} />
+                      <Icon
+                        size={20}
+                        className={activeTab === item.id ? "text-white" : "text-white/40"}
+                      />
                       {item.label}
                     </button>
                   );
                 })}
               </nav>
 
-              <div className="border-t border-white/10 pt-4">
+              <div className="border-t border-white/10 pt-8">
                 <button
                   onClick={handleLogout}
-                  className="w-full px-4 py-3 bg-red-500/10 border border-red-500/25 hover:bg-red-500 hover:text-white transition rounded-2xl text-xs font-semibold uppercase tracking-wider font-body flex items-center justify-center gap-2 cursor-pointer text-red-400"
+                  className="w-full px-6 py-5 bg-red-500/10 border border-red-500/20 hover:bg-red-500 hover:text-white transition-all duration-500 rounded-[1.5rem] text-sm font-bold uppercase tracking-widest font-body flex items-center justify-center gap-3 cursor-pointer text-red-400 shadow-sm"
                 >
-                  <LogOut size={14} />
-                  Logout
+                  <LogOut size={18} />
+                  Logout Session
                 </button>
               </div>
             </div>
           </aside>
 
           {/* RIGHT CONTENT PANEL */}
-          <main className="flex-1 min-w-0 bg-white/[0.01] border border-white/5 rounded-3xl p-6 md:p-8 shadow-soft">
+          <main className="flex-1 min-w-0 bg-white/5 backdrop-blur-3xl border border-white/10 rounded-[3rem] p-10 md:p-14 shadow-2xl overflow-y-auto">
             {error && (
-              <div className="p-4 mb-6 bg-red-500/10 border border-red-500/20 text-red-200 text-xs rounded-2xl text-center font-body flex items-center justify-center gap-2">
-                <AlertCircle size={14} /> {error}
+              <div className="p-6 mb-8 bg-red-500/10 border border-red-500/20 text-red-200 text-sm rounded-3xl text-center font-body flex items-center justify-center gap-3 animate-fade-in">
+                <AlertCircle size={18} /> {error}
               </div>
             )}
             {successMsg && (
-              <div className="p-4 mb-6 bg-green-500/10 border border-green-500/20 text-green-200 text-xs rounded-2xl text-center font-body flex items-center justify-center gap-2 animate-pulse">
-                <CheckCircle2 size={14} /> {successMsg}
+              <div className="p-6 mb-8 bg-green-500/10 border border-green-500/20 text-green-200 text-sm rounded-3xl text-center font-body flex items-center justify-center gap-3 animate-pulse">
+                <CheckCircle2 size={18} /> {successMsg}
               </div>
             )}
 
             {/* TAB CONTENT: DASHBOARD */}
             {activeTab === "dashboard" && (
-              <div className="space-y-8">
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-white/10 pb-5">
+              <div className="space-y-12 animate-fade-in">
+                <div className="flex flex-col xl:flex-row xl:items-center justify-between gap-8 border-b border-white/10 pb-10">
                   <div>
-                    <h1 className="text-2xl md:text-3xl font-display font-semibold">
-                      Welcome to Admin Dashboard
+                    <h1 className="text-5xl md:text-6xl font-display font-bold leading-tight text-white">
+                      Master <span className="text-amber-400">Dashboard</span>
                     </h1>
-                    <p className="text-xs text-white/50 font-body mt-0.5">
-                      Samyam Spiritual Tourism Console
+                    <p className="text-sm text-white/50 font-body uppercase tracking-[0.3em] mt-3 font-medium">
+                      Complete Control of Samyam Sacred Journeys
                     </p>
                   </div>
                   <button
                     onClick={handleMigrateData}
                     disabled={migrating}
-                    className="px-5 py-3 bg-gradient-cta text-white shadow-glow hover:scale-[1.03] transition rounded-2xl text-xs font-bold uppercase tracking-wider font-body flex items-center justify-center gap-2 cursor-pointer disabled:opacity-55 disabled:cursor-not-allowed"
+                    className="px-8 py-5 bg-gradient-cta text-white shadow-glow-amber hover:scale-[1.05] active:scale-[0.95] transition-all duration-500 rounded-[2rem] text-xs font-black uppercase tracking-[0.2em] font-body flex items-center justify-center gap-3 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
                   >
-                    <Database size={14} className={migrating ? "animate-spin" : ""} />
-                    {migrating ? "Migrating Data..." : "Migrate Initial Data"}
+                    <Database size={18} className={migrating ? "animate-spin" : ""} />
+                    {migrating ? "Synchronizing..." : "Sync Baseline Data"}
                   </button>
                 </div>
 
                 {/* Statistics Overview */}
-                <div className="space-y-4">
-                  <h3 className="text-sm font-semibold uppercase tracking-wider text-amber-400 font-body">
-                    Statistics Overview
-                  </h3>
-                  <div className="grid grid-cols-2 lg:grid-cols-5 gap-4">
+                <div className="space-y-8">
+                  <div className="flex items-center gap-4">
+                    <span className="h-px flex-1 bg-gradient-to-r from-transparent to-white/10"></span>
+                    <h3 className="text-xs font-black uppercase tracking-[0.4em] text-amber-400/80 font-body">
+                      System Metrics
+                    </h3>
+                    <span className="h-px flex-1 bg-gradient-to-l from-transparent to-white/10"></span>
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
                     {[
                       {
-                        label: "Total Enquiries",
+                        label: "Pilgrim Enquiries",
                         val: stats?.totalEnquiries ?? enquiries.length,
-                        color: "text-amber-400",
+                        color: "from-amber-400/20 to-amber-600/5",
+                        textColor: "text-amber-400",
+                        icon: Mail,
                       },
                       {
-                        label: "Yatra and Retreats",
+                        label: "Sacred Yatras",
                         val: stats?.totalRetreats ?? yatras.length,
-                        color: "text-sky-400",
+                        color: "from-sky-400/20 to-sky-600/5",
+                        textColor: "text-sky-400",
+                        icon: Compass,
                       },
                       {
-                        label: "Knowledge Videos",
+                        label: "Wisdom Portal",
                         val: stats?.totalVideos ?? videos.length,
-                        color: "text-purple-400",
+                        color: "from-purple-400/20 to-purple-600/5",
+                        textColor: "text-purple-400",
+                        icon: Film,
                       },
                       {
-                        label: "Teerthas",
+                        label: "Holy Teerthas",
                         val: stats?.totalTeerthas ?? teerthas.length,
-                        color: "text-emerald-400",
+                        color: "from-emerald-400/20 to-emerald-600/5",
+                        textColor: "text-emerald-400",
+                        icon: MapPin,
                       },
                       {
-                        label: "CEO Blogs & Quotes",
+                        label: "CEO Journal",
                         val: stats?.totalBlogs ?? blogs.length,
-                        color: "text-rose-400",
+                        color: "from-rose-400/20 to-rose-600/5",
+                        textColor: "text-rose-400",
+                        icon: FileText,
                       },
                     ].map((st, i) => (
                       <div
                         key={i}
-                        className="bg-white/[0.02] border border-white/5 p-6 rounded-2xl shadow-soft"
+                        className={`bg-white/[0.03] border border-white/10 p-10 rounded-[2.5rem] shadow-soft hover:shadow-glow transition-all duration-500 group relative overflow-hidden flex flex-col items-center justify-center`}
                       >
-                        <p className={`text-3xl font-display font-bold mt-1 ${st.color}`}>
-                          {st.val}
-                        </p>
-                        <p className="text-[10px] text-white/45 font-body uppercase tracking-wider mt-1">
-                          {st.label}
-                        </p>
+                        <div
+                          className={`absolute top-0 right-0 w-32 h-32 bg-gradient-to-br ${st.color} blur-[50px] opacity-20 group-hover:opacity-40 transition-opacity`}
+                        />
+                        <div className="relative z-10 flex flex-col items-center text-center space-y-2">
+                          <st.icon size={24} className={`${st.textColor} opacity-60 mb-2`} />
+                          <p
+                            className={`text-6xl font-display font-black tracking-tighter ${st.textColor}`}
+                          >
+                            {st.val}
+                          </p>
+                          <p className="text-[10px] text-white/40 font-bold uppercase tracking-[0.2em]">
+                            {st.label}
+                          </p>
+                        </div>
                       </div>
                     ))}
                   </div>
                 </div>
 
                 {/* Quick Actions */}
-                <div className="space-y-4 pt-4">
-                  <h3 className="text-sm font-semibold uppercase tracking-wider text-amber-400 font-body">
-                    Quick Actions
-                  </h3>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div className="bg-white/[0.02] border border-white/5 p-6 rounded-2xl hover:border-amber-500/20 transition-all flex flex-col justify-between group">
-                      <div className="space-y-2 text-left">
-                        <h4 className="text-base font-semibold font-display text-white">
-                          ✉ Enquiry Management
-                        </h4>
-                        <p className="text-xs text-white/55 font-body leading-relaxed">
-                          View and manage contact form submissions
-                        </p>
-                      </div>
-                      <button
-                        onClick={() => setActiveTab("enquiries")}
-                        className="mt-6 text-[10px] uppercase font-bold tracking-wider text-amber-400 text-left cursor-pointer group-hover:translate-x-1.5 transition-transform"
-                      >
-                        View Enquiries →
-                      </button>
-                    </div>
+                <div className="space-y-8 pt-8">
+                  <div className="flex items-center gap-4">
+                    <span className="h-px flex-1 bg-gradient-to-r from-transparent to-white/10"></span>
+                    <h3 className="text-xs font-black uppercase tracking-[0.4em] text-amber-400/80 font-body">
+                      Rapid Access
+                    </h3>
+                    <span className="h-px flex-1 bg-gradient-to-l from-transparent to-white/10"></span>
+                  </div>
 
-                    <div className="bg-white/[0.02] border border-white/5 p-6 rounded-2xl hover:border-amber-500/20 transition-all flex flex-col justify-between group">
-                      <div className="space-y-2 text-left">
-                        <h4 className="text-base font-semibold font-display text-white">
-                          🕉 Teerthas Management
-                        </h4>
-                        <p className="text-xs text-white/55 font-body leading-relaxed">
-                          Add, edit, and manage sacred destinations
-                        </p>
-                      </div>
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    {[
+                      {
+                        title: "Enquiry Management",
+                        desc: "Review and respond to seeker requests",
+                        icon: "✉",
+                        tab: "enquiries",
+                      },
+                      {
+                        title: "Teertha Library",
+                        desc: "Curate sacred destinations",
+                        icon: "🕉",
+                        tab: "teerthas",
+                      },
+                      {
+                        title: "Knowledge Vault",
+                        desc: "Upload and organize spiritual content",
+                        icon: "📚",
+                        tab: "videos",
+                      },
+                    ].map((action, i) => (
                       <button
-                        onClick={() => setActiveTab("teerthas")}
-                        className="mt-6 text-[10px] uppercase font-bold tracking-wider text-amber-400 text-left cursor-pointer group-hover:translate-x-1.5 transition-transform"
+                        key={i}
+                        onClick={() => setActiveTab(action.tab as any)}
+                        className="bg-white/[0.02] border border-white/10 p-10 rounded-[3rem] hover:bg-white/10 hover:border-amber-400/30 transition-all duration-500 flex flex-col items-start group text-left cursor-pointer shadow-soft hover:shadow-glow"
                       >
-                        Manage Teerthas →
-                      </button>
-                    </div>
-
-                    <div className="bg-white/[0.02] border border-white/5 p-6 rounded-2xl hover:border-amber-500/20 transition-all flex flex-col justify-between group">
-                      <div className="space-y-2 text-left">
-                        <h4 className="text-base font-semibold font-display text-white">
-                          📚 Knowledge Videos
+                        <div className="w-16 h-16 rounded-[1.5rem] bg-white/5 flex items-center justify-center text-4xl mb-6 group-hover:scale-110 transition-transform duration-500">
+                          {action.icon}
+                        </div>
+                        <h4 className="text-2xl font-bold font-display text-white mb-2">
+                          {action.title}
                         </h4>
-                        <p className="text-xs text-white/55 font-body leading-relaxed">
-                          Manage videos in the Knowledge Portal
+                        <p className="text-sm text-white/40 font-body leading-relaxed mb-6">
+                          {action.desc}
                         </p>
-                      </div>
-                      <button
-                        onClick={() => setActiveTab("videos")}
-                        className="mt-6 text-[10px] uppercase font-bold tracking-wider text-amber-400 text-left cursor-pointer group-hover:translate-x-1.5 transition-transform"
-                      >
-                        Manage Videos →
+                        <span className="text-[10px] font-black uppercase tracking-[0.2em] text-amber-400 group-hover:translate-x-2 transition-transform">
+                          Open Module →
+                        </span>
                       </button>
-                    </div>
+                    ))}
                   </div>
                 </div>
               </div>
@@ -800,25 +825,32 @@ function AdminDashboardPage() {
 
             {/* TAB CONTENT: ENQUIRIES */}
             {activeTab === "enquiries" && (
-              <div className="space-y-6">
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-white/10 pb-5">
-                  <h1 className="text-2xl font-display font-semibold">Enquiry Management</h1>
+              <div className="space-y-10 animate-fade-in">
+                <div className="flex flex-col xl:flex-row xl:items-center justify-between gap-8 border-b border-white/10 pb-10">
+                  <div>
+                    <h1 className="text-5xl font-display font-bold">
+                      Seeker <span className="text-amber-400">Requests</span>
+                    </h1>
+                    <p className="text-sm text-white/50 font-body uppercase tracking-[0.3em] mt-3">
+                      Manage sacred inquiries & connections
+                    </p>
+                  </div>
 
                   {/* Search Bar */}
-                  <div className="relative w-full sm:w-64 font-body">
-                    <Search className="absolute left-4 top-3 text-white/30" size={14} />
+                  <div className="relative w-full xl:w-96 font-body">
+                    <Search className="absolute left-6 top-5 text-amber-400/50" size={20} />
                     <input
                       type="text"
-                      placeholder="Search inquiries..."
+                      placeholder="Find pilgrim by name, phone or email..."
                       value={searchTerm}
                       onChange={(e) => setSearchTerm(e.target.value)}
-                      className="w-full pl-10 pr-4 py-2.5 rounded-2xl bg-white/[0.03] border border-white/5 text-white placeholder-white/30 focus:outline-none focus:border-amber-400 text-xs transition-all"
+                      className="w-full pl-16 pr-6 py-5 rounded-[2rem] bg-white/[0.03] border border-white/10 text-white placeholder-white/20 focus:outline-none focus:border-amber-400 focus:bg-white/5 text-sm font-medium transition-all duration-500 shadow-soft"
                     />
                   </div>
                 </div>
 
                 {/* Filter tabs */}
-                <div className="flex flex-wrap items-center gap-1.5 p-1 bg-white/[0.02] border border-white/5 rounded-2xl font-body max-w-fit">
+                <div className="flex flex-wrap items-center gap-3 p-2 bg-white/[0.02] border border-white/10 rounded-[2rem] font-body w-fit">
                   {(["All", "New", "Contacted", "Resolved"] as const).map((status) => {
                     const count =
                       status === "All"
@@ -828,13 +860,13 @@ function AdminDashboardPage() {
                       <button
                         key={status}
                         onClick={() => setStatusFilter(status)}
-                        className={`px-4 py-2 text-[10px] font-bold uppercase tracking-wider rounded-xl transition cursor-pointer ${
+                        className={`px-8 py-3.5 text-[11px] font-black uppercase tracking-[0.15em] rounded-[1.25rem] transition-all duration-500 cursor-pointer ${
                           statusFilter === status
-                            ? "bg-gradient-cta text-white shadow border border-amber-500/10"
-                            : "text-white/60 hover:text-white"
+                            ? "bg-gradient-cta text-white shadow-glow-amber scale-105"
+                            : "text-white/40 hover:text-white hover:bg-white/5"
                         }`}
                       >
-                        {status} ({count})
+                        {status} <span className="opacity-50 ml-1">({count})</span>
                       </button>
                     );
                   })}
@@ -842,42 +874,59 @@ function AdminDashboardPage() {
 
                 {/* List */}
                 {filteredEnquiries.length === 0 ? (
-                  <div className="py-20 text-center space-y-3 bg-white/[0.01] border border-white/5 rounded-3xl">
-                    <p className="text-white/40 text-xs font-body">
-                      No pilgrim requests match your current filters.
+                  <div className="py-32 text-center space-y-4 bg-white/[0.01] border border-white/10 rounded-[3rem]">
+                    <Search size={48} className="mx-auto text-white/10" />
+                    <p className="text-white/40 text-sm font-body font-bold uppercase tracking-widest">
+                      No seeker requests match your filters
                     </p>
                   </div>
                 ) : (
-                  <div className="space-y-4">
+                  <div className="grid grid-cols-1 gap-6">
                     {filteredEnquiries.map((enquiry) => (
                       <div
                         key={enquiry._id}
-                        className="bg-white/[0.02] border border-white/5 p-6 rounded-3xl space-y-4 text-left font-body text-xs relative hover:border-white/10 transition-all"
+                        className="bg-white/[0.02] border border-white/10 p-10 rounded-[3rem] space-y-8 text-left font-body relative hover:bg-white/[0.04] hover:border-amber-400/20 transition-all duration-500 shadow-soft group"
                       >
-                        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-white/5 pb-3">
-                          <div className="space-y-1">
-                            <div className="flex items-center gap-3">
-                              <h4 className="text-base font-semibold font-display text-white">
+                        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 border-b border-white/5 pb-8">
+                          <div className="space-y-4">
+                            <div className="flex items-center flex-wrap gap-4">
+                              <h4 className="text-3xl font-bold font-display text-white">
                                 {enquiry.name}
                               </h4>
                               <span
-                                className={`px-2 py-0.5 rounded-full text-[9px] font-bold uppercase tracking-wider ${
+                                className={`px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest ${
                                   enquiry.preferredYatra.includes("Custom")
-                                    ? "bg-purple-500/10 border border-purple-500/20 text-purple-300"
-                                    : "bg-amber-400/10 border border-amber-400/20 text-amber-300"
+                                    ? "bg-purple-500/20 border border-purple-500/30 text-purple-300"
+                                    : "bg-amber-400/20 border border-amber-400/30 text-amber-300"
                                 }`}
                               >
                                 {enquiry.preferredYatra}
                               </span>
                             </div>
-                            <div className="flex flex-wrap gap-x-4 gap-y-1 text-white/50 text-[11px]">
-                              <span>📞 {enquiry.phoneNumber}</span>
-                              {enquiry.email && <span>✉ {enquiry.email}</span>}
-                              <span>🕒 {new Date(enquiry.createdAt).toLocaleString()}</span>
+                            <div className="flex flex-wrap gap-x-8 gap-y-3 text-white/60 text-sm">
+                              <span className="flex items-center gap-2 font-medium">
+                                <Phone size={14} className="text-amber-400/60" />{" "}
+                                {enquiry.phoneNumber}
+                              </span>
+                              {enquiry.email && (
+                                <span className="flex items-center gap-2 font-medium">
+                                  <Mail size={14} className="text-amber-400/60" /> {enquiry.email}
+                                </span>
+                              )}
+                              <span className="flex items-center gap-2 font-medium">
+                                <Clock size={14} className="text-amber-400/60" />{" "}
+                                {new Date(enquiry.createdAt).toLocaleDateString("en-IN", {
+                                  day: "numeric",
+                                  month: "long",
+                                  year: "numeric",
+                                  hour: "2-digit",
+                                  minute: "2-digit",
+                                })}
+                              </span>
                             </div>
                           </div>
 
-                          <div className="flex items-center gap-2">
+                          <div className="flex items-center gap-4">
                             <select
                               value={enquiry.status}
                               onChange={(e) =>
@@ -886,72 +935,74 @@ function AdminDashboardPage() {
                                   e.target.value as Enquiry["status"],
                                 )
                               }
-                              className={`px-3 py-1.5 rounded-2xl text-[10px] font-semibold focus:outline-none border cursor-pointer ${
+                              className={`px-6 py-3 rounded-[1.25rem] text-xs font-black uppercase tracking-widest focus:outline-none border-2 cursor-pointer transition-all duration-500 ${
                                 enquiry.status === "New"
-                                  ? "bg-sky-500/10 border-sky-500/20 text-sky-400"
+                                  ? "bg-sky-500/10 border-sky-500/30 text-sky-300"
                                   : enquiry.status === "Contacted"
-                                    ? "bg-amber-400/10 border-amber-400/20 text-amber-400"
-                                    : "bg-emerald-500/10 border-emerald-500/20 text-emerald-400"
-                              } [&>option]:bg-[#140817] [&>option]:text-white`}
+                                    ? "bg-amber-400/10 border-amber-400/30 text-amber-300"
+                                    : "bg-emerald-500/10 border-emerald-500/30 text-emerald-300"
+                              } hover:scale-105 active:scale-95 [&>option]:bg-[#2a0e2d] [&>option]:text-white`}
                             >
-                              <option value="New">New</option>
-                              <option value="Contacted">Contacted</option>
-                              <option value="Resolved">Resolved</option>
+                              <option value="New">Status: New</option>
+                              <option value="Contacted">Status: Contacted</option>
+                              <option value="Resolved">Status: Resolved</option>
                             </select>
 
                             <button
                               onClick={() => setDeleteConfirm({ id: enquiry._id, type: "enquiry" })}
-                              className="px-3 py-1.5 rounded-2xl border border-red-500/20 bg-red-500/5 hover:bg-red-500 hover:text-white transition text-red-400 cursor-pointer"
-                              title="Delete Record"
+                              className="w-12 h-12 flex items-center justify-center rounded-[1.25rem] border-2 border-red-500/20 bg-red-500/5 hover:bg-red-500 hover:text-white hover:border-red-500 transition-all duration-500 text-red-400 cursor-pointer shadow-sm group-hover:scale-110"
+                              title="Delete Permanent"
                             >
-                              Delete
+                              <Trash2 size={20} />
                             </button>
                           </div>
                         </div>
 
                         {/* Custom details */}
                         {enquiry.preferredYatra.includes("Custom") && (
-                          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 bg-white/[0.01] border border-white/5 p-4 rounded-2xl">
+                          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 bg-white/[0.01] border border-white/5 p-8 rounded-[2rem]">
                             <div>
-                              <p className="text-white/40 text-[9px] uppercase tracking-wider mb-0.5">
+                              <p className="text-white/30 text-[10px] font-black uppercase tracking-[0.2em] mb-2">
                                 Destination
                               </p>
-                              <p className="font-semibold text-white">
-                                {enquiry.journeyType || "N/A"}
+                              <p className="text-lg font-bold text-white leading-tight">
+                                {enquiry.journeyType || "Sacred Site"}
                               </p>
                             </div>
                             <div>
-                              <p className="text-white/40 text-[9px] uppercase tracking-wider mb-0.5">
-                                Dates
+                              <p className="text-white/30 text-[10px] font-black uppercase tracking-[0.2em] mb-2">
+                                Preferred Window
                               </p>
-                              <p className="font-semibold text-white">
-                                {enquiry.message.slice(0, 20) || "N/A"}
-                              </p>
-                            </div>
-                            <div>
-                              <p className="text-white/40 text-[9px] uppercase tracking-wider mb-0.5">
-                                Travelers
-                              </p>
-                              <p className="font-semibold text-white">
-                                {enquiry.travelers || "N/A"}
+                              <p className="text-lg font-bold text-white leading-tight">
+                                {enquiry.budget?.includes("/") ? enquiry.budget : "Flexible"}
                               </p>
                             </div>
                             <div>
-                              <p className="text-white/40 text-[9px] uppercase tracking-wider mb-0.5">
-                                Budget
+                              <p className="text-white/30 text-[10px] font-black uppercase tracking-[0.2em] mb-2">
+                                Pilgrims
                               </p>
-                              <p className="font-semibold text-white">{enquiry.budget || "N/A"}</p>
+                              <p className="text-lg font-bold text-white leading-tight">
+                                {enquiry.travelers || "Individual"}
+                              </p>
+                            </div>
+                            <div>
+                              <p className="text-white/30 text-[10px] font-black uppercase tracking-[0.2em] mb-2">
+                                Budget Est.
+                              </p>
+                              <p className="text-lg font-bold text-amber-400 leading-tight">
+                                {enquiry.budget || "On Request"}
+                              </p>
                             </div>
                           </div>
                         )}
 
-                        <div className="space-y-1">
-                          <p className="text-white/40 text-[9px] uppercase tracking-wider">
-                            Seeker message / intent
+                        <div className="space-y-4">
+                          <p className="text-white/30 text-[10px] font-black uppercase tracking-[0.2em]">
+                            Intent & Vision
                           </p>
-                          <p className="text-white/85 leading-relaxed bg-white/[0.01] p-3 rounded-xl border border-white/5 whitespace-pre-wrap">
-                            {enquiry.message}
-                          </p>
+                          <div className="text-lg text-white/90 leading-relaxed bg-white/[0.01] p-8 rounded-[2rem] border border-white/5 whitespace-pre-wrap font-medium font-body italic">
+                            "{enquiry.message}"
+                          </div>
                         </div>
                       </div>
                     ))}
@@ -962,215 +1013,116 @@ function AdminDashboardPage() {
 
             {/* TAB CONTENT: YATRA RETREATS */}
             {activeTab === "yatras" && (
-              <div className="space-y-6">
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-white/10 pb-5">
+              <div className="space-y-12 animate-fade-in">
+                <div className="flex flex-col xl:flex-row xl:items-center justify-between gap-8 border-b border-white/10 pb-10">
                   <div>
-                    <h1 className="text-2xl font-display font-semibold">
-                      Yatra and Retreats Management
+                    <h1 className="text-5xl font-display font-bold text-white">
+                      Sacred <span className="text-amber-400">Journeys</span>
                     </h1>
-                    <p className="text-xs text-white/50 font-body">
+                    <p className="text-sm text-white/50 font-body uppercase tracking-[0.3em] mt-3 font-medium">
                       Add, update, or remove dynamic spiritual travel itineraries
                     </p>
                   </div>
                   <button
                     onClick={openAddYatra}
-                    className="px-5 py-3 bg-gradient-cta text-white shadow-glow hover:scale-[1.03] transition rounded-2xl text-xs font-bold uppercase tracking-wider font-body flex items-center gap-2 cursor-pointer"
+                    className="px-10 py-5 bg-gradient-cta text-white shadow-glow-amber hover:scale-[1.05] active:scale-[0.95] transition-all duration-500 rounded-[2rem] text-xs font-black uppercase tracking-[0.2em] font-body flex items-center justify-center gap-3 cursor-pointer"
                   >
-                    <Plus size={14} /> Add New Yatra/Retreat
+                    <PlusCircle size={20} /> Deploy New Journey
                   </button>
                 </div>
 
                 {/* Grid list */}
                 {yatras.length === 0 ? (
-                  <div className="py-20 text-center bg-white/[0.01] border border-white/5 rounded-3xl">
-                    <p className="text-white/40 text-xs font-body">
-                      No Yatra records found. Seed initial data or add new.
+                  <div className="py-32 text-center bg-white/[0.01] border border-white/10 rounded-[3rem]">
+                    <p className="text-white/40 text-sm font-bold uppercase tracking-widest font-body">
+                      The sanctuary is empty. Seed baseline data or add manually.
                     </p>
                   </div>
                 ) : (
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-left">
+                  <div className="grid grid-cols-1 xl:grid-cols-2 gap-10 text-left">
                     {yatras.map((y) => (
                       <div
                         key={y._id}
-                        className="bg-white/[0.02] border border-white/5 rounded-3xl overflow-hidden shadow-soft flex flex-col justify-between hover:border-white/10 transition duration-300"
+                        className="bg-white/[0.02] border border-white/10 rounded-[3rem] overflow-hidden shadow-soft flex flex-col justify-between hover:bg-white/[0.04] hover:border-amber-400/30 transition-all duration-700 group"
                       >
                         <div>
                           {/* Image */}
-                          <div className="aspect-video bg-black/40 relative overflow-hidden">
+                          <div className="aspect-[21/9] bg-black/40 relative overflow-hidden">
                             <img
                               src={y.img.startsWith("/") ? y.img : `/images/${y.img}`}
                               alt={y.name}
-                              className="w-full h-full object-cover"
+                              className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000 opacity-60 group-hover:opacity-80"
                               onError={(e) => {
-                                // fallback if image fails to load
                                 (e.target as HTMLImageElement).src =
                                   "https://samyam.co/images/knowledge.jpeg";
                               }}
                             />
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
-                            <div className="absolute bottom-4 left-4 right-4">
-                              <h3 className="text-lg font-semibold font-display text-white leading-tight">
+                            <div className="absolute inset-0 bg-gradient-to-t from-[#1a0a1e] via-transparent to-transparent" />
+                            <div className="absolute bottom-6 left-8 right-6">
+                              <h3 className="text-3xl font-bold font-display text-white">
                                 {y.name}
                               </h3>
-                              <p className="text-[10px] text-amber-300 font-semibold font-body uppercase mt-0.5">
-                                {y.date} • {y.duration}
+                              <p className="text-amber-400 text-xs font-black uppercase tracking-widest mt-1">
+                                {y.duration} • {y.date}
                               </p>
                             </div>
                           </div>
 
-                          <div className="p-5 space-y-4 font-body text-xs">
-                            <p className="text-white/60 leading-relaxed line-clamp-3">{y.desc}</p>
-
-                            {/* Badges counts */}
-                            <div className="flex flex-wrap gap-2 pt-2">
-                              <span className="px-2.5 py-1 rounded-lg bg-white/5 border border-white/5 text-[9px] font-bold text-white/70">
-                                📅 {y.itinerary?.length || 0} Days Itinerary
-                              </span>
-                              <span className="px-2.5 py-1 rounded-lg bg-white/5 border border-white/5 text-[9px] font-bold text-white/70">
-                                🕉 {y.darshans?.length || 0} Darshan Categories
-                              </span>
-                              <span className="px-2.5 py-1 rounded-lg bg-white/5 border border-white/5 text-[9px] font-bold text-white/70">
-                                ✓ {y.inclusions?.length || 0} Inclusions
-                              </span>
-                            </div>
-
-                            {/* Expandable Details Panel */}
-                            <div className="border-t border-white/5 mt-2 pt-2">
-                              <button
-                                onClick={() => toggleYatraExpand(y._id!)}
-                                className="w-full py-2 text-center text-[10px] uppercase font-bold text-amber-400 hover:text-amber-300 transition flex items-center justify-center gap-1 cursor-pointer"
-                              >
-                                {expandedYatras[y._id!] ? "Hide Details ▴" : "Show Full Details ▾"}
-                              </button>
-
-                              {expandedYatras[y._id!] && (
-                                <div className="space-y-4 px-1 pb-3 text-white/80 animate-fade-in mt-3 text-left">
-                                  {y.slogan && (
-                                    <div className="p-2 bg-white/[0.02] border border-white/5 rounded-xl">
-                                      <span className="text-[9px] text-amber-400/80 font-bold uppercase tracking-wider block">
-                                        Slogan
-                                      </span>
-                                      <p className="text-[10px] font-semibold italic text-amber-100">
-                                        {y.slogan}
-                                      </p>
-                                    </div>
-                                  )}
-
-                                  <div className="grid grid-cols-2 gap-2">
-                                    <div className="p-2 bg-white/[0.02] border border-white/5 rounded-xl">
-                                      <span className="text-[9px] text-white/40 font-bold uppercase tracking-wider block">
-                                        Double Price
-                                      </span>
-                                      <p className="text-[10px] text-white font-medium">
-                                        {y.doublePrice || "N/A"}
-                                      </p>
-                                    </div>
-                                    <div className="p-2 bg-white/[0.02] border border-white/5 rounded-xl">
-                                      <span className="text-[9px] text-white/40 font-bold uppercase tracking-wider block">
-                                        Triple Price
-                                      </span>
-                                      <p className="text-[10px] text-white font-medium">
-                                        {y.triplePrice || "N/A"}
-                                      </p>
-                                    </div>
-                                  </div>
-
-                                  {y.staysHeading && (
-                                    <div className="p-2.5 bg-white/[0.02] border border-white/5 rounded-xl space-y-1">
-                                      <span className="text-[9px] text-amber-400/80 font-bold uppercase tracking-wider block">
-                                        Stays Info
-                                      </span>
-                                      <p className="text-[10px] text-white font-semibold">
-                                        {y.staysHeading}
-                                      </p>
-                                      <p className="text-[10px] text-white/60 leading-normal">
-                                        {y.staysDesc}
-                                      </p>
-                                    </div>
-                                  )}
-
-                                  {y.inclusions && y.inclusions.length > 0 && (
-                                    <div className="space-y-1">
-                                      <span className="text-[9px] text-white/40 font-bold uppercase tracking-wider block font-semibold mb-1">
-                                        Inclusions
-                                      </span>
-                                      <ul className="list-disc list-inside text-[10px] text-white/70 space-y-1 leading-normal pl-1">
-                                        {y.inclusions.map((inc, i) => (
-                                          <li key={i}>{inc}</li>
-                                        ))}
-                                      </ul>
-                                    </div>
-                                  )}
-
-                                  {y.itinerary && y.itinerary.length > 0 && (
-                                    <div className="space-y-2 border-t border-white/5 pt-2">
-                                      <span className="text-[9px] text-white/40 font-bold uppercase tracking-wider block font-semibold">
-                                        Day-wise Itinerary
-                                      </span>
-                                      <div className="space-y-2 max-h-48 overflow-y-auto pr-1">
-                                        {y.itinerary.map((day) => (
-                                          <div
-                                            key={day.day}
-                                            className="p-2.5 bg-white/[0.01] border border-white/5 rounded-xl"
-                                          >
-                                            <span className="text-[10px] font-bold text-amber-400 block">
-                                              Day {day.day}
-                                            </span>
-                                            <ul className="list-disc list-inside text-[10px] text-white/75 mt-1 space-y-1 leading-normal pl-1">
-                                              {day.points.map((pt, pIdx) => (
-                                                <li key={pIdx}>{pt}</li>
-                                              ))}
-                                            </ul>
-                                          </div>
-                                        ))}
-                                      </div>
-                                    </div>
-                                  )}
-
-                                  {y.darshans && y.darshans.length > 0 && (
-                                    <div className="space-y-2 border-t border-white/5 pt-2">
-                                      <span className="text-[9px] text-white/40 font-bold uppercase tracking-wider block font-semibold">
-                                        Sacred Darshans
-                                      </span>
-                                      <div className="space-y-2 max-h-40 overflow-y-auto pr-1">
-                                        {y.darshans.map((d, dIdx) => (
-                                          <div
-                                            key={dIdx}
-                                            className="p-2.5 bg-white/[0.01] border border-white/5 rounded-xl"
-                                          >
-                                            <span className="text-[10px] font-bold text-white block">
-                                              {d.title}
-                                            </span>
-                                            <ul className="list-disc list-inside text-[10px] text-white/75 mt-1 space-y-1 leading-normal pl-1">
-                                              {d.items.map((item, itemIdx) => (
-                                                <li key={itemIdx}>{item}</li>
-                                              ))}
-                                            </ul>
-                                          </div>
-                                        ))}
-                                      </div>
-                                    </div>
-                                  )}
-                                </div>
-                              )}
+                          {/* Content */}
+                          <div className="p-8 space-y-6">
+                            <p className="text-white/60 text-sm leading-relaxed line-clamp-3 font-medium font-body">
+                              {y.desc}
+                            </p>
+                            <div className="grid grid-cols-2 gap-4">
+                              <div className="p-4 rounded-2xl bg-white/5 border border-white/5">
+                                <p className="text-[10px] text-white/30 uppercase font-black tracking-widest mb-1">
+                                  Triple
+                                </p>
+                                <p className="text-xs font-bold text-amber-400/90 tracking-tight">
+                                  {y.triplePrice || "On Request"}
+                                </p>
+                              </div>
+                              <div className="p-4 rounded-2xl bg-white/5 border border-white/5">
+                                <p className="text-[10px] text-white/30 uppercase font-black tracking-widest mb-1">
+                                  Double
+                                </p>
+                                <p className="text-xs font-bold text-sky-400/90 tracking-tight">
+                                  {y.doublePrice || "On Request"}
+                                </p>
+                              </div>
                             </div>
                           </div>
                         </div>
 
                         {/* Actions */}
-                        <div className="px-5 py-4 bg-white/[0.01] border-t border-white/5 flex items-center justify-end gap-2">
-                          <button
-                            onClick={() => openEditYatra(y)}
-                            className="px-4 py-2 bg-gradient-cta text-white font-bold rounded-2xl text-[10px] uppercase tracking-wider hover:scale-105 transition cursor-pointer"
+                        <div className="p-8 bg-black/20 flex items-center justify-between border-t border-white/5">
+                          <span
+                            className={`px-3 py-1 rounded-full text-[9px] font-black uppercase tracking-widest ${
+                              y.isPublished
+                                ? "bg-emerald-500/10 text-emerald-400 border border-emerald-500/20"
+                                : "bg-amber-500/10 text-amber-400 border border-amber-500/20"
+                            }`}
                           >
-                            Edit
-                          </button>
-                          <button
-                            onClick={() => setDeleteConfirm({ id: y._id!, type: "yatra" })}
-                            className="px-4 py-2 border border-red-500/20 bg-red-500/5 hover:bg-red-500 hover:text-white transition text-red-400 font-bold rounded-2xl text-[10px] uppercase tracking-wider cursor-pointer"
-                          >
-                            Delete
-                          </button>
+                            {y.isPublished ? "Live on Portal" : "Draft Status"}
+                          </span>
+                          <div className="flex items-center gap-3">
+                            <button
+                              onClick={() => openEditYatra(y)}
+                              className="p-3 rounded-xl bg-white/5 hover:bg-white/10 text-white/60 hover:text-white transition-all duration-300"
+                              title="Edit Itinerary"
+                            >
+                              <Edit size={18} />
+                            </button>
+                            <button
+                              onClick={() =>
+                                setDeleteConfirm({ id: y._id as string, type: "yatra" })
+                              }
+                              className="p-3 rounded-xl bg-red-500/5 hover:bg-red-500 text-red-400 hover:text-white transition-all duration-300 shadow-sm"
+                              title="Archive journey"
+                            >
+                              <Trash2 size={18} />
+                            </button>
+                          </div>
                         </div>
                       </div>
                     ))}
@@ -1181,35 +1133,37 @@ function AdminDashboardPage() {
 
             {/* TAB CONTENT: TEERTHAS */}
             {activeTab === "teerthas" && (
-              <div className="space-y-6">
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-white/10 pb-5">
+              <div className="space-y-12 animate-fade-in">
+                <div className="flex flex-col xl:flex-row xl:items-center justify-between gap-8 border-b border-white/10 pb-10">
                   <div>
-                    <h1 className="text-2xl font-display font-semibold">Teerthas Management</h1>
-                    <p className="text-xs text-white/50 font-body">
+                    <h1 className="text-5xl font-display font-bold text-white">
+                      Holy <span className="text-amber-400">Teerthas</span>
+                    </h1>
+                    <p className="text-sm text-white/50 font-body uppercase tracking-[0.3em] mt-3 font-medium">
                       Add, edit, and manage sacred destinations
                     </p>
                   </div>
                   <button
                     onClick={openAddTeertha}
-                    className="px-5 py-3 bg-gradient-cta text-white shadow-glow hover:scale-[1.03] transition rounded-2xl text-xs font-bold uppercase tracking-wider font-body flex items-center gap-2 cursor-pointer"
+                    className="px-10 py-5 bg-gradient-cta text-white shadow-glow-amber hover:scale-[1.05] active:scale-[0.95] transition-all duration-500 rounded-[2rem] text-xs font-black uppercase tracking-[0.2em] font-body flex items-center justify-center gap-3 cursor-pointer"
                   >
-                    <Plus size={14} /> Add Teertha
+                    <PlusCircle size={20} /> Define New Teertha
                   </button>
                 </div>
 
                 {/* Grid list */}
                 {teerthas.length === 0 ? (
-                  <div className="py-20 text-center bg-white/[0.01] border border-white/5 rounded-3xl">
-                    <p className="text-white/40 text-xs font-body">
+                  <div className="py-32 text-center bg-white/[0.01] border border-white/10 rounded-[3rem]">
+                    <p className="text-white/40 text-sm font-bold uppercase tracking-widest font-body">
                       No Teertha records found. Seed initial data or add new.
                     </p>
                   </div>
                 ) : (
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 text-left">
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 text-left">
                     {teerthas.map((t) => (
                       <div
                         key={t._id}
-                        className="bg-white/[0.02] border border-white/5 rounded-3xl overflow-hidden shadow-soft flex flex-col justify-between hover:border-white/10 transition duration-300"
+                        className="bg-white/[0.02] border border-white/10 rounded-[3rem] overflow-hidden shadow-soft flex flex-col justify-between hover:bg-white/[0.04] hover:border-amber-400/10 transition duration-300 group"
                       >
                         <div>
                           {/* Image */}
@@ -1223,210 +1177,52 @@ function AdminDashboardPage() {
                                     : `/images/${t.img}`
                               }
                               alt={t.name}
-                              className="w-full h-full object-cover"
+                              className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000 opacity-70"
                               onError={(e) => {
                                 (e.target as HTMLImageElement).src =
                                   "https://samyam.co/images/knowledge.jpeg";
                               }}
                             />
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
-                            <div className="absolute bottom-4 left-4 right-4">
-                              <h3 className="text-base font-semibold font-display text-white leading-tight">
+                            <div className="absolute inset-0 bg-gradient-to-t from-[#1c081e] via-transparent to-transparent" />
+                            <div className="absolute bottom-6 left-8 right-6">
+                              <h3 className="text-2xl font-bold font-display text-white leading-tight">
                                 {t.name}
                               </h3>
-                              <p className="text-[9px] text-white/45 font-semibold font-body uppercase mt-0.5">
-                                {t.region} • {t.significance || t.tagline} • {t.duration}
+                              <p className="text-[10px] text-amber-400 font-bold font-body uppercase mt-1 tracking-widest">
+                                {t.region} • {t.significance || t.tagline}
                               </p>
                             </div>
                           </div>
 
-                          <div className="p-4 font-body text-xs space-y-3">
-                            <p className="text-white/60 leading-relaxed line-clamp-3">{t.desc}</p>
+                          <div className="p-8 font-body text-sm space-y-6">
+                            <p className="text-white/60 leading-relaxed line-clamp-3 italic">
+                              "{t.desc}"
+                            </p>
 
-                            {/* Badges counts */}
-                            <div className="flex flex-wrap gap-2 pt-1">
-                              <span className="px-2 py-0.5 rounded-md bg-white/5 border border-white/5 text-[9px] font-bold text-white/60">
-                                📅 {t.itinerary?.length || 0} Days Itinerary
+                            <div className="flex flex-wrap gap-2">
+                              <span className="px-3 py-1 rounded-full bg-white/5 border border-white/5 text-[9px] font-black uppercase text-white/50 tracking-widest">
+                                📅 {t.itinerary?.length || 0} Days
                               </span>
-                              {t.darshans && t.darshans.length > 0 && (
-                                <span className="px-2 py-0.5 rounded-md bg-white/5 border border-white/5 text-[9px] font-bold text-white/60">
-                                  🕉 {t.darshans.length} Darshans
-                                </span>
-                              )}
-                              {t.highlights && t.highlights.length > 0 && (
-                                <span className="px-2 py-0.5 rounded-md bg-white/5 border border-white/5 text-[9px] font-bold text-white/60">
-                                  ✨ {t.highlights.length} Highlights
-                                </span>
-                              )}
-                              {t.inclusions && t.inclusions.length > 0 && (
-                                <span className="px-2 py-0.5 rounded-md bg-white/5 border border-white/5 text-[9px] font-bold text-white/60">
-                                  ✓ {t.inclusions.length} Inclusions
-                                </span>
-                              )}
-                            </div>
-
-                            {/* Expandable Details Panel */}
-                            <div className="border-t border-white/5 mt-2 pt-2">
-                              <button
-                                onClick={() => toggleTeerthaExpand(t._id!)}
-                                className="w-full py-2 text-center text-[10px] uppercase font-bold text-amber-400 hover:text-amber-300 transition flex items-center justify-center gap-1 cursor-pointer"
-                              >
-                                {expandedTeerthas[t._id!]
-                                  ? "Hide Details ▴"
-                                  : "Show Full Details ▾"}
-                              </button>
-
-                              {expandedTeerthas[t._id!] && (
-                                <div className="space-y-4 px-1 pb-3 text-white/80 animate-fade-in mt-3 text-left">
-                                  {t.tagline && (
-                                    <div className="p-2 bg-white/[0.02] border border-white/5 rounded-xl">
-                                      <span className="text-[9px] text-amber-400/80 font-bold uppercase tracking-wider block">
-                                        Tagline
-                                      </span>
-                                      <p className="text-[10px] font-semibold text-amber-100">
-                                        {t.tagline}
-                                      </p>
-                                    </div>
-                                  )}
-
-                                  {t.slogan && (
-                                    <div className="p-2 bg-white/[0.02] border border-white/5 rounded-xl">
-                                      <span className="text-[9px] text-amber-400/80 font-bold uppercase tracking-wider block font-semibold mb-0.5">
-                                        Slogan Banner
-                                      </span>
-                                      <p className="text-[10px] font-semibold italic text-amber-100">
-                                        {t.slogan}
-                                      </p>
-                                    </div>
-                                  )}
-
-                                  <div className="grid grid-cols-2 gap-2">
-                                    <div className="p-2 bg-white/[0.02] border border-white/5 rounded-xl">
-                                      <span className="text-[9px] text-white/40 font-bold uppercase tracking-wider block">
-                                        Double Price
-                                      </span>
-                                      <p className="text-[10px] text-white font-medium">
-                                        {t.doublePrice || "N/A"}
-                                      </p>
-                                    </div>
-                                    <div className="p-2 bg-white/[0.02] border border-white/5 rounded-xl">
-                                      <span className="text-[9px] text-white/40 font-bold uppercase tracking-wider block">
-                                        Triple Price
-                                      </span>
-                                      <p className="text-[10px] text-white font-medium">
-                                        {t.triplePrice || "N/A"}
-                                      </p>
-                                    </div>
-                                  </div>
-
-                                  {t.staysHeading && (
-                                    <div className="p-2.5 bg-white/[0.02] border border-white/5 rounded-xl space-y-1">
-                                      <span className="text-[9px] text-amber-400/80 font-bold uppercase tracking-wider block font-semibold mb-0.5">
-                                        Stays Info
-                                      </span>
-                                      <p className="text-[10px] text-white font-semibold">
-                                        {t.staysHeading}
-                                      </p>
-                                      <p className="text-[10px] text-white/60 leading-normal">
-                                        {t.staysDesc}
-                                      </p>
-                                    </div>
-                                  )}
-
-                                  {t.highlights && t.highlights.length > 0 && (
-                                    <div className="space-y-1">
-                                      <span className="text-[9px] text-white/40 font-bold uppercase tracking-wider block font-semibold mb-1">
-                                        Highlights
-                                      </span>
-                                      <ul className="list-disc list-inside text-[10px] text-white/70 space-y-1 leading-normal pl-1">
-                                        {t.highlights.map((hl, i) => (
-                                          <li key={i}>{hl}</li>
-                                        ))}
-                                      </ul>
-                                    </div>
-                                  )}
-
-                                  {t.inclusions && t.inclusions.length > 0 && (
-                                    <div className="space-y-1">
-                                      <span className="text-[9px] text-white/40 font-bold uppercase tracking-wider block font-semibold mb-1">
-                                        Inclusions
-                                      </span>
-                                      <ul className="list-disc list-inside text-[10px] text-white/70 space-y-1 leading-normal pl-1">
-                                        {t.inclusions.map((inc, i) => (
-                                          <li key={i}>{inc}</li>
-                                        ))}
-                                      </ul>
-                                    </div>
-                                  )}
-
-                                  {t.itinerary && t.itinerary.length > 0 && (
-                                    <div className="space-y-2 border-t border-white/5 pt-2">
-                                      <span className="text-[9px] text-white/40 font-bold uppercase tracking-wider block font-semibold">
-                                        Day-wise Itinerary
-                                      </span>
-                                      <div className="space-y-2 max-h-48 overflow-y-auto pr-1">
-                                        {t.itinerary.map((day) => (
-                                          <div
-                                            key={day.day}
-                                            className="p-2.5 bg-white/[0.01] border border-white/5 rounded-xl"
-                                          >
-                                            <span className="text-[10px] font-bold text-amber-400 block">
-                                              Day {day.day}
-                                            </span>
-                                            <ul className="list-disc list-inside text-[10px] text-white/75 mt-1 space-y-1 leading-normal pl-1">
-                                              {day.points.map((pt, pIdx) => (
-                                                <li key={pIdx}>{pt}</li>
-                                              ))}
-                                            </ul>
-                                          </div>
-                                        ))}
-                                      </div>
-                                    </div>
-                                  )}
-
-                                  {t.darshans && t.darshans.length > 0 && (
-                                    <div className="space-y-2 border-t border-white/5 pt-2">
-                                      <span className="text-[9px] text-white/40 font-bold uppercase tracking-wider block font-semibold">
-                                        Sacred Darshans
-                                      </span>
-                                      <div className="space-y-2 max-h-40 overflow-y-auto pr-1">
-                                        {t.darshans.map((d, dIdx) => (
-                                          <div
-                                            key={dIdx}
-                                            className="p-2.5 bg-white/[0.01] border border-white/5 rounded-xl"
-                                          >
-                                            <span className="text-[10px] font-bold text-white block">
-                                              {d.title}
-                                            </span>
-                                            <ul className="list-disc list-inside text-[10px] text-white/75 mt-1 space-y-1 leading-normal pl-1">
-                                              {d.items.map((item, itemIdx) => (
-                                                <li key={itemIdx}>{item}</li>
-                                              ))}
-                                            </ul>
-                                          </div>
-                                        ))}
-                                      </div>
-                                    </div>
-                                  )}
-                                </div>
-                              )}
+                              <span className="px-3 py-1 rounded-full bg-white/5 border border-white/5 text-[9px] font-black uppercase text-white/50 tracking-widest">
+                                ✓ {t.inclusions?.length || 0} Inclusions
+                              </span>
                             </div>
                           </div>
                         </div>
 
                         {/* Actions */}
-                        <div className="px-4 py-3 bg-white/[0.01] border-t border-white/5 flex items-center justify-end gap-2">
+                        <div className="px-8 py-6 bg-black/20 border-t border-white/5 flex items-center justify-end gap-3">
                           <button
                             onClick={() => openEditTeertha(t)}
-                            className="px-3.5 py-1.5 bg-gradient-cta text-white font-bold rounded-xl text-[9px] uppercase tracking-wider hover:scale-105 transition cursor-pointer"
+                            className="p-3 rounded-xl bg-white/5 hover:bg-white/10 text-white/60 hover:text-white transition-all"
                           >
-                            Edit
+                            <Edit size={16} />
                           </button>
                           <button
                             onClick={() => setDeleteConfirm({ id: t._id!, type: "teertha" })}
-                            className="px-3.5 py-1.5 border border-red-500/20 bg-red-500/5 hover:bg-red-500 hover:text-white transition text-red-400 font-bold rounded-xl text-[9px] uppercase tracking-wider cursor-pointer"
+                            className="p-3 rounded-xl bg-red-500/5 hover:bg-red-500 text-red-400 hover:text-white transition-all"
                           >
-                            Delete
+                            <Trash2 size={16} />
                           </button>
                         </div>
                       </div>
@@ -1438,31 +1234,33 @@ function AdminDashboardPage() {
 
             {/* TAB CONTENT: KNOWLEDGE VIDEOS */}
             {activeTab === "videos" && (
-              <div className="space-y-6">
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-white/10 pb-5">
+              <div className="space-y-12 animate-fade-in">
+                <div className="flex flex-col xl:flex-row xl:items-center justify-between gap-8 border-b border-white/10 pb-10">
                   <div>
-                    <h1 className="text-2xl font-display font-semibold">Knowledge Videos</h1>
-                    <p className="text-xs text-white/50 font-body">
+                    <h1 className="text-5xl font-display font-bold text-white">
+                      Knowledge <span className="text-amber-400">Vault</span>
+                    </h1>
+                    <p className="text-sm text-white/50 font-body uppercase tracking-[0.3em] mt-3 font-medium">
                       Manage videos and seeker testimonials in the Knowledge Portal
                     </p>
                   </div>
                   <button
                     onClick={openAddVideo}
-                    className="px-5 py-3 bg-gradient-cta text-white shadow-glow hover:scale-[1.03] transition rounded-2xl text-xs font-bold uppercase tracking-wider font-body flex items-center gap-2 cursor-pointer"
+                    className="px-10 py-5 bg-gradient-cta text-white shadow-glow-amber hover:scale-[1.05] active:scale-[0.95] transition-all duration-500 rounded-[2rem] text-xs font-black uppercase tracking-[0.2em] font-body flex items-center justify-center gap-3 cursor-pointer"
                   >
-                    <Plus size={14} /> Add Video
+                    <Plus size={18} /> Add New Content
                   </button>
                 </div>
 
                 {/* List grouped by category */}
                 {videos.length === 0 ? (
-                  <div className="py-20 text-center bg-white/[0.01] border border-white/5 rounded-3xl">
-                    <p className="text-white/40 text-xs font-body">
+                  <div className="py-32 text-center bg-white/[0.01] border border-white/10 rounded-[3rem]">
+                    <p className="text-white/40 text-sm font-bold uppercase tracking-widest font-body">
                       No Video records found. Seed initial data or add new.
                     </p>
                   </div>
                 ) : (
-                  <div className="space-y-8 text-left font-body">
+                  <div className="space-y-16 text-left font-body">
                     {[
                       "Kashi Knowledge Portal",
                       "Kashi Knowledge Portal • Quick Bits",
@@ -1471,20 +1269,23 @@ function AdminDashboardPage() {
                       const catVideos = videos.filter((v) => v.category === cat);
                       if (catVideos.length === 0) return null;
                       return (
-                        <div key={cat} className="space-y-4">
-                          <h3 className="text-sm font-semibold uppercase tracking-wider text-amber-400 border-b border-white/5 pb-2">
-                            {cat}
-                          </h3>
+                        <div key={cat} className="space-y-8">
+                          <div className="flex items-center gap-4">
+                            <h3 className="text-xl font-bold uppercase tracking-[0.3em] text-amber-400 whitespace-nowrap">
+                              {cat}
+                            </h3>
+                            <div className="h-px w-full bg-gradient-to-r from-amber-400/30 to-transparent" />
+                          </div>
 
-                          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
                             {catVideos.map((video) => (
                               <div
                                 key={video._id}
-                                className="bg-white/[0.02] border border-white/5 rounded-2xl overflow-hidden flex flex-col justify-between hover:border-white/10 transition duration-300 shadow-soft"
+                                className="bg-white/[0.02] border border-white/10 rounded-[2.5rem] overflow-hidden flex flex-col justify-between hover:border-amber-400/20 transition duration-700 shadow-soft group"
                               >
                                 <div>
                                   {/* Iframe embed */}
-                                  <div className="aspect-video bg-black/50">
+                                  <div className="aspect-video bg-black/50 grayscale group-hover:grayscale-0 transition-all duration-700">
                                     <iframe
                                       src={video.youtubeLink}
                                       title="Video preview"
@@ -1493,27 +1294,25 @@ function AdminDashboardPage() {
                                       allowFullScreen
                                     ></iframe>
                                   </div>
-                                  <div className="p-3 text-[10px] text-white/50 break-all truncate">
+                                  <div className="p-6 text-[10px] text-white/30 break-all truncate font-medium uppercase tracking-widest">
                                     {video.youtubeLink}
                                   </div>
                                 </div>
 
-                                <div className="p-3 bg-white/[0.01] border-t border-white/5 flex items-center justify-end gap-1.5">
+                                <div className="p-6 bg-black/20 border-t border-white/5 flex items-center justify-end gap-3">
                                   <button
                                     onClick={() => openEditVideo(video)}
-                                    className="p-1.5 bg-white/5 border border-white/5 rounded-lg hover:bg-white/10 transition cursor-pointer text-white/80 hover:text-white"
-                                    title="Edit"
+                                    className="p-3 bg-white/5 border border-white/5 rounded-xl hover:bg-white/10 transition cursor-pointer text-white/60 hover:text-white"
                                   >
-                                    <Edit size={12} />
+                                    <Edit size={16} />
                                   </button>
                                   <button
                                     onClick={() =>
                                       setDeleteConfirm({ id: video._id!, type: "video" })
                                     }
-                                    className="p-1.5 bg-red-500/10 border border-red-500/10 rounded-lg hover:bg-red-500 hover:text-white transition cursor-pointer text-red-400"
-                                    title="Delete"
+                                    className="p-3 bg-red-500/10 border border-red-500/10 rounded-xl hover:bg-red-500 hover:text-white transition cursor-pointer text-red-400"
                                   >
-                                    <Trash2 size={12} />
+                                    <Trash2 size={16} />
                                   </button>
                                 </div>
                               </div>
@@ -1529,80 +1328,81 @@ function AdminDashboardPage() {
 
             {/* TAB CONTENT: BLOGS */}
             {activeTab === "blogs" && (
-              <div className="space-y-6">
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-white/10 pb-5">
+              <div className="space-y-12 animate-fade-in">
+                <div className="flex flex-col xl:flex-row xl:items-center justify-between gap-8 border-b border-white/10 pb-10">
                   <div>
-                    <h1 className="text-2xl font-display font-semibold">CEO Blogs & Quotes</h1>
-                    <p className="text-xs text-white/50 font-body">
-                      Manage philosophical blogs and idea quotes by the CEO/Founder shown on the
-                      home page
+                    <h1 className="text-5xl font-display font-bold text-white">
+                      CEO <span className="text-amber-400">Thoughts</span>
+                    </h1>
+                    <p className="text-sm text-white/50 font-body uppercase tracking-[0.3em] mt-3 font-medium">
+                      Manage philosophical blogs and idea quotes by the CEO
                     </p>
                   </div>
                   <button
                     onClick={openAddBlog}
-                    className="px-5 py-3 bg-gradient-cta text-white shadow-glow hover:scale-[1.03] transition rounded-2xl text-xs font-bold uppercase tracking-wider font-body flex items-center gap-2 cursor-pointer"
+                    className="px-10 py-5 bg-gradient-cta text-white shadow-glow-amber hover:scale-[1.05] active:scale-[0.95] transition-all duration-500 rounded-[2rem] text-xs font-black uppercase tracking-[0.2em] font-body flex items-center justify-center gap-3 cursor-pointer"
                   >
-                    <Plus size={14} /> Add Blog Post
+                    <Plus size={18} /> Compose New Blog
                   </button>
                 </div>
 
                 {blogs.length === 0 ? (
-                  <div className="py-20 text-center bg-white/[0.01] border border-white/5 rounded-3xl">
-                    <p className="text-white/40 text-xs font-body">
-                      No Blog posts found. Click Add Blog Post or seed data.
+                  <div className="py-32 text-center bg-white/[0.01] border border-white/10 rounded-[3rem]">
+                    <p className="text-white/40 text-sm font-bold uppercase tracking-widest font-body">
+                      No Blog posts found. Click Compose New Blog or seed data.
                     </p>
                   </div>
                 ) : (
-                  <div className="space-y-6 text-left font-body">
+                  <div className="space-y-10 text-left font-body">
                     {blogs.map((b) => (
                       <div
                         key={b._id}
-                        className="bg-white/[0.02] border border-white/10 p-6 rounded-3xl flex flex-col justify-between gap-6 hover:border-white/20 transition-all duration-300"
+                        className="bg-white/[0.02] border border-white/10 p-12 rounded-[3.5rem] flex flex-col justify-between gap-10 hover:bg-white/[0.04] hover:border-amber-400/20 transition-all duration-700 shadow-soft"
                       >
-                        <div className="space-y-4">
-                          <div className="flex justify-between items-start gap-4">
-                            <div>
-                              <h3 className="text-lg font-display font-semibold text-white">
+                        <div className="space-y-8">
+                          <div className="flex flex-col md:flex-row md:justify-between md:items-start gap-6">
+                            <div className="space-y-3">
+                              <h3 className="text-4xl font-display font-bold text-white leading-tight">
                                 {b.title}
                               </h3>
-                              <div className="flex items-center gap-2 mt-1">
-                                <span className="text-[10px] text-amber-400 font-bold uppercase tracking-wider">
+                              <div className="flex items-center gap-4">
+                                <span className="text-xs text-amber-400 font-black uppercase tracking-[0.2em]">
                                   {b.authorName || "Nileema Shenoy"}
                                 </span>
-                                <span className="text-white/30 text-[10px]">•</span>
-                                <span className="text-[9px] text-white/50 uppercase font-semibold">
+                                <div className="h-1 w-1 rounded-full bg-white/20" />
+                                <span className="text-xs text-white/40 uppercase font-bold tracking-widest">
                                   {b.authorTitle || "Founder & CEO"}
                                 </span>
                               </div>
                             </div>
                             <span
-                              className={`px-2 py-0.5 rounded text-[8px] font-bold uppercase tracking-wider ${b.isPublished ? "bg-green-500/20 text-green-300 border border-green-500/30" : "bg-white/10 text-white/40"}`}
+                              className={`px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest ${b.isPublished ? "bg-emerald-500/20 text-emerald-300 border border-emerald-500/30" : "bg-white/10 text-white/40"}`}
                             >
                               {b.isPublished ? "Published" : "Draft"}
                             </span>
                           </div>
 
                           {b.quote && (
-                            <div className="pl-4 border-l-2 border-amber-500/50 py-0.5 text-xs italic text-amber-200">
+                            <div className="p-8 border-l-4 border-amber-500/50 bg-white/5 rounded-r-[2rem] text-xl italic text-amber-200 font-display">
                               “{b.quote}”
                             </div>
                           )}
 
-                          <p className="text-xs text-white/70 leading-relaxed whitespace-pre-wrap">
+                          <p className="text-lg text-white/70 leading-relaxed whitespace-pre-wrap font-medium">
                             {b.content}
                           </p>
                         </div>
 
-                        <div className="flex items-center justify-end gap-2 border-t border-white/5 pt-4">
+                        <div className="flex items-center justify-end gap-4 border-t border-white/5 pt-8">
                           <button
                             onClick={() => openEditBlog(b)}
-                            className="px-4 py-2 bg-gradient-cta text-white font-bold rounded-2xl text-[10px] uppercase tracking-wider hover:scale-105 transition cursor-pointer"
+                            className="px-8 py-3.5 bg-white/10 hover:bg-white/20 text-white font-bold rounded-2xl text-xs uppercase tracking-widest transition-all cursor-pointer border border-white/10"
                           >
-                            Edit
+                            Edit Post
                           </button>
                           <button
                             onClick={() => setDeleteConfirm({ id: b._id!, type: "blog" })}
-                            className="px-4 py-2 border border-red-500/20 bg-red-500/5 hover:bg-red-500 hover:text-white transition text-red-400 font-bold rounded-2xl text-[10px] uppercase tracking-wider cursor-pointer"
+                            className="px-8 py-3.5 border border-red-500/20 bg-red-500/5 hover:bg-red-500 hover:text-white transition-all text-red-400 font-bold rounded-2xl text-xs uppercase tracking-widest cursor-pointer"
                           >
                             Delete
                           </button>
