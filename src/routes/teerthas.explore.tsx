@@ -154,7 +154,17 @@ function ExploreTeerthasPage() {
             ].map((subTab) => (
               <button
                 key={subTab.id}
-                onClick={() => setActiveSubTab(subTab.id as any)}
+                onClick={() => {
+                  setActiveSubTab(subTab.id as any);
+                  if (subTab.id === "itinerary") {
+                    setTimeout(() => {
+                      document.getElementById("itinerary-section")?.scrollIntoView({
+                        behavior: "smooth",
+                        block: "start",
+                      });
+                    }, 100);
+                  }
+                }}
                 className={`flex-1 pb-3 text-sm font-medium tracking-wide border-b-2 transition cursor-pointer text-center ${
                   activeSubTab === subTab.id
                     ? "border-amber-600 text-foreground font-semibold"
@@ -168,7 +178,7 @@ function ExploreTeerthasPage() {
 
           {/* TAB PANELS */}
           <div className="transition-all duration-300">
-            {activeSubTab === "overview" && (
+            {(activeSubTab === "overview" || activeSubTab === "itinerary") && (
               <div className="space-y-12">
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
                   {/* Left side: Overview text & pricing */}
@@ -255,11 +265,50 @@ function ExploreTeerthasPage() {
                         </Link>
                       </div>
                     </ScrollReveal>
+
+                    {/* Day wise Itinerary (Inline) */}
+                    {activeSubTab === "itinerary" && (
+                      <div id="itinerary-section" className="mt-8 pt-8 border-t border-border space-y-6 animate-fade-in scroll-mt-20">
+                        <div className="text-left">
+                          <h4 className="text-lg font-display font-semibold text-foreground">
+                            Day wise Itinerary
+                          </h4>
+                          <p className="text-xs text-muted-foreground mt-1 italic">
+                            Schedule subject to shift in timings based on local conditions
+                          </p>
+                        </div>
+
+                        <div className="relative border-l border-border ml-4 pl-6 space-y-8 py-2">
+                          {activeTeertha.itinerary.map((dayItem: any, idx: number) => (
+                            <ScrollReveal key={idx} variant="fade-up">
+                              <div className="relative group">
+                                <span className="absolute -left-[35px] top-1.5 w-5 h-5 rounded-full bg-background border-2 border-amber-600 flex items-center justify-center text-[9px] font-bold text-amber-600 group-hover:bg-amber-600 group-hover:text-white transition duration-300">
+                                  {dayItem.day}
+                                </span>
+                                <div className="p-5 rounded-2xl bg-white border border-black/[0.06] shadow-soft hover:shadow-glow hover:border-amber-600/20 transition duration-300">
+                                  <span className="text-[9px] font-bold uppercase tracking-wider text-amber-600 bg-amber-500/10 px-2.5 py-0.5 rounded-full border border-amber-500/25 font-body">
+                                    Day {dayItem.day}
+                                  </span>
+                                  <ul className="mt-3 space-y-2.5 text-xs text-muted-foreground list-none font-body">
+                                    {dayItem.points.map((pointText: string, pIdx: number) => (
+                                      <li key={pIdx} className="flex gap-2 items-start leading-relaxed">
+                                        <span className="text-amber-600 text-sm leading-none select-none mt-0.5">•</span>
+                                        <span>{pointText}</span>
+                                      </li>
+                                    ))}
+                                  </ul>
+                                </div>
+                              </div>
+                            </ScrollReveal>
+                          ))}
+                        </div>
+                      </div>
+                    )}
                   </div>
 
                   {/* Right side: Inclusions List */}
-                  <ScrollReveal variant="fade-left" delay={200} className="lg:col-span-5 h-full">
-                    <div className="p-8 rounded-3xl bg-white border border-black/[0.06] text-foreground space-y-6 shadow-glow relative overflow-hidden text-left hover:border-amber-600/30 transition-all duration-300 h-full">
+                  <ScrollReveal variant="fade-left" delay={200} className="lg:col-span-5">
+                    <div className="p-8 rounded-3xl bg-white border border-black/[0.06] text-foreground space-y-6 shadow-glow relative overflow-hidden text-left hover:border-amber-600/30 transition-all duration-300">
                       <div className="absolute top-0 right-0 w-32 h-32 bg-amber-500/5 rounded-full blur-2xl pointer-events-none" />
                       <h3 className="text-xl font-display font-semibold border-b border-border pb-3 flex items-center gap-2 text-foreground">
                         <span>✨</span> All Inclusions
@@ -348,60 +397,6 @@ function ExploreTeerthasPage() {
               </div>
             )}
 
-            {activeSubTab === "itinerary" && (
-              <div className="max-w-4xl mx-auto text-left">
-                <div className="text-center mb-10">
-                  <h3 className="text-3xl font-display font-semibold text-foreground">
-                    Day wise Itinerary
-                  </h3>
-                  <p className="text-xs md:text-sm text-muted-foreground mt-2 italic">
-                    Schedule subject to shift in timings based on local conditions
-                  </p>
-                </div>
-
-                {/* Timeline */}
-                <div className="relative border-l border-border ml-4 md:ml-8 pl-8 md:pl-10 space-y-8 py-4">
-                  {activeTeertha.itinerary.map((dayItem: any, idx: number) => (
-                    <ScrollReveal key={idx} variant="fade-up">
-                      <div className="relative group">
-                        {/* Timeline dot */}
-                        <span className="absolute -left-[45px] md:-left-[53px] top-2.5 w-6 h-6 rounded-full bg-background border-2 border-amber-600 flex items-center justify-center text-[10px] font-bold text-amber-600 group-hover:bg-amber-600 group-hover:text-white transition duration-300">
-                          {dayItem.day}
-                        </span>
-
-                        {/* Content Card */}
-                        <div className="p-6 md:p-8 rounded-3xl bg-white border border-black/[0.06] shadow-soft hover:shadow-glow hover:border-amber-600/20 transition duration-300">
-                          <span className="text-[10px] font-bold uppercase tracking-wider text-amber-600 bg-amber-500/10 px-3 py-1 rounded-full border border-amber-500/25">
-                            Day {dayItem.day}
-                          </span>
-
-                          <ul className="mt-4 space-y-3.5 text-xs md:text-sm text-muted-foreground list-none font-body">
-                            {dayItem.points.map((pointText: string, pIdx: number) => (
-                              <li key={pIdx} className="flex gap-3 items-start leading-relaxed">
-                                <span className="text-amber-600 text-base leading-none select-none mt-0.5">
-                                  •
-                                </span>
-                                <span>{pointText}</span>
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-                      </div>
-                    </ScrollReveal>
-                  ))}
-                </div>
-
-                {/* Book callout */}
-                <div className="mt-12 text-center">
-                  <Link
-                    to="/enquire"
-                    className="px-8 py-3 bg-gradient-cta text-accent-foreground font-semibold rounded-full text-sm shadow-soft hover:scale-[1.03] transition inline-flex items-center gap-2 cursor-pointer"
-                  >
-                    Book This Package ➔
-                  </Link>
-                </div>
-              </div>
-            )}
 
             {activeSubTab === "prep" && (
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto text-left">

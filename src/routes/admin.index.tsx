@@ -633,10 +633,10 @@ function AdminDashboardPage() {
                         setActiveTab(item.id as any);
                         setSearchTerm("");
                       }}
-                      className={`w-full px-4 py-3.5 rounded-2xl text-xs font-bold uppercase tracking-wider flex items-center gap-3 transition-all duration-300 cursor-pointer ${
+                      className={`w-full px-5 py-3.5 rounded-full text-xs font-bold uppercase tracking-wider flex items-center gap-3 transition-all duration-300 border-2 cursor-pointer ${
                         activeTab === item.id
-                          ? "bg-amber-400 text-[#0d040f] shadow-glow-amber scale-[1.02]"
-                          : "text-white/50 hover:text-white hover:bg-white/5"
+                          ? "bg-gradient-to-r from-[#FF7A00] to-[#A82A9C] text-white border-[#0090FF] shadow-lg shadow-[#FF7A00]/20 scale-[1.02]"
+                          : "text-white/50 hover:text-white hover:bg-white/5 border-transparent"
                       }`}
                     >
                       <Icon size={16} />
@@ -649,7 +649,7 @@ function AdminDashboardPage() {
               <div className="border-t border-white/5 pt-6">
                 <button
                   onClick={handleLogout}
-                  className="w-full px-4 py-3 bg-red-500/10 border border-red-500/20 hover:bg-red-500 hover:text-white transition-all rounded-2xl text-[10px] font-bold uppercase tracking-widest font-body flex items-center justify-center gap-2 cursor-pointer text-red-400"
+                  className="w-full px-4 py-3 bg-red-500/10 border border-red-500/20 hover:bg-red-500 hover:text-white transition-all rounded-full text-[10px] font-bold uppercase tracking-widest font-body flex items-center justify-center gap-2 cursor-pointer text-red-400"
                 >
                   <LogOut size={14} />
                   Logout
@@ -686,7 +686,7 @@ function AdminDashboardPage() {
                   <button
                     onClick={handleMigrateData}
                     disabled={migrating}
-                    className="px-6 py-3 bg-white/5 border border-white/10 text-amber-400 hover:bg-amber-400 hover:text-[#0d040f] transition-all rounded-2xl text-[10px] font-bold uppercase tracking-widest font-body flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
+                    className="px-6 py-3 bg-[#FF7A00]/10 border border-[#FF7A00]/30 text-white hover:bg-gradient-to-r hover:from-[#FF7A00] hover:to-[#A82A9C] hover:border-transparent transition-all rounded-full text-[10px] font-bold uppercase tracking-widest font-body flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50 shadow-md shadow-[#FF7A00]/5"
                   >
                     <Database size={14} className={migrating ? "animate-spin" : ""} />
                     {migrating ? "Syncing..." : "Sync Initial Data"}
@@ -765,7 +765,7 @@ function AdminDashboardPage() {
                     <button
                       key={i}
                       onClick={() => setActiveTab(action.tab as any)}
-                      className="bg-white/[0.02] border border-white/5 p-6 rounded-2xl hover:bg-white/[0.04] hover:border-amber-400/20 transition-all flex flex-col items-start group text-left cursor-pointer"
+                      className="bg-white/[0.02] border border-white/5 p-6 rounded-2xl hover:bg-white/[0.04] hover:border-[#FF7A00]/30 hover:shadow-lg hover:shadow-[#FF7A00]/5 transition-all flex flex-col items-start group text-left cursor-pointer"
                     >
                       <div className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition-transform">
                         {action.icon}
@@ -912,7 +912,7 @@ function AdminDashboardPage() {
                   </div>
                   <button
                     onClick={openAddYatra}
-                    className="px-6 py-3 bg-amber-400 text-[#0d040f] font-bold rounded-2xl text-[10px] uppercase tracking-widest hover:scale-105 transition cursor-pointer flex items-center gap-2"
+                    className="px-6 py-3 bg-gradient-to-r from-[#FF7A00] to-[#A82A9C] text-white font-bold rounded-full text-[10px] uppercase tracking-widest hover:scale-105 hover:shadow-lg hover:shadow-[#FF7A00]/35 transition cursor-pointer flex items-center gap-2"
                   >
                     <PlusCircle size={14} /> Create Journey
                   </button>
@@ -968,13 +968,13 @@ function AdminDashboardPage() {
                         <div className="flex items-center gap-2">
                           <button
                             onClick={() => openEditYatra(y)}
-                            className="w-8 h-8 flex items-center justify-center rounded-lg bg-white/5 hover:bg-white/10 text-white/50 hover:text-white transition cursor-pointer"
+                            className="w-8 h-8 flex items-center justify-center rounded-full bg-white/5 hover:bg-gradient-to-r hover:from-[#FF7A00] hover:to-[#A82A9C] text-white/50 hover:text-white transition-all cursor-pointer"
                           >
                             <Edit size={14} />
                           </button>
                           <button
                             onClick={() => setDeleteConfirm({ id: y._id as string, type: "yatra" })}
-                            className="w-8 h-8 flex items-center justify-center rounded-lg bg-red-500/5 hover:bg-red-500 text-red-400 hover:text-white transition cursor-pointer"
+                            className="w-8 h-8 flex items-center justify-center rounded-full bg-red-500/5 hover:bg-red-500 text-red-400 hover:text-white transition cursor-pointer"
                           >
                             <Trash2 size={14} />
                           </button>
@@ -998,7 +998,7 @@ function AdminDashboardPage() {
                   </div>
                   <button
                     onClick={openAddTeertha}
-                    className="px-6 py-3 bg-amber-400 text-[#0d040f] font-bold rounded-2xl text-[10px] uppercase tracking-widest hover:scale-105 transition cursor-pointer flex items-center gap-2"
+                    className="px-6 py-3 bg-gradient-to-r from-[#FF7A00] to-[#A82A9C] text-white font-bold rounded-full text-[10px] uppercase tracking-widest hover:scale-105 hover:shadow-lg hover:shadow-[#FF7A00]/35 transition cursor-pointer flex items-center gap-2"
                   >
                     <PlusCircle size={14} /> Add Teertha
                   </button>
@@ -1045,13 +1045,13 @@ function AdminDashboardPage() {
                       <div className="px-5 py-4 bg-black/20 flex items-center justify-end gap-2 border-t border-white/5">
                         <button
                           onClick={() => openEditTeertha(t)}
-                          className="w-8 h-8 flex items-center justify-center rounded-lg bg-white/5 hover:bg-white/10 text-white/50 hover:text-white transition cursor-pointer"
+                          className="w-8 h-8 flex items-center justify-center rounded-full bg-white/5 hover:bg-gradient-to-r hover:from-[#FF7A00] hover:to-[#A82A9C] text-white/50 hover:text-white transition-all cursor-pointer"
                         >
                           <Edit size={14} />
                         </button>
                         <button
                           onClick={() => setDeleteConfirm({ id: t._id!, type: "teertha" })}
-                          className="w-8 h-8 flex items-center justify-center rounded-lg bg-red-500/5 hover:bg-red-500 text-red-400 hover:text-white transition cursor-pointer"
+                          className="w-8 h-8 flex items-center justify-center rounded-full bg-red-500/5 hover:bg-red-500 text-red-400 hover:text-white transition cursor-pointer"
                         >
                           <Trash2 size={14} />
                         </button>
@@ -1074,7 +1074,7 @@ function AdminDashboardPage() {
                   </div>
                   <button
                     onClick={openAddVideo}
-                    className="px-6 py-3 bg-amber-400 text-[#0d040f] font-bold rounded-2xl text-[10px] uppercase tracking-widest hover:scale-105 transition cursor-pointer flex items-center gap-2"
+                    className="px-6 py-3 bg-gradient-to-r from-[#FF7A00] to-[#A82A9C] text-white font-bold rounded-full text-[10px] uppercase tracking-widest hover:scale-105 hover:shadow-lg hover:shadow-[#FF7A00]/35 transition cursor-pointer flex items-center gap-2"
                   >
                     <PlusCircle size={14} /> Add Video
                   </button>
@@ -1116,7 +1116,7 @@ function AdminDashboardPage() {
                                 <div className="flex gap-2">
                                   <button
                                     onClick={() => openEditVideo(video)}
-                                    className="p-1.5 bg-white/5 rounded-lg text-white/40 hover:text-white"
+                                    className="p-1.5 bg-white/5 rounded-full text-white/40 hover:bg-gradient-to-r hover:from-[#FF7A00] hover:to-[#A82A9C] hover:text-white transition-all"
                                   >
                                     <Edit size={12} />
                                   </button>
@@ -1124,7 +1124,7 @@ function AdminDashboardPage() {
                                     onClick={() =>
                                       setDeleteConfirm({ id: video._id!, type: "video" })
                                     }
-                                    className="p-1.5 bg-red-500/5 rounded-lg text-red-400 hover:bg-red-500 hover:text-white transition"
+                                    className="p-1.5 bg-red-500/5 rounded-full text-red-400 hover:bg-red-500 hover:text-white transition"
                                   >
                                     <Trash2 size={12} />
                                   </button>
@@ -1152,7 +1152,7 @@ function AdminDashboardPage() {
                   </div>
                   <button
                     onClick={openAddBlog}
-                    className="px-6 py-3 bg-amber-400 text-[#0d040f] font-bold rounded-2xl text-[10px] uppercase tracking-widest hover:scale-105 transition cursor-pointer flex items-center gap-2"
+                    className="px-6 py-3 bg-gradient-to-r from-[#FF7A00] to-[#A82A9C] text-white font-bold rounded-full text-[10px] uppercase tracking-widest hover:scale-105 hover:shadow-lg hover:shadow-[#FF7A00]/35 transition cursor-pointer flex items-center gap-2"
                   >
                     <PlusCircle size={14} /> New Post
                   </button>
@@ -1180,13 +1180,13 @@ function AdminDashboardPage() {
                       <div className="flex items-center justify-end gap-3 pt-4 border-t border-white/5">
                         <button
                           onClick={() => openEditBlog(b)}
-                          className="px-5 py-2 bg-white/5 rounded-xl text-[10px] font-bold uppercase tracking-widest hover:bg-white/10 transition cursor-pointer"
+                          className="px-5 py-2 bg-white/5 rounded-full text-[10px] font-bold uppercase tracking-widest hover:bg-gradient-to-r hover:from-[#FF7A00] hover:to-[#A82A9C] hover:text-white transition-all cursor-pointer"
                         >
                           Edit
                         </button>
                         <button
                           onClick={() => setDeleteConfirm({ id: b._id!, type: "blog" })}
-                          className="px-5 py-2 bg-red-500/5 text-red-400 rounded-xl text-[10px] font-bold uppercase tracking-widest hover:bg-red-500 hover:text-white transition cursor-pointer"
+                          className="px-5 py-2 bg-red-500/5 text-red-400 rounded-full text-[10px] font-bold uppercase tracking-widest hover:bg-red-500 hover:text-white transition cursor-pointer"
                         >
                           Delete
                         </button>
@@ -1354,10 +1354,10 @@ function AdminDashboardPage() {
                       onClick={() =>
                         setYatraForm({ ...yatraForm, isPublished: !yatraForm.isPublished })
                       }
-                      className={`w-14 h-7 rounded-full transition-all duration-500 relative ${yatraForm.isPublished ? "bg-amber-400" : "bg-white/10"}`}
+                      className={`w-14 h-7 rounded-full transition-all duration-500 relative ${yatraForm.isPublished ? "bg-gradient-to-r from-[#FF7A00] to-[#A82A9C]" : "bg-white/10"}`}
                     >
                       <div
-                        className={`absolute top-1 w-5 h-5 rounded-full transition-all duration-500 ${yatraForm.isPublished ? "right-1 bg-[#0d040f]" : "left-1 bg-white/40"}`}
+                        className={`absolute top-1 w-5 h-5 rounded-full transition-all duration-500 ${yatraForm.isPublished ? "right-1 bg-white" : "left-1 bg-white/40"}`}
                       />
                     </button>
                   </div>
@@ -1424,7 +1424,7 @@ function AdminDashboardPage() {
                                     ],
                                   })
                                 }
-                                className="px-4 py-2 rounded-xl bg-white/5 hover:bg-white/10 text-[9px] font-bold uppercase tracking-widest"
+                                className="px-4 py-2 rounded-full bg-white/5 hover:bg-gradient-to-r hover:from-[#FF7A00] hover:to-[#A82A9C] hover:text-white transition-all text-[9px] font-bold uppercase tracking-widest cursor-pointer"
                               >
                                 + Add Day
                               </button>
@@ -1442,13 +1442,13 @@ function AdminDashboardPage() {
                     <button
                       type="button"
                       onClick={() => setIsFormOpen(false)}
-                      className="px-8 py-4 rounded-full bg-white/5 text-white/60 font-bold uppercase tracking-widest text-[10px] hover:text-white transition cursor-pointer"
+                      className="px-8 py-4 rounded-full bg-white/5 text-white/60 font-bold uppercase tracking-widest text-[10px] hover:bg-white/10 hover:text-white transition cursor-pointer"
                     >
                       Discard
                     </button>
                     <button
                       type="submit"
-                      className="px-10 py-4 rounded-full bg-amber-400 text-[#0d040f] font-black uppercase tracking-[0.2em] text-[10px] shadow-glow-amber hover:scale-105 transition cursor-pointer"
+                      className="px-10 py-4 rounded-full bg-gradient-to-r from-[#FF7A00] to-[#A82A9C] text-white font-black uppercase tracking-[0.2em] text-[10px] shadow-lg shadow-[#FF7A00]/25 hover:scale-105 transition cursor-pointer"
                     >
                       Save Itinerary
                     </button>
@@ -1647,13 +1647,13 @@ function AdminDashboardPage() {
                     <button
                       type="button"
                       onClick={() => setIsFormOpen(false)}
-                      className="px-8 py-4 rounded-full bg-white/5 text-white/60 font-bold uppercase tracking-widest text-[10px] hover:text-white transition cursor-pointer"
+                      className="px-8 py-4 rounded-full bg-white/5 text-white/60 font-bold uppercase tracking-widest text-[10px] hover:bg-white/10 hover:text-white transition cursor-pointer"
                     >
                       Discard
                     </button>
                     <button
                       type="submit"
-                      className="px-10 py-4 rounded-full bg-amber-400 text-[#0d040f] font-black uppercase tracking-[0.2em] text-[10px] shadow-glow-amber hover:scale-105 transition cursor-pointer"
+                      className="px-10 py-4 rounded-full bg-gradient-to-r from-[#FF7A00] to-[#A82A9C] text-white font-black uppercase tracking-[0.2em] text-[10px] shadow-lg shadow-[#FF7A00]/25 hover:scale-105 transition cursor-pointer"
                     >
                       Save Teertha
                     </button>
@@ -1697,13 +1697,13 @@ function AdminDashboardPage() {
                     <button
                       type="button"
                       onClick={() => setIsFormOpen(false)}
-                      className="px-8 py-3 rounded-full bg-white/5 text-white/60 font-bold uppercase tracking-widest text-[10px] hover:text-white cursor-pointer"
+                      className="px-8 py-3 rounded-full bg-white/5 text-white/60 font-bold uppercase tracking-widest text-[10px] hover:bg-white/10 hover:text-white transition cursor-pointer"
                     >
                       Cancel
                     </button>
                     <button
                       type="submit"
-                      className="px-10 py-3 rounded-full bg-amber-400 text-[#0d040f] font-black uppercase tracking-widest text-[10px] cursor-pointer"
+                      className="px-10 py-3 rounded-full bg-gradient-to-r from-[#FF7A00] to-[#A82A9C] text-white font-black uppercase tracking-widest text-[10px] shadow-lg shadow-[#FF7A00]/20 hover:scale-105 transition cursor-pointer"
                     >
                       Upload Video
                     </button>
@@ -1744,13 +1744,13 @@ function AdminDashboardPage() {
                     <button
                       type="button"
                       onClick={() => setIsFormOpen(false)}
-                      className="px-8 py-3 rounded-full bg-white/5 text-white/60 font-bold uppercase tracking-widest text-[10px] hover:text-white cursor-pointer"
+                      className="px-8 py-3 rounded-full bg-white/5 text-white/60 font-bold uppercase tracking-widest text-[10px] hover:bg-white/10 hover:text-white transition cursor-pointer"
                     >
                       Cancel
                     </button>
                     <button
                       type="submit"
-                      className="px-10 py-3 rounded-full bg-amber-400 text-[#0d040f] font-black uppercase tracking-widest text-[10px] cursor-pointer"
+                      className="px-10 py-3 rounded-full bg-gradient-to-r from-[#FF7A00] to-[#A82A9C] text-white font-black uppercase tracking-widest text-[10px] shadow-lg shadow-[#FF7A00]/20 hover:scale-105 transition cursor-pointer"
                     >
                       Publish Blog
                     </button>
