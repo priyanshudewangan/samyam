@@ -6,23 +6,20 @@ export function FloatingContact() {
       icon: <Instagram size={24} />,
       href: "https://www.instagram.com/samyamspirituals/",
       label: "Instagram",
-      color:
-        "hover:text-white hover:bg-gradient-to-tr hover:from-[#f09433] hover:via-[#dc2743] hover:to-[#bc1888]",
-      shadow: "hover:shadow-[0_0_15px_rgba(220,39,67,0.5)]",
+      className:
+        "text-white bg-gradient-to-tr from-[#f09433] via-[#dc2743] to-[#bc1888] shadow-[0_0_15px_rgba(220,39,67,0.5)]",
     },
     {
       icon: <MessageCircle size={24} />,
       href: "https://wa.me/919035225375",
       label: "WhatsApp",
-      color: "hover:text-white hover:bg-[#25D366]",
-      shadow: "hover:shadow-[0_0_15px_rgba(37,211,102,0.5)]",
+      className: "text-white bg-[#25D366] shadow-[0_0_15px_rgba(37,211,102,0.5)]",
     },
     {
       icon: <Phone size={24} />,
       href: "tel:+919035225375",
       label: "Phone",
-      color: "hover:text-white hover:bg-amber-500",
-      shadow: "hover:shadow-[0_0_15px_rgba(245,158,11,0.5)]",
+      className: "text-white bg-amber-500 shadow-[0_0_15px_rgba(245,158,11,0.5)]",
     },
   ];
 
@@ -39,7 +36,7 @@ export function FloatingContact() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label={link.label}
-            className={`w-12 h-12 flex items-center justify-center rounded-2xl bg-white/5 text-white transition-all duration-500 hover:-translate-y-1 hover:scale-110 ${link.color} ${link.shadow}`}
+            className={`w-12 h-12 flex items-center justify-center rounded-2xl transition-all duration-500 hover:-translate-y-1 hover:scale-110 ${link.className}`}
           >
             {link.icon}
           </a>
