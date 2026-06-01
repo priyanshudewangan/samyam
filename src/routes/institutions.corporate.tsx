@@ -59,8 +59,8 @@ function CorporatePage() {
       >
         <div className="absolute inset-0 z-0">
           <img
-            src={studentsImg}
-            alt="Corporate Wellness"
+            src="https://samyam.co/images/corporate.jpg"
+            alt="Corporate Wellness and Spiritual Leadership"
             className="w-full h-full object-cover object-center filter brightness-[0.4]"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-[#1c081e]/30 via-[#1c081e]/60 to-[#1c081e]"></div>
