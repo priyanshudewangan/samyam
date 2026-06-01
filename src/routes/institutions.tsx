@@ -2,7 +2,8 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { Nav } from "@/components/Nav";
 import { FlowerField } from "@/components/FlowerField";
 import { Footer } from "@/components/Footer";
-import { Mail, Phone } from "lucide-react";
+import { Mail, Phone, Briefcase, GraduationCap } from "lucide-react";
+import React, { useState } from "react";
 import {
   Dialog,
   DialogContent,
@@ -17,12 +18,12 @@ import { ScrollReveal } from "@/components/ui/ScrollReveal";
 export const Route = createFileRoute("/institutions")({
   component: InstitutionsPage,
   head: () => ({
-    title: "Samyam for Institutions | Sacred Learning Journeys",
+    title: "Samyam for Institutions | Sacred Learning & Wellness",
     meta: [
       {
         name: "description",
         content:
-          "More than study tours immersions that blend civilizational wisdom with contemporary pedagogy, curated especially for students, faculty, and parent communities.",
+          "More than study tours—immersions that blend civilizational wisdom with contemporary pedagogy, curated for students, faculty, and corporate leadership.",
       },
     ],
   }),
@@ -32,12 +33,12 @@ const whyChooseSchools = [
   {
     icon: "🎓",
     title: "Curriculum Aligned",
-    desc: "Programs co created with school faculty to match age, boards, and learning objectives.",
+    desc: "Programs co-created with school faculty to match age, boards, and learning objectives.",
   },
   {
     icon: "🕉️",
     title: "Spiritual Authenticity",
-    desc: "Scholarled rituals, mantra sessions, and cultural immersions that honour the shastra.",
+    desc: "Scholar-led rituals, mantra sessions, and cultural immersions that honour the shastra.",
   },
   {
     icon: "🌱",
@@ -51,9 +52,32 @@ const whyChooseSchools = [
   },
 ];
 
+const corporatePrograms = [
+  {
+    icon: "🏛️",
+    title: "Leadership Retreats",
+    desc: "Curated journeys for executives to reflect and lead with consciousness and stability.",
+  },
+  {
+    icon: "🤝",
+    title: "Team Pilgrimages",
+    desc: "Building team synergy through shared spiritual experiences and cultural discovery.",
+  },
+  {
+    icon: "🧘",
+    title: "Mindfulness Workshops",
+    desc: "Vedic principles for professional growth, stress reduction, and conscious work culture.",
+  },
+  {
+    icon: "📜",
+    title: "Swadhyay for Business",
+    desc: "Ancient wisdom applied to modern decision-making and sustainable leadership.",
+  },
+];
+
 const threeStreamFramework = [
   {
-    title: "Pre Yatra Classroom",
+    title: "Pre-Yatra Classroom",
     points: [
       "Orientation assemblies",
       "Storytelling & quizzes",
@@ -62,7 +86,7 @@ const threeStreamFramework = [
     ],
   },
   {
-    title: "On ground Immersion",
+    title: "On-ground Immersion",
     points: [
       "Guided darshans & seva",
       "Workshops with artisans",
@@ -71,7 +95,7 @@ const threeStreamFramework = [
     ],
   },
   {
-    title: "Post Yatra Integration",
+    title: "Post-Yatra Integration",
     points: [
       "Portfolio of learnings",
       "Service projects",
@@ -88,34 +112,36 @@ const experienceArc = [
   },
   {
     phase: "Immersion",
-    detail: "Multi day experiential journey with curated modules and reflective pauses.",
+    detail: "Multi-day experiential journey with curated modules and reflective pauses.",
   },
   {
     phase: "Integration",
-    detail: "Digital keepsakes, gratitude circles, and follow up sessions with mentors.",
+    detail: "Digital keepsakes, gratitude circles, and follow-up sessions with mentors.",
   },
 ];
 
 const immersionLabs = [
   {
     title: "Yoga & Breathwork Labs",
-    desc: "Short, age appropriate practices to anchor energy before temple immersions.",
+    desc: "Short, age-appropriate practices to anchor energy before temple immersions.",
   },
   {
     title: "Culture Studios",
-    desc: "Hands on modules with classical artists, temple architects, and textile revivalists.",
+    desc: "Hands-on modules with classical artists, temple architects, and textile revivalists.",
   },
   {
     title: "Service Pods",
-    desc: "Seva activities that build empathy, such as gaushala care, annadanam prep, or heritage clean ups.",
+    desc: "Seva activities that build empathy, such as gaushala care, annadanam prep, or heritage clean-ups.",
   },
   {
     title: "Wisdom Circles",
-    desc: "Dialogue led sessions with scholars translating scriptures into modern life lessons.",
+    desc: "Dialogue-led sessions with scholars translating scriptures into modern life lessons.",
   },
 ];
 
 function InstitutionsPage() {
+  const [activeView, setActiveView] = useState<"schools" | "corporate">("schools");
+
   return (
     <div className="relative min-h-screen overflow-x-hidden bg-background text-foreground flex flex-col justify-between">
       <Nav />
@@ -139,20 +165,56 @@ function InstitutionsPage() {
         <div className="relative z-10 max-w-5xl mx-auto px-6 text-center pt-24 space-y-6">
           <ScrollReveal variant="fade-in" delay={100}>
             <span className="inline-block text-xs uppercase tracking-[0.5em] text-amber-400 font-bold select-none">
-              SAMYAM FOR SCHOOLS
+              SAMYAM FOR {activeView === "schools" ? "SCHOOLS" : "CORPORATES"}
             </span>
           </ScrollReveal>
           <ScrollReveal variant="fade-up" delay={300}>
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-display font-semibold text-white leading-tight">
-              Sacred Learning Journeys <br />
-              <span className="text-amber-400">for Modern Classrooms</span>
+              {activeView === "schools"
+                ? "Sacred Learning Journeys"
+                : "Conscious Corporate Wellness"}
+              <br />
+              <span className="text-amber-400">
+                {activeView === "schools" ? "for Modern Classrooms" : "for Inner Stability"}
+              </span>
             </h1>
           </ScrollReveal>
           <ScrollReveal variant="fade-up" delay={500}>
             <p className="text-white/95 text-base md:text-xl max-w-3xl mx-auto leading-relaxed font-body font-light">
-              More than study tours immersions that blend civilizational wisdom with contemporary
-              pedagogy, curated especially for students, faculty, and parent communities.
+              {activeView === "schools"
+                ? "More than study tours—immersions that blend civilizational wisdom with contemporary pedagogy, curated especially for students, faculty, and parent communities."
+                : "Moving from stress management to inner stability. Transform your corporate culture through mindfulness, spiritual leadership, and transformative team journeys."}
             </p>
+          </ScrollReveal>
+
+          {/* Switcher */}
+          <ScrollReveal variant="fade-up" delay={600}>
+            <div className="flex justify-center mt-10">
+              <div className="inline-flex p-1 bg-white/5 backdrop-blur-md rounded-full border border-white/10 shadow-soft">
+                <button
+                  onClick={() => setActiveView("schools")}
+                  className={`flex items-center gap-2 px-6 py-2.5 rounded-full text-xs font-bold uppercase tracking-widest transition-all duration-300 cursor-pointer ${
+                    activeView === "schools"
+                      ? "bg-gradient-cta text-white shadow-glow"
+                      : "text-white/50 hover:text-white/80"
+                  }`}
+                >
+                  <GraduationCap size={14} />
+                  Schools
+                </button>
+                <button
+                  onClick={() => setActiveView("corporate")}
+                  className={`flex items-center gap-2 px-6 py-2.5 rounded-full text-xs font-bold uppercase tracking-widest transition-all duration-300 cursor-pointer ${
+                    activeView === "corporate"
+                      ? "bg-gradient-cta text-white shadow-glow"
+                      : "text-white/50 hover:text-white/80"
+                  }`}
+                >
+                  <Briefcase size={14} />
+                  Corporate
+                </button>
+              </div>
+            </div>
           </ScrollReveal>
         </div>
       </section>
@@ -170,19 +232,21 @@ function InstitutionsPage() {
                 Our Intent
               </span>
               <h2 className="text-2xl md:text-4xl font-display font-semibold text-foreground max-w-3xl mx-auto leading-tight">
-                Not “just” sightseeing. We help students experience living Sanatan culture with awe,
-                sensitivity, and relevance.
+                {activeView === "schools"
+                  ? "Not “just” sightseeing. We help students experience living Sanatan culture with awe, sensitivity, and relevance."
+                  : "From stress management to inner stability. We help organizations foster a more balanced and conscious work culture."}
               </h2>
               <p className="text-sm md:text-base text-muted-foreground max-w-3xl mx-auto leading-relaxed font-body">
-                Every program is co designed with school leadership, aligning with academic goals
-                while initiating young minds into gratitude, seva, and inner leadership.
+                {activeView === "schools"
+                  ? "Every program is co-designed with school leadership, aligning with academic goals while initiating young minds into gratitude, seva, and inner leadership."
+                  : "Our corporate programs blend spiritual wisdom with professional excellence, providing teams the tools to lead with clarity, empathy, and sustainable intent."}
               </p>
             </div>
           </ScrollReveal>
         </div>
       </section>
 
-      {/* WHY SCHOOLS CHOOSE SAMYAM */}
+      {/* WHY CHOOSE SECTION (Dynamic based on view) */}
       <section
         data-nav-theme="dark"
         className="relative py-20 px-6 bg-[#1c081e] text-white overflow-hidden border-t border-white/5"
@@ -193,21 +257,24 @@ function InstitutionsPage() {
           <ScrollReveal variant="fade-up">
             <div className="text-center space-y-3">
               <span className="text-xs uppercase tracking-[0.5em] text-amber-400 font-semibold">
-                Why Schools Choose SAMYAM
+                Why Choose Samyam {activeView === "schools" ? "for Schools" : "for Corporate"}
               </span>
               <h2 className="text-3xl md:text-4xl font-display font-semibold">
-                Learning that transforms
+                {activeView === "schools"
+                  ? "Learning that transforms"
+                  : "Excellence through stability"}
               </h2>
               <p className="text-white/60 text-xs md:text-sm max-w-2xl mx-auto leading-relaxed font-body">
-                We combine scholar guidance, stellar logistics, and thoughtful facilitation so every
-                student completes the journey with clarity and pride.
+                {activeView === "schools"
+                  ? "We combine scholar guidance, stellar logistics, and thoughtful facilitation so every student completes the journey with clarity and pride."
+                  : "We help professionals reconnect with their inner selves to navigate the complexities of modern business with a steady mind and visionary heart."}
               </p>
             </div>
           </ScrollReveal>
 
           {/* Cards Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {whyChooseSchools.map((item, idx) => (
+            {(activeView === "schools" ? whyChooseSchools : corporatePrograms).map((item, idx) => (
               <ScrollReveal key={idx} variant="fade-up" delay={idx * 150}>
                 <div className="p-6 md:p-8 rounded-3xl bg-white/[0.03] border border-white/10 hover:bg-white/[0.06] hover:border-amber-400/30 transition-all duration-300 group text-left h-full">
                   <div className="w-12 h-12 rounded-2xl bg-white/5 flex items-center justify-center text-3xl mb-4 group-hover:scale-110 transition-transform duration-300">
@@ -226,124 +293,185 @@ function InstitutionsPage() {
         </div>
       </section>
 
-      {/* THREE STREAM FRAMEWORK */}
-      <section
-        data-nav-theme="light"
-        className="relative py-20 px-6 bg-background overflow-hidden border-t border-border"
-      >
-        <FlowerField count={8} />
-        <div className="max-w-6xl mx-auto relative z-10 space-y-12">
-          {/* Header */}
-          <ScrollReveal variant="fade-up">
-            <div className="text-center space-y-3">
-              <span className="text-xs uppercase tracking-[0.5em] text-amber-600 font-semibold">
-                Three Stream Framework
-              </span>
-              <h2 className="text-3xl md:text-4xl font-display font-semibold text-foreground">
-                How we co create each journey
-              </h2>
-            </div>
-          </ScrollReveal>
+      {/* ADDITIONAL SECTIONS (Only for Schools currently, or shared if applicable) */}
+      {activeView === "schools" ? (
+        <>
+          {/* THREE STREAM FRAMEWORK */}
+          <section
+            data-nav-theme="light"
+            className="relative py-20 px-6 bg-background overflow-hidden border-t border-border"
+          >
+            <FlowerField count={8} />
+            <div className="max-w-6xl mx-auto relative z-10 space-y-12">
+              {/* Header */}
+              <ScrollReveal variant="fade-up">
+                <div className="text-center space-y-3">
+                  <span className="text-xs uppercase tracking-[0.5em] text-amber-600 font-semibold">
+                    Three Stream Framework
+                  </span>
+                  <h2 className="text-3xl md:text-4xl font-display font-semibold text-foreground">
+                    How we co-create each journey
+                  </h2>
+                </div>
+              </ScrollReveal>
 
-          {/* Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-left">
-            {threeStreamFramework.map((stream, idx) => (
-              <ScrollReveal key={idx} variant="scale-up" delay={idx * 150}>
-                <div className="p-6 md:p-8 rounded-3xl bg-white border border-black/[0.06] shadow-soft hover:shadow-glow hover:border-amber-600/30 transition-all duration-300 h-full">
-                  <h3 className="text-lg md:text-xl font-display font-semibold text-foreground mb-4 border-b border-border pb-2">
-                    {stream.title}
-                  </h3>
-                  <ul className="space-y-3 text-xs md:text-sm text-muted-foreground list-none font-body">
-                    {stream.points.map((pt, pIdx) => (
-                      <li key={pIdx} className="flex gap-2.5 items-center">
-                        <span className="text-amber-600 font-bold">✺</span>
-                        <span>{pt}</span>
+              {/* Grid */}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-left">
+                {threeStreamFramework.map((stream, idx) => (
+                  <ScrollReveal key={idx} variant="scale-up" delay={idx * 150}>
+                    <div className="p-6 md:p-8 rounded-3xl bg-white border border-black/[0.06] shadow-soft hover:shadow-glow hover:border-amber-600/30 transition-all duration-300 h-full">
+                      <h3 className="text-lg md:text-xl font-display font-semibold text-foreground mb-4 border-b border-border pb-2">
+                        {stream.title}
+                      </h3>
+                      <ul className="space-y-3 text-xs md:text-sm text-muted-foreground list-none font-body">
+                        {stream.points.map((pt, pIdx) => (
+                          <li key={pIdx} className="flex gap-2.5 items-center">
+                            <span className="text-amber-600 font-bold">✺</span>
+                            <span>{pt}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </ScrollReveal>
+                ))}
+              </div>
+            </div>
+          </section>
+
+          {/* EXPERIENCE ARC SECTION */}
+          <section
+            data-nav-theme="dark"
+            className="relative py-20 px-6 bg-gradient-to-b from-[#823883] to-[#3D0068] text-white overflow-hidden border-t border-white/5"
+          >
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-amber-500/5 blur-[120px] pointer-events-none" />
+            <div className="max-w-6xl mx-auto relative z-10 space-y-12">
+              {/* Header */}
+              <ScrollReveal variant="fade-up">
+                <div className="text-center space-y-3">
+                  <span className="text-xs uppercase tracking-[0.55em] text-amber-400 font-semibold">
+                    Experience Arc
+                  </span>
+                  <h2 className="text-3xl md:text-4xl font-display font-semibold">
+                    A guided flow from intent to impact
+                  </h2>
+                </div>
+              </ScrollReveal>
+
+              {/* Grid */}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-left">
+                {experienceArc.map((arc, idx) => (
+                  <ScrollReveal key={idx} variant="fade-up" delay={idx * 150}>
+                    <div className="p-6 md:p-8 rounded-3xl bg-white/[0.03] border border-white/10 hover:bg-white/[0.06] hover:border-amber-400/30 transition-all duration-300 h-full">
+                      <span className="text-[10px] uppercase tracking-wider text-amber-400 font-bold block mb-2 font-body">
+                        Phase {idx + 1}
+                      </span>
+                      <h3 className="text-xl font-display font-semibold mb-3 text-white">
+                        {arc.phase}
+                      </h3>
+                      <p className="text-xs md:text-sm text-white/60 leading-relaxed font-body">
+                        {arc.detail}
+                      </p>
+                    </div>
+                  </ScrollReveal>
+                ))}
+              </div>
+            </div>
+          </section>
+
+          {/* IMMERSION LABS */}
+          <section
+            data-nav-theme="light"
+            className="relative py-20 px-6 bg-background overflow-hidden border-t border-border"
+          >
+            <FlowerField count={8} />
+            <div className="max-w-6xl mx-auto relative z-10 space-y-12">
+              {/* Header */}
+              <ScrollReveal variant="fade-up">
+                <div className="text-left space-y-2">
+                  <span className="text-xs uppercase tracking-[0.5em] text-amber-600 font-semibold">
+                    Immersion Labs
+                  </span>
+                  <h2 className="text-3xl md:text-4xl font-display font-semibold text-foreground">
+                    Where learning becomes visceral
+                  </h2>
+                </div>
+              </ScrollReveal>
+
+              {/* Grid */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-left">
+                {immersionLabs.map((lab, idx) => (
+                  <ScrollReveal key={idx} variant="fade-up" delay={idx * 150}>
+                    <div className="p-6 md:p-8 rounded-3xl bg-white border border-black/[0.06] shadow-soft hover:shadow-glow hover:border-amber-600/30 transition-all duration-300 h-full">
+                      <h3 className="text-lg md:text-xl font-display font-semibold text-foreground mb-3">
+                        {lab.title}
+                      </h3>
+                      <p className="text-xs md:text-sm text-muted-foreground leading-relaxed font-body">
+                        {lab.desc}
+                      </p>
+                    </div>
+                  </ScrollReveal>
+                ))}
+              </div>
+            </div>
+          </section>
+        </>
+      ) : (
+        /* CORPORATE SPECIFIC SECTIONS */
+        <section
+          data-nav-theme="light"
+          className="relative py-20 px-6 bg-background overflow-hidden border-t border-border"
+        >
+          <FlowerField count={8} />
+          <div className="max-w-6xl mx-auto relative z-10 space-y-16">
+            <div className="grid lg:grid-cols-2 gap-16 items-center">
+              <ScrollReveal variant="fade-right">
+                <div className="space-y-6">
+                  <h2 className="text-4xl md:text-5xl font-display font-semibold text-foreground leading-tight">
+                    Fostering Conscious <br />
+                    <span className="text-amber-600">Work Culture</span>
+                  </h2>
+                  <p className="text-lg text-muted-foreground leading-relaxed font-body">
+                    We move beyond the temporary fixes of traditional corporate retreats. Samyam
+                    spiritual journeys for organizations are designed to create lasting impact on
+                    employee well-being, team cohesion, and leadership integrity.
+                  </p>
+                  <ul className="space-y-4">
+                    {[
+                      "Stress reduction through ancient mindfulness",
+                      "Increased productivity and visionary thinking",
+                      "Enhanced team empathy and communication",
+                      "Building a purpose-driven work environment",
+                    ].map((item, i) => (
+                      <li
+                        key={i}
+                        className="flex items-center gap-3 text-muted-foreground font-body"
+                      >
+                        <div className="w-1.5 h-1.5 rounded-full bg-amber-500" />
+                        {item}
                       </li>
                     ))}
                   </ul>
                 </div>
               </ScrollReveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* EXPERIENCE ARC SECTION */}
-      <section
-        data-nav-theme="dark"
-        className="relative py-20 px-6 bg-gradient-to-b from-[#823883] to-[#3D0068] text-white overflow-hidden border-t border-white/5"
-      >
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-amber-500/5 blur-[120px] pointer-events-none" />
-        <div className="max-w-6xl mx-auto relative z-10 space-y-12">
-          {/* Header */}
-          <ScrollReveal variant="fade-up">
-            <div className="text-center space-y-3">
-              <span className="text-xs uppercase tracking-[0.55em] text-amber-400 font-semibold">
-                Experience Arc
-              </span>
-              <h2 className="text-3xl md:text-4xl font-display font-semibold">
-                A guided flow from intent to impact
-              </h2>
-            </div>
-          </ScrollReveal>
-
-          {/* Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-left">
-            {experienceArc.map((arc, idx) => (
-              <ScrollReveal key={idx} variant="fade-up" delay={idx * 150}>
-                <div className="p-6 md:p-8 rounded-3xl bg-white/[0.03] border border-white/10 hover:bg-white/[0.06] hover:border-amber-400/30 transition-all duration-300 h-full">
-                  <span className="text-[10px] uppercase tracking-wider text-amber-400 font-bold block mb-2 font-body">
-                    Phase {idx + 1}
-                  </span>
-                  <h3 className="text-xl font-display font-semibold mb-3 text-white">
-                    {arc.phase}
-                  </h3>
-                  <p className="text-xs md:text-sm text-white/60 leading-relaxed font-body">
-                    {arc.detail}
-                  </p>
+              <ScrollReveal variant="fade-left" delay={200}>
+                <div className="relative aspect-square rounded-[3rem] overflow-hidden shadow-glow border border-border">
+                  <img
+                    src="https://samyam.co/images/why%20choose%20samyam.jpg"
+                    alt="Team Building"
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                  <div className="absolute bottom-10 left-10 text-white">
+                    <p className="text-2xl font-display font-medium">
+                      "Innovation starts with a steady mind."
+                    </p>
+                  </div>
                 </div>
               </ScrollReveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* IMMERSION LABS */}
-      <section
-        data-nav-theme="light"
-        className="relative py-20 px-6 bg-background overflow-hidden border-t border-border"
-      >
-        <FlowerField count={8} />
-        <div className="max-w-6xl mx-auto relative z-10 space-y-12">
-          {/* Header */}
-          <ScrollReveal variant="fade-up">
-            <div className="text-left space-y-2">
-              <span className="text-xs uppercase tracking-[0.5em] text-amber-600 font-semibold">
-                Immersion Labs
-              </span>
-              <h2 className="text-3xl md:text-4xl font-display font-semibold text-foreground">
-                Where learning becomes visceral
-              </h2>
             </div>
-          </ScrollReveal>
-
-          {/* Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-left">
-            {immersionLabs.map((lab, idx) => (
-              <ScrollReveal key={idx} variant="fade-up" delay={idx * 150}>
-                <div className="p-6 md:p-8 rounded-3xl bg-white border border-black/[0.06] shadow-soft hover:shadow-glow hover:border-amber-600/30 transition-all duration-300 h-full">
-                  <h3 className="text-lg md:text-xl font-display font-semibold text-foreground mb-3">
-                    {lab.title}
-                  </h3>
-                  <p className="text-xs md:text-sm text-muted-foreground leading-relaxed font-body">
-                    {lab.desc}
-                  </p>
-                </div>
-              </ScrollReveal>
-            ))}
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       {/* FINAL CTA SECTION */}
       <section
@@ -353,13 +481,16 @@ function InstitutionsPage() {
         <div className="max-w-5xl mx-auto text-center space-y-8 relative z-10">
           <ScrollReveal variant="fade-up">
             <h2 className="text-3xl md:text-5xl font-display font-semibold text-white leading-tight max-w-3xl mx-auto">
-              Let’s co create your school’s next transformative journey
+              {activeView === "schools"
+                ? "Let’s co-create your school’s next transformative journey"
+                : "Transform your organization’s approach to well-being"}
             </h2>
           </ScrollReveal>
           <ScrollReveal variant="fade-up" delay={150}>
             <p className="text-base md:text-lg text-white/60 max-w-2xl mx-auto leading-relaxed font-body">
-              Share your preferred destination, batch size, timeline, and learning objectives. Our
-              academic strategists will design an immersive program deck within 3 working days.
+              {activeView === "schools"
+                ? "Share your preferred destination, batch size, timeline, and learning objectives. Our academic strategists will design an immersive program deck within 3 working days."
+                : "Partner with us to design a bespoke wellness program or leadership retreat tailored to your organization’s unique challenges and goals."}
             </p>
           </ScrollReveal>
 
@@ -368,7 +499,9 @@ function InstitutionsPage() {
               <Dialog>
                 <DialogTrigger asChild>
                   <button className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-gradient-cta text-white font-semibold rounded-full text-base shadow-soft hover:scale-[1.02] transition cursor-pointer border-none">
-                    <span>Speak with our Schools Team</span>
+                    <span>
+                      Speak with our {activeView === "schools" ? "Schools" : "Corporate"} Team
+                    </span>
                     <span>→</span>
                   </button>
                 </DialogTrigger>
@@ -380,10 +513,11 @@ function InstitutionsPage() {
                     <div className="p-8 space-y-8">
                       <DialogHeader>
                         <DialogTitle className="text-3xl md:text-4xl font-display font-semibold text-white text-center">
-                          Contact our Schools Team
+                          Contact our {activeView === "schools" ? "Schools" : "Corporate"} Team
                         </DialogTitle>
                         <DialogDescription className="text-center text-white/60 pt-2 font-body">
-                          We're here to help you design the perfect journey for your students.
+                          We're here to help you design the perfect journey for your{" "}
+                          {activeView === "schools" ? "students" : "organization"}.
                         </DialogDescription>
                       </DialogHeader>
 
