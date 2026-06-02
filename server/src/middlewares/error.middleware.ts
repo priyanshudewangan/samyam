@@ -28,8 +28,10 @@ export const genericErrorHandler = (
 ) => {
   logger.error("Generic Error caught:", err);
 
+  const isProduction = process.env.NODE_ENV === "production";
+
   res.status(500).json({
     success: false,
-    message: err.message || "Internal Server Error",
+    message: isProduction ? "Internal Server Error" : err.message || "Internal Server Error",
   });
 };

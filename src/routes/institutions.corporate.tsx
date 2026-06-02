@@ -9,8 +9,8 @@ import {
   DialogTrigger,
   DialogDescription,
 } from "@/components/ui/dialog";
-import studentsImg from "@/assets/students.png";
-import corporatePackagesImg from "@/assets/corporate_packages.png";
+const studentsImg = "/images/students.png";
+const corporatePackagesImg = "/images/corporate_packages.png";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
 
 export const Route = createFileRoute("/institutions/corporate")({

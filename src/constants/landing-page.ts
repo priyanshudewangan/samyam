@@ -1,6 +1,6 @@
-import kashi from "@/assets/kashi.jpg";
-import vrindavan from "@/assets/vrindavan.jpg";
-import himachal from "@/assets/himachal.jpg";
+const kashi = "/images/kashi.jpg";
+const vrindavan = "/images/vrindavan.jpg";
+const himachal = "/images/himachal.jpg";
 
 export const yatras = [
   {

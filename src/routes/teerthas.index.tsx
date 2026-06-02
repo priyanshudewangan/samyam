@@ -3,7 +3,7 @@ import { Nav } from "@/components/Nav";
 import { FlowerField } from "@/components/FlowerField";
 import { Footer } from "@/components/Footer";
 import { useState } from "react";
-import teerthas1 from "@/assets/teerthas1.jpg";
+const teerthas1 = "/images/teerthas1.jpg";
 import { Mail, Phone, MapPin, Sparkles } from "lucide-react";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
 import { formatNormalDash } from "@/lib/utils";

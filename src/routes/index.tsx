@@ -10,14 +10,14 @@ import { API_ENDPOINTS } from "@/lib/api-config";
 import { formatNormalDash } from "@/lib/utils";
 
 // Asset imports
-import spiritualJoy from "@/assets/spiritual_joy_new.jpg";
-import founderImg from "@/assets/founder.jpg";
-import aartiImg from "@/assets/aarti.jpg";
-import kashiImg from "@/assets/kashi.jpg";
-import vrindavanImg from "@/assets/vrindavan.jpg";
-import himachalImg from "@/assets/himachal.jpg";
-import yatra1Img from "@/assets/Yatra-1.jpg";
-import studentsImg from "@/assets/students.png";
+const spiritualJoy = "/images/spiritual_joy_new.jpg";
+const founderImg = "/images/founder.jpg";
+const aartiImg = "/images/aarti.jpg";
+const kashiImg = "/images/kashi.jpg";
+const vrindavanImg = "/images/vrindavan.jpg";
+const himachalImg = "/images/himachal.jpg";
+const yatra1Img = "/images/Yatra-1.jpg";
+const studentsImg = "/images/students.png";
 
 export const Route = createFileRoute("/")({
   component: Index,

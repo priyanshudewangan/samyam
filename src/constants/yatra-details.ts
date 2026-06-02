@@ -1,6 +1,6 @@
-import ayodhyaKashiImg from "@/assets/ayodhya_kashi.png";
-import rishikeshBadrinathImg from "@/assets/rishikesh_badrinath.png";
-import shaktiPeethasImg from "@/assets/shakti_peethas.png";
+const ayodhyaKashiImg = "/images/ayodhya_kashi.png";
+const rishikeshBadrinathImg = "/images/rishikesh_badrinath.png";
+const shaktiPeethasImg = "/images/shakti_peethas.png";
 
 export interface ItineraryItem {
   day: number;

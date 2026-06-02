@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import logo from "@/assets/logo.png";
+const logo = "/images/logo.png";
 import { useEffect, useState } from "react";
 import {
   Instagram,

@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { Nav } from "@/components/Nav";
 import { FlowerField } from "@/components/FlowerField";
 import { Footer } from "@/components/Footer";
-import yatra1 from "@/assets/Yatra-1.jpg";
+const yatra1 = "/images/Yatra-1.jpg";
 import { detailedYatras } from "@/constants/yatras";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
 import { API_ENDPOINTS } from "@/lib/api-config";

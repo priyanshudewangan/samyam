@@ -3,10 +3,10 @@ import { useState } from "react";
 import { Nav } from "@/components/Nav";
 import { FlowerField } from "@/components/FlowerField";
 import { Footer } from "@/components/Footer";
-import meth1 from "@/assets/methodology-1.jpeg";
-import meth2 from "@/assets/methodology-2.jpeg";
-import meth3 from "@/assets/methodology-3.jpg";
-import meth4 from "@/assets/methodology-4.jpg";
+const meth1 = "/images/methodology-1.jpeg";
+const meth2 = "/images/methodology-2.jpeg";
+const meth3 = "/images/methodology-3.jpg";
+const meth4 = "/images/methodology-4.jpg";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
 
 export const Route = createFileRoute("/methodology")({

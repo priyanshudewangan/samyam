@@ -1,4 +1,4 @@
-import flower from "@/assets/flower.png";
+const flower = "/images/flower.png";
 
 export function FlowerField({ count = 18 }: { count?: number }) {
   return (

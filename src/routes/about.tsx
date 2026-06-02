@@ -1,11 +1,11 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Nav } from "@/components/Nav";
 import { FlowerField } from "@/components/FlowerField";
-import spiritualJoy from "@/assets/spiritual_joy_new.jpg";
-import aarti from "@/assets/aarti.jpg";
-import founder from "@/assets/founder.jpg";
-import bgAbout from "@/assets/bg-about.png";
-import logo from "@/assets/logo.png";
+const spiritualJoy = "/images/spiritual_joy_new.jpg";
+const aarti = "/images/aarti.jpg";
+const founder = "/images/founder.jpg";
+const bgAbout = "/images/bg-about.png";
+const logo = "/images/logo.png";
 import { Footer } from "@/components/Footer";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
 

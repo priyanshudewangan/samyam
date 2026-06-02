@@ -9,7 +9,7 @@ import {
   DialogTrigger,
   DialogDescription,
 } from "@/components/ui/dialog";
-import studentsImg from "@/assets/students.png";
+const studentsImg = "/images/students.png";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
 
 export const Route = createFileRoute("/institutions/school")({
@@ -20,7 +20,7 @@ export const Route = createFileRoute("/institutions/school")({
       {
         name: "description",
         content:
-          "More than study tours—immersions that blend civilizational wisdom with contemporary pedagogy, curated especially for students, faculty, and parent communities.",
+          "More than study tours immersions that blend civilizational wisdom with contemporary pedagogy, curated especially for students, faculty, and parent communities.",
       },
     ],
   }),
@@ -51,7 +51,7 @@ const whyChooseSchools = [
 
 const threeStreamFramework = [
   {
-    title: "Pre-Yatra Classroom",
+    title: "Pre Yatra Classroom",
     points: [
       "Orientation assemblies",
       "Storytelling & quizzes",
@@ -60,7 +60,7 @@ const threeStreamFramework = [
     ],
   },
   {
-    title: "On-ground Immersion",
+    title: "On ground Immersion",
     points: [
       "Guided darshans & seva",
       "Workshops with artisans",
@@ -69,7 +69,7 @@ const threeStreamFramework = [
     ],
   },
   {
-    title: "Post-Yatra Integration",
+    title: "Post Yatra Integration",
     points: [
       "Portfolio of learnings",
       "Service projects",
@@ -86,30 +86,30 @@ const experienceArc = [
   },
   {
     phase: "Immersion",
-    detail: "Multi-day experiential journey with curated modules and reflective pauses.",
+    detail: "Multiday experiential journey with curated modules and reflective pauses.",
   },
   {
     phase: "Integration",
-    detail: "Digital keepsakes, gratitude circles, and follow-up sessions with mentors.",
+    detail: "Digital keepsakes, gratitude circles, and followup sessions with mentors.",
   },
 ];
 
 const immersionLabs = [
   {
     title: "Yoga & Breathwork Labs",
-    desc: "Short, age-appropriate practices to anchor energy before temple immersions.",
+    desc: "Short, age appropriate practices to anchor energy before temple immersions.",
   },
   {
     title: "Culture Studios",
-    desc: "Hands-on modules with classical artists, temple architects, and textile revivalists.",
+    desc: "Hands on modules with classical artists, temple architects, and textile revivalists.",
   },
   {
     title: "Service Pods",
-    desc: "Seva activities that build empathy, such as gaushala care, annadanam prep, or heritage clean-ups.",
+    desc: "Seva activities that build empathy, such as gaushala care, annadanam prep, or heritage clean ups.",
   },
   {
     title: "Wisdom Circles",
-    desc: "Dialogue-led sessions with scholars translating scriptures into modern life lessons.",
+    desc: "Dialogueled sessions with scholars translating scriptures into modern life lessons.",
   },
 ];
 
@@ -144,7 +144,7 @@ function SchoolPage() {
           </ScrollReveal>
           <ScrollReveal variant="fade-up" delay={500}>
             <p className="text-white/95 text-base md:text-xl max-w-3xl mx-auto leading-relaxed font-body font-light">
-              More than study tours—immersions that blend civilizational wisdom with contemporary
+              More than study tours immersions that blend civilizational wisdom with contemporary
               pedagogy, curated especially for students, faculty, and parent communities.
             </p>
           </ScrollReveal>
@@ -168,7 +168,7 @@ function SchoolPage() {
                 sensitivity, and relevance.
               </h2>
               <p className="text-sm md:text-base text-muted-foreground max-w-3xl mx-auto leading-relaxed font-body">
-                Every program is co-designed with school leadership, aligning with academic goals
+                Every program is co designed with school leadership, aligning with academic goals
                 while initiating young minds into gratitude, seva, and inner leadership.
               </p>
             </div>
@@ -231,7 +231,7 @@ function SchoolPage() {
                 Three Stream Framework
               </span>
               <h2 className="text-3xl md:text-4xl font-display font-semibold text-foreground">
-                How we co-create each journey
+                How we co create each journey
               </h2>
             </div>
           </ScrollReveal>
@@ -339,7 +339,7 @@ function SchoolPage() {
         <div className="max-w-5xl mx-auto text-center space-y-8 relative z-10">
           <ScrollReveal variant="fade-up">
             <h2 className="text-3xl md:text-5xl font-display font-semibold text-white leading-tight max-w-3xl mx-auto">
-              Let’s co-create your school’s next transformative journey
+              Let’s co create your school’s next transformative journey
             </h2>
           </ScrollReveal>
           <ScrollReveal variant="fade-up" delay={150}>

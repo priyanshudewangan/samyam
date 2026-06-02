@@ -1,5 +1,6 @@
 import express from "express";
 import cors from "cors";
+import helmet from "helmet";
 import cookieParser from "cookie-parser";
 import { serverConfig } from "./config";
 import logger from "./config/logger.config";
@@ -13,6 +14,12 @@ import { attachCorrelationIdMiddleware } from "./middlewares/correlation.middlew
 ========================= */
 
 const app = express();
+
+/* =========================
+   SECURITY MIDDLEWARES
+========================= */
+
+app.use(helmet());
 
 /* =========================
    DATABASE CONNECTION

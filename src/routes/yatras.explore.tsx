@@ -252,45 +252,6 @@ function ExploreYatrasPage() {
                         </Link>
                       </div>
                     </ScrollReveal>
-
-                    {/* Day wise Itinerary (Inline) */}
-                    {activeSubTab === "itinerary" && (
-                      <div id="itinerary-section" className="mt-8 pt-8 border-t border-border space-y-6 animate-fade-in scroll-mt-20">
-                        <div className="text-left">
-                          <h4 className="text-lg font-display font-semibold text-foreground">
-                            Day wise Itinerary
-                          </h4>
-                          <p className="text-xs text-muted-foreground mt-1 italic">
-                            Schedule subject to shift in timings
-                          </p>
-                        </div>
-
-                        <div className="relative border-l border-border ml-4 pl-6 space-y-8 py-2">
-                          {activeYatra.itinerary.map((dayItem: any, idx: number) => (
-                            <ScrollReveal key={idx} variant="fade-up">
-                              <div className="relative group">
-                                <span className="absolute -left-[35px] top-1.5 w-5 h-5 rounded-full bg-background border-2 border-amber-600 flex items-center justify-center text-[9px] font-bold text-amber-600 group-hover:bg-amber-600 group-hover:text-white transition duration-300">
-                                  {dayItem.day}
-                                </span>
-                                <div className="p-5 rounded-2xl bg-white border border-black/[0.06] shadow-soft hover:shadow-glow hover:border-amber-600/20 transition duration-300">
-                                  <span className="text-[9px] font-bold uppercase tracking-wider text-amber-600 bg-amber-500/10 px-2.5 py-0.5 rounded-full border border-amber-500/25 font-body">
-                                    Day {dayItem.day}
-                                  </span>
-                                  <ul className="mt-3 space-y-2.5 text-xs text-muted-foreground list-none font-body">
-                                    {dayItem.points.map((pointText: string, pIdx: number) => (
-                                      <li key={pIdx} className="flex gap-2 items-start leading-relaxed">
-                                        <span className="text-amber-600 text-sm leading-none select-none mt-0.5">•</span>
-                                        <span>{pointText}</span>
-                                      </li>
-                                    ))}
-                                  </ul>
-                                </div>
-                              </div>
-                            </ScrollReveal>
-                          ))}
-                        </div>
-                      </div>
-                    )}
                   </div>
 
                   {/* Right side: Inclusions List */}
@@ -314,6 +275,79 @@ function ExploreYatrasPage() {
                     </div>
                   </ScrollReveal>
                 </div>
+
+                {/* Day-wise Itinerary (Full Width Grid) */}
+                {activeSubTab === "itinerary" && (
+                  <div id="itinerary-section" className="animate-fade-in scroll-mt-20">
+                    <div className="p-8 md:p-10 rounded-[2.5rem] bg-gradient-to-br from-[#802c84] via-[#460b4c] to-[#1d0121] border border-white/10 text-white shadow-glow relative overflow-hidden">
+                      <div className="absolute bottom-4 right-4 text-5xl opacity-15 pointer-events-none select-none">
+                        🪷
+                      </div>
+
+                      <div className="text-center mb-8 space-y-2">
+                        <h4 className="text-2xl md:text-3xl font-display font-semibold text-white">
+                          Day-wise Itinerary
+                        </h4>
+                        <p className="text-xs md:text-sm text-white/60 italic font-body">
+                          Schedule subject to shift in timings
+                        </p>
+                      </div>
+
+                      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 relative z-10">
+                        {activeYatra.itinerary.map((dayItem: any, idx: number) => {
+                          const firstPoint = dayItem.points[0] || "";
+                          const isCulmination =
+                            firstPoint &&
+                            (firstPoint.toLowerCase().includes("participate in") ||
+                              firstPoint.toLowerCase().includes("special puja") ||
+                              firstPoint.toLowerCase().includes("havan for") ||
+                              firstPoint.toLowerCase().includes("culmination"));
+
+                          const displayPoints = isCulmination
+                            ? dayItem.points.slice(1)
+                            : dayItem.points;
+
+                          return (
+                            <ScrollReveal key={idx} variant="fade-up" delay={idx * 100}>
+                              <div className="p-6 rounded-2xl bg-white/[0.04] border border-white/10 hover:bg-white/[0.08] hover:border-amber-400/30 transition-all duration-300 flex flex-col h-full">
+                                {isCulmination ? (
+                                  <div className="mb-4 space-y-2">
+                                    <div className="inline-flex w-8 h-8 rounded-full bg-[#ff5a00] flex items-center justify-center text-sm font-bold text-white shadow-sm">
+                                      {dayItem.day}
+                                    </div>
+                                    <h5 className="text-sm font-semibold text-white leading-snug font-display">
+                                      {firstPoint}
+                                    </h5>
+                                  </div>
+                                ) : (
+                                  <div className="mb-4">
+                                    <div className="inline-flex w-8 h-8 rounded-full bg-[#ff5a00] flex items-center justify-center text-sm font-bold text-white shadow-sm">
+                                      {dayItem.day}
+                                    </div>
+                                  </div>
+                                )}
+
+                                <ul className="space-y-3 text-xs text-white/80 list-none font-body mt-auto">
+                                  {displayPoints.map((pointText: string, pIdx: number) => (
+                                    <li
+                                      key={pIdx}
+                                      className="flex gap-2 items-start leading-relaxed text-left"
+                                    >
+                                      <span className="text-amber-400 text-sm leading-none select-none mt-0.5">
+                                        •
+                                      </span>
+                                      <span>{pointText}</span>
+                                    </li>
+                                  ))}
+                                </ul>
+                              </div>
+                            </ScrollReveal>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  </div>
+                )}
 
                 {/* Stays Section */}
                 <ScrollReveal variant="fade-up">
@@ -383,7 +417,6 @@ function ExploreYatrasPage() {
                 </div>
               </div>
             )}
-
 
             {activeSubTab === "prep" && (
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto text-left">
