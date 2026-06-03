@@ -42,7 +42,10 @@ app.use(
       if (!origin) return callback(null, true);
       const isLocal = /^http:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/.test(origin);
       const isCloudflare =
-        origin.endsWith(".samyam.pages.dev") || origin.endsWith(".samyam.workers.dev");
+        origin === "https://samyam.pages.dev" ||
+        origin.endsWith(".samyam.pages.dev") ||
+        origin === "https://samyam.workers.dev" ||
+        origin.endsWith(".samyam.workers.dev");
       if (isLocal || isCloudflare || origin === "https://samyam.co") {
         return callback(null, true);
       }
