@@ -14,6 +14,7 @@ import { Route as TeerthasRouteImport } from './routes/teerthas'
 import { Route as MethodologyRouteImport } from './routes/methodology'
 import { Route as KnowledgePortalRouteImport } from './routes/knowledge-portal'
 import { Route as InstitutionsRouteImport } from './routes/institutions'
+import { Route as GalleryRouteImport } from './routes/gallery'
 import { Route as EnquireRouteImport } from './routes/enquire'
 import { Route as DifferenceRouteImport } from './routes/difference'
 import { Route as CustomYatraRouteImport } from './routes/custom-yatra'
@@ -53,6 +54,11 @@ const KnowledgePortalRoute = KnowledgePortalRouteImport.update({
 const InstitutionsRoute = InstitutionsRouteImport.update({
   id: '/institutions',
   path: '/institutions',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GalleryRoute = GalleryRouteImport.update({
+  id: '/gallery',
+  path: '/gallery',
   getParentRoute: () => rootRouteImport,
 } as any)
 const EnquireRoute = EnquireRouteImport.update({
@@ -138,6 +144,7 @@ export interface FileRoutesByFullPath {
   '/custom-yatra': typeof CustomYatraRoute
   '/difference': typeof DifferenceRoute
   '/enquire': typeof EnquireRoute
+  '/gallery': typeof GalleryRoute
   '/institutions': typeof InstitutionsRouteWithChildren
   '/knowledge-portal': typeof KnowledgePortalRoute
   '/methodology': typeof MethodologyRoute
@@ -159,6 +166,7 @@ export interface FileRoutesByTo {
   '/custom-yatra': typeof CustomYatraRoute
   '/difference': typeof DifferenceRoute
   '/enquire': typeof EnquireRoute
+  '/gallery': typeof GalleryRoute
   '/knowledge-portal': typeof KnowledgePortalRoute
   '/methodology': typeof MethodologyRoute
   '/admin/login': typeof AdminLoginRoute
@@ -179,6 +187,7 @@ export interface FileRoutesById {
   '/custom-yatra': typeof CustomYatraRoute
   '/difference': typeof DifferenceRoute
   '/enquire': typeof EnquireRoute
+  '/gallery': typeof GalleryRoute
   '/institutions': typeof InstitutionsRouteWithChildren
   '/knowledge-portal': typeof KnowledgePortalRoute
   '/methodology': typeof MethodologyRoute
@@ -203,6 +212,7 @@ export interface FileRouteTypes {
     | '/custom-yatra'
     | '/difference'
     | '/enquire'
+    | '/gallery'
     | '/institutions'
     | '/knowledge-portal'
     | '/methodology'
@@ -224,6 +234,7 @@ export interface FileRouteTypes {
     | '/custom-yatra'
     | '/difference'
     | '/enquire'
+    | '/gallery'
     | '/knowledge-portal'
     | '/methodology'
     | '/admin/login'
@@ -243,6 +254,7 @@ export interface FileRouteTypes {
     | '/custom-yatra'
     | '/difference'
     | '/enquire'
+    | '/gallery'
     | '/institutions'
     | '/knowledge-portal'
     | '/methodology'
@@ -266,6 +278,7 @@ export interface RootRouteChildren {
   CustomYatraRoute: typeof CustomYatraRoute
   DifferenceRoute: typeof DifferenceRoute
   EnquireRoute: typeof EnquireRoute
+  GalleryRoute: typeof GalleryRoute
   InstitutionsRoute: typeof InstitutionsRouteWithChildren
   KnowledgePortalRoute: typeof KnowledgePortalRoute
   MethodologyRoute: typeof MethodologyRoute
@@ -308,6 +321,13 @@ declare module '@tanstack/react-router' {
       path: '/institutions'
       fullPath: '/institutions'
       preLoaderRoute: typeof InstitutionsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/gallery': {
+      id: '/gallery'
+      path: '/gallery'
+      fullPath: '/gallery'
+      preLoaderRoute: typeof GalleryRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/enquire': {
@@ -480,6 +500,7 @@ const rootRouteChildren: RootRouteChildren = {
   CustomYatraRoute: CustomYatraRoute,
   DifferenceRoute: DifferenceRoute,
   EnquireRoute: EnquireRoute,
+  GalleryRoute: GalleryRoute,
   InstitutionsRoute: InstitutionsRouteWithChildren,
   KnowledgePortalRoute: KnowledgePortalRoute,
   MethodologyRoute: MethodologyRoute,

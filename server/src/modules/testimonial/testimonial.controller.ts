@@ -50,7 +50,7 @@ export const getAllTestimonialVideos = asyncHandler(
 
 export const getSingleTestimonialVideo = asyncHandler(
   async (req: Request, res: Response): Promise<void> => {
-    const { id } = req.params;
+    const id = req.params.id as string;
 
     const testimonialVideo = await getSingleTestimonialVideoService(id);
 
@@ -68,7 +68,7 @@ export const getSingleTestimonialVideo = asyncHandler(
 
 export const updateTestimonialVideo = asyncHandler(
   async (req: Request, res: Response): Promise<void> => {
-    const { id } = req.params;
+    const id = req.params.id as string;
 
     const updatedTestimonialVideo = await updateTestimonialVideoService(id, req.body);
 
@@ -87,7 +87,7 @@ export const updateTestimonialVideo = asyncHandler(
 
 export const deleteTestimonialVideo = asyncHandler(
   async (req: Request, res: Response): Promise<void> => {
-    const { id } = req.params;
+    const id = req.params.id as string;
 
     await deleteTestimonialVideoService(id);
 

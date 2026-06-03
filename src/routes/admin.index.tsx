@@ -30,6 +30,7 @@ import {
   Database,
   ChevronDown,
   ChevronUp,
+  Image,
 } from "lucide-react";
 
 export const Route = createFileRoute("/admin/")({
@@ -184,12 +185,24 @@ const initialBlogState: Blog = {
   isPublished: true,
 };
 
+const categories = [
+  { id: "places-visited", label: "Places Visited" },
+  { id: "activities-or-ritual", label: "Activities or Ritual" },
+  { id: "landscapes-and-streets", label: "Landscapes and Streets" },
+  { id: "people-and-emotions", label: "People and Emotions" },
+];
+
+const initialGalleryState = {
+  title: "",
+  img: "",
+  category: "places-visited",
+};
+
 function AdminDashboardPage() {
   const navigate = useNavigate();
-  const [token, setToken] = useState<string | null>(null);
   const [adminEmail, setAdminEmail] = useState("");
   const [activeTab, setActiveTab] = useState<
-    "dashboard" | "enquiries" | "yatras" | "teerthas" | "videos" | "blogs"
+    "dashboard" | "enquiries" | "yatras" | "teerthas" | "videos" | "blogs" | "gallery"
   >("dashboard");
 
   // Data lists
@@ -198,6 +211,7 @@ function AdminDashboardPage() {
   const [teerthas, setTeerthas] = useState<Teertha[]>([]);
   const [videos, setVideos] = useState<Video[]>([]);
   const [blogs, setBlogs] = useState<Blog[]>([]);
+  const [gallery, setGallery] = useState<any[]>([]);
 
   const [stats, setStats] = useState<Stats | null>(null);
   const [loading, setLoading] = useState(true);
@@ -225,30 +239,27 @@ function AdminDashboardPage() {
   const [selectedEnquiry, setSelectedEnquiry] = useState<Enquiry | null>(null);
   const [deleteConfirm, setDeleteConfirm] = useState<{
     id: string;
-    type: "enquiry" | "yatra" | "teertha" | "video" | "blog";
+    type: "enquiry" | "yatra" | "teertha" | "video" | "blog" | "gallery";
   } | null>(null);
 
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [formMode, setFormMode] = useState<"add" | "edit">("add");
-  const [formType, setFormType] = useState<"yatra" | "teertha" | "video" | "blog">("yatra");
+  const [formType, setFormType] = useState<"yatra" | "teertha" | "video" | "blog" | "gallery">(
+    "yatra",
+  );
   const [showAdvanced, setShowAdvanced] = useState(false);
 
   const [yatraForm, setYatraForm] = useState<Yatra>(initialYatraState);
   const [teerthaForm, setTeerthaForm] = useState<Teertha>(initialTeerthaState);
   const [videoForm, setVideoForm] = useState<Video>(initialVideoState);
   const [blogForm, setBlogForm] = useState<Blog>(initialBlogState);
+  const [galleryForm, setGalleryForm] = useState<any>(initialGalleryState);
 
   // Authentication check
   useEffect(() => {
-    const storedToken = localStorage.getItem("samyam_token");
     const storedEmail = localStorage.getItem("samyam_email") || "admin@samyam.co";
-    if (!storedToken) {
-      navigate({ to: "/admin/login" });
-    } else {
-      setToken(storedToken);
-      setAdminEmail(storedEmail);
-    }
-  }, [navigate]);
+    setAdminEmail(storedEmail);
+  }, []);
 
   const handleLogout = useCallback(() => {
     localStorage.removeItem("samyam_token");
@@ -256,79 +267,88 @@ function AdminDashboardPage() {
     navigate({ to: "/admin/login" });
   }, [navigate]);
 
-  const fetchData = useCallback(
-    async (authToken: string) => {
-      setLoading(true);
-      setError("");
-      try {
-        // 1. Fetch Stats
-        const statsRes = await fetch(API_ENDPOINTS.DASHBOARD.STATS, {
-          headers: { Authorization: `Bearer ${authToken}` },
-        });
-        if (statsRes.status === 401) {
-          handleLogout();
-          return;
-        }
-        const statsResult = await statsRes.json();
-        if (statsRes.ok) setStats(statsResult.data);
-
-        // 2. Fetch Enquiries
-        const enquiriesRes = await fetch(API_ENDPOINTS.ENQUIRIES, {
-          headers: { Authorization: `Bearer ${authToken}` },
-        });
-        const enquiriesResult = await enquiriesRes.json();
-        if (enquiriesRes.ok) setEnquiries(enquiriesResult.data || []);
-
-        // 3. Fetch Yatras
-        const yatrasRes = await fetch(API_ENDPOINTS.YATRAS);
-        const yatrasResult = await yatrasRes.json();
-        if (yatrasRes.ok) setYatras(yatrasResult.data || []);
-
-        // 4. Fetch Teerthas
-        const teerthasRes = await fetch(API_ENDPOINTS.TEERTHAS);
-        const teerthasResult = await teerthasRes.json();
-        if (teerthasRes.ok) setTeerthas(teerthasResult.data || []);
-
-        // 5. Fetch Videos
-        const videosRes = await fetch(API_ENDPOINTS.TESTIMONIALS);
-        const videosResult = await videosRes.json();
-        if (videosRes.ok) setVideos(videosResult.data || []);
-
-        // 6. Fetch Blogs
-        const blogsRes = await fetch(API_ENDPOINTS.BLOGS);
-        const blogsResult = await blogsRes.json();
-        if (blogsRes.ok) setBlogs(blogsResult.data || []);
-      } catch (err: any) {
-        setError(err.message || "Failed to load dashboard data.");
-      } finally {
-        setLoading(false);
+  const fetchData = useCallback(async () => {
+    setLoading(true);
+    setError("");
+    try {
+      // 1. Fetch Stats
+      const statsRes = await fetch(API_ENDPOINTS.DASHBOARD.STATS, {
+        credentials: "include",
+      });
+      if (statsRes.status === 401) {
+        handleLogout();
+        return;
       }
-    },
-    [handleLogout],
-  );
+      const statsResult = await statsRes.json();
+      if (statsRes.ok) setStats(statsResult.data);
+
+      // 2. Fetch Enquiries
+      const enquiriesRes = await fetch(API_ENDPOINTS.ENQUIRIES, {
+        credentials: "include",
+      });
+      const enquiriesResult = await enquiriesRes.json();
+      if (enquiriesRes.ok) setEnquiries(enquiriesResult.data || []);
+
+      // 3. Fetch Yatras
+      const yatrasRes = await fetch(API_ENDPOINTS.YATRAS, {
+        credentials: "include",
+      });
+      const yatrasResult = await yatrasRes.json();
+      if (yatrasRes.ok) setYatras(yatrasResult.data || []);
+
+      // 4. Fetch Teerthas
+      const teerthasRes = await fetch(API_ENDPOINTS.TEERTHAS, {
+        credentials: "include",
+      });
+      const teerthasResult = await teerthasRes.json();
+      if (teerthasRes.ok) setTeerthas(teerthasResult.data || []);
+
+      // 5. Fetch Videos
+      const videosRes = await fetch(API_ENDPOINTS.TESTIMONIALS, {
+        credentials: "include",
+      });
+      const videosResult = await videosRes.json();
+      if (videosRes.ok) setVideos(videosResult.data || []);
+
+      // 6. Fetch Blogs
+      const blogsRes = await fetch(API_ENDPOINTS.BLOGS, {
+        credentials: "include",
+      });
+      const blogsResult = await blogsRes.json();
+      if (blogsRes.ok) setBlogs(blogsResult.data || []);
+
+      // 7. Fetch Gallery
+      const galleryRes = await fetch(API_ENDPOINTS.GALLERY, {
+        credentials: "include",
+      });
+      const galleryResult = await galleryRes.json();
+      if (galleryRes.ok) setGallery(galleryResult.data || []);
+    } catch (err: any) {
+      setError(err.message || "Failed to load dashboard data.");
+    } finally {
+      setLoading(false);
+    }
+  }, [handleLogout]);
 
   useEffect(() => {
-    if (token) {
-      fetchData(token);
-    }
-  }, [token, fetchData]);
+    fetchData();
+  }, [fetchData]);
 
   // Seeder call
   const handleMigrateData = async () => {
-    if (!token) return;
     setMigrating(true);
     setError("");
     setSuccessMsg("");
     try {
       const res = await fetch(API_ENDPOINTS.DASHBOARD.MIGRATE, {
         method: "POST",
-        headers: { Authorization: `Bearer ${token}` },
+        credentials: "include",
       });
       const result = await res.json();
       if (!res.ok) throw new Error(result.message || "Migration failed");
 
       setSuccessMsg("Success! Seeder executed. All database tables refreshed.");
-      await fetchData(token);
+      await fetchData();
       setTimeout(() => setSuccessMsg(""), 4000);
     } catch (err: any) {
       setError(err.message || "Data seeding encountered an issue.");
@@ -339,14 +359,13 @@ function AdminDashboardPage() {
 
   // Enquiry status change
   const handleUpdateEnquiryStatus = async (id: string, newStatus: Enquiry["status"]) => {
-    if (!token) return;
     try {
       const response = await fetch(`${API_ENDPOINTS.ENQUIRIES}/${id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
         },
+        credentials: "include",
         body: JSON.stringify({ status: newStatus }),
       });
       if (!response.ok) throw new Error("Failed to update status");
@@ -364,7 +383,7 @@ function AdminDashboardPage() {
 
   // Delete Action Dispatcher
   const handleDeleteItem = async () => {
-    if (!token || !deleteConfirm) return;
+    if (!deleteConfirm) return;
     const { id, type } = deleteConfirm;
 
     let url = "";
@@ -373,11 +392,12 @@ function AdminDashboardPage() {
     if (type === "teertha") url = `${API_ENDPOINTS.TEERTHAS}/${id}`;
     if (type === "video") url = `${API_ENDPOINTS.TESTIMONIALS}/${id}`;
     if (type === "blog") url = `${API_ENDPOINTS.BLOGS}/${id}`;
+    if (type === "gallery") url = `${API_ENDPOINTS.GALLERY}/${id}`;
 
     try {
       const response = await fetch(url, {
         method: "DELETE",
-        headers: { Authorization: `Bearer ${token}` },
+        credentials: "include",
       });
       if (!response.ok) throw new Error("Failed to delete record");
 
@@ -387,15 +407,14 @@ function AdminDashboardPage() {
       if (type === "teertha") setTeerthas((prev) => prev.filter((item) => item._id !== id));
       if (type === "video") setVideos((prev) => prev.filter((item) => item._id !== id));
       if (type === "blog") setBlogs((prev) => prev.filter((item) => item._id !== id));
+      if (type === "gallery") setGallery((prev) => prev.filter((item) => item._id !== id));
 
       // Update statistics
-      if (token) {
-        const statsRes = await fetch(API_ENDPOINTS.DASHBOARD.STATS, {
-          headers: { Authorization: `Bearer ${token}` },
-        });
-        const statsResult = await statsRes.json();
-        if (statsRes.ok) setStats(statsResult.data);
-      }
+      const statsRes = await fetch(API_ENDPOINTS.DASHBOARD.STATS, {
+        credentials: "include",
+      });
+      const statsResult = await statsRes.json();
+      if (statsRes.ok) setStats(statsResult.data);
 
       setDeleteConfirm(null);
       if (selectedEnquiry?._id === id) setSelectedEnquiry(null);
@@ -407,7 +426,6 @@ function AdminDashboardPage() {
   // Yatra Form Submit
   const handleYatraSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!token) return;
     setLoading(true);
     try {
       const isEdit = formMode === "edit";
@@ -417,15 +435,15 @@ function AdminDashboardPage() {
         method: isEdit ? "PUT" : "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
         },
+        credentials: "include",
         body: JSON.stringify(yatraForm),
       });
 
       const result = await response.json();
       if (!response.ok) throw new Error(result.message || "Failed to save Yatra");
 
-      await fetchData(token);
+      await fetchData();
       setIsFormOpen(false);
     } catch (err: any) {
       alert(err.message);
@@ -437,7 +455,6 @@ function AdminDashboardPage() {
   // Teertha Form Submit
   const handleTeerthaSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!token) return;
     setLoading(true);
     try {
       const isEdit = formMode === "edit";
@@ -447,15 +464,15 @@ function AdminDashboardPage() {
         method: isEdit ? "PUT" : "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
         },
+        credentials: "include",
         body: JSON.stringify(teerthaForm),
       });
 
       const result = await response.json();
       if (!response.ok) throw new Error(result.message || "Failed to save Teertha");
 
-      await fetchData(token);
+      await fetchData();
       setIsFormOpen(false);
     } catch (err: any) {
       alert(err.message);
@@ -467,7 +484,6 @@ function AdminDashboardPage() {
   // Video Form Submit
   const handleVideoSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!token) return;
     setLoading(true);
     try {
       const isEdit = formMode === "edit";
@@ -479,15 +495,15 @@ function AdminDashboardPage() {
         method: isEdit ? "PUT" : "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
         },
+        credentials: "include",
         body: JSON.stringify(videoForm),
       });
 
       const result = await response.json();
       if (!response.ok) throw new Error(result.message || "Failed to save Video");
 
-      await fetchData(token);
+      await fetchData();
       setIsFormOpen(false);
     } catch (err: any) {
       alert(err.message);
@@ -545,7 +561,6 @@ function AdminDashboardPage() {
 
   const handleBlogSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!token) return;
     setLoading(true);
     try {
       const isEdit = formMode === "edit";
@@ -555,15 +570,15 @@ function AdminDashboardPage() {
         method: isEdit ? "PUT" : "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
         },
+        credentials: "include",
         body: JSON.stringify(blogForm),
       });
 
       const result = await response.json();
       if (!response.ok) throw new Error(result.message || "Failed to save Blog");
 
-      await fetchData(token);
+      await fetchData();
       setIsFormOpen(false);
     } catch (err: any) {
       alert(err.message);
@@ -586,6 +601,48 @@ function AdminDashboardPage() {
     setIsFormOpen(true);
   };
 
+  const handleGallerySubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+    try {
+      const isEdit = formMode === "edit";
+      const url = isEdit ? `${API_ENDPOINTS.GALLERY}/${galleryForm._id}` : API_ENDPOINTS.GALLERY;
+
+      const response = await fetch(url, {
+        method: isEdit ? "PUT" : "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+        body: JSON.stringify(galleryForm),
+      });
+
+      const result = await response.json();
+      if (!response.ok) throw new Error(result.message || "Failed to save Gallery Item");
+
+      await fetchData();
+      setIsFormOpen(false);
+    } catch (err: any) {
+      alert(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const openAddGallery = () => {
+    setGalleryForm(initialGalleryState);
+    setFormMode("add");
+    setFormType("gallery");
+    setIsFormOpen(true);
+  };
+
+  const openEditGallery = (item: any) => {
+    setGalleryForm(item);
+    setFormMode("edit");
+    setFormType("gallery");
+    setIsFormOpen(true);
+  };
+
   // Filters logic
   const filteredEnquiries = enquiries.filter((e) => {
     const matchesSearch =
@@ -600,6 +657,28 @@ function AdminDashboardPage() {
 
   return (
     <div className="relative min-h-screen overflow-x-hidden bg-[#0d040f] text-white flex flex-col justify-between">
+      {/* GLOBAL LOADING OVERLAY */}
+      {loading && (
+        <div className="fixed inset-0 z-[100] bg-black/60 backdrop-blur-sm flex flex-col items-center justify-center animate-fade-in">
+          <div className="bg-[#1a0a1e] border border-white/10 p-10 rounded-[3rem] shadow-2xl flex flex-col items-center gap-6 max-w-sm w-full mx-4">
+            <div className="relative">
+              <div className="w-20 h-20 rounded-full border-b-2 border-amber-400 animate-spin" />
+              <div className="absolute inset-0 flex items-center justify-center">
+                <Sparkles className="text-amber-400 animate-pulse" size={32} />
+              </div>
+            </div>
+            <div className="text-center space-y-2">
+              <h3 className="text-2xl font-display font-bold text-white tracking-tight">
+                Processing...
+              </h3>
+              <p className="text-[10px] text-white/40 uppercase tracking-[0.2em] font-black">
+                Updating your sacred records
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
+
       <section className="relative py-8 px-4 md:px-8 overflow-hidden min-h-[92vh] flex-grow flex">
         <FlowerField count={5} />
 
@@ -624,6 +703,7 @@ function AdminDashboardPage() {
                   { id: "teerthas", label: "Teerthas", icon: MapPin },
                   { id: "videos", label: "Knowledge", icon: Film },
                   { id: "blogs", label: "CEO Journal", icon: FileText },
+                  { id: "gallery", label: "Gallery", icon: Image },
                 ].map((item) => {
                   const Icon = item.icon;
                   return (
@@ -694,7 +774,7 @@ function AdminDashboardPage() {
                 </div>
 
                 {/* Statistics Overview */}
-                <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
+                <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4">
                   {[
                     {
                       label: "Enquiries",
@@ -725,6 +805,12 @@ function AdminDashboardPage() {
                       val: stats?.totalBlogs ?? blogs.length,
                       color: "text-rose-400",
                       icon: FileText,
+                    },
+                    {
+                      label: "Gallery",
+                      val: stats?.totalGallery ?? gallery.length,
+                      color: "text-orange-400",
+                      icon: Image,
                     },
                   ].map((st, i) => (
                     <div
@@ -927,7 +1013,13 @@ function AdminDashboardPage() {
                       <div>
                         <div className="aspect-video bg-black relative overflow-hidden">
                           <img
-                            src={y.img.startsWith("/") ? y.img : `/images/${y.img}`}
+                            src={
+                              y.img.startsWith("http")
+                                ? y.img
+                                : y.img.startsWith("/")
+                                  ? y.img
+                                  : `/images/${y.img}`
+                            }
                             alt={y.name}
                             className="w-full h-full object-cover opacity-60 group-hover:opacity-80 transition-all duration-700"
                             onError={(e) => {
@@ -1196,6 +1288,71 @@ function AdminDashboardPage() {
                 </div>
               </div>
             )}
+
+            {/* TAB CONTENT: GALLERY */}
+            {activeTab === "gallery" && (
+              <div className="space-y-8 animate-fade-in text-left">
+                <div className="flex flex-col xl:flex-row xl:items-center justify-between gap-6 border-b border-white/5 pb-8">
+                  <div>
+                    <h1 className="text-3xl font-display font-bold text-white">
+                      Glimpses of Grace
+                    </h1>
+                    <p className="text-[10px] text-white/40 font-body uppercase tracking-widest mt-1">
+                      Manage gallery images
+                    </p>
+                  </div>
+                  <button
+                    onClick={openAddGallery}
+                    className="px-6 py-3 bg-gradient-to-r from-[#FF7A00] to-[#A82A9C] text-white font-bold rounded-full text-[10px] uppercase tracking-widest hover:scale-105 hover:shadow-lg hover:shadow-[#FF7A00]/35 transition cursor-pointer flex items-center gap-2"
+                  >
+                    <PlusCircle size={14} /> Add Image
+                  </button>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {gallery.map((g) => (
+                    <div
+                      key={g._id}
+                      className="bg-white/[0.02] border border-white/5 rounded-3xl overflow-hidden shadow-soft flex flex-col justify-between hover:bg-white/[0.04] transition-all group"
+                    >
+                      <div className="aspect-video bg-black relative overflow-hidden">
+                        <img
+                          src={g.img}
+                          alt={g.title}
+                          className="w-full h-full object-cover opacity-60 group-hover:opacity-80 transition-all duration-700"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-[#0d040f] via-transparent to-transparent" />
+                        <div className="absolute bottom-4 left-4 right-4 text-left">
+                          <h3 className="text-lg font-bold font-display text-white">{g.title}</h3>
+                          <p className="text-[10px] text-amber-400 font-bold uppercase mt-0.5">
+                            {categories.find((c) => c.id === g.category)?.label || g.category}
+                          </p>
+                        </div>
+                      </div>
+                      <div className="px-5 py-4 bg-black/20 flex items-center justify-end gap-2 border-t border-white/5">
+                        <button
+                          onClick={() => openEditGallery(g)}
+                          className="w-8 h-8 flex items-center justify-center rounded-full bg-white/5 hover:bg-gradient-to-r hover:from-[#FF7A00] hover:to-[#A82A9C] text-white/50 hover:text-white transition-all cursor-pointer"
+                        >
+                          <Edit size={14} />
+                        </button>
+                        <button
+                          onClick={() => setDeleteConfirm({ id: g._id!, type: "gallery" })}
+                          className="w-8 h-8 flex items-center justify-center rounded-full bg-red-500/5 hover:bg-red-500 text-red-400 hover:text-white transition cursor-pointer"
+                        >
+                          <Trash2 size={14} />
+                        </button>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+                {gallery.length === 0 && (
+                  <div className="py-20 text-center text-white/30 text-xs font-body uppercase tracking-widest">
+                    No images in the gallery
+                  </div>
+                )}
+              </div>
+            )}
           </main>
         </div>
       </section>
@@ -1215,7 +1372,9 @@ function AdminDashboardPage() {
                         ? "Teertha Entry"
                         : formType === "video"
                           ? "Vault Video"
-                          : "Blog Post"}
+                          : formType === "gallery"
+                            ? "Gallery Item"
+                            : "Blog Post"}
                   </span>
                 </h2>
               </div>
@@ -1448,9 +1607,17 @@ function AdminDashboardPage() {
                     </button>
                     <button
                       type="submit"
-                      className="px-10 py-4 rounded-full bg-gradient-to-r from-[#FF7A00] to-[#A82A9C] text-white font-black uppercase tracking-[0.2em] text-[10px] shadow-lg shadow-[#FF7A00]/25 hover:scale-105 transition cursor-pointer"
+                      disabled={loading}
+                      className={`px-10 py-4 rounded-full bg-gradient-to-r from-[#FF7A00] to-[#A82A9C] text-white font-black uppercase tracking-[0.2em] text-[10px] shadow-lg shadow-[#FF7A00]/25 hover:scale-105 transition cursor-pointer flex items-center gap-2 ${loading ? "opacity-50 cursor-not-allowed" : ""}`}
                     >
-                      Save Itinerary
+                      {loading ? (
+                        <>
+                          <RefreshCw className="animate-spin" size={14} />
+                          Processing...
+                        </>
+                      ) : (
+                        "Save Itinerary"
+                      )}
                     </button>
                   </div>
                 </form>
@@ -1653,9 +1820,17 @@ function AdminDashboardPage() {
                     </button>
                     <button
                       type="submit"
-                      className="px-10 py-4 rounded-full bg-gradient-to-r from-[#FF7A00] to-[#A82A9C] text-white font-black uppercase tracking-[0.2em] text-[10px] shadow-lg shadow-[#FF7A00]/25 hover:scale-105 transition cursor-pointer"
+                      disabled={loading}
+                      className={`px-10 py-4 rounded-full bg-gradient-to-r from-[#FF7A00] to-[#A82A9C] text-white font-black uppercase tracking-[0.2em] text-[10px] shadow-lg shadow-[#FF7A00]/25 hover:scale-105 transition cursor-pointer flex items-center gap-2 ${loading ? "opacity-50 cursor-not-allowed" : ""}`}
                     >
-                      Save Teertha
+                      {loading ? (
+                        <>
+                          <RefreshCw className="animate-spin" size={14} />
+                          Saving...
+                        </>
+                      ) : (
+                        "Save Teertha"
+                      )}
                     </button>
                   </div>
                 </form>
@@ -1703,9 +1878,17 @@ function AdminDashboardPage() {
                     </button>
                     <button
                       type="submit"
-                      className="px-10 py-3 rounded-full bg-gradient-to-r from-[#FF7A00] to-[#A82A9C] text-white font-black uppercase tracking-widest text-[10px] shadow-lg shadow-[#FF7A00]/20 hover:scale-105 transition cursor-pointer"
+                      disabled={loading}
+                      className={`px-10 py-3 rounded-full bg-gradient-to-r from-[#FF7A00] to-[#A82A9C] text-white font-black uppercase tracking-widest text-[10px] shadow-lg shadow-[#FF7A00]/20 hover:scale-105 transition cursor-pointer flex items-center gap-2 ${loading ? "opacity-50 cursor-not-allowed" : ""}`}
                     >
-                      Upload Video
+                      {loading ? (
+                        <>
+                          <RefreshCw className="animate-spin" size={14} />
+                          Uploading...
+                        </>
+                      ) : (
+                        "Upload Video"
+                      )}
                     </button>
                   </div>
                 </form>
@@ -1750,9 +1933,89 @@ function AdminDashboardPage() {
                     </button>
                     <button
                       type="submit"
-                      className="px-10 py-3 rounded-full bg-gradient-to-r from-[#FF7A00] to-[#A82A9C] text-white font-black uppercase tracking-widest text-[10px] shadow-lg shadow-[#FF7A00]/20 hover:scale-105 transition cursor-pointer"
+                      disabled={loading}
+                      className={`px-10 py-3 rounded-full bg-gradient-to-r from-[#FF7A00] to-[#A82A9C] text-white font-black uppercase tracking-widest text-[10px] shadow-lg shadow-[#FF7A00]/20 hover:scale-105 transition cursor-pointer flex items-center gap-2 ${loading ? "opacity-50 cursor-not-allowed" : ""}`}
                     >
-                      Publish Blog
+                      {loading ? (
+                        <>
+                          <RefreshCw className="animate-spin" size={14} />
+                          Publishing...
+                        </>
+                      ) : (
+                        "Publish Blog"
+                      )}
+                    </button>
+                  </div>
+                </form>
+              )}
+
+              {/* GALLERY FORM */}
+              {formType === "gallery" && (
+                <form onSubmit={handleGallerySubmit} className="space-y-6">
+                  <div className="space-y-2">
+                    <label className="text-[10px] font-black uppercase tracking-widest text-amber-400/80">
+                      Image Title
+                    </label>
+                    <input
+                      type="text"
+                      required
+                      value={galleryForm.title}
+                      onChange={(e) => setGalleryForm({ ...galleryForm, title: e.target.value })}
+                      className="w-full px-5 py-4 rounded-2xl bg-white/[0.04] border border-white/10 text-white"
+                      placeholder="Ganga Aarti"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <label className="text-[10px] font-black uppercase tracking-widest text-amber-400/80">
+                      Image URL
+                    </label>
+                    <input
+                      type="text"
+                      required
+                      value={galleryForm.img}
+                      onChange={(e) => setGalleryForm({ ...galleryForm, img: e.target.value })}
+                      className="w-full px-5 py-4 rounded-2xl bg-white/[0.04] border border-white/10 text-white"
+                      placeholder="https://samyam.co/images/..."
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <label className="text-[10px] font-black uppercase tracking-widest text-amber-400/80">
+                      Category
+                    </label>
+                    <select
+                      value={galleryForm.category}
+                      onChange={(e) => setGalleryForm({ ...galleryForm, category: e.target.value as any })}
+                      className="w-full px-5 py-4 rounded-2xl bg-white/[0.04] border border-white/10 text-white [&>option]:bg-[#140817]"
+                    >
+                      <option value="places-visited">Places Visited</option>
+                      <option value="activities-or-ritual">Activities or Ritual</option>
+                      <option value="landscapes-and-streets">Landscapes and Streets</option>
+                      <option value="people-and-emotions">People and Emotions</option>
+                    </select>
+                  </div>
+                  <div className="pt-4 flex justify-end gap-4">
+                    <button
+                      type="button"
+                      onClick={() => setIsFormOpen(false)}
+                      className="px-8 py-3 rounded-full bg-white/5 text-white/60 font-bold uppercase tracking-widest text-[10px] hover:bg-white/10 hover:text-white transition cursor-pointer"
+                    >
+                      Cancel
+                    </button>
+                    <button
+                      type="submit"
+                      disabled={loading}
+                      className={`px-10 py-3 rounded-full bg-gradient-to-r from-[#FF7A00] to-[#A82A9C] text-white font-black uppercase tracking-widest text-[10px] shadow-lg shadow-[#FF7A00]/20 hover:scale-105 transition cursor-pointer flex items-center gap-2 ${loading ? "opacity-50 cursor-not-allowed" : ""}`}
+                    >
+                      {loading ? (
+                        <>
+                          <RefreshCw className="animate-spin" size={14} />
+                          Saving...
+                        </>
+                      ) : formMode === "add" ? (
+                        "Add Image"
+                      ) : (
+                        "Save Image"
+                      )}
                     </button>
                   </div>
                 </form>

@@ -48,38 +48,38 @@ export const getAllYatraRetreats = asyncHandler(
 export const getSingleYatraRetreat = asyncHandler(
   async (req: Request, res: Response): Promise<void> => {
     const { slug } = req.params;
-    const yatraRetreat = await getSingleYatraRetreatService(slug);
+    const yatraRetreat = await getSingleYatraRetreatService(slug as string);
     res.status(200).json({
       success: true,
       data: yatraRetreat,
     });
-  },
-);
+    },
+    );
 
-/* =========================
-   UPDATE YATRA RETREAT
-========================= */
+    /* =========================
+    UPDATE YATRA RETREAT
+    ========================= */
 
-export const updateYatraRetreat = asyncHandler(
-  async (req: Request, res: Response): Promise<void> => {
+    export const updateYatraRetreat = asyncHandler(
+    async (req: Request, res: Response): Promise<void> => {
     const { id } = req.params;
-    const updatedYatraRetreat = await updateYatraRetreatService(id, req.body);
+    const updatedYatraRetreat = await updateYatraRetreatService(id as string, req.body);
     res.status(200).json({
       success: true,
       message: "Yatra retreat updated successfully",
       data: updatedYatraRetreat,
     });
-  },
-);
+    },
+    );
 
-/* =========================
-   DELETE YATRA RETREAT
-========================= */
+    /* =========================
+    DELETE YATRA RETREAT
+    ========================= */
 
-export const deleteYatraRetreat = asyncHandler(
-  async (req: Request, res: Response): Promise<void> => {
+    export const deleteYatraRetreat = asyncHandler(
+    async (req: Request, res: Response): Promise<void> => {
     const { id } = req.params;
-    await deleteYatraRetreatService(id);
+    await deleteYatraRetreatService(id as string);
     res.status(200).json({
       success: true,
       message: "Yatra retreat deleted successfully",

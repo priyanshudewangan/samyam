@@ -49,6 +49,7 @@ function AdminLoginPage() {
         headers: {
           "Content-Type": "application/json",
         },
+        credentials: "include",
         body: JSON.stringify({ email, password }),
       });
 
@@ -58,7 +59,6 @@ function AdminLoginPage() {
         throw new Error(result.message || "Authentication failed");
       }
 
-      localStorage.setItem("samyam_token", result.data.accessToken);
       localStorage.setItem("samyam_email", result.data.email);
       setSuccess("Success! Redirecting...");
       setTimeout(() => {

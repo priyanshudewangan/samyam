@@ -21,4 +21,5 @@ export const API_ENDPOINTS = {
   TEERTHAS: `${API_BASE_URL}/api/v1/teerthas`,
   TESTIMONIALS: `${API_BASE_URL}/api/v1/testimonials`,
   BLOGS: `${API_BASE_URL}/api/v1/blogs`,
+  GALLERY: `${API_BASE_URL}/api/v1/gallery`,
 };

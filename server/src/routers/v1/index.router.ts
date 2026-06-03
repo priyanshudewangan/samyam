@@ -8,6 +8,7 @@ import testimonialRouter from "../../modules/testimonial/testimonial.route";
 import enquiryRouter from "../../modules/enquiry/enquiry.route";
 import dashboardRouter from "../../modules/dashboard/dashboard.route";
 import blogRouter from "../../modules/blog/blog.route";
+import galleryRouter from "../../modules/gallery/gallery.route";
 import { protect } from "../../middlewares/auth.middleware";
 
 const v1Router = express.Router();
@@ -50,6 +51,11 @@ v1Router.use("/testimonials", testimonialRouter);
    BLOG ROUTES
 ========================= */
 v1Router.use("/blogs", blogRouter);
+
+/* =========================
+   GALLERY ROUTES
+========================= */
+v1Router.use("/gallery", galleryRouter);
 
 /* =========================
    ENQUIRY ROUTES

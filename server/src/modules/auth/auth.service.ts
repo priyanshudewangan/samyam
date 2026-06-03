@@ -20,7 +20,7 @@ import {
 export const registerUserService = async (email: string, password: string) => {
   const emailNormalized = email.trim().toLowerCase();
   if (!serverConfig.ALLOWED_ADMIN_EMAILS.includes(emailNormalized)) {
-    throw new ForbiddenError("Registration is restricted to authorized admin emails only.");
+    throw new ForbiddenError("Invalid email or password");
   }
 
   const existingUser = await User.findOne({ email: emailNormalized });
@@ -51,19 +51,19 @@ export const registerUserService = async (email: string, password: string) => {
 export const loginUserService = async (email: string, password: string) => {
   const emailNormalized = email.trim().toLowerCase();
   if (!serverConfig.ALLOWED_ADMIN_EMAILS.includes(emailNormalized)) {
-    throw new ForbiddenError("Login is restricted to authorized admin emails only.");
+    throw new UnauthorizedError("Invalid email or password");
   }
 
   const user = await User.findOne({ email: emailNormalized }).select("+password");
 
   if (!user) {
-    throw new UnauthorizedError("Invalid credentials");
+    throw new UnauthorizedError("Invalid email or password");
   }
 
   const isPasswordMatched = await user.comparePassword(password);
 
   if (!isPasswordMatched) {
-    throw new UnauthorizedError("Invalid credentials");
+    throw new UnauthorizedError("Invalid email or password");
   }
 
   const accessToken = generateAccessToken(user._id.toString());

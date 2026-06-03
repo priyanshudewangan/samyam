@@ -24,6 +24,7 @@ const links = [
   { label: "Methodology", to: "/methodology" },
   { label: "Customize Yatra", to: "/custom-yatra" },
   { label: "Knowledge Portal", to: "/knowledge-portal" },
+  { label: "Gallery", to: "/gallery" },
   { label: "About us", to: "/about" },
 ] as const;
 
@@ -33,7 +34,7 @@ export function Nav() {
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
-    setIsLoggedIn(!!localStorage.getItem("samyam_token"));
+    setIsLoggedIn(!!localStorage.getItem("samyam_email"));
   }, []);
 
   useEffect(() => {
@@ -71,7 +72,7 @@ export function Nav() {
         color: "var(--nav-text)",
       }}
     >
-      <div className="max-w-7xl mx-auto px-4 h-20 flex items-center gap-6">
+      <div className="max-w-[1600px] mx-auto px-6 h-20 flex items-center gap-8">
         {/* Logo */}
         <Link
           to="/"
@@ -82,11 +83,11 @@ export function Nav() {
         </Link>
 
         {/* Navigation list */}
-        <nav className="flex-1 flex items-center justify-start lg:justify-center gap-1 overflow-x-auto no-scrollbar">
+        <nav className="flex-1 flex items-center justify-start lg:justify-center gap-0.5 overflow-x-auto no-scrollbar">
           {links.map((l) =>
             "children" in l ? (
               <DropdownMenu key={l.label}>
-                <DropdownMenuTrigger className="shrink-0 px-4 py-2 text-xs md:text-sm rounded-full hover:bg-white/10 transition whitespace-nowrap flex items-center gap-1.5 outline-none cursor-pointer">
+                <DropdownMenuTrigger className="shrink-0 px-3 py-2 text-xs xl:text-sm rounded-full hover:bg-white/10 transition whitespace-nowrap flex items-center gap-1.5 outline-none cursor-pointer">
                   {l.label}
                   <ChevronDown size={14} className="opacity-50" />
                 </DropdownMenuTrigger>
@@ -114,7 +115,7 @@ export function Nav() {
                   style: { backgroundColor: "var(--nav-button-bg)" },
                 }}
                 style={{ color: "var(--nav-text)" }}
-                className="shrink-0 px-4 py-2 text-xs md:text-sm rounded-full hover:bg-white/10 transition whitespace-nowrap"
+                className="shrink-0 px-3 py-2 text-xs xl:text-sm rounded-full hover:bg-white/10 transition whitespace-nowrap"
               >
                 {l.label}
               </Link>
@@ -123,7 +124,7 @@ export function Nav() {
         </nav>
 
         {/* Desktop CTA Action Buttons */}
-        <div className="hidden lg:flex items-center gap-3 shrink-0">
+        <div className="hidden lg:flex items-center gap-4 shrink-0">
           <Link
             to={isLoggedIn ? "/admin" : "/admin/login"}
             style={{

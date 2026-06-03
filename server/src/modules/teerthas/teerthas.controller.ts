@@ -44,7 +44,7 @@ export const getAllTeerthas = asyncHandler(async (_req: Request, res: Response):
 ========================= */
 
 export const getSingleTeertha = asyncHandler(async (req: Request, res: Response): Promise<void> => {
-  const { slug } = req.params;
+  const slug = req.params.slug as string;
 
   const teertha = await getSingleTeerthaService(slug);
 
@@ -60,7 +60,7 @@ export const getSingleTeertha = asyncHandler(async (req: Request, res: Response)
 ========================= */
 
 export const updateTeertha = asyncHandler(async (req: Request, res: Response): Promise<void> => {
-  const { id } = req.params;
+  const id = req.params.id as string;
 
   const updatedTeertha = await updateTeerthaService(id, req.body);
 
@@ -77,7 +77,7 @@ export const updateTeertha = asyncHandler(async (req: Request, res: Response): P
 ========================= */
 
 export const deleteTeertha = asyncHandler(async (req: Request, res: Response): Promise<void> => {
-  const { id } = req.params;
+  const id = req.params.id as string;
 
   await deleteTeerthaService(id);
 

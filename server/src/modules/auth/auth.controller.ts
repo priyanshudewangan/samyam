@@ -33,6 +33,24 @@ export const registerUser = asyncHandler(async (req: Request, res: Response): Pr
 export const loginUser = asyncHandler(async (req: Request, res: Response): Promise<void> => {
   const { email, password } = req.body;
   const { user, accessToken, refreshToken } = await loginUserService(email, password);
+
+  // Set tokens in HttpOnly cookies
+  const isProduction = process.env.NODE_ENV === "production";
+
+  res.cookie("accessToken", accessToken, {
+    httpOnly: true,
+    secure: isProduction,
+    sameSite: "strict",
+    maxAge: 7 * 24 * 60 * 60 * 1000, // Matches JWT expiry (7d)
+  });
+
+  res.cookie("refreshToken", refreshToken, {
+    httpOnly: true,
+    secure: isProduction,
+    sameSite: "strict",
+    maxAge: 30 * 24 * 60 * 60 * 1000, // Matches JWT expiry (30d)
+  });
+
   res.status(200).json({
     success: true,
     message: "Login successful",
@@ -52,15 +70,22 @@ export const refreshAccessToken = asyncHandler(
   async (req: Request, res: Response): Promise<void> => {
     const refreshToken = req.cookies.refreshToken;
     const accessToken = await refreshAccessTokenService(refreshToken);
+
+    const isProduction = process.env.NODE_ENV === "production";
+
     res.cookie("accessToken", accessToken, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
+      secure: isProduction,
       sameSite: "strict",
-      maxAge: 15 * 60 * 1000,
+      maxAge: 7 * 24 * 60 * 60 * 1000,
     });
+
     res.status(200).json({
       success: true,
       message: "Access token refreshed",
+      data: {
+        accessToken,
+      },
     });
   },
 );
@@ -69,6 +94,9 @@ export const refreshAccessToken = asyncHandler(
    LOGOUT CONTROLLER
 ========================= */
 export const logoutUser = asyncHandler(async (_req: Request, res: Response): Promise<void> => {
+  res.clearCookie("accessToken");
+  res.clearCookie("refreshToken");
+
   res.status(200).json({
     success: true,
     message: "Logout successful",
@@ -106,7 +134,7 @@ RESET PASSWORD CONTROLLER
 export const resetPassword = asyncHandler(async (req: Request, res: Response): Promise<void> => {
   const { token } = req.params;
   const { password } = req.body;
-  const result = await resetPasswordService(token, password);
+  const result = await resetPasswordService(token as string, password);
   res.status(200).json({
     success: true,
     message: result.message,

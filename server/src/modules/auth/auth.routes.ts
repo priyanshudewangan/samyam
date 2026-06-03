@@ -10,7 +10,12 @@ import {
 } from "../auth/auth.controller";
 import { protect } from "../../middlewares/auth.middleware";
 
+import { authRateLimiter } from "../../middlewares/rateLimit.middleware";
+
 const authRoute = express.Router();
+
+// Apply rate limiting to all auth routes
+authRoute.use(authRateLimiter);
 
 authRoute.post("/login", loginUser);
 authRoute.post("/refresh-token", refreshAccessToken);

@@ -12,12 +12,17 @@ export interface AuthRequest extends Request {
 export const protect = asyncHandler(
   async (req: AuthRequest, _res: Response, next: NextFunction): Promise<void> => {
     const authHeader = req.headers.authorization;
+    let token = "";
 
-    if (!authHeader?.startsWith("Bearer ")) {
-      throw new UnauthorizedError("Access denied. Please login.");
+    if (authHeader?.startsWith("Bearer ")) {
+      token = authHeader.split(" ")[1];
+    } else if (req.cookies?.accessToken) {
+      token = req.cookies.accessToken;
     }
 
-    const token = authHeader.split(" ")[1];
+    if (!token) {
+      throw new UnauthorizedError("Access denied. Please login.");
+    }
 
     let decoded: { id: string };
     try {

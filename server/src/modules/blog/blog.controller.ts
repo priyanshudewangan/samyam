@@ -37,7 +37,7 @@ export const getAllBlogs = asyncHandler(async (_req: Request, res: Response): Pr
    GET SINGLE BLOG
  ========================= */
 export const getSingleBlog = asyncHandler(async (req: Request, res: Response): Promise<void> => {
-  const { id } = req.params;
+  const id = req.params.id as string;
   const blog = await getSingleBlogService(id);
   res.status(200).json({
     success: true,
@@ -49,7 +49,7 @@ export const getSingleBlog = asyncHandler(async (req: Request, res: Response): P
    UPDATE BLOG
  ========================= */
 export const updateBlog = asyncHandler(async (req: Request, res: Response): Promise<void> => {
-  const { id } = req.params;
+  const id = req.params.id as string;
   const updatedBlog = await updateBlogService(id, req.body);
   res.status(200).json({
     success: true,
@@ -62,7 +62,7 @@ export const updateBlog = asyncHandler(async (req: Request, res: Response): Prom
    DELETE BLOG
  ========================= */
 export const deleteBlog = asyncHandler(async (req: Request, res: Response): Promise<void> => {
-  const { id } = req.params;
+  const id = req.params.id as string;
   await deleteBlogService(id);
   res.status(200).json({
     success: true,

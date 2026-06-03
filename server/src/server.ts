@@ -8,6 +8,7 @@ import { connectDB } from "./config/db.config";
 import v1Router from "./routers/v1/index.router";
 import { appErrorHandler, genericErrorHandler } from "./middlewares/error.middleware";
 import { attachCorrelationIdMiddleware } from "./middlewares/correlation.middleware";
+import { apiRateLimiter } from "./middlewares/rateLimit.middleware";
 
 /* =========================
    APP
@@ -15,11 +16,15 @@ import { attachCorrelationIdMiddleware } from "./middlewares/correlation.middlew
 
 const app = express();
 
+// Trust proxy is required for express-rate-limit to work correctly behind proxies (Cloudflare, Nginx, etc.)
+app.set("trust proxy", 1);
+
 /* =========================
    SECURITY MIDDLEWARES
 ========================= */
 
 app.use(helmet());
+app.use(apiRateLimiter);
 
 /* =========================
    DATABASE CONNECTION

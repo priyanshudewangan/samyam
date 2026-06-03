@@ -6,18 +6,20 @@ import Retreat from "../../models/yatra";
 import Video from "../../models/testimonial";
 import Teertha from "../../models/teerthas";
 import Blog from "../../models/blog";
+import Gallery from "../../models/gallery";
 
 /* ======================================================
    GET DASHBOARD STATS SERVICE
 ====================================================== */
 export const getDashboardStatsService = async () => {
-  const [totalEnquiries, totalRetreats, totalVideos, totalTeerthas, totalBlogs] = await Promise.all(
+  const [totalEnquiries, totalRetreats, totalVideos, totalTeerthas, totalBlogs, totalGallery] = await Promise.all(
     [
       Enquiry.countDocuments(),
       Retreat.countDocuments(),
       Video.countDocuments(),
       Teertha.countDocuments(),
       Blog.countDocuments(),
+      Gallery.countDocuments(),
     ],
   );
 
@@ -27,6 +29,7 @@ export const getDashboardStatsService = async () => {
     totalVideos,
     totalTeerthas,
     totalBlogs,
+    totalGallery,
   };
 };
 
@@ -41,7 +44,7 @@ export const migrateInitialDataService = async () => {
   }
 
   const rawData = fs.readFileSync(seedDataPath, "utf-8");
-  const { yatras, teerthas, videos } = JSON.parse(rawData);
+  const { yatras, teerthas, videos, gallery } = JSON.parse(rawData);
 
   const defaultBlogs = [
     {
@@ -62,14 +65,16 @@ export const migrateInitialDataService = async () => {
     Teertha.deleteMany({}),
     Video.deleteMany({}),
     Blog.deleteMany({}),
+    Gallery.deleteMany({}),
   ]);
 
   // Insert seed data
-  const [createdYatras, createdTeerthas, createdVideos, createdBlogs] = await Promise.all([
+  const [createdYatras, createdTeerthas, createdVideos, createdBlogs, createdGallery] = await Promise.all([
     Retreat.insertMany(yatras),
     Teertha.insertMany(teerthas),
     Video.insertMany(videos),
     Blog.insertMany(defaultBlogs),
+    Gallery.insertMany(gallery || []),
   ]);
 
   return {
@@ -77,5 +82,6 @@ export const migrateInitialDataService = async () => {
     teerthasCount: createdTeerthas.length,
     videosCount: createdVideos.length,
     blogsCount: createdBlogs.length,
+    galleryCount: createdGallery.length,
   };
 };

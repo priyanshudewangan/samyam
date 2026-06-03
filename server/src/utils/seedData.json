@@ -70,7 +70,12 @@
       "darshans": [
         {
           "title": "Ayodhya Temples",
-          "items": ["Ram Janmabhoomi Mandir", "Hanuman Garhi", "Dashrath Mahal", "Kanak Bhawan"]
+          "items": [
+            "Ram Janmabhoomi Mandir",
+            "Hanuman Garhi",
+            "Dashrath Mahal",
+            "Kanak Bhawan"
+          ]
         },
         {
           "title": "Kashi Sacred Sites",
@@ -304,7 +309,10 @@
         },
         {
           "title": "Power Seats",
-          "items": ["Maa Baglamukhi Temple", "Dharamshala Spiritual Circle"]
+          "items": [
+            "Maa Baglamukhi Temple",
+            "Dharamshala Spiritual Circle"
+          ]
         },
         {
           "title": "Divine Experiences",
@@ -614,7 +622,12 @@
         },
         {
           "title": "Sacred Sites",
-          "items": ["Gomti Ghat", "Gopi Talav", "Sudama Setu", "Dwarka Lighthouse"]
+          "items": [
+            "Gomti Ghat",
+            "Gopi Talav",
+            "Sudama Setu",
+            "Dwarka Lighthouse"
+          ]
         },
         {
           "title": "Divine Experiences",
@@ -931,7 +944,12 @@
         },
         {
           "title": "Sacred Ghats",
-          "items": ["Har Ki Pauri", "Vishnu Ghat", "Brahmakund", "Sati Kund"]
+          "items": [
+            "Har Ki Pauri",
+            "Vishnu Ghat",
+            "Brahmakund",
+            "Sati Kund"
+          ]
         },
         {
           "title": "Divine Experiences",
@@ -1010,11 +1028,21 @@
       "darshans": [
         {
           "title": "Ayodhya Temples",
-          "items": ["Sri Ram Janmabhoomi Mandir", "Hanuman Garhi", "Dashrath Mahal", "Kanak Bhawan"]
+          "items": [
+            "Sri Ram Janmabhoomi Mandir",
+            "Hanuman Garhi",
+            "Dashrath Mahal",
+            "Kanak Bhawan"
+          ]
         },
         {
           "title": "Sacred Sites",
-          "items": ["Sarayu Ghat", "Nageshwarnath Temple", "Ram Ki Paidi", "Treta Ke Thakur"]
+          "items": [
+            "Sarayu Ghat",
+            "Nageshwarnath Temple",
+            "Ram Ki Paidi",
+            "Treta Ke Thakur"
+          ]
         },
         {
           "title": "Divine Experiences",
@@ -1359,6 +1387,633 @@
     {
       "category": "Testimonials (Coming Soon)",
       "youtubeLink": "https://www.youtube.com/embed/ZRXdapTdvCI"
+    }
+  ],
+  "gallery": [
+    {
+      "title": "PIY 9793",
+      "img": "https://samyam.co/images/places visited/PIY_9793.jpg",
+      "category": "places-visited"
+    },
+    {
+      "title": "PIY 9800",
+      "img": "https://samyam.co/images/places visited/PIY_9800.jpg",
+      "category": "places-visited"
+    },
+    {
+      "title": "PIY 9815",
+      "img": "https://samyam.co/images/places visited/PIY_9815.jpg",
+      "category": "places-visited"
+    },
+    {
+      "title": "PIY 9856",
+      "img": "https://samyam.co/images/places visited/PIY_9856.jpg",
+      "category": "places-visited"
+    },
+    {
+      "title": "PIY 9883",
+      "img": "https://samyam.co/images/places visited/PIY_9883.jpg",
+      "category": "places-visited"
+    },
+    {
+      "title": "PIY 9907",
+      "img": "https://samyam.co/images/places visited/PIY_9907.jpg",
+      "category": "places-visited"
+    },
+    {
+      "title": "PIY 9915",
+      "img": "https://samyam.co/images/places visited/PIY_9915.jpg",
+      "category": "places-visited"
+    },
+    {
+      "title": "PIY 9918",
+      "img": "https://samyam.co/images/places visited/PIY_9918.jpg",
+      "category": "places-visited"
+    },
+    {
+      "title": "PIY 9922",
+      "img": "https://samyam.co/images/places visited/PIY_9922.jpg",
+      "category": "places-visited"
+    },
+    {
+      "title": "PIY 9949",
+      "img": "https://samyam.co/images/places visited/PIY_9949.jpg",
+      "category": "places-visited"
+    },
+    {
+      "title": "PIY 9953",
+      "img": "https://samyam.co/images/places visited/PIY_9953.jpg",
+      "category": "places-visited"
+    },
+    {
+      "title": "PIY 9955",
+      "img": "https://samyam.co/images/places visited/PIY_9955.jpg",
+      "category": "places-visited"
+    },
+    {
+      "title": "PRA 5826",
+      "img": "https://samyam.co/images/places visited/PRA_5826.JPG",
+      "category": "places-visited"
+    },
+    {
+      "title": "PRA 5878",
+      "img": "https://samyam.co/images/places visited/PRA_5878.JPG",
+      "category": "places-visited"
+    },
+    {
+      "title": "PRA 5884",
+      "img": "https://samyam.co/images/places visited/PRA_5884.JPG",
+      "category": "places-visited"
+    },
+    {
+      "title": "PRA 5895",
+      "img": "https://samyam.co/images/places visited/PRA_5895.JPG",
+      "category": "places-visited"
+    },
+    {
+      "title": "PRA 5899",
+      "img": "https://samyam.co/images/places visited/PRA_5899.JPG",
+      "category": "places-visited"
+    },
+    {
+      "title": "PRA 6285",
+      "img": "https://samyam.co/images/places visited/PRA_6285.JPG",
+      "category": "places-visited"
+    },
+    {
+      "title": "PRA 6694",
+      "img": "https://samyam.co/images/places visited/PRA_6694.JPG",
+      "category": "places-visited"
+    },
+    {
+      "title": "PIY 0135",
+      "img": "https://samyam.co/images/activites or ritual/PIY_0135.jpg",
+      "category": "activities-or-ritual"
+    },
+    {
+      "title": "PIY 0136",
+      "img": "https://samyam.co/images/activites or ritual/PIY_0136.jpg",
+      "category": "activities-or-ritual"
+    },
+    {
+      "title": "PIY 0146",
+      "img": "https://samyam.co/images/activites or ritual/PIY_0146.jpg",
+      "category": "activities-or-ritual"
+    },
+    {
+      "title": "PIY 0156",
+      "img": "https://samyam.co/images/activites or ritual/PIY_0156.jpg",
+      "category": "activities-or-ritual"
+    },
+    {
+      "title": "PIY 0159",
+      "img": "https://samyam.co/images/activites or ritual/PIY_0159.jpg",
+      "category": "activities-or-ritual"
+    },
+    {
+      "title": "PIY 0220",
+      "img": "https://samyam.co/images/activites or ritual/PIY_0220.jpg",
+      "category": "activities-or-ritual"
+    },
+    {
+      "title": "PIY 0674",
+      "img": "https://samyam.co/images/activites or ritual/PIY_0674.jpg",
+      "category": "activities-or-ritual"
+    },
+    {
+      "title": "PIY 0719",
+      "img": "https://samyam.co/images/activites or ritual/PIY_0719.jpg",
+      "category": "activities-or-ritual"
+    },
+    {
+      "title": "PIY 0859",
+      "img": "https://samyam.co/images/activites or ritual/PIY_0859.jpg",
+      "category": "activities-or-ritual"
+    },
+    {
+      "title": "PIY 0900",
+      "img": "https://samyam.co/images/activites or ritual/PIY_0900.jpg",
+      "category": "activities-or-ritual"
+    },
+    {
+      "title": "PIY 1301",
+      "img": "https://samyam.co/images/activites or ritual/PIY_1301.jpg",
+      "category": "activities-or-ritual"
+    },
+    {
+      "title": "PIY 8677",
+      "img": "https://samyam.co/images/activites or ritual/PIY_8677.jpg",
+      "category": "activities-or-ritual"
+    },
+    {
+      "title": "PIY 8749",
+      "img": "https://samyam.co/images/activites or ritual/PIY_8749.jpg",
+      "category": "activities-or-ritual"
+    },
+    {
+      "title": "PIY 8928",
+      "img": "https://samyam.co/images/activites or ritual/PIY_8928.jpg",
+      "category": "activities-or-ritual"
+    },
+    {
+      "title": "PIY 9434",
+      "img": "https://samyam.co/images/activites or ritual/PIY_9434.jpg",
+      "category": "activities-or-ritual"
+    },
+    {
+      "title": "PRA 5730",
+      "img": "https://samyam.co/images/activites or ritual/PRA_5730.JPG",
+      "category": "activities-or-ritual"
+    },
+    {
+      "title": "IMG 20250331182445113",
+      "img": "https://samyam.co/images/landscapes and streets/IMG_20250331182445113.JPG",
+      "category": "landscapes-and-streets"
+    },
+    {
+      "title": "IMG 20250331182445135",
+      "img": "https://samyam.co/images/landscapes and streets/IMG_20250331182445135.JPG",
+      "category": "landscapes-and-streets"
+    },
+    {
+      "title": "IMG 20250331182445137",
+      "img": "https://samyam.co/images/landscapes and streets/IMG_20250331182445137.JPG",
+      "category": "landscapes-and-streets"
+    },
+    {
+      "title": "IMG 20250331182445146",
+      "img": "https://samyam.co/images/landscapes and streets/IMG_20250331182445146.JPG",
+      "category": "landscapes-and-streets"
+    },
+    {
+      "title": "IMG 20250331182445147",
+      "img": "https://samyam.co/images/landscapes and streets/IMG_20250331182445147.JPG",
+      "category": "landscapes-and-streets"
+    },
+    {
+      "title": "IMG 20250331182445148",
+      "img": "https://samyam.co/images/landscapes and streets/IMG_20250331182445148.JPG",
+      "category": "landscapes-and-streets"
+    },
+    {
+      "title": "IMG 20250331182445149",
+      "img": "https://samyam.co/images/landscapes and streets/IMG_20250331182445149.JPG",
+      "category": "landscapes-and-streets"
+    },
+    {
+      "title": "IMG 2025033118244563",
+      "img": "https://samyam.co/images/landscapes and streets/IMG_2025033118244563.JPG",
+      "category": "landscapes-and-streets"
+    },
+    {
+      "title": "IMG 2025033118244564",
+      "img": "https://samyam.co/images/landscapes and streets/IMG_2025033118244564.JPG",
+      "category": "landscapes-and-streets"
+    },
+    {
+      "title": "IMG 2025033118244578",
+      "img": "https://samyam.co/images/landscapes and streets/IMG_2025033118244578.JPG",
+      "category": "landscapes-and-streets"
+    },
+    {
+      "title": "IMG 2025033118244579",
+      "img": "https://samyam.co/images/landscapes and streets/IMG_2025033118244579.JPG",
+      "category": "landscapes-and-streets"
+    },
+    {
+      "title": "IMG 2025033118244580",
+      "img": "https://samyam.co/images/landscapes and streets/IMG_2025033118244580.JPG",
+      "category": "landscapes-and-streets"
+    },
+    {
+      "title": "PIY 0449",
+      "img": "https://samyam.co/images/landscapes and streets/PIY_0449.jpg",
+      "category": "landscapes-and-streets"
+    },
+    {
+      "title": "PIY 0450",
+      "img": "https://samyam.co/images/landscapes and streets/PIY_0450.jpg",
+      "category": "landscapes-and-streets"
+    },
+    {
+      "title": "PIY 0469",
+      "img": "https://samyam.co/images/landscapes and streets/PIY_0469.jpg",
+      "category": "landscapes-and-streets"
+    },
+    {
+      "title": "PIY 0473",
+      "img": "https://samyam.co/images/landscapes and streets/PIY_0473.jpg",
+      "category": "landscapes-and-streets"
+    },
+    {
+      "title": "PIY 0493",
+      "img": "https://samyam.co/images/landscapes and streets/PIY_0493.jpg",
+      "category": "landscapes-and-streets"
+    },
+    {
+      "title": "PIY 0528",
+      "img": "https://samyam.co/images/landscapes and streets/PIY_0528.jpg",
+      "category": "landscapes-and-streets"
+    },
+    {
+      "title": "PIY 0530",
+      "img": "https://samyam.co/images/landscapes and streets/PIY_0530.jpg",
+      "category": "landscapes-and-streets"
+    },
+    {
+      "title": "PIY 0532",
+      "img": "https://samyam.co/images/landscapes and streets/PIY_0532.jpg",
+      "category": "landscapes-and-streets"
+    },
+    {
+      "title": "PIY 0547",
+      "img": "https://samyam.co/images/landscapes and streets/PIY_0547.jpg",
+      "category": "landscapes-and-streets"
+    },
+    {
+      "title": "PIY 0565",
+      "img": "https://samyam.co/images/landscapes and streets/PIY_0565.jpg",
+      "category": "landscapes-and-streets"
+    },
+    {
+      "title": "PIY 0568",
+      "img": "https://samyam.co/images/landscapes and streets/PIY_0568.jpg",
+      "category": "landscapes-and-streets"
+    },
+    {
+      "title": "PIY 0668",
+      "img": "https://samyam.co/images/landscapes and streets/PIY_0668.jpg",
+      "category": "landscapes-and-streets"
+    },
+    {
+      "title": "PIY 0785",
+      "img": "https://samyam.co/images/landscapes and streets/PIY_0785.jpg",
+      "category": "landscapes-and-streets"
+    },
+    {
+      "title": "PIY 0786",
+      "img": "https://samyam.co/images/landscapes and streets/PIY_0786.jpg",
+      "category": "landscapes-and-streets"
+    },
+    {
+      "title": "PIY 0788",
+      "img": "https://samyam.co/images/landscapes and streets/PIY_0788.jpg",
+      "category": "landscapes-and-streets"
+    },
+    {
+      "title": "PIY 0801",
+      "img": "https://samyam.co/images/landscapes and streets/PIY_0801.jpg",
+      "category": "landscapes-and-streets"
+    },
+    {
+      "title": "PIY 0802",
+      "img": "https://samyam.co/images/landscapes and streets/PIY_0802.jpg",
+      "category": "landscapes-and-streets"
+    },
+    {
+      "title": "PIY 0890",
+      "img": "https://samyam.co/images/landscapes and streets/PIY_0890.jpg",
+      "category": "landscapes-and-streets"
+    },
+    {
+      "title": "PIY 0891",
+      "img": "https://samyam.co/images/landscapes and streets/PIY_0891.jpg",
+      "category": "landscapes-and-streets"
+    },
+    {
+      "title": "PIY 0894",
+      "img": "https://samyam.co/images/landscapes and streets/PIY_0894.jpg",
+      "category": "landscapes-and-streets"
+    },
+    {
+      "title": "PIY 0917",
+      "img": "https://samyam.co/images/landscapes and streets/PIY_0917.jpg",
+      "category": "landscapes-and-streets"
+    },
+    {
+      "title": "PIY 0925",
+      "img": "https://samyam.co/images/landscapes and streets/PIY_0925.jpg",
+      "category": "landscapes-and-streets"
+    },
+    {
+      "title": "PIY 8672",
+      "img": "https://samyam.co/images/landscapes and streets/PIY_8672.jpg",
+      "category": "landscapes-and-streets"
+    },
+    {
+      "title": "PIY 9287",
+      "img": "https://samyam.co/images/landscapes and streets/PIY_9287.jpg",
+      "category": "landscapes-and-streets"
+    },
+    {
+      "title": "PIY 9288",
+      "img": "https://samyam.co/images/landscapes and streets/PIY_9288.jpg",
+      "category": "landscapes-and-streets"
+    },
+    {
+      "title": "PIY 9300",
+      "img": "https://samyam.co/images/landscapes and streets/PIY_9300.jpg",
+      "category": "landscapes-and-streets"
+    },
+    {
+      "title": "PIY 9309",
+      "img": "https://samyam.co/images/landscapes and streets/PIY_9309.jpg",
+      "category": "landscapes-and-streets"
+    },
+    {
+      "title": "PIY 9330",
+      "img": "https://samyam.co/images/landscapes and streets/PIY_9330.jpg",
+      "category": "landscapes-and-streets"
+    },
+    {
+      "title": "PIY 9606",
+      "img": "https://samyam.co/images/landscapes and streets/PIY_9606.jpg",
+      "category": "landscapes-and-streets"
+    },
+    {
+      "title": "PIY 9607",
+      "img": "https://samyam.co/images/landscapes and streets/PIY_9607.jpg",
+      "category": "landscapes-and-streets"
+    },
+    {
+      "title": "PIY 9609",
+      "img": "https://samyam.co/images/landscapes and streets/PIY_9609.jpg",
+      "category": "landscapes-and-streets"
+    },
+    {
+      "title": "PIY 9610",
+      "img": "https://samyam.co/images/landscapes and streets/PIY_9610.jpg",
+      "category": "landscapes-and-streets"
+    },
+    {
+      "title": "PIY 9612",
+      "img": "https://samyam.co/images/landscapes and streets/PIY_9612.jpg",
+      "category": "landscapes-and-streets"
+    },
+    {
+      "title": "PIY 9616",
+      "img": "https://samyam.co/images/landscapes and streets/PIY_9616.jpg",
+      "category": "landscapes-and-streets"
+    },
+    {
+      "title": "PIY 9625",
+      "img": "https://samyam.co/images/landscapes and streets/PIY_9625.jpg",
+      "category": "landscapes-and-streets"
+    },
+    {
+      "title": "PIY 9631",
+      "img": "https://samyam.co/images/landscapes and streets/PIY_9631.jpg",
+      "category": "landscapes-and-streets"
+    },
+    {
+      "title": "PIY 9650",
+      "img": "https://samyam.co/images/landscapes and streets/PIY_9650.jpg",
+      "category": "landscapes-and-streets"
+    },
+    {
+      "title": "PIY 9705",
+      "img": "https://samyam.co/images/landscapes and streets/PIY_9705.jpg",
+      "category": "landscapes-and-streets"
+    },
+    {
+      "title": "PIY 9706",
+      "img": "https://samyam.co/images/landscapes and streets/PIY_9706.jpg",
+      "category": "landscapes-and-streets"
+    },
+    {
+      "title": "PRA 5633",
+      "img": "https://samyam.co/images/landscapes and streets/PRA_5633.JPG",
+      "category": "landscapes-and-streets"
+    },
+    {
+      "title": "PRA 5643",
+      "img": "https://samyam.co/images/landscapes and streets/PRA_5643.JPG",
+      "category": "landscapes-and-streets"
+    },
+    {
+      "title": "PRA 5649",
+      "img": "https://samyam.co/images/landscapes and streets/PRA_5649.JPG",
+      "category": "landscapes-and-streets"
+    },
+    {
+      "title": "PRA 5664",
+      "img": "https://samyam.co/images/landscapes and streets/PRA_5664.JPG",
+      "category": "landscapes-and-streets"
+    },
+    {
+      "title": "PRA 5666",
+      "img": "https://samyam.co/images/landscapes and streets/PRA_5666.JPG",
+      "category": "landscapes-and-streets"
+    },
+    {
+      "title": "PRA 5751",
+      "img": "https://samyam.co/images/landscapes and streets/PRA_5751.JPG",
+      "category": "landscapes-and-streets"
+    },
+    {
+      "title": "PRA 5799",
+      "img": "https://samyam.co/images/landscapes and streets/PRA_5799.JPG",
+      "category": "landscapes-and-streets"
+    },
+    {
+      "title": "PRA 5806",
+      "img": "https://samyam.co/images/landscapes and streets/PRA_5806.JPG",
+      "category": "landscapes-and-streets"
+    },
+    {
+      "title": "PRA 5818",
+      "img": "https://samyam.co/images/landscapes and streets/PRA_5818.JPG",
+      "category": "landscapes-and-streets"
+    },
+    {
+      "title": "PRA 5903",
+      "img": "https://samyam.co/images/landscapes and streets/PRA_5903.JPG",
+      "category": "landscapes-and-streets"
+    },
+    {
+      "title": "PRA 6199",
+      "img": "https://samyam.co/images/landscapes and streets/PRA_6199.JPG",
+      "category": "landscapes-and-streets"
+    },
+    {
+      "title": "PRA 6211",
+      "img": "https://samyam.co/images/landscapes and streets/PRA_6211.JPG",
+      "category": "landscapes-and-streets"
+    },
+    {
+      "title": "PRA 6283",
+      "img": "https://samyam.co/images/landscapes and streets/PRA_6283.JPG",
+      "category": "landscapes-and-streets"
+    },
+    {
+      "title": "PRA 6432",
+      "img": "https://samyam.co/images/landscapes and streets/PRA_6432.JPG",
+      "category": "landscapes-and-streets"
+    },
+    {
+      "title": "PRA 6735",
+      "img": "https://samyam.co/images/landscapes and streets/PRA_6735.JPG",
+      "category": "landscapes-and-streets"
+    },
+    {
+      "title": "PRA 6871",
+      "img": "https://samyam.co/images/landscapes and streets/PRA_6871.JPG",
+      "category": "landscapes-and-streets"
+    },
+    {
+      "title": "PRA 6873",
+      "img": "https://samyam.co/images/landscapes and streets/PRA_6873.JPG",
+      "category": "landscapes-and-streets"
+    },
+    {
+      "title": "PRA 7003",
+      "img": "https://samyam.co/images/landscapes and streets/PRA_7003.JPG",
+      "category": "landscapes-and-streets"
+    },
+    {
+      "title": "PRA 7217",
+      "img": "https://samyam.co/images/landscapes and streets/PRA_7217.JPG",
+      "category": "landscapes-and-streets"
+    },
+    {
+      "title": "PRA 7313",
+      "img": "https://samyam.co/images/landscapes and streets/PRA_7313.JPG",
+      "category": "landscapes-and-streets"
+    },
+    {
+      "title": "IMG 20250331182445138",
+      "img": "https://samyam.co/images/people and emotions/IMG_20250331182445138.JPG",
+      "category": "people-and-emotions"
+    },
+    {
+      "title": "PIY 0259",
+      "img": "https://samyam.co/images/people and emotions/PIY_0259.jpg",
+      "category": "people-and-emotions"
+    },
+    {
+      "title": "PIY 0269",
+      "img": "https://samyam.co/images/people and emotions/PIY_0269.jpg",
+      "category": "people-and-emotions"
+    },
+    {
+      "title": "PIY 0290",
+      "img": "https://samyam.co/images/people and emotions/PIY_0290.jpg",
+      "category": "people-and-emotions"
+    },
+    {
+      "title": "PIY 0292",
+      "img": "https://samyam.co/images/people and emotions/PIY_0292.jpg",
+      "category": "people-and-emotions"
+    },
+    {
+      "title": "PIY 0308",
+      "img": "https://samyam.co/images/people and emotions/PIY_0308.jpg",
+      "category": "people-and-emotions"
+    },
+    {
+      "title": "PIY 0382",
+      "img": "https://samyam.co/images/people and emotions/PIY_0382.jpg",
+      "category": "people-and-emotions"
+    },
+    {
+      "title": "PIY 0385",
+      "img": "https://samyam.co/images/people and emotions/PIY_0385.jpg",
+      "category": "people-and-emotions"
+    },
+    {
+      "title": "PIY 0414",
+      "img": "https://samyam.co/images/people and emotions/PIY_0414.jpg",
+      "category": "people-and-emotions"
+    },
+    {
+      "title": "PIY 0425",
+      "img": "https://samyam.co/images/people and emotions/PIY_0425.jpg",
+      "category": "people-and-emotions"
+    },
+    {
+      "title": "PIY 0439",
+      "img": "https://samyam.co/images/people and emotions/PIY_0439.jpg",
+      "category": "people-and-emotions"
+    },
+    {
+      "title": "PIY 0461",
+      "img": "https://samyam.co/images/people and emotions/PIY_0461.jpg",
+      "category": "people-and-emotions"
+    },
+    {
+      "title": "PIY 0616",
+      "img": "https://samyam.co/images/people and emotions/PIY_0616.jpg",
+      "category": "people-and-emotions"
+    },
+    {
+      "title": "PIY 0790",
+      "img": "https://samyam.co/images/people and emotions/PIY_0790.jpg",
+      "category": "people-and-emotions"
+    },
+    {
+      "title": "PIY 1000",
+      "img": "https://samyam.co/images/people and emotions/PIY_1000.jpg",
+      "category": "people-and-emotions"
+    },
+    {
+      "title": "PIY 1323",
+      "img": "https://samyam.co/images/people and emotions/PIY_1323.jpg",
+      "category": "people-and-emotions"
+    },
+    {
+      "title": "PIY 1324",
+      "img": "https://samyam.co/images/people and emotions/PIY_1324.jpg",
+      "category": "people-and-emotions"
+    },
+    {
+      "title": "PIY 1336",
+      "img": "https://samyam.co/images/people and emotions/PIY_1336.jpg",
+      "category": "people-and-emotions"
+    },
+    {
+      "title": "PIY 8669",
+      "img": "https://samyam.co/images/people and emotions/PIY_8669.jpg",
+      "category": "people-and-emotions"
     }
   ]
 }

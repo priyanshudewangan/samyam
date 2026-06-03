@@ -41,7 +41,7 @@ export const getAllEnquiries = asyncHandler(async (_req: Request, res: Response)
 ========================= */
 
 export const getSingleEnquiry = asyncHandler(async (req: Request, res: Response): Promise<void> => {
-  const { id } = req.params;
+  const id = req.params.id as string;
 
   const enquiry = await getSingleEnquiryService(id);
 
@@ -56,7 +56,7 @@ export const getSingleEnquiry = asyncHandler(async (req: Request, res: Response)
 ========================= */
 
 export const updateEnquiry = asyncHandler(async (req: Request, res: Response): Promise<void> => {
-  const { id } = req.params;
+  const id = req.params.id as string;
 
   const updatedEnquiry = await updateEnquiryService(id, req.body);
 
@@ -72,7 +72,7 @@ export const updateEnquiry = asyncHandler(async (req: Request, res: Response): P
 ========================= */
 
 export const deleteEnquiry = asyncHandler(async (req: Request, res: Response): Promise<void> => {
-  const { id } = req.params;
+  const id = req.params.id as string;
   await deleteEnquiryService(id);
   res.status(200).json({
     success: true,
