@@ -66,6 +66,7 @@ interface Stats {
   totalVideos: number;
   totalTeerthas: number;
   totalBlogs?: number;
+  totalGallery?: number;
 }
 
 interface Yatra {
@@ -200,6 +201,25 @@ const initialGalleryState = {
 
 function AdminDashboardPage() {
   const navigate = useNavigate();
+
+  // Local fetch wrapper to automatically include Authorization token for cross-domain support
+  const fetch = useCallback(
+    async (url: RequestInfo | URL, options: RequestInit = {}) => {
+      const token = localStorage.getItem("samyam_token");
+      const headers = {
+        "Content-Type": "application/json",
+        ...options.headers,
+        ...(token ? { Authorization: `Bearer ${token}` } : {}),
+      };
+      return window.fetch(url, {
+        ...options,
+        headers,
+        credentials: "include",
+      });
+    },
+    []
+  );
+
   const [adminEmail, setAdminEmail] = useState("");
   const [activeTab, setActiveTab] = useState<
     "dashboard" | "enquiries" | "yatras" | "teerthas" | "videos" | "blogs" | "gallery"

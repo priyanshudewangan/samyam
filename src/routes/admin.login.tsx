@@ -60,6 +60,7 @@ function AdminLoginPage() {
       }
 
       localStorage.setItem("samyam_email", result.data.email);
+      localStorage.setItem("samyam_token", result.data.accessToken);
       setSuccess("Success! Redirecting...");
       setTimeout(() => {
         navigate({ to: "/admin" });
